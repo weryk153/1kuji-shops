@@ -149,14 +149,13 @@ git commit -m "docs: 1kuji 資料取得路徑調查紀錄"
   },
   "devDependencies": {
     "@types/node": "^20.0.0",
-    "playwright": "^1.45.0",
     "tsx": "^4.0.0",
     "typescript": "^5.4.0"
   }
 }
 ```
 
-> **Note：** 若 Task 1 結論是用 fetch，可從 devDependencies 移除 `playwright`。
+> **Note：** Task 1 調查確認用純 `fetch`，不需要 `playwright`。Node 20+ `fetch` 內建。
 
 - [ ] **Step 2: 建立 `tsconfig.json`**
 
@@ -201,7 +200,6 @@ web/data/
 
 \`\`\`bash
 npm install
-npx playwright install chromium  # 若 scraper 使用 Playwright
 npm run scrape                   # 跑爬蟲，產出 data/
 npm run build                    # 複製 data/ 到 web/data/
 npm run serve                    # 本地預覽前端
@@ -252,9 +250,10 @@ export interface Prefecture {
 }
 
 export interface Lottery {
-  id: string;
+  id: string;             // slug，例如 "medalist"，做為檔名與 URL 參數
+  product_id: number;     // 1kuji 內部 numeric id，呼叫 cities.json/search.json 用
   name_ja: string;
-  release_date: string; // YYYY-MM-DD
+  release_date: string;   // YYYY-MM-DD
   image_url: string;
   source_url: string;
 }
@@ -561,84 +560,126 @@ git commit -m "feat: URL → slug 產生器"
 
 ---
 
-## Task 7: 一番賞清單抓取（fetch-lotteries）
+## Task 7: 一番賞清單抓取（fetch-lotteries + session）
 
-依 Task 1 結論寫實作。**以下程式碼為「使用 API」假設下的範本，若 Task 1 結論為純 DOM scrape，則改用 Playwright（見後備版本）。**
+依 `docs/investigation.md` 結論：API path、需 CSRF + cookie、release_date 要二次抓 detail page。
 
 **Files:**
+- Create: `scraper/session.ts`（CSRF + cookie helper，T7 與 T8 共用）
 - Create: `scraper/fetch-lotteries.ts`
 
-- [ ] **Step 1: 寫實作（API 版本）`scraper/fetch-lotteries.ts`**
+- [ ] **Step 1: 寫 `scraper/session.ts`（建立 session，取 cookie + CSRF token）**
+
+```typescript
+const UA = '1kuji-shops-scraper/1.0 (+https://github.com/owner/1kuji-shops)';
+
+export interface Session {
+  cookies: string;        // "_bsp_lt_pro_general_sid=...; _foo=..."
+  csrf: string;
+}
+
+export async function establishSession(): Promise<Session> {
+  const res = await fetch('https://1kuji.com/shop_lists', {
+    headers: { 'User-Agent': UA },
+  });
+  if (!res.ok) throw new Error(`Session bootstrap failed: ${res.status}`);
+  const html = await res.text();
+  const csrf = html.match(/<meta name="csrf-token" content="([^"]+)"/)?.[1];
+  if (!csrf) throw new Error('Could not find csrf-token meta tag');
+  const setCookies = res.headers.getSetCookie();
+  if (setCookies.length === 0) throw new Error('No Set-Cookie returned');
+  // 只保留 name=value 部分
+  const cookies = setCookies.map((c) => c.split(';')[0]).join('; ');
+  return { cookies, csrf };
+}
+
+export function apiHeaders(s: Session): HeadersInit {
+  return {
+    'User-Agent': UA,
+    'Cookie': s.cookies,
+    'X-CSRF-Token': s.csrf,
+    'Content-Type': 'application/json; charset=utf-8',
+    'Referer': 'https://1kuji.com/shop_lists',
+  };
+}
+
+export { UA };
+```
+
+> 注意：UA 不能含 `Bot` 等關鍵字（會被 1kuji robots.txt 對多家 AI bot 的 Disallow / 規則打到）。`<owner>` 留實際 GitHub repo URL。
+
+- [ ] **Step 2: 寫 `scraper/fetch-lotteries.ts`**
 
 ```typescript
 import type { Lottery } from './types.ts';
-import { urlToSlug } from './slug.ts';
+import { establishSession, apiHeaders, UA, type Session } from './session.ts';
 
-const LOTTERY_LIST_URL = '<從 Task 1 docs/investigation.md 取得實際 URL>';
+const PRODUCTS_URL = 'https://1kuji.com/shop_lists/products.json';
 
-export async function fetchLotteries(): Promise<Lottery[]> {
-  const res = await fetch(LOTTERY_LIST_URL, {
-    headers: { 'User-Agent': '1kuji-shops-tool/0.1 (https://github.com/<owner>/1kuji-shops)' },
-  });
-  if (!res.ok) throw new Error(`Lottery list fetch failed: ${res.status}`);
-  const data = await res.json();
+interface ProductsApiResponse {
+  products: Array<{
+    id: number;
+    name: string;
+    show_url: string;
+    image_url: string;
+  }>;
+}
 
-  // 依 Task 1 確認的 JSON schema 對應欄位
-  const lotteries: Lottery[] = data.<path-from-investigation>.map((item: any) => ({
-    id: urlToSlug(item.<source_url_field>),
-    name_ja: item.<name_field>,
-    release_date: item.<release_date_field>,
-    image_url: item.<image_url_field>,
-    source_url: item.<source_url_field>,
-  }));
+export async function fetchLotteries(session?: Session): Promise<Lottery[]> {
+  const s = session ?? (await establishSession());
 
+  const res = await fetch(PRODUCTS_URL, { headers: apiHeaders(s) });
+  if (!res.ok) throw new Error(`products.json failed: ${res.status}`);
+  const data = (await res.json()) as ProductsApiResponse;
+  if (!Array.isArray(data.products) || data.products.length === 0) {
+    throw new Error('products.json returned empty list (CSRF/cookie likely missing)');
+  }
+
+  // 對每筆 lottery 二次抓 detail page，解 release_date。1 秒一個請求節流。
+  const lotteries: Lottery[] = [];
+  for (const p of data.products) {
+    const release_date = await fetchReleaseDate(p.show_url);
+    lotteries.push({
+      id: p.show_url,
+      name_ja: p.name,
+      release_date,
+      image_url: p.image_url,
+      source_url: `https://1kuji.com/products/${p.show_url}`,
+    });
+    await sleep(1000);
+  }
   return lotteries;
 }
-```
 
-> **Important：** 上面的 `<...>` 必須在動手寫之前從 `docs/investigation.md` 拿到具體值。若還沒做 Task 1 不要寫這檔。
+async function fetchReleaseDate(slug: string): Promise<string> {
+  const res = await fetch(`https://1kuji.com/products/${slug}`, {
+    headers: { 'User-Agent': UA },
+  });
+  if (!res.ok) throw new Error(`detail page failed for ${slug}: ${res.status}`);
+  const html = await res.text();
+  // <section class="aboutCol"> ... ■発売日：店頭販売：YYYY年MM月DD日 ...
+  const m = html.match(
+    /<section[^>]*class="aboutCol"[\s\S]*?■発売日：[\s\S]*?(\d{4})年(\d{2})月(\d{2})日/
+  );
+  if (!m) throw new Error(`could not parse release_date for ${slug}`);
+  return `${m[1]}-${m[2]}-${m[3]}`;
+}
 
-- [ ] **Step 1b（後備版本，Task 1 結論是 DOM 時用）：** 改用 Playwright
-
-```typescript
-import { chromium } from 'playwright';
-import type { Lottery } from './types.ts';
-import { urlToSlug } from './slug.ts';
-
-const LOTTERY_LIST_URL = '<從 docs/investigation.md 取得>';
-
-export async function fetchLotteries(): Promise<Lottery[]> {
-  const browser = await chromium.launch();
-  try {
-    const page = await browser.newPage();
-    await page.goto(LOTTERY_LIST_URL, { waitUntil: 'networkidle' });
-
-    const lotteries = await page.$$eval('<card-selector-from-investigation>', (cards) =>
-      cards.map((card) => ({
-        name_ja: card.querySelector('<name-selector>')?.textContent?.trim() ?? '',
-        release_date: card.querySelector('<date-selector>')?.textContent?.trim() ?? '',
-        image_url: card.querySelector('img')?.src ?? '',
-        source_url: (card.querySelector('a') as HTMLAnchorElement)?.href ?? '',
-      }))
-    );
-
-    return lotteries
-      .filter((l) => l.source_url)
-      .map((l) => ({ ...l, id: urlToSlug(l.source_url) }));
-  } finally {
-    await browser.close();
-  }
+function sleep(ms: number): Promise<void> {
+  return new Promise((r) => setTimeout(r, ms));
 }
 ```
 
-- [ ] **Step 2: 暫時 smoke test（手動跑一次確認回傳合理）**
+- [ ] **Step 3: Smoke test**
 
-建一個臨時檔 `scraper/_smoke.ts`：
+建立 `scraper/_smoke.ts`：
 
 ```typescript
 import { fetchLotteries } from './fetch-lotteries.ts';
 const ls = await fetchLotteries();
-console.log(JSON.stringify(ls, null, 2));
+console.log(`got ${ls.length} lotteries`);
+console.log('sample:', ls[0]);
+console.log('release_date 範圍:', ls.map((l) => l.release_date).slice(0, 5));
 ```
 
 ```bash
@@ -646,71 +687,140 @@ npx tsx scraper/_smoke.ts
 rm scraper/_smoke.ts
 ```
 
-Expected: 印出陣列，每筆有 `id`、`name_ja`、`release_date`、`image_url`、`source_url`，**至少一筆**。若空陣列代表 selector 對不到，回頭檢查 investigation。
+Expected: 約 60 筆，每筆含 `id`（slug，例如 `"medalist"`）、`name_ja`、`release_date`（YYYY-MM-DD）、`image_url`、`source_url`。
 
-- [ ] **Step 3: Commit**
+- [ ] **Step 4: Commit**
 
 ```bash
-git add scraper/fetch-lotteries.ts
-git commit -m "feat: 一番賞清單抓取"
+git add scraper/session.ts scraper/fetch-lotteries.ts
+git commit -m "feat: 一番賞清單抓取（含 session + CSRF + detail page release_date）"
 ```
 
 ---
 
 ## Task 8: 店舖清單抓取（fetch-shops）
 
+依 `docs/investigation.md` §4：
+- `cities.json?product_id=<numeric>&pref=<1..47>` 取該 (lottery, prefecture) 的城市清單（semicolon-delimited string）
+- `search.json?product_id=<numeric>&code=<5-digit-city-code>` 取該城市內店舖
+- 1 秒節流；空城市清單直接跳過
+- **product_id 用 1kuji 的 numeric id（products.json 的 `id` 欄）**，不是 slug
+- pref 是整數 1-47，不是 JIS 兩位字串。`prefectures.json` 的 `code`（"01"-"47"）`parseInt` 即可
+
 **Files:**
 - Create: `scraper/fetch-shops.ts`
 
-- [ ] **Step 1: 寫實作 `scraper/fetch-shops.ts`**
+> **前置：** Task 3 已把 `product_id: number` 放進 `Lottery`，Task 7 寫的 `fetch-lotteries.ts` 也應該回傳含 `product_id` 的 Lottery（即 `product_id: p.id`，p 為 products.json 的 entry）。如果 Task 7 沒帶 `product_id`，先回頭補上。
 
-API 版本（依 Task 1 結論調整）：
+- [ ] **Step 1: 寫 `scraper/fetch-shops.ts`**
 
 ```typescript
-import type { Shop, Lottery } from './types.ts';
+import type { Shop, Lottery, Prefecture } from './types.ts';
 import { addressToPrefectureCode } from './prefecture.ts';
+import { apiHeaders, type Session } from './session.ts';
+import { readFileSync } from 'node:fs';
+import { fileURLToPath } from 'node:url';
+import { dirname, join } from 'node:path';
 
-export async function fetchShops(lottery: Lottery): Promise<Shop[]> {
-  const url = `<shop-search-endpoint-from-investigation>?product_id=${encodeURIComponent(lottery.id)}`;
-  const res = await fetch(url, {
-    headers: { 'User-Agent': '1kuji-shops-tool/0.1' },
-  });
-  if (!res.ok) throw new Error(`Shop fetch failed for ${lottery.id}: ${res.status}`);
-  const data = await res.json();
+const __dirname = dirname(fileURLToPath(import.meta.url));
+const prefectures: Prefecture[] = JSON.parse(
+  readFileSync(join(__dirname, '../data/prefectures.json'), 'utf8')
+);
 
-  const shops: Shop[] = data.<path>.map((item: any) => {
-    const address: string = item.<address_field>;
-    return {
-      name: item.<name_field>,
-      address,
-      prefecture_code: addressToPrefectureCode(address),
-      release_datetime: item.<release_datetime_field>,
-    };
-  });
+const THROTTLE_MS = 1000;
 
-  return shops;
+interface CitiesApiResponse {
+  cities: string; // "千代田区(1),13101;新宿区(1),13104"
+}
+
+interface SearchApiResponse {
+  shops: Array<{
+    name: string;
+    address: string;
+    active_datetime: string; // ISO 8601 with JST offset
+  }>;
+}
+
+export async function fetchShops(lottery: Lottery, session: Session): Promise<Shop[]> {
+  const all: Shop[] = [];
+
+  for (const pref of prefectures) {
+    const prefNum = parseInt(pref.code, 10); // "13" → 13
+    const cities = await fetchCities(lottery.product_id, prefNum, session);
+    if (cities.length === 0) continue;
+    for (const city of cities) {
+      await sleep(THROTTLE_MS);
+      const shops = await fetchCityShops(lottery.product_id, city.code, session);
+      for (const s of shops) {
+        all.push({
+          name: s.name,
+          address: s.address,
+          prefecture_code: addressToPrefectureCode(s.address),
+          release_datetime: s.active_datetime,
+        });
+      }
+    }
+    await sleep(THROTTLE_MS);
+  }
+
+  return all;
+}
+
+async function fetchCities(
+  productId: number,
+  pref: number,
+  session: Session
+): Promise<Array<{ name: string; code: string }>> {
+  const url = `https://1kuji.com/shop_lists/cities.json?product_id=${productId}&pref=${pref}`;
+  const res = await fetch(url, { headers: apiHeaders(session) });
+  if (!res.ok) throw new Error(`cities.json failed (pref=${pref}): ${res.status}`);
+  const data = (await res.json()) as CitiesApiResponse;
+  if (!data.cities) return [];
+  return data.cities
+    .split(';')
+    .filter(Boolean)
+    .map((s) => {
+      const m = s.match(/^(.+)\((\d+)\),(\d+)$/);
+      if (!m) throw new Error(`Cannot parse city entry: ${s}`);
+      return { name: m[1], code: m[3] };
+    });
+}
+
+async function fetchCityShops(
+  productId: number,
+  cityCode: string,
+  session: Session
+): Promise<SearchApiResponse['shops']> {
+  const url = `https://1kuji.com/shop_lists/search.json?product_id=${productId}&code=${cityCode}`;
+  const res = await fetch(url, { headers: apiHeaders(session) });
+  if (!res.ok) throw new Error(`search.json failed (code=${cityCode}): ${res.status}`);
+  const data = (await res.json()) as SearchApiResponse;
+  return data.shops ?? [];
+}
+
+function sleep(ms: number): Promise<void> {
+  return new Promise((r) => setTimeout(r, ms));
 }
 ```
 
-Playwright 版本則類似 Task 7 的後備版本，差別是進到搜尋頁、選一番賞、按搜尋、抓全部結果（**無都道府縣篩選**，一次拿全國）。
+- [ ] **Step 2: Smoke test（用一個小型一番賞，避免跑太久）**
 
-> **分頁處理：** 若 Task 1 發現結果有上限（例如預設 100 筆），需要：
-> 1. 看是否有 `limit` / `page` 參數可以調整
-> 2. 若無，分都道府縣 47 次查詢、合併
-> 在 `docs/investigation.md` 記錄選擇。
-
-- [ ] **Step 2: Smoke test（用一筆 lottery 試跑）**
-
-建立臨時檔 `scraper/_smoke.ts`：
+建立 `scraper/_smoke.ts`：
 
 ```typescript
+import { establishSession } from './session.ts';
 import { fetchLotteries } from './fetch-lotteries.ts';
 import { fetchShops } from './fetch-shops.ts';
 
-const ls = await fetchLotteries();
-const shops = await fetchShops(ls[0]);
-console.log('lottery:', ls[0].name_ja, 'shops:', shops.length);
-console.log('first shop:', shops[0]);
+const session = await establishSession();
+const ls = await fetchLotteries(session);
+// 拿最後一筆當 smoke test（通常規模小、不會跑太久）
+const small = ls[ls.length - 1];
+console.log(`testing ${small.id} (${small.name_ja})`);
+const t = Date.now();
+const shops = await fetchShops(small, session);
+console.log(`got ${shops.length} shops in ${((Date.now() - t) / 1000).toFixed(0)}s`);
+console.log('sample shop:', shops[0]);
 ```
 
 ```bash
@@ -718,13 +828,13 @@ npx tsx scraper/_smoke.ts
 rm scraper/_smoke.ts
 ```
 
-Expected: 印出店舖數量（>0）與第一筆內容（含正確的 `prefecture_code`）。
+Expected: 印出店舖數（>0）、第一筆 `prefecture_code` 為 "01"-"47"。**該 smoke test 可能跑數分鐘**，這是預期的。
 
 - [ ] **Step 3: Commit**
 
 ```bash
-git add scraper/fetch-shops.ts
-git commit -m "feat: 單一一番賞店舖清單抓取"
+git add scraper/fetch-shops.ts scraper/types.ts scraper/fetch-lotteries.ts
+git commit -m "feat: 店舖清單抓取（pref × city 兩階段 API）"
 ```
 
 ---
@@ -825,25 +935,46 @@ git commit -m "feat: 下檔一番賞 shops JSON 保留 7 天"
 ```typescript
 import { writeFile, readdir, stat, unlink, mkdir } from 'node:fs/promises';
 import { join } from 'node:path';
+import { establishSession } from './session.ts';
 import { fetchLotteries } from './fetch-lotteries.ts';
 import { fetchShops } from './fetch-shops.ts';
 import { shouldDeleteShopFile } from './retention.ts';
-import type { LotteriesFile, ShopsFile } from './types.ts';
+import type { Lottery, LotteriesFile, ShopsFile } from './types.ts';
 
 const DATA_DIR = 'data';
 const SHOPS_DIR = join(DATA_DIR, 'shops');
-const THROTTLE_MS = 1000; // 每個 shop request 之間至少 1 秒
 
-const sleep = (ms: number) => new Promise((r) => setTimeout(r, ms));
+// 開賣日視窗：[today - WINDOW_BEFORE_DAYS, today + WINDOW_AFTER_DAYS]
+// 視窗外的 lottery 不爬店舖（也不出現在前端 dropdown）。
+// 60 個 lottery × 每個 ~3-8 分鐘 → 8-12h 超出 GitHub Actions 6h 限制，必須過濾。
+const WINDOW_BEFORE_DAYS = 30;
+const WINDOW_AFTER_DAYS = 14;
+
+function withinWindow(release_date: string, now: Date): boolean {
+  const d = new Date(release_date + 'T00:00:00+09:00');
+  const lo = new Date(now); lo.setUTCDate(lo.getUTCDate() - WINDOW_BEFORE_DAYS);
+  const hi = new Date(now); hi.setUTCDate(hi.getUTCDate() + WINDOW_AFTER_DAYS);
+  return d >= lo && d <= hi;
+}
 
 async function main() {
   await mkdir(SHOPS_DIR, { recursive: true });
   const now = new Date();
 
-  // 1. 抓一番賞清單
-  console.log('fetching lottery list...');
-  const lotteries = await fetchLotteries();
-  console.log(`got ${lotteries.length} lotteries`);
+  console.log('establishing session...');
+  const session = await establishSession();
+
+  console.log('fetching lottery list (and release dates)...');
+  const allLotteries = await fetchLotteries(session);
+  console.log(`  -> ${allLotteries.length} total`);
+
+  // 過濾到視窗內
+  const lotteries: Lottery[] = allLotteries.filter((l) =>
+    withinWindow(l.release_date, now)
+  );
+  console.log(
+    `  -> ${lotteries.length} within window [${WINDOW_BEFORE_DAYS}d before, ${WINDOW_AFTER_DAYS}d after]`
+  );
 
   const lotteriesFile: LotteriesFile = {
     scraped_at: now.toISOString(),
@@ -854,30 +985,29 @@ async function main() {
     JSON.stringify(lotteriesFile, null, 2) + '\n'
   );
 
-  // 2. 對每個一番賞抓店舖
+  // 對每個視窗內 lottery 抓店舖
   for (const lottery of lotteries) {
-    console.log(`fetching shops for ${lottery.id}...`);
+    console.log(`fetching shops for ${lottery.id} (product_id=${lottery.product_id})...`);
+    const t = Date.now();
     try {
-      const shops = await fetchShops(lottery);
+      const shops = await fetchShops(lottery, session);
       const file: ShopsFile = {
         lottery_id: lottery.id,
-        scraped_at: now.toISOString(),
+        scraped_at: new Date().toISOString(),
         shops,
       };
       await writeFile(
         join(SHOPS_DIR, `${lottery.id}.json`),
         JSON.stringify(file, null, 2) + '\n'
       );
-      console.log(`  -> ${shops.length} shops`);
+      console.log(`  -> ${shops.length} shops in ${((Date.now() - t) / 1000).toFixed(0)}s`);
     } catch (err) {
       console.warn(`  ! failed: ${(err as Error).message}`);
-      // 部分失敗不中斷，但 process exit code 設 1（Action 會變紅）
       process.exitCode = 1;
     }
-    await sleep(THROTTLE_MS);
   }
 
-  // 3. 清掉超過 7 天的下檔一番賞 JSON
+  // 清掉超過 7 天且不在窗內的 shops JSON
   const activeIds = new Set(lotteries.map((l) => l.id));
   const files = await readdir(SHOPS_DIR);
   for (const f of files) {
@@ -901,9 +1031,11 @@ main().catch((err) => {
 ```
 
 > **錯誤處理：**
-> - 一番賞清單抓取失敗 → 整個流程 throw，Action 失敗，**不寫 lotteries.json**（保留舊的）
-> - 個別一番賞店舖抓取失敗 → log warning、跳過、`exitCode = 1`，但其他繼續
+> - Session / lottery list 失敗 → throw，整個流程結束，**不寫任何檔**（保留舊的）
+> - 個別 lottery shop 抓取失敗 → log warning、跳過、`exitCode = 1`，但其他繼續
 > - 已寫入的 shops JSON 保留（即便 exit code = 1，前端仍可用）
+>
+> **保留的 lottery 範圍：** 由 `WINDOW_BEFORE_DAYS` / `WINDOW_AFTER_DAYS` 控制；如果之後想加寬或縮窄，改這兩個常數即可。
 
 - [ ] **Step 2: 端到端跑一次**
 
@@ -949,6 +1081,7 @@ on:
 jobs:
   scrape:
     runs-on: ubuntu-latest
+    timeout-minutes: 360  # 視窗內預估 30-40 個 lottery × 3-8 分鐘 = 2-5 小時，留 buffer
     permissions:
       contents: write
     steps:
@@ -960,12 +1093,6 @@ jobs:
           cache: npm
 
       - run: npm ci
-
-      - name: Install Playwright browser if needed
-        run: |
-          if grep -q '"playwright"' package.json; then
-            npx playwright install --with-deps chromium
-          fi
 
       - name: Run scraper
         run: npm run scrape
@@ -1577,7 +1704,6 @@ git commit -m "refactor: CSV 純函式抽出並加單元測試"
 
 \`\`\`bash
 npm install
-npx playwright install chromium  # 若 scraper 走 Playwright 路線
 npm run scrape                   # 抓資料 → data/
 npm run build                    # data/ → web/data/
 npm run serve                    # 本地預覽 http://localhost:3000

@@ -20,7 +20,7 @@
 
 **做**：
 
-- 涵蓋 1kuji.com「販售中 / 即將開賣」的一番賞
+- 涵蓋 1kuji.com「販售中 / 即將開賣」的一番賞，**進一步限制在開賣日 [today - 30 天, today + 14 天] 視窗內**（理由：API 必須 prefecture × city 逐一抓，全 60 個 lottery 需 8-12 小時超出 GitHub Actions 6h 限制；該視窗保留正在販售與即將開賣的 lottery，已下檔太久或太遠期的不爬）
 - 47 都道府縣篩選（必填）
 - 中文 UI（一番賞名稱保留日文）
 - 每日自動更新資料
@@ -316,13 +316,16 @@ Name,Address
 - **資料新鮮度**：頁面右上角顯示 `lotteries.json.scraped_at`，超過 48 小時顯示橘色警示
 - **手動觸發**：`workflow_dispatch` 隨時可跑
 
-## 11. 留待 writing-plans 階段確認
+## 11. 實作細節（Task 1 調查後已確認）
 
-以下為實作細節，本設計層級不鎖死：
+詳見 `docs/investigation.md`。摘要：
 
-- 1kuji.com 是否有可直接呼叫的 JSON/REST API（如有則改用 `fetch`，省略 Playwright 開銷）
-- 一番賞 `id` slug 的具體生成規則
-- 店舖列表 DOM selector / API path
-- robots.txt 與請求節流（每 request 間隔約 1 秒）
-- 是否需處理分頁（如該一番賞店舖數超過某閾值）
-- `prefectures.json` 的中文翻譯來源
+- **API path（首選）**：`/shop_lists/products.json`（lottery list）、`/shop_lists/cities.json`（pref → cities）、`/shop_lists/search.json`（city → shops）
+- **不需要 Playwright**，純 fetch 即可
+- **認證**：先 GET `/shop_lists` 取 session cookie + CSRF token，後續 JSON 請求帶 `Cookie` + `X-CSRF-Token` header
+- **節流**：1 req/s（已寫入實作計畫）
+- **分頁**：API 無分頁，但需要對每個 lottery iterate 47 prefecture + N city
+- **`Lottery.id`**：用 `products[].show_url`（已是 ASCII slug）
+- **`Lottery.release_date`**：products.json 不帶，需二次抓 `/products/<show_url>` HTML 解析
+- **User-Agent**：用識別性 UA（不含 `Bot` 等被 robots.txt 擋的關鍵字）
+- **中文翻譯**：手寫進 `data/prefectures.json`（47 筆固定值）
