@@ -138,7 +138,7 @@ function renderShop(shop) {
   li.className = 'shop-card';
   const mapUrl = `https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(shop.address)}`;
   li.innerHTML = `
-    <a class="map-link" href="${mapUrl}" target="_blank" rel="noopener" title="在 Google 地圖開啟">地圖</a>
+    <a class="map-link" href="${mapUrl}" target="_blank" rel="noopener" title="在 Google 地圖開啟">開啟地圖</a>
     <div class="name"></div>
     <div class="address"></div>
     <div class="release"></div>
