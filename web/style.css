@@ -50,5 +50,20 @@ header h1 { margin: 0; font-size: 1.4rem; }
 .shop-card .address { color: var(--muted); font-size: 0.9rem; margin: 0.2rem 0; }
 .shop-card .release { color: var(--muted); font-size: 0.85rem; }
 .shop-card .map-link {
-  float: right; text-decoration: none; font-size: 1.1rem;
+  float: right;
+  display: inline-block;
+  padding: 0.35rem 0.7rem;
+  font-size: 0.85rem;
+  font-weight: 600;
+  text-decoration: none;
+  color: var(--accent);
+  background: var(--card-bg);
+  border: 1px solid var(--accent);
+  border-radius: 999px;
+  transition: background 0.15s, color 0.15s;
+}
+.shop-card .map-link:hover,
+.shop-card .map-link:focus {
+  background: var(--accent);
+  color: #fff;
 }
