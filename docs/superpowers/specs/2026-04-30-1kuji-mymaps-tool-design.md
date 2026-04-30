@@ -211,9 +211,11 @@ data/
 ローソン 渋谷スクランブル店,東京都渋谷区道玄坂2-1-1,2026-05-15 10:00
 ```
 
-- UTF-8 with BOM
+- 純 UTF-8（**不加 BOM**，避免污染第一欄欄名導致 My Maps 解析失敗）
 - 檔名：`<lottery_id>_<prefecture>_<YYYYMMDD>.csv`
-- My Maps 匯入時偵測「地址」欄做自動 geocoding
+- 第一列為欄位名；My Maps 匯入時會讓使用者指定「哪一欄是地址 / 哪一欄是名稱」，欄名用中文沒問題
+- My Maps 自動對「地址」欄 geocoding（日文地址無需經緯度，Google 對日本 geocoding 支援良好）
+- **單檔上限 2000 列**（Google My Maps 限制）。實務上單一都道府縣店舖數遠低於此；若未來踩到上限再考慮分檔
 
 ### 技術選擇
 
