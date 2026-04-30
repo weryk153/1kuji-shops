@@ -1,4 +1,4 @@
-const UA = '1kuji-shops-scraper/1.0 (+https://github.com/kurenpeng/1kuji-shops)';
+const UA = '1kuji-shops-scraper/1.0 (+https://github.com/weryk153/1kuji-shops)';
 
 export interface Session {
   cookies: string;        // "_bsp_lt_pro_general_sid=...; _foo=..."
