@@ -641,6 +641,7 @@ export async function fetchLotteries(session?: Session): Promise<Lottery[]> {
     const release_date = await fetchReleaseDate(p.show_url);
     lotteries.push({
       id: p.show_url,
+      product_id: p.id,
       name_ja: p.name,
       release_date,
       image_url: p.image_url,
