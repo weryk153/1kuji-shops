@@ -1,3 +1,5 @@
+import { generateCsv, generateFilename } from './csv.js';
+
 const $ = (id) => document.getElementById(id);
 const lotterySelect = $('lottery-select');
 const prefectureSelect = $('prefecture-select');
@@ -195,20 +197,6 @@ function onDownloadCsv() {
   triggerDownload(csv, filename);
 }
 
-// CSV / 檔名 / 時間格式 純函式 — Task 14 會抽出來做單元測試
-function generateCsv(shops) {
-  const rows = [['Name', 'Address']];
-  for (const s of shops) rows.push([s.name, s.address]);
-  return rows.map((r) => r.map(csvEscape).join(',')).join('\r\n');
-}
-function csvEscape(field) {
-  if (/[",\r\n]/.test(field)) return `"${field.replace(/"/g, '""')}"`;
-  return field;
-}
-function generateFilename(lottery, pref) {
-  const cleanName = lottery.name_ja.replace(/^一番くじ\s*/, '').replace(/[\\\/:*?"<>|]/g, '_');
-  return `一番くじ_${cleanName}_${pref.name_ja}_${lottery.release_date}発売_店舗リスト.csv`;
-}
 function triggerDownload(content, filename) {
   const blob = new Blob([content], { type: 'text/csv;charset=utf-8' });
   const url = URL.createObjectURL(blob);

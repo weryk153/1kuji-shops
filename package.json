@@ -6,7 +6,7 @@
   "engines": { "node": ">=20" },
   "scripts": {
     "scrape": "tsx scraper/scrape.ts",
-    "test": "tsx --test tests/*.test.ts",
+    "test": "tsx --test tests/*.test.{ts,mjs}",
     "build": "bash scripts/build.sh",
     "serve": "npx serve web"
   },
