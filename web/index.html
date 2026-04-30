@@ -1,0 +1,46 @@
+<!doctype html>
+<html lang="zh-Hant">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>一番賞店舖查詢</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <header>
+    <h1>🎯 一番賞店舖查詢</h1>
+    <p class="meta">
+      資料來源：1kuji.com・最後更新：<span id="scraped-at">載入中…</span>
+    </p>
+    <p class="stale-warning" id="stale-warning" hidden>⚠️ 資料超過 48 小時未更新</p>
+  </header>
+
+  <main>
+    <section class="filters">
+      <label>
+        一番賞
+        <select id="lottery-select" disabled>
+          <option value="">載入中…</option>
+        </select>
+      </label>
+      <label>
+        都道府縣
+        <select id="prefecture-select" disabled>
+          <option value="">請先選一番賞</option>
+        </select>
+      </label>
+      <div class="actions">
+        <button id="copy-link" disabled>📋 複製分享連結</button>
+        <button id="download-csv" disabled>⬇ 下載 CSV (Google My Maps 用)</button>
+      </div>
+    </section>
+
+    <section class="results">
+      <p id="status"></p>
+      <ul id="shop-list"></ul>
+    </section>
+  </main>
+
+  <script type="module" src="app.js"></script>
+</body>
+</html>

@@ -1,0 +1,54 @@
+:root {
+  --bg: #fafafa;
+  --fg: #222;
+  --muted: #666;
+  --accent: #d63;
+  --warn: #c80;
+  --card-bg: #fff;
+  --border: #ddd;
+}
+
+* { box-sizing: border-box; }
+
+body {
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Hiragino Sans',
+               'Noto Sans CJK TC', 'PingFang TC', sans-serif;
+  background: var(--bg);
+  color: var(--fg);
+  margin: 0;
+  padding: 1rem;
+  max-width: 720px;
+  margin-inline: auto;
+}
+
+header h1 { margin: 0; font-size: 1.4rem; }
+.meta { color: var(--muted); font-size: 0.85rem; margin: 0.3rem 0; }
+.stale-warning { color: var(--warn); font-weight: 600; }
+
+.filters { display: flex; flex-direction: column; gap: 0.6rem; margin: 1.2rem 0; }
+.filters label { display: flex; flex-direction: column; gap: 0.2rem; font-size: 0.9rem; }
+.filters select { padding: 0.5rem; font-size: 1rem; border: 1px solid var(--border); border-radius: 4px; }
+
+.actions { display: flex; gap: 0.5rem; flex-wrap: wrap; }
+.actions button {
+  padding: 0.5rem 0.8rem; font-size: 0.95rem; cursor: pointer;
+  border: 1px solid var(--border); background: var(--card-bg); border-radius: 4px;
+}
+.actions button:disabled { opacity: 0.5; cursor: not-allowed; }
+.actions button.success { background: #d4edda; border-color: #b8d8be; }
+
+#status { color: var(--muted); font-size: 0.9rem; }
+#shop-list { list-style: none; padding: 0; margin: 0; }
+.shop-card {
+  background: var(--card-bg);
+  border: 1px solid var(--border);
+  border-radius: 6px;
+  padding: 0.8rem;
+  margin-bottom: 0.6rem;
+}
+.shop-card .name { font-weight: 600; }
+.shop-card .address { color: var(--muted); font-size: 0.9rem; margin: 0.2rem 0; }
+.shop-card .release { color: var(--muted); font-size: 0.85rem; }
+.shop-card .map-link {
+  float: right; text-decoration: none; font-size: 1.1rem;
+}
