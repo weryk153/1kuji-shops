@@ -2,7 +2,7 @@ name: scrape
 
 on:
   schedule:
-    - cron: '0 3 * * *'  # 每日 UTC 03:00 (= JST 12:00)
+    - cron: '0 19 * * *'  # 每日 UTC 19:00 (= 台灣時間 03:00 隔日)
   workflow_dispatch:
   # PR 只在改到爬蟲核心邏輯時跑（避免 Cloudflare autoconfig 之類 PR 觸發長時間爬蟲）
   pull_request:
