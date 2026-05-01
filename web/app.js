@@ -1,7 +1,7 @@
 import { generateCsv, generateFilename } from './csv.js';
 
 const $ = (id) => document.getElementById(id);
-const lotterySelect = $('lottery-select');
+const lotteryPicker = $('lottery-picker');
 const prefectureSelect = $('prefecture-select');
 const copyBtn = $('copy-link');
 const downloadBtn = $('download-csv');
@@ -12,7 +12,7 @@ const staleWarning = $('stale-warning');
 
 let lotteries = [];
 let prefectures = [];
-let currentShops = [];      // 全部都道府縣的店舖（fetch 一次）
+let currentShops = [];
 let currentLotteryId = null;
 
 async function init() {
@@ -24,7 +24,6 @@ async function init() {
     lotteries = lJson.lotteries;
     prefectures = pJson;
 
-    // 顯示更新時間 + 過期警示
     const scrapedAt = new Date(lJson.scraped_at);
     scrapedAtEl.textContent = formatDate(scrapedAt);
     if (Date.now() - scrapedAt.getTime() > 48 * 3600 * 1000) {
@@ -42,14 +41,37 @@ async function init() {
 }
 
 function populateLotteries() {
-  lotterySelect.innerHTML = '<option value="">選擇一番賞…</option>';
-  for (const l of lotteries) {
-    const opt = document.createElement('option');
-    opt.value = l.id;
-    opt.textContent = l.name_ja;
-    lotterySelect.appendChild(opt);
+  lotteryPicker.innerHTML = '';
+  if (lotteries.length === 0) {
+    lotteryPicker.innerHTML = '<p class="picker-empty">目前沒有可選的一番賞</p>';
+    return;
   }
-  lotterySelect.disabled = false;
+  for (const l of lotteries) {
+    lotteryPicker.appendChild(renderLotteryCard(l));
+  }
+}
+
+function renderLotteryCard(lottery) {
+  const card = document.createElement('button');
+  card.type = 'button';
+  card.className = 'lottery-card';
+  card.dataset.id = lottery.id;
+  card.setAttribute('role', 'radio');
+  card.setAttribute('aria-checked', 'false');
+  card.innerHTML = `
+    <div class="img-wrap">
+      <img loading="lazy" alt="" />
+    </div>
+    <div class="name"></div>
+    <div class="date"></div>
+  `;
+  const img = card.querySelector('img');
+  if (lottery.image_url) img.src = lottery.image_url;
+  img.alt = lottery.name_ja;
+  card.querySelector('.name').textContent = lottery.name_ja;
+  card.querySelector('.date').textContent = `${lottery.release_date} 開賣`;
+  card.addEventListener('click', () => selectLottery(lottery.id));
+  return card;
 }
 
 function populatePrefectures() {
@@ -63,28 +85,33 @@ function populatePrefectures() {
 }
 
 function bindEvents() {
-  lotterySelect.addEventListener('change', onLotteryChange);
   prefectureSelect.addEventListener('change', onPrefectureChange);
   copyBtn.addEventListener('click', onCopyLink);
   downloadBtn.addEventListener('click', onDownloadCsv);
 }
 
-async function onLotteryChange() {
-  const id = lotterySelect.value;
-  prefectureSelect.disabled = !id;
-  currentShops = [];
-  currentLotteryId = null;
-
-  if (!id) {
-    updateUrl();
-    render();
-    return;
+function markSelectedCard(id) {
+  for (const card of lotteryPicker.querySelectorAll('.lottery-card')) {
+    const isSelected = card.dataset.id === id;
+    card.classList.toggle('selected', isSelected);
+    card.setAttribute('aria-checked', String(isSelected));
   }
+}
+
+async function selectLottery(id) {
+  if (id === currentLotteryId) return;
+  currentLotteryId = null;
+  currentShops = [];
+  markSelectedCard(id);
+  prefectureSelect.disabled = false;
+
   try {
     statusEl.textContent = '載入店舖資料中…';
     const res = await fetch(`data/shops/${encodeURIComponent(id)}.json`);
     if (!res.ok) {
       statusEl.textContent = '找不到此一番賞，可能已下檔';
+      markSelectedCard('');
+      prefectureSelect.disabled = true;
       return;
     }
     const data = await res.json();
@@ -123,12 +150,12 @@ function render() {
   const prefName = prefectures.find((p) => p.code === prefCode)?.name_zh ?? '';
 
   if (filtered.length === 0) {
-    statusEl.textContent = `${prefName}：目前沒有販售店舖`;
+    statusEl.textContent = `${prefName} 目前沒有販售店舖`;
     setActionsEnabled(false);
     return;
   }
 
-  statusEl.textContent = `📍 ${prefName} 共 ${filtered.length} 家店舖`;
+  statusEl.textContent = `${prefName} 共 ${filtered.length} 家店舖`;
   for (const shop of filtered) listEl.appendChild(renderShop(shop));
   setActionsEnabled(true);
 }
@@ -138,14 +165,14 @@ function renderShop(shop) {
   li.className = 'shop-card';
   const mapUrl = `https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(shop.address)}`;
   li.innerHTML = `
-    <a class="map-link" href="${mapUrl}" target="_blank" rel="noopener" title="在 Google 地圖開啟">開啟地圖</a>
     <div class="name"></div>
     <div class="address"></div>
     <div class="release"></div>
+    <a class="map-link" href="${mapUrl}" target="_blank" rel="noopener" title="在 Google 地圖開啟">開啟地圖</a>
   `;
   li.querySelector('.name').textContent = shop.name;
   li.querySelector('.address').textContent = shop.address;
-  li.querySelector('.release').textContent = `開賣：${formatDateTime(shop.release_datetime)}`;
+  li.querySelector('.release').textContent = `開賣 ${formatDateTime(shop.release_datetime)}`;
   return li;
 }
 
@@ -156,7 +183,7 @@ function setActionsEnabled(enabled) {
 
 function updateUrl() {
   const params = new URLSearchParams();
-  if (lotterySelect.value) params.set('lottery', lotterySelect.value);
+  if (currentLotteryId) params.set('lottery', currentLotteryId);
   if (prefectureSelect.value) params.set('prefecture', prefectureSelect.value);
   const q = params.toString();
   history.replaceState(null, '', q ? `?${q}` : window.location.pathname);
@@ -167,8 +194,7 @@ async function restoreFromUrl() {
   const lid = params.get('lottery');
   const pcode = params.get('prefecture');
   if (lid && lotteries.some((l) => l.id === lid)) {
-    lotterySelect.value = lid;
-    await onLotteryChange();
+    await selectLottery(lid);
   }
   if (pcode && prefectures.some((p) => p.code === pcode)) {
     prefectureSelect.value = pcode;
@@ -178,10 +204,10 @@ async function restoreFromUrl() {
 
 async function onCopyLink() {
   await navigator.clipboard.writeText(window.location.href);
-  copyBtn.textContent = '✓ 已複製';
+  copyBtn.textContent = '已複製';
   copyBtn.classList.add('success');
   setTimeout(() => {
-    copyBtn.textContent = '📋 複製分享連結';
+    copyBtn.textContent = '複製分享連結';
     copyBtn.classList.remove('success');
   }, 1500);
 }
@@ -206,12 +232,12 @@ function triggerDownload(content, filename) {
   a.click();
   URL.revokeObjectURL(url);
 }
+
 const JST_FMT = new Intl.DateTimeFormat('ja-JP', {
   year: 'numeric', month: '2-digit', day: '2-digit',
   hour: '2-digit', minute: '2-digit', timeZone: 'Asia/Tokyo', hour12: false,
 });
 function formatDate(d) {
-  // 將 ja-JP 的「2026/04/30 12:00」改成「2026-04-30 12:00 JST」
   return JST_FMT.format(d).replace(/\//g, '-') + ' JST';
 }
 function formatDateTime(iso) {

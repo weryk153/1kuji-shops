@@ -4,40 +4,45 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>一番賞店舖查詢</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;500;700&display=swap">
   <link rel="stylesheet" href="style.css">
 </head>
 <body>
-  <header>
-    <h1>🎯 一番賞店舖查詢</h1>
+  <header class="page-header">
+    <h1>一番賞店舖查詢</h1>
     <p class="meta">
-      資料來源：1kuji.com・最後更新：<span id="scraped-at">載入中…</span>
+      資料來源 1kuji.com・最後更新 <span id="scraped-at">載入中…</span>
     </p>
-    <p class="stale-warning" id="stale-warning" hidden>⚠️ 資料超過 48 小時未更新</p>
+    <p class="stale-warning" id="stale-warning" hidden>資料超過 48 小時未更新</p>
   </header>
 
   <main>
+    <section class="picker-section" aria-labelledby="lottery-label">
+      <h2 id="lottery-label" class="section-label">選擇一番賞</h2>
+      <div id="lottery-picker" class="lottery-picker" role="radiogroup" aria-labelledby="lottery-label">
+        <p class="picker-empty">載入中…</p>
+      </div>
+    </section>
+
     <section class="filters">
-      <label>
-        一番賞
-        <select id="lottery-select" disabled>
-          <option value="">載入中…</option>
-        </select>
-      </label>
-      <label>
-        都道府縣
+      <label class="field">
+        <span class="field-label">都道府縣</span>
         <select id="prefecture-select" disabled>
           <option value="">請先選一番賞</option>
         </select>
       </label>
       <div class="actions">
-        <button id="copy-link" disabled>📋 複製分享連結</button>
-        <button id="download-csv" disabled>⬇ 下載 CSV (Google My Maps 用)</button>
+        <button id="copy-link" class="btn btn-secondary" disabled>複製分享連結</button>
+        <button id="download-csv" class="btn btn-primary" disabled>下載 CSV</button>
       </div>
+      <p class="actions-hint">CSV 可拖入 Google My Maps 看整張地圖</p>
     </section>
 
     <section class="results">
-      <p id="status"></p>
-      <ul id="shop-list"></ul>
+      <p id="status" class="status"></p>
+      <ul id="shop-list" class="shop-list"></ul>
     </section>
   </main>
 
