@@ -4,11 +4,17 @@ on:
   schedule:
     - cron: '0 3 * * *'  # 每日 UTC 03:00 (= JST 12:00)
   workflow_dispatch:
+  # PR 只在改到爬蟲核心邏輯時跑（避免 Cloudflare autoconfig 之類 PR 觸發長時間爬蟲）
   pull_request:
+    branches: [main]
     paths:
       - 'scraper/**'
       - 'data/prefectures.json'
-      - 'package.json'
+
+# 防止多個 scrape 同時打 1kuji（會 rate limit）。同 group 後到的會等前一個完成。
+concurrency:
+  group: scrape
+  cancel-in-progress: false
 
 jobs:
   scrape:
