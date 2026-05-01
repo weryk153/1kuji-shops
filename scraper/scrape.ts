@@ -4,6 +4,7 @@ import { establishSession } from './session.ts';
 import { fetchLotteries } from './fetch-lotteries.ts';
 import { fetchShops } from './fetch-shops.ts';
 import { shouldDeleteShopFile } from './retention.ts';
+import { pool } from './pool.ts';
 import type { Lottery, LotteriesFile, ShopsFile } from './types.ts';
 
 const DATA_DIR = 'data';
@@ -11,9 +12,9 @@ const SHOPS_DIR = join(DATA_DIR, 'shops');
 
 // 開賣日視窗：[today - WINDOW_BEFORE_DAYS, today + WINDOW_AFTER_DAYS]
 // 視窗外的 lottery 不爬店舖（也不出現在前端 dropdown）。
-// 60 個 lottery × 每個 ~3-8 分鐘 → 8-12h 超出 GitHub Actions 6h 限制，必須過濾。
 const WINDOW_BEFORE_DAYS = 30;
 const WINDOW_AFTER_DAYS = 14;
+const LOTTERY_CONCURRENCY = 3;
 
 function withinWindow(release_date: string, now: Date): boolean {
   const d = new Date(release_date + 'T00:00:00+09:00');
@@ -50,8 +51,8 @@ async function main() {
     JSON.stringify(lotteriesFile, null, 2) + '\n'
   );
 
-  // 對每個視窗內 lottery 抓店舖
-  for (const lottery of lotteries) {
+  // 對每個視窗內 lottery 並行抓店舖
+  await pool(lotteries, LOTTERY_CONCURRENCY, async (lottery) => {
     console.log(`fetching shops for ${lottery.id} (product_id=${lottery.product_id})...`);
     const t = Date.now();
     try {
@@ -65,12 +66,12 @@ async function main() {
         join(SHOPS_DIR, `${lottery.id}.json`),
         JSON.stringify(file, null, 2) + '\n'
       );
-      console.log(`  -> ${shops.length} shops in ${((Date.now() - t) / 1000).toFixed(0)}s`);
+      console.log(`  -> ${lottery.id}: ${shops.length} shops in ${((Date.now() - t) / 1000).toFixed(0)}s`);
     } catch (err) {
-      console.warn(`  ! failed: ${(err as Error).message}`);
+      console.warn(`  ! ${lottery.id} failed: ${(err as Error).message}`);
       process.exitCode = 1;
     }
-  }
+  });
 
   // 清掉超過 7 天且不在窗內的 shops JSON
   const activeIds = new Set(lotteries.map((l) => l.id));
