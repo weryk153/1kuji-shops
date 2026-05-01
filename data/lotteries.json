@@ -1,0 +1,213 @@
+{
+  "scraped_at": "2026-05-01T19:22:48.453Z",
+  "lotteries": [
+    {
+      "id": "kirby25",
+      "product_id": 10683,
+      "name_ja": "一番くじ 星のカービィ PUPUPU GOURMET",
+      "release_date": "2026-05-09",
+      "image_url": "https://assets.1kuji.com/uploads/product/image/10683/8a79a8b8-fadb-4530-bc32-2ffd80ff131d.webp",
+      "source_url": "https://1kuji.com/products/kirby25"
+    },
+    {
+      "id": "obungu5",
+      "product_id": 10661,
+      "name_ja": "一番くじ お文具といっしょ ～いっぱいたべたいな～",
+      "release_date": "2026-05-09",
+      "image_url": "https://assets.1kuji.com/uploads/product/image/10661/a344648b-18aa-4901-b9c7-e8bec9d66235.webp",
+      "source_url": "https://1kuji.com/products/obungu5"
+    },
+    {
+      "id": "db_goku",
+      "product_id": 10651,
+      "name_ja": "一番くじ ドラゴンボール THE CHRONICLE OF GOKU",
+      "release_date": "2026-05-08",
+      "image_url": "https://assets.1kuji.com/uploads/product/image/10651/bc0e8f35-9a5c-4dfc-a5a8-ba9659f2c6be.webp",
+      "source_url": "https://1kuji.com/products/db_goku"
+    },
+    {
+      "id": "ppg2",
+      "product_id": 10653,
+      "name_ja": "一番くじ パワーパフ ガールズ ～強くてかわいい正義の味方は大忙し！～",
+      "release_date": "2026-05-08",
+      "image_url": "https://assets.1kuji.com/uploads/product/image/10653/30646f31-7fa6-40a1-a518-1fcd39193819.webp",
+      "source_url": "https://1kuji.com/products/ppg2"
+    },
+    {
+      "id": "onep101",
+      "product_id": 10664,
+      "name_ja": "一番くじ ワンピース MONKEY.D.LUFFY－冒険の記憶と未来への航路－",
+      "release_date": "2026-05-02",
+      "image_url": "https://assets.1kuji.com/uploads/product/image/10664/b1631717-82e8-47b1-80bb-44c8ff5abe36.webp",
+      "source_url": "https://1kuji.com/products/onep101"
+    },
+    {
+      "id": "bluelock8",
+      "product_id": 10658,
+      "name_ja": "一番くじ ブルーロック あでぃしょなる・たいむ！",
+      "release_date": "2026-05-02",
+      "image_url": "https://assets.1kuji.com/uploads/product/image/10658/76e2e436-5d97-4ad0-a535-9a286df4cd63.webp",
+      "source_url": "https://1kuji.com/products/bluelock8"
+    },
+    {
+      "id": "tamagotchi3-2",
+      "product_id": 10648,
+      "name_ja": "一番くじ たまごっち ～令和で発見！！あのころのお部屋とたまごっち～",
+      "release_date": "2026-05-01",
+      "image_url": "https://assets.1kuji.com/uploads/product/image/10648/2a751790-df89-4473-b1bc-494d9390ff12.webp",
+      "source_url": "https://1kuji.com/products/tamagotchi3-2"
+    },
+    {
+      "id": "nikke7",
+      "product_id": 10669,
+      "name_ja": "一番くじ 勝利の女神：NIKKE CHAPTER7",
+      "release_date": "2026-05-01",
+      "image_url": "https://assets.1kuji.com/uploads/product/image/10669/aa16946a-e226-47fc-8541-4ecbdf52c663.webp",
+      "source_url": "https://1kuji.com/products/nikke7"
+    },
+    {
+      "id": "shingeki14",
+      "product_id": 10637,
+      "name_ja": "一番くじ 進撃の巨人 ～それぞれの決意～",
+      "release_date": "2026-04-30",
+      "image_url": "https://assets.1kuji.com/uploads/product/image/10637/24cc3bfb-fa71-4b46-9e29-73f030efd13e.gif",
+      "source_url": "https://1kuji.com/products/shingeki14"
+    },
+    {
+      "id": "gundam_orphans",
+      "product_id": 10630,
+      "name_ja": "一番くじ 機動戦士ガンダム 鉄血のオルフェンズ",
+      "release_date": "2026-04-25",
+      "image_url": "https://assets.1kuji.com/uploads/product/image/10630/e27366b3-b256-41c9-a21e-78b708362810.webp",
+      "source_url": "https://1kuji.com/products/gundam_orphans"
+    },
+    {
+      "id": "jujutsu18",
+      "product_id": 10629,
+      "name_ja": "一番くじ 呪術廻戦 死滅回游 ～弐～",
+      "release_date": "2026-04-25",
+      "image_url": "https://assets.1kuji.com/uploads/product/image/10629/296c24b6-525b-4e3d-8fda-d9b3572b5eae.gif",
+      "source_url": "https://1kuji.com/products/jujutsu18"
+    },
+    {
+      "id": "bluearchive3",
+      "product_id": 10625,
+      "name_ja": "一番くじ ブルーアーカイブ vol.3",
+      "release_date": "2026-04-25",
+      "image_url": "https://assets.1kuji.com/uploads/product/image/10625/469b4687-24a9-4fca-a09e-05d87034b8da.webp",
+      "source_url": "https://1kuji.com/products/bluearchive3"
+    },
+    {
+      "id": "mario_movie2",
+      "product_id": 10644,
+      "name_ja": "一番くじ 『ザ・スーパーマリオギャラクシー・ムービー』",
+      "release_date": "2026-04-24",
+      "image_url": "https://assets.1kuji.com/uploads/product/image/10644/957d1363-5400-49c2-9536-0407d050d293.webp",
+      "source_url": "https://1kuji.com/products/mario_movie2"
+    },
+    {
+      "id": "spongebob",
+      "product_id": 10620,
+      "name_ja": "一番くじ スポンジ・ボブ～ようこそビキニタウンへ！～",
+      "release_date": "2026-04-24",
+      "image_url": "https://assets.1kuji.com/uploads/product/image/10620/7db508f7-1b8c-4171-82e8-abab5ff3fa96.webp",
+      "source_url": "https://1kuji.com/products/spongebob"
+    },
+    {
+      "id": "luluttolilly",
+      "product_id": 10668,
+      "name_ja": "一番くじちょこっと 魔法の姉妹ルルットリリィ＆魔法の天使クリィミーマミ",
+      "release_date": "2026-04-20",
+      "image_url": "https://assets.1kuji.com/uploads/product/image/10668/844cc60c-dad9-459e-bae9-088614246fdd.webp",
+      "source_url": "https://1kuji.com/products/luluttolilly"
+    },
+    {
+      "id": "pandorobou-2",
+      "product_id": 10638,
+      "name_ja": "一番くじ パンどろぼう ～いとしのパン～",
+      "release_date": "2026-04-18",
+      "image_url": "https://assets.1kuji.com/uploads/product/image/10638/227ad9c1-ad67-4ab6-b11b-b676ce5a120b.webp",
+      "source_url": "https://1kuji.com/products/pandorobou-2"
+    },
+    {
+      "id": "jojo_24",
+      "product_id": 10634,
+      "name_ja": "一番くじ ジョジョの奇妙な冒険 The Gathering of STARS",
+      "release_date": "2026-04-18",
+      "image_url": "https://assets.1kuji.com/uploads/product/image/10634/36bd3bab-844d-4342-b920-33f6cf7ecd57.webp",
+      "source_url": "https://1kuji.com/products/jojo_24"
+    },
+    {
+      "id": "monst7",
+      "product_id": 10650,
+      "name_ja": "一番くじ モンスターストライク 2026",
+      "release_date": "2026-04-18",
+      "image_url": "https://assets.1kuji.com/uploads/product/image/10650/cfa20e32-d535-4d53-847b-b2f56788a4c0.webp",
+      "source_url": "https://1kuji.com/products/monst7"
+    },
+    {
+      "id": "kingdom5",
+      "product_id": 10639,
+      "name_ja": "一番くじ 春秋戦国大戦キングダム The Animation 秦国の未来",
+      "release_date": "2026-04-17",
+      "image_url": "https://assets.1kuji.com/uploads/product/image/10639/e287bdc6-71a5-4d34-91d4-754396414da4.webp",
+      "source_url": "https://1kuji.com/products/kingdom5"
+    },
+    {
+      "id": "winbre6",
+      "product_id": 10617,
+      "name_ja": "一番くじ WIND BREAKER -原作5周年-",
+      "release_date": "2026-04-14",
+      "image_url": "https://assets.1kuji.com/uploads/product/image/10617/b7999d17-f908-455d-b11c-8c4488811780.webp",
+      "source_url": "https://1kuji.com/products/winbre6"
+    },
+    {
+      "id": "tomandjerry6",
+      "product_id": 10608,
+      "name_ja": "一番くじ トムとジェリー Colorful Funny Time!",
+      "release_date": "2026-04-11",
+      "image_url": "https://assets.1kuji.com/uploads/product/image/10608/439c6b21-4a82-4e90-8d49-35ffb72307e8.webp",
+      "source_url": "https://1kuji.com/products/tomandjerry6"
+    },
+    {
+      "id": "utagawa",
+      "product_id": 10643,
+      "name_ja": "一番くじ 歌川一門",
+      "release_date": "2026-04-11",
+      "image_url": "https://assets.1kuji.com/uploads/product/image/10643/9c21deab-a849-42bd-ad28-6e3bf6316a43.webp",
+      "source_url": "https://1kuji.com/products/utagawa"
+    },
+    {
+      "id": "fruitszipper",
+      "product_id": 10633,
+      "name_ja": "一番くじ FRUITS ZIPPER ねえ？ねえ？ねえ？わたしの一番くじに気付いてる？",
+      "release_date": "2026-04-10",
+      "image_url": "https://assets.1kuji.com/uploads/product/image/10633/f5d40a23-3b07-4c36-bdc0-56d2966414fb.webp",
+      "source_url": "https://1kuji.com/products/fruitszipper"
+    },
+    {
+      "id": "frieren",
+      "product_id": 10632,
+      "name_ja": "一番くじ 葬送のフリーレン",
+      "release_date": "2026-04-10",
+      "image_url": "https://assets.1kuji.com/uploads/product/image/10632/3b1cb846-586a-43e0-bb67-462a019fcf68.webp",
+      "source_url": "https://1kuji.com/products/frieren"
+    },
+    {
+      "id": "doubutsuno_mori6",
+      "product_id": 10640,
+      "name_ja": "一番くじ どうぶつの森 おかえり！ハッピーメモリーズ",
+      "release_date": "2026-04-04",
+      "image_url": "https://assets.1kuji.com/uploads/product/image/10640/76770cd4-c44a-4d3b-966e-c1c9b3fb263f.webp",
+      "source_url": "https://1kuji.com/products/doubutsuno_mori6"
+    },
+    {
+      "id": "medalist",
+      "product_id": 10636,
+      "name_ja": "一番くじ TVアニメ「メダリスト」",
+      "release_date": "2026-04-03",
+      "image_url": "https://assets.1kuji.com/uploads/product/image/10636/c6eaaf2a-aaec-4e35-8604-dd3b2b69da40.webp",
+      "source_url": "https://1kuji.com/products/medalist"
+    }
+  ]
+}

@@ -1,0 +1,894 @@
+{
+  "lottery_id": "winbre6",
+  "scraped_at": "2026-05-01T19:53:40.760Z",
+  "shops": [
+    {
+      "name": "アニメイト 札幌店",
+      "address": "北海道札幌市中央区南二条西1丁目5番地",
+      "prefecture_code": "01",
+      "release_datetime": "2026-04-14T00:00:00.000+09:00"
+    },
+    {
+      "name": "一番くじ公式ショップ さっぽろ東急百貨店",
+      "address": "北海道札幌市中央区北4条西2-1",
+      "prefecture_code": "01",
+      "release_datetime": "2026-04-14T00:00:00.000+09:00"
+    },
+    {
+      "name": "アニメイト イオンモール旭川駅前店",
+      "address": "北海道旭川市宮下通7丁目2番5号",
+      "prefecture_code": "01",
+      "release_datetime": "2026-04-14T00:00:00.000+09:00"
+    },
+    {
+      "name": "一番くじ公式ショップ 青森ELM店",
+      "address": "青森県五所川原市大字唐笠柳字藤巻517番地1",
+      "prefecture_code": "02",
+      "release_datetime": "2026-04-14T00:00:00.000+09:00"
+    },
+    {
+      "name": "アニメイト 盛岡店",
+      "address": "岩手県盛岡市盛岡駅前通7-12",
+      "prefecture_code": "03",
+      "release_datetime": "2026-04-14T00:00:00.000+09:00"
+    },
+    {
+      "name": "アニメイト 仙台店",
+      "address": "宮城県仙台市青葉区中央4-1-1",
+      "prefecture_code": "04",
+      "release_datetime": "2026-04-14T00:00:00.000+09:00"
+    },
+    {
+      "name": "一番くじ公式ショップ 仙台PARCO店",
+      "address": "宮城県仙台市青葉区中央1-2-3",
+      "prefecture_code": "04",
+      "release_datetime": "2026-04-14T00:00:00.000+09:00"
+    },
+    {
+      "name": "一番くじ公式ショップ 宮城イオンモール名取店",
+      "address": "宮城県名取市杜せきのした5丁目3番地の1",
+      "prefecture_code": "04",
+      "release_datetime": "2026-04-14T00:00:00.000+09:00"
+    },
+    {
+      "name": "アニメイト イオンモール新利府",
+      "address": "宮城県宮城郡利府町新中道三丁目1-1 イオンモール新利府南館3F",
+      "prefecture_code": "04",
+      "release_datetime": "2026-04-14T00:00:00.000+09:00"
+    },
+    {
+      "name": "一番くじ公式ショップ 秋田OPA店",
+      "address": "秋田県秋田市千秋久保田町4-2",
+      "prefecture_code": "05",
+      "release_datetime": "2026-04-14T00:00:00.000+09:00"
+    },
+    {
+      "name": "アニメイト 秋田店",
+      "address": "秋田県秋田市中通2-8-1",
+      "prefecture_code": "05",
+      "release_datetime": "2026-04-14T00:00:00.000+09:00"
+    },
+    {
+      "name": "一番くじ公式ショップ サテライト 山形イオンモール天童店",
+      "address": "山形県天童市芳賀タウン北四丁目１番１号",
+      "prefecture_code": "06",
+      "release_datetime": "2026-04-14T00:00:00.000+09:00"
+    },
+    {
+      "name": "一番くじ公式ショップ サテライト 福島MAXふくしま店",
+      "address": "福島県福島市曽根田町1-18",
+      "prefecture_code": "07",
+      "release_datetime": "2026-04-14T00:00:00.000+09:00"
+    },
+    {
+      "name": "アニメイト 郡山店",
+      "address": "福島県郡山市駅前1-16-7",
+      "prefecture_code": "07",
+      "release_datetime": "2026-04-14T00:00:00.000+09:00"
+    },
+    {
+      "name": "一番くじ公式ショップ 福島イオンタウン郡山店",
+      "address": "福島県郡山市松木町2-88",
+      "prefecture_code": "07",
+      "release_datetime": "2026-04-14T09:00:00.000+09:00"
+    },
+    {
+      "name": "アニメイト 水戸店",
+      "address": "茨城県水戸市宮町1-2-4",
+      "prefecture_code": "08",
+      "release_datetime": "2026-04-14T00:00:00.000+09:00"
+    },
+    {
+      "name": "アニメイト イオンモール土浦店",
+      "address": "茨城県土浦市上高津367番地",
+      "prefecture_code": "08",
+      "release_datetime": "2026-04-14T00:00:00.000+09:00"
+    },
+    {
+      "name": "一番くじ公式ショップ 茨城イーアスつくば店",
+      "address": "茨城県つくば市研究学園5-19",
+      "prefecture_code": "08",
+      "release_datetime": "2026-04-14T00:00:00.000+09:00"
+    },
+    {
+      "name": "アニメイト 宇都宮店",
+      "address": "栃木県宇都宮市曲師町2-8",
+      "prefecture_code": "09",
+      "release_datetime": "2026-04-14T00:00:00.000+09:00"
+    },
+    {
+      "name": "一番くじ公式ショップ 栃木フェドラP&D佐野店",
+      "address": "栃木県佐野市高萩町1340番地",
+      "prefecture_code": "09",
+      "release_datetime": "2026-04-14T00:00:00.000+09:00"
+    },
+    {
+      "name": "アニメイト ロブレ小山店",
+      "address": "栃木県小山市中央町3丁目7番1号",
+      "prefecture_code": "09",
+      "release_datetime": "2026-04-14T00:00:00.000+09:00"
+    },
+    {
+      "name": "一番くじ公式ショップ 群馬けやきウォーク前橋店",
+      "address": "群馬県前橋市文京町2-1-1",
+      "prefecture_code": "10",
+      "release_datetime": "2026-04-14T00:00:00.000+09:00"
+    },
+    {
+      "name": "アニメイト 高崎店",
+      "address": "群馬県高崎市旭町34-5",
+      "prefecture_code": "10",
+      "release_datetime": "2026-04-14T00:00:00.000+09:00"
+    },
+    {
+      "name": "アニメイト イオンモール太田店",
+      "address": "群馬県太田市石原町81",
+      "prefecture_code": "10",
+      "release_datetime": "2026-04-14T00:00:00.000+09:00"
+    },
+    {
+      "name": "一番くじ公式ショップ 埼玉大宮アルシェ店",
+      "address": "埼玉県さいたま市大宮区桜木町2-1-1",
+      "prefecture_code": "11",
+      "release_datetime": "2026-04-14T00:00:00.000+09:00"
+    },
+    {
+      "name": "アニメイト 大宮店",
+      "address": "埼玉県さいたま市大宮区桜木町1-132",
+      "prefecture_code": "11",
+      "release_datetime": "2026-04-14T00:00:00.000+09:00"
+    },
+    {
+      "name": "一番くじ公式ショップ サテライト 浦和PARCO店",
+      "address": "埼玉県さいたま市浦和区東高砂町11-1",
+      "prefecture_code": "11",
+      "release_datetime": "2026-04-14T00:00:00.000+09:00"
+    },
+    {
+      "name": "アニメイト 川越店",
+      "address": "埼玉県川越市脇田町4-2",
+      "prefecture_code": "11",
+      "release_datetime": "2026-04-14T00:00:00.000+09:00"
+    },
+    {
+      "name": "アニメイト 川口店",
+      "address": "埼玉県川口市栄町3-7-1",
+      "prefecture_code": "11",
+      "release_datetime": "2026-04-14T00:00:00.000+09:00"
+    },
+    {
+      "name": "アニメイト所沢",
+      "address": "埼玉県所沢市東町5-22",
+      "prefecture_code": "11",
+      "release_datetime": "2026-04-14T00:00:00.000+09:00"
+    },
+    {
+      "name": "アニメイト イオンレイクタウン店",
+      "address": "埼玉県越谷市レイクタウン3丁目1番地1",
+      "prefecture_code": "11",
+      "release_datetime": "2026-04-14T00:00:00.000+09:00"
+    },
+    {
+      "name": "一番くじ公式ショップ 埼玉イオンレイクタウンmori店",
+      "address": "埼玉県越谷市レイクタウン3-1-1",
+      "prefecture_code": "11",
+      "release_datetime": "2026-04-14T00:00:00.000+09:00"
+    },
+    {
+      "name": "アニメイト モラージュ菖蒲店",
+      "address": "埼玉県久喜市菖蒲町菖蒲6005番地1",
+      "prefecture_code": "11",
+      "release_datetime": "2026-04-14T00:00:00.000+09:00"
+    },
+    {
+      "name": "アニメイト ららぽーと富士見",
+      "address": "埼玉県富士見市山室1-1313　ららぽーと富士見3F",
+      "prefecture_code": "11",
+      "release_datetime": "2026-04-14T00:00:00.000+09:00"
+    },
+    {
+      "name": "アニメイト 千葉店",
+      "address": "千葉県千葉市中央区富士見2-22-2",
+      "prefecture_code": "12",
+      "release_datetime": "2026-04-14T00:00:00.000+09:00"
+    },
+    {
+      "name": "一番くじ公式ショップ 千葉松戸駅前店",
+      "address": "千葉県松戸市松戸1230-1",
+      "prefecture_code": "12",
+      "release_datetime": "2026-04-14T00:00:00.000+09:00"
+    },
+    {
+      "name": "アニメイト イオンモール津田沼",
+      "address": "千葉県習志野市津田沼1-23-1",
+      "prefecture_code": "12",
+      "release_datetime": "2026-04-14T00:00:00.000+09:00"
+    },
+    {
+      "name": "アニメイト 柏店",
+      "address": "千葉県柏市柏1-2-26",
+      "prefecture_code": "12",
+      "release_datetime": "2026-04-14T00:00:00.000+09:00"
+    },
+    {
+      "name": "アニメイト 秋葉原本館",
+      "address": "東京都千代田区外神田4-3-2",
+      "prefecture_code": "13",
+      "release_datetime": "2026-04-14T00:00:00.000+09:00"
+    },
+    {
+      "name": "一番くじ公式ショップ　秋葉原店",
+      "address": "東京都千代田区外神田1丁目15-9　1F",
+      "prefecture_code": "13",
+      "release_datetime": "2026-04-14T00:00:00.000+09:00"
+    },
+    {
+      "name": "一番くじ公式ショップ 新宿東急歌舞伎町タワー店",
+      "address": "東京都新宿区歌舞伎町一丁目29番1号",
+      "prefecture_code": "13",
+      "release_datetime": "2026-04-14T00:00:00.000+09:00"
+    },
+    {
+      "name": "アニメイト 新宿",
+      "address": "東京都新宿区新宿5-16-4　新宿マルイ メン 7F",
+      "prefecture_code": "13",
+      "release_datetime": "2026-04-14T00:00:00.000+09:00"
+    },
+    {
+      "name": "アニメイト 渋谷店",
+      "address": "東京都渋谷区宇田川町31-2",
+      "prefecture_code": "13",
+      "release_datetime": "2026-04-14T00:00:00.000+09:00"
+    },
+    {
+      "name": "一番くじ公式ショップ 渋谷MAGNET by SHIBUYA109店",
+      "address": "東京都渋谷区神南1-23-10",
+      "prefecture_code": "13",
+      "release_datetime": "2026-04-14T00:00:00.000+09:00"
+    },
+    {
+      "name": "アニメイト 池袋本店",
+      "address": "東京都豊島区東池袋1-20-7",
+      "prefecture_code": "13",
+      "release_datetime": "2026-04-14T00:00:00.000+09:00"
+    },
+    {
+      "name": "一番くじ公式ショップ 池袋サンシャインシティ総本店",
+      "address": "東京都豊島区東池袋3-1-3",
+      "prefecture_code": "13",
+      "release_datetime": "2026-04-14T00:00:00.000+09:00"
+    },
+    {
+      "name": "アニメイト 八王子店",
+      "address": "東京都八王子市旭町6-6",
+      "prefecture_code": "13",
+      "release_datetime": "2026-04-14T00:00:00.000+09:00"
+    },
+    {
+      "name": "一番くじ公式ショップ 立川髙島屋S.C.店",
+      "address": "東京都立川市曙町2丁目39-3",
+      "prefecture_code": "13",
+      "release_datetime": "2026-04-14T00:00:00.000+09:00"
+    },
+    {
+      "name": "アニメイト 立川店",
+      "address": "東京都立川市柴崎町2-3-1",
+      "prefecture_code": "13",
+      "release_datetime": "2026-04-14T00:00:00.000+09:00"
+    },
+    {
+      "name": "アニメイト吉祥寺パルコ",
+      "address": "東京都武蔵野市吉祥寺本町1-5-1",
+      "prefecture_code": "13",
+      "release_datetime": "2026-04-14T00:00:00.000+09:00"
+    },
+    {
+      "name": "アニメイト 町田店",
+      "address": "東京都町田市原町田4-11-14",
+      "prefecture_code": "13",
+      "release_datetime": "2026-04-14T00:00:00.000+09:00"
+    },
+    {
+      "name": "アニメイト イオンモールむさし村山店",
+      "address": "東京都武蔵村山市榎1-1-3",
+      "prefecture_code": "13",
+      "release_datetime": "2026-04-14T00:00:00.000+09:00"
+    },
+    {
+      "name": "アニメイト 横浜ビブレ",
+      "address": "神奈川県横浜市西区高島2丁目15-13",
+      "prefecture_code": "14",
+      "release_datetime": "2026-04-14T00:00:00.000+09:00"
+    },
+    {
+      "name": "一番くじ公式ショップ 横浜ビブレ店",
+      "address": "神奈川県横浜市西区南幸2-15-13",
+      "prefecture_code": "14",
+      "release_datetime": "2026-04-14T00:00:00.000+09:00"
+    },
+    {
+      "name": "一番くじ公式ショップ 横浜ワールドポーターズ店",
+      "address": "神奈川県横浜市中区新港2丁目2-1　横浜ワールドポーターズ2階",
+      "prefecture_code": "14",
+      "release_datetime": "2026-04-14T00:00:00.000+09:00"
+    },
+    {
+      "name": "一番くじ公式ショップ サテライト 神奈川港北ニュータウン店",
+      "address": "神奈川県横浜市都筑区中川中央1丁目25-1",
+      "prefecture_code": "14",
+      "release_datetime": "2026-04-14T00:00:00.000+09:00"
+    },
+    {
+      "name": "アニメイト 川崎店",
+      "address": "神奈川県川崎市幸区大宮町1310",
+      "prefecture_code": "14",
+      "release_datetime": "2026-04-14T00:00:00.000+09:00"
+    },
+    {
+      "name": "アニメイト 藤沢店",
+      "address": "神奈川県藤沢市南藤沢19-17　ドン・キホーテ藤沢駅南口店5F",
+      "prefecture_code": "14",
+      "release_datetime": "2026-04-14T00:00:00.000+09:00"
+    },
+    {
+      "name": "アニメイト マルイファミリー海老名",
+      "address": "神奈川県海老名市中央1-6-1　マルイファミリー海老名5F",
+      "prefecture_code": "14",
+      "release_datetime": "2026-04-14T00:00:00.000+09:00"
+    },
+    {
+      "name": "一番くじ公式ショップ 新潟ビルボードプレイス店",
+      "address": "新潟県新潟市中央区八千代二丁目5番7号",
+      "prefecture_code": "15",
+      "release_datetime": "2026-04-14T00:00:00.000+09:00"
+    },
+    {
+      "name": "アニメイト 富山店",
+      "address": "富山県富山市桜橋通り5-13",
+      "prefecture_code": "16",
+      "release_datetime": "2026-04-14T00:00:00.000+09:00"
+    },
+    {
+      "name": "アニメイト イオンモール高岡",
+      "address": "富山県高岡市下伏間江383番地",
+      "prefecture_code": "16",
+      "release_datetime": "2026-04-14T00:00:00.000+09:00"
+    },
+    {
+      "name": "一番くじ公式ショップ 富山イオンモール高岡店",
+      "address": "富山県高岡市下伏間江３８３番地",
+      "prefecture_code": "16",
+      "release_datetime": "2026-04-14T00:00:00.000+09:00"
+    },
+    {
+      "name": "一番くじ公式ショップ 金沢フォーラス店",
+      "address": "石川県金沢市堀川新町3-1",
+      "prefecture_code": "17",
+      "release_datetime": "2026-04-14T00:00:00.000+09:00"
+    },
+    {
+      "name": "一番くじ公式ショップ サテライト 石川イオンモール白山店",
+      "address": "石川県白山市横江町5001番地",
+      "prefecture_code": "17",
+      "release_datetime": "2026-04-14T00:00:00.000+09:00"
+    },
+    {
+      "name": "アニメイト 福井店",
+      "address": "福井県福井市中央1-8-17",
+      "prefecture_code": "18",
+      "release_datetime": "2026-04-14T00:00:00.000+09:00"
+    },
+    {
+      "name": "一番くじ公式ショップ 福井フェアモール店",
+      "address": "福井県福井市大和田2-1230",
+      "prefecture_code": "18",
+      "release_datetime": "2026-04-14T00:00:00.000+09:00"
+    },
+    {
+      "name": "アニメイト イオンモール甲府昭和店",
+      "address": "山梨県中巨摩郡昭和町飯喰1505-1",
+      "prefecture_code": "19",
+      "release_datetime": "2026-04-14T10:00:00.000+09:00"
+    },
+    {
+      "name": "アニメイト 長野店",
+      "address": "長野県長野市南千歳町826",
+      "prefecture_code": "20",
+      "release_datetime": "2026-04-14T00:00:00.000+09:00"
+    },
+    {
+      "name": "アニメイト イオンモール松本",
+      "address": "長野県松本市中央4-9-51",
+      "prefecture_code": "20",
+      "release_datetime": "2026-04-14T00:00:00.000+09:00"
+    },
+    {
+      "name": "一番くじ公式ショップ 長野アリオ上田店",
+      "address": "長野県上田市天神3-5-1",
+      "prefecture_code": "20",
+      "release_datetime": "2026-04-14T00:00:00.000+09:00"
+    },
+    {
+      "name": "アニメイト 岐阜店",
+      "address": "岐阜県岐阜市加納清水町3-8-1",
+      "prefecture_code": "21",
+      "release_datetime": "2026-04-14T00:00:00.000+09:00"
+    },
+    {
+      "name": "一番くじ公式ショップ 岐阜イオンモール各務原店",
+      "address": "岐阜県各務原市那加萱場町３−８",
+      "prefecture_code": "21",
+      "release_datetime": "2026-04-14T00:00:00.000+09:00"
+    },
+    {
+      "name": "アニメイト イオンモール各務原店",
+      "address": "岐阜県各務原市那加萱場町3-8",
+      "prefecture_code": "21",
+      "release_datetime": "2026-04-14T00:00:00.000+09:00"
+    },
+    {
+      "name": "アニメイト静岡パルコ",
+      "address": "静岡県静岡市葵区紺屋町6-7",
+      "prefecture_code": "22",
+      "release_datetime": "2026-04-14T00:00:00.000+09:00"
+    },
+    {
+      "name": "アニメイト 沼津店",
+      "address": "静岡県沼津市大手町5-9-21",
+      "prefecture_code": "22",
+      "release_datetime": "2026-04-14T00:00:00.000+09:00"
+    },
+    {
+      "name": "アニメイト イオンモール富士宮店",
+      "address": "静岡県富士宮市浅間町1-8",
+      "prefecture_code": "22",
+      "release_datetime": "2026-04-14T00:00:00.000+09:00"
+    },
+    {
+      "name": "一番くじ公式ショップ 静岡ららぽーと磐田店",
+      "address": "静岡県磐田市高見丘1200",
+      "prefecture_code": "22",
+      "release_datetime": "2026-04-14T00:00:00.000+09:00"
+    },
+    {
+      "name": "アニメイト イオン浜松市野店",
+      "address": "静岡県浜松市中央区天王町1981-3",
+      "prefecture_code": "22",
+      "release_datetime": "2026-04-14T00:00:00.000+09:00"
+    },
+    {
+      "name": "アニメイト 浜松店",
+      "address": "静岡県浜松市中央区砂山町6-1",
+      "prefecture_code": "22",
+      "release_datetime": "2026-04-14T00:00:00.000+09:00"
+    },
+    {
+      "name": "一番くじ公式ショップ 愛知イオンモールナゴヤドーム前店",
+      "address": "愛知県名古屋市東区矢田南4-102-3",
+      "prefecture_code": "23",
+      "release_datetime": "2026-04-14T00:00:00.000+09:00"
+    },
+    {
+      "name": "一番くじ公式ショップ 愛知mozo ワンダーシティ店",
+      "address": "愛知県名古屋市西区二方町40番",
+      "prefecture_code": "23",
+      "release_datetime": "2026-04-14T00:00:00.000+09:00"
+    },
+    {
+      "name": "アニメイト 名古屋店",
+      "address": "愛知県名古屋市中村区椿町18-4",
+      "prefecture_code": "23",
+      "release_datetime": "2026-04-14T00:00:00.000+09:00"
+    },
+    {
+      "name": "一番くじ公式ショップ 名古屋駅前店",
+      "address": "愛知県名古屋市中村区椿町6-6　ニッセイ名古屋駅西ビル別館6F",
+      "prefecture_code": "23",
+      "release_datetime": "2026-04-14T00:00:00.000+09:00"
+    },
+    {
+      "name": "アニメイト 金山店",
+      "address": "愛知県名古屋市中区金山4-6-27",
+      "prefecture_code": "23",
+      "release_datetime": "2026-04-14T00:00:00.000+09:00"
+    },
+    {
+      "name": "アニメイト名古屋パルコ",
+      "address": "愛知県名古屋市中区栄3丁目29-1",
+      "prefecture_code": "23",
+      "release_datetime": "2026-04-14T00:00:00.000+09:00"
+    },
+    {
+      "name": "アニメイト イオンモール大高店",
+      "address": "愛知県名古屋市緑区大高町字奥平子1-1 イオンモール大高3F",
+      "prefecture_code": "23",
+      "release_datetime": "2026-04-14T00:00:00.000+09:00"
+    },
+    {
+      "name": "一番くじ公式ショップ 愛知イオンモール大高店",
+      "address": "愛知県名古屋市緑区南大高二丁目450番地",
+      "prefecture_code": "23",
+      "release_datetime": "2026-04-14T00:00:00.000+09:00"
+    },
+    {
+      "name": "アニメイト 豊橋店",
+      "address": "愛知県豊橋市花田町西宿",
+      "prefecture_code": "23",
+      "release_datetime": "2026-04-14T00:00:00.000+09:00"
+    },
+    {
+      "name": "アニメイト 豊田店",
+      "address": "愛知県豊田市若宮町2-70",
+      "prefecture_code": "23",
+      "release_datetime": "2026-04-14T00:00:00.000+09:00"
+    },
+    {
+      "name": "アニメイト 四日市店",
+      "address": "三重県四日市市安島1-2-18",
+      "prefecture_code": "24",
+      "release_datetime": "2026-04-14T00:00:00.000+09:00"
+    },
+    {
+      "name": "一番くじ公式ショップ 三重イオンモール鈴鹿店",
+      "address": "三重県鈴鹿市庄野羽山4-1-2",
+      "prefecture_code": "24",
+      "release_datetime": "2026-04-14T00:00:00.000+09:00"
+    },
+    {
+      "name": "一番くじ公式ショップ 滋賀ビバシティ彦根店",
+      "address": "滋賀県彦根市竹ケ鼻町43-1",
+      "prefecture_code": "25",
+      "release_datetime": "2026-04-14T00:00:00.000+09:00"
+    },
+    {
+      "name": "アニメイト アル・プラザ草津店",
+      "address": "滋賀県草津市西渋川1-23-30",
+      "prefecture_code": "25",
+      "release_datetime": "2026-04-14T00:00:00.000+09:00"
+    },
+    {
+      "name": "一番くじ公式ショップ 滋賀ピエリ守山店",
+      "address": "滋賀県守山市今浜町２６２０ー５",
+      "prefecture_code": "25",
+      "release_datetime": "2026-04-14T00:00:00.000+09:00"
+    },
+    {
+      "name": "一番くじ公式ショップ 京都イオンモールKYOTO店",
+      "address": "京都府京都市 南区西九条鳥居口町1番地",
+      "prefecture_code": "26",
+      "release_datetime": "2026-04-14T00:00:00.000+09:00"
+    },
+    {
+      "name": "アニメイト アバンティ京都店",
+      "address": "京都府京都市南区東九条西山王町31",
+      "prefecture_code": "26",
+      "release_datetime": "2026-04-14T00:00:00.000+09:00"
+    },
+    {
+      "name": "一番くじ公式ショップ サテライト 京都イオンモール久御山店",
+      "address": "京都府久世郡久御山町森南大内156-1",
+      "prefecture_code": "26",
+      "release_datetime": "2026-04-14T00:00:00.000+09:00"
+    },
+    {
+      "name": "アニメイト 京橋店",
+      "address": "大阪府大阪市都島区東野田町1-6-16",
+      "prefecture_code": "27",
+      "release_datetime": "2026-04-14T00:00:00.000+09:00"
+    },
+    {
+      "name": "アニメイト 大阪日本橋店",
+      "address": "大阪府大阪市浪速区日本橋西1丁目1-3",
+      "prefecture_code": "27",
+      "release_datetime": "2026-04-14T00:00:00.000+09:00"
+    },
+    {
+      "name": "アニメイト 梅田店",
+      "address": "大阪府大阪市北区茶屋町10−12",
+      "prefecture_code": "27",
+      "release_datetime": "2026-04-14T00:00:00.000+09:00"
+    },
+    {
+      "name": "一番くじ公式ショップ 梅田 HEP FIVE店",
+      "address": "大阪府大阪市北区角田町5-15 HEP FIVE 8階",
+      "prefecture_code": "27",
+      "release_datetime": "2026-04-14T00:00:00.000+09:00"
+    },
+    {
+      "name": "一番くじ公式ショップ 心斎橋PARCO店",
+      "address": "大阪府大阪市中央区心斎橋筋1丁目8-3",
+      "prefecture_code": "27",
+      "release_datetime": "2026-04-14T00:00:00.000+09:00"
+    },
+    {
+      "name": "一番くじ公式ショップ 大阪イオンモール大日店",
+      "address": "大阪府守口市大日東町1-18",
+      "prefecture_code": "27",
+      "release_datetime": "2026-04-14T00:00:00.000+09:00"
+    },
+    {
+      "name": "アニメイトくずはモール",
+      "address": "大阪府枚方市楠葉花園町10-85 南館 ヒカリノモール 2F",
+      "prefecture_code": "27",
+      "release_datetime": "2026-04-14T00:00:00.000+09:00"
+    },
+    {
+      "name": "アニメイト イオンモール茨木",
+      "address": "大阪府茨木市松ケ本町8-30",
+      "prefecture_code": "27",
+      "release_datetime": "2026-04-14T00:00:00.000+09:00"
+    },
+    {
+      "name": "アニメイト リノアス八尾店",
+      "address": "大阪府八尾市光町2-60　リノアス八尾 5F",
+      "prefecture_code": "27",
+      "release_datetime": "2026-04-14T00:00:00.000+09:00"
+    },
+    {
+      "name": "一番くじ公式ショップ サテライト 神戸ハーバーランド店",
+      "address": "兵庫県神戸市中央区東川崎町1丁目7番2号",
+      "prefecture_code": "28",
+      "release_datetime": "2026-04-14T00:00:00.000+09:00"
+    },
+    {
+      "name": "アニメイト 三宮店",
+      "address": "兵庫県神戸市中央区三宮町1-9-1-309",
+      "prefecture_code": "28",
+      "release_datetime": "2026-04-14T00:00:00.000+09:00"
+    },
+    {
+      "name": "アニメイト 姫路店",
+      "address": "兵庫県姫路市東駅前町54",
+      "prefecture_code": "28",
+      "release_datetime": "2026-04-14T00:00:00.000+09:00"
+    },
+    {
+      "name": "アニメイトイオンモール橿原",
+      "address": "奈良県橿原市曲川町7-20-1イオンモール橿原3F",
+      "prefecture_code": "29",
+      "release_datetime": "2026-04-14T00:00:00.000+09:00"
+    },
+    {
+      "name": "アニメイト 和歌山店",
+      "address": "和歌山県和歌山市美園町5-61",
+      "prefecture_code": "30",
+      "release_datetime": "2026-04-14T00:00:00.000+09:00"
+    },
+    {
+      "name": "一番くじ公式ショップ サテライト 和歌山イオンモール和歌山店",
+      "address": "和歌山県和歌山市ふじと台23",
+      "prefecture_code": "30",
+      "release_datetime": "2026-04-14T00:00:00.000+09:00"
+    },
+    {
+      "name": "一番くじ公式ショップ 鳥取イオンモール鳥取北店",
+      "address": "鳥取県鳥取市晩稲３４８",
+      "prefecture_code": "31",
+      "release_datetime": "2026-04-14T00:00:00.000+09:00"
+    },
+    {
+      "name": "一番くじ公式ショップ サテライト 島根イオン松江店",
+      "address": "島根県松江市東朝日町151",
+      "prefecture_code": "32",
+      "release_datetime": "2026-04-14T00:00:00.000+09:00"
+    },
+    {
+      "name": "アニメイト 岡山店",
+      "address": "岡山県岡山市北区本町6-30",
+      "prefecture_code": "33",
+      "release_datetime": "2026-04-14T00:00:00.000+09:00"
+    },
+    {
+      "name": "一番くじ公式ショップ 岡山アリオ倉敷店",
+      "address": "岡山県倉敷市寿町12-2",
+      "prefecture_code": "33",
+      "release_datetime": "2026-04-14T00:00:00.000+09:00"
+    },
+    {
+      "name": "アニメイト イオンモール倉敷",
+      "address": "岡山県倉敷市水江1番地 イオンモール倉敷2F",
+      "prefecture_code": "33",
+      "release_datetime": "2026-04-14T00:00:00.000+09:00"
+    },
+    {
+      "name": "アニメイト 広島",
+      "address": "広島県広島市中区大手町2-3-1",
+      "prefecture_code": "34",
+      "release_datetime": "2026-04-14T00:00:00.000+09:00"
+    },
+    {
+      "name": "アニメイト 福山店",
+      "address": "広島県福山市三之丸町2-14",
+      "prefecture_code": "34",
+      "release_datetime": "2026-04-14T00:00:00.000+09:00"
+    },
+    {
+      "name": "一番くじ公式ショップ 広島府中店",
+      "address": "広島県安芸郡府中町大須2-1-1",
+      "prefecture_code": "34",
+      "release_datetime": "2026-04-14T00:00:00.000+09:00"
+    },
+    {
+      "name": "アニメイト イオン防府店",
+      "address": "山口県防府市中央町1-3",
+      "prefecture_code": "35",
+      "release_datetime": "2026-04-14T00:00:00.000+09:00"
+    },
+    {
+      "name": "一番くじ公式ショップ 山口・おのだサンパーク店",
+      "address": "山口県山陽小野田市中川6丁目4番1号",
+      "prefecture_code": "35",
+      "release_datetime": "2026-04-14T00:00:00.000+09:00"
+    },
+    {
+      "name": "アニメイト 徳島店",
+      "address": "徳島県徳島市東新町1-5-3　ユーフォーテーブルシネマ地下1F",
+      "prefecture_code": "36",
+      "release_datetime": "2026-04-14T00:00:00.000+09:00"
+    },
+    {
+      "name": "一番くじ公式ショップ ゆめタウン徳島店",
+      "address": "徳島県板野郡藍住町奥野字東中須88-1",
+      "prefecture_code": "36",
+      "release_datetime": "2026-04-14T00:00:00.000+09:00"
+    },
+    {
+      "name": "アニメイト 高松店",
+      "address": "香川県高松市丸亀町7番地16",
+      "prefecture_code": "37",
+      "release_datetime": "2026-04-14T00:00:00.000+09:00"
+    },
+    {
+      "name": "一番くじ公式ショップ 香川ゆめタウン高松店",
+      "address": "香川県高松市三条町中所608-1",
+      "prefecture_code": "37",
+      "release_datetime": "2026-04-14T00:00:00.000+09:00"
+    },
+    {
+      "name": "アニメイト 松山店",
+      "address": "愛媛県松山市湊町4-10-8",
+      "prefecture_code": "38",
+      "release_datetime": "2026-04-14T00:00:00.000+09:00"
+    },
+    {
+      "name": "一番くじ公式ショップ 愛媛エミフルMASAKI店",
+      "address": "愛媛県伊予郡松前町筒井850",
+      "prefecture_code": "38",
+      "release_datetime": "2026-04-14T00:00:00.000+09:00"
+    },
+    {
+      "name": "アニメイト 高知店",
+      "address": "高知県高知市本町3丁目1-2",
+      "prefecture_code": "39",
+      "release_datetime": "2026-04-14T00:00:00.000+09:00"
+    },
+    {
+      "name": "アニメイト 小倉店",
+      "address": "福岡県北九州市小倉北区浅野2-14-5",
+      "prefecture_code": "40",
+      "release_datetime": "2026-04-14T00:00:00.000+09:00"
+    },
+    {
+      "name": "一番くじ公式ショップ 博多キャナルシティ店",
+      "address": "福岡県福岡市博多区住吉1丁目2-74",
+      "prefecture_code": "40",
+      "release_datetime": "2026-04-14T00:00:00.000+09:00"
+    },
+    {
+      "name": "一番くじ公式ショップ 博多バスターミナル店",
+      "address": "福岡県福岡市博多区博多駅中央街2-1",
+      "prefecture_code": "40",
+      "release_datetime": "2026-04-14T00:00:00.000+09:00"
+    },
+    {
+      "name": "アニメイト 福岡パルコ店",
+      "address": "福岡県福岡市中央区天神2丁目11-1　福岡パルコ本館 8F",
+      "prefecture_code": "40",
+      "release_datetime": "2026-04-14T00:00:00.000+09:00"
+    },
+    {
+      "name": "アニメイト イオンモール筑紫野店",
+      "address": "福岡県筑紫野市立明寺434番地1　イオンモール筑紫野3F",
+      "prefecture_code": "40",
+      "release_datetime": "2026-04-14T00:00:00.000+09:00"
+    },
+    {
+      "name": "一番くじ公式ショップ 佐賀ゆめタウン店",
+      "address": "佐賀県佐賀市兵庫北5-14-1",
+      "prefecture_code": "41",
+      "release_datetime": "2026-04-14T00:00:00.000+09:00"
+    },
+    {
+      "name": "アニメイト モラージュ佐賀店",
+      "address": "佐賀県佐賀市巨勢町牛島73",
+      "prefecture_code": "41",
+      "release_datetime": "2026-04-14T00:00:00.000+09:00"
+    },
+    {
+      "name": "アニメイト 長崎店",
+      "address": "長崎県長崎市浜町1番10号",
+      "prefecture_code": "42",
+      "release_datetime": "2026-04-14T00:00:00.000+09:00"
+    },
+    {
+      "name": "一番くじ公式ショップ 長崎アミュプラザ店",
+      "address": "長崎県長崎市尾上町1-1",
+      "prefecture_code": "42",
+      "release_datetime": "2026-04-14T00:00:00.000+09:00"
+    },
+    {
+      "name": "アニメイト 熊本店",
+      "address": "熊本県熊本市中央区手取本町4-12",
+      "prefecture_code": "43",
+      "release_datetime": "2026-04-14T00:00:00.000+09:00"
+    },
+    {
+      "name": "一番くじ公式ショップ 熊本ゆめタウン光の森店",
+      "address": "熊本県菊池郡菊陽町光の森7-39-1",
+      "prefecture_code": "43",
+      "release_datetime": "2026-04-14T00:00:00.000+09:00"
+    },
+    {
+      "name": "一番くじ公式ショップ 大分トキハわさだタウン店",
+      "address": "大分県大分市玉沢755-1",
+      "prefecture_code": "44",
+      "release_datetime": "2026-04-14T00:00:00.000+09:00"
+    },
+    {
+      "name": "アニメイト アミュプラザおおいた店",
+      "address": "大分県大分市要町1-14",
+      "prefecture_code": "44",
+      "release_datetime": "2026-04-14T00:00:00.000+09:00"
+    },
+    {
+      "name": "アニメイト 宮崎店",
+      "address": "宮崎県宮崎市橘通東3丁目1-11",
+      "prefecture_code": "45",
+      "release_datetime": "2026-04-14T00:00:00.000+09:00"
+    },
+    {
+      "name": "一番くじ公式ショップ 宮崎宮交シティ店",
+      "address": "宮崎県宮崎市大淀4-6-28",
+      "prefecture_code": "45",
+      "release_datetime": "2026-04-14T00:00:00.000+09:00"
+    },
+    {
+      "name": "アニメイト 鹿児島店",
+      "address": "鹿児島県鹿児島市東千石町13-3",
+      "prefecture_code": "46",
+      "release_datetime": "2026-04-14T00:00:00.000+09:00"
+    },
+    {
+      "name": "アニメイト 那覇国際通り店",
+      "address": "沖縄県那覇市牧志1-2-1",
+      "prefecture_code": "47",
+      "release_datetime": "2026-04-14T00:00:00.000+09:00"
+    },
+    {
+      "name": "一番くじ公式ショップ 那覇メインプレイス店",
+      "address": "沖縄県那覇市おもろまち4-4-9",
+      "prefecture_code": "47",
+      "release_datetime": "2026-04-14T00:00:00.000+09:00"
+    }
+  ]
+}
