@@ -332,6 +332,37 @@ main, .page-header {
   }
 }
 
+/* How-to / tutorial */
+.howto {
+  margin-top: 2.5rem;
+  padding: 1.25rem;
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-md);
+}
+.howto .section-label {
+  margin-top: 0;
+  margin-bottom: 0.75rem;
+}
+.howto-steps {
+  margin: 0;
+  padding-left: 1.4rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.4rem;
+  font-size: 0.9rem;
+  line-height: 1.55;
+  color: var(--fg);
+}
+.howto-steps li::marker { color: var(--accent); font-weight: 700; }
+.howto-steps a { color: var(--accent); text-decoration: underline; text-underline-offset: 2px; }
+.howto-steps strong { font-weight: 600; }
+.howto-note {
+  margin: 0.9rem 0 0 0;
+  font-size: 0.78rem;
+  color: var(--muted);
+}
+
 @media (prefers-reduced-motion: reduce) {
   *, *::before, *::after {
     transition-duration: 0.01ms !important;
