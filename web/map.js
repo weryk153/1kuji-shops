@@ -391,7 +391,38 @@ export function createMap({ container, onPrefectureClick, onCityToggle }) {
     if (pointers.has(e.pointerId)) endPointer(e);
   });
 
-  // 拖曳後抑制隨之而來的 click，避免誤觸 polygon
+  // 用 pointerdown/up 自己判定 tap，不依賴 click。
+  // 原因：Chrome on Android（Pixel 等）在 touch-action:none + 隱式 pointer capture
+  // 下，click 偶爾不會派發到 path，導致第一次 tap 看起來「沒反應」。
+  // 自己根據單指、無 pinch、位移夠小來決定是否觸發 handler，行為穩定可預期。
+  function attachTap(element, handler) {
+    let downX = 0, downY = 0, downId = null, wasFirstFinger = false;
+    element.addEventListener('pointerdown', (e) => {
+      if (e.button !== undefined && e.button !== 0) return;
+      // pointerdown 在 target → ancestor 的順序冒泡，此時 SVG 尚未把這指加入 pointers，
+      // 所以 size===0 代表這是第一指
+      wasFirstFinger = pointers.size === 0;
+      downX = e.clientX;
+      downY = e.clientY;
+      downId = e.pointerId;
+    });
+    element.addEventListener('pointerup', (e) => {
+      if (e.pointerId !== downId) return;
+      downId = null;
+      if (!wasFirstFinger) return; // 多指 / 第二指 lift 不算 tap
+      if (pinch) return; // 整段過程進過 pinch，path 上的 finger 1 lift 此時 pinch 仍存在
+      const dx = e.clientX - downX;
+      const dy = e.clientY - downY;
+      const threshold = e.pointerType === 'touch' ? 10 : 5;
+      if (Math.hypot(dx, dy) > threshold) return;
+      handler();
+    });
+    element.addEventListener('pointercancel', (e) => {
+      if (e.pointerId === downId) downId = null;
+    });
+  }
+
+  // 保留：pan 之後的 phantom click 可能還會冒到 svg，這裡再擋一次（保險）
   svg.addEventListener('click', (e) => {
     if (suppressNextClick) {
       e.stopPropagation();
@@ -425,7 +456,7 @@ export function createMap({ container, onPrefectureClick, onCityToggle }) {
       path.classList.add('map-region', 'pref');
       if (code === state.prefectureCode) path.classList.add('selected');
       path.dataset.code = code;
-      path.addEventListener('click', () => onPrefectureClick(code));
+      attachTap(path, () => onPrefectureClick(code));
       const t = document.createElementNS(NS, 'title');
       t.textContent = f.properties.nam_ja;
       path.appendChild(t);
@@ -481,7 +512,7 @@ export function createMap({ container, onPrefectureClick, onCityToggle }) {
         }
         path.dataset.code = cityCode;
         path.dataset.name = matchedName;
-        path.addEventListener('click', () => onCityToggle(matchedName));
+        attachTap(path, () => onCityToggle(matchedName));
       }
       const t = document.createElementNS(NS, 'title');
       t.textContent = displayName;
