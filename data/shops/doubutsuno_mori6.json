@@ -1,29 +1,33 @@
 {
   "lottery_id": "doubutsuno_mori6",
-  "scraped_at": "2026-05-01T20:45:28.929Z",
+  "scraped_at": "2026-05-02T08:10:49.568Z",
   "shops": [
     {
       "name": "Nintendo TOKYO",
       "address": "東京都渋谷区宇田川町15-1",
       "prefecture_code": "13",
+      "city": "渋谷区",
       "release_datetime": "2026-04-04T00:00:00.000+09:00"
     },
     {
       "name": "Nintendo KYOTO",
       "address": "京都府京都市下京区四条通寺町東入2丁目御旅町35",
       "prefecture_code": "26",
+      "city": "京都市下京区",
       "release_datetime": "2026-04-04T00:00:00.000+09:00"
     },
     {
       "name": "Nintendo OSAKA",
       "address": "大阪府大阪市北区梅田3-1-1",
       "prefecture_code": "27",
+      "city": "大阪市北区",
       "release_datetime": "2026-04-04T00:00:00.000+09:00"
     },
     {
       "name": "Nintendo FUKUOKA",
       "address": "福岡県福岡市博多区博多駅中央街1-1",
       "prefecture_code": "40",
+      "city": "福岡市博多区",
       "release_datetime": "2026-04-04T00:00:00.000+09:00"
     }
   ]
