@@ -496,8 +496,8 @@ main, .page-header {
   fill: url(#map-disabled-pattern);
   cursor: not-allowed;
 }
-.map-region.pref:active:not(.selected) { fill: var(--accent); fill-opacity: 0.5; }
-.map-region.city:active:not(.disabled):not(.selected) { fill: var(--accent); fill-opacity: 0.5; }
+/* 按壓回饋：用 brightness 微暗，避免 fill-opacity 造成的「紅框→全紅」閃爍 */
+.map-region:active:not(.disabled) { filter: brightness(0.9); }
 
 .map-legend {
   display: flex;
