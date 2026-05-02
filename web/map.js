@@ -149,7 +149,9 @@ export function createMap({ container, onPrefectureClick, onCityToggle }) {
   svg.setAttribute('viewBox', `0 0 ${TARGET_W} ${TARGET_W}`);
   svg.setAttribute('preserveAspectRatio', 'xMidYMid meet');
   svg.classList.add('map-svg');
-  svg.style.touchAction = 'none'; // 自己處理手勢，避免瀏覽器 pan/zoom 衝突
+  // 預設 pan-y：允許瀏覽器在地圖上垂直 scroll 頁面（避免使用者手指放地圖就卡住）。
+  // 使用者實際開始多指 / pinch 時動態切成 'none' 接管手勢，pointerup 後恢復。
+  svg.style.touchAction = 'pan-y';
 
   // 灰色斜線 pattern 給「無店舖」city 用（顏色 + 紋理雙重編碼，符合 WCAG color-not-only）
   const defs = document.createElementNS(NS, 'defs');
@@ -244,6 +246,9 @@ export function createMap({ container, onPrefectureClick, onCityToggle }) {
     zoomOutBtn.disabled = zoomState.scale <= MIN_ZOOM + 0.001;
     zoomInBtn.disabled = zoomState.scale >= MAX_ZOOM - 0.001;
     zoomResetBtn.disabled = zoomState.scale === 1 && zoomState.tx === 0 && zoomState.ty === 0;
+    // scale=1：放給瀏覽器垂直 scroll 頁面（避免地圖卡住整頁滾動）
+    // scale>1：使用者要用單指 pan 才有意義，自己接管所有手勢
+    svg.style.touchAction = zoomState.scale > 1.001 ? 'none' : 'pan-y';
   }
 
   function resetZoom() {
@@ -297,8 +302,11 @@ export function createMap({ container, onPrefectureClick, onCityToggle }) {
   });
   zoomResetBtn.addEventListener('click', resetZoom);
 
-  // 滾輪縮放（pivot 在游標位置）
+  // 滾輪縮放（pivot 在游標位置）— 只在 ctrl / meta 修飾鍵按下時觸發，
+  // 否則放給瀏覽器做頁面 scroll，避免在小型嵌入地圖上劫持滾動。
+  // Trackpad pinch 手勢瀏覽器會自動帶 ctrlKey=true，所以 pinch 仍能 zoom。
   svg.addEventListener('wheel', (e) => {
+    if (!e.ctrlKey && !e.metaKey) return;
     e.preventDefault();
     const p = clientToSvg(e.clientX, e.clientY);
     const factor = e.deltaY < 0 ? 1.2 : 1 / 1.2;
@@ -317,6 +325,10 @@ export function createMap({ container, onPrefectureClick, onCityToggle }) {
     // 會卡在 true 把下一次 tap 也吃掉，造成「進到新畫面後第一次 tap 沒反應」
     if (pointers.size === 0) suppressNextClick = false;
     pointers.set(e.pointerId, { x: e.clientX, y: e.clientY });
+    // 顯式抓住 pointer：保證 pointerup/cancel 一定派發到 svg 即使手指滑出
+    // SVG 範圍。少了這個，drag 出去 SVG 後 pointerup 丟失，留 pointers 殘留
+    // 把後續 tap 邏輯卡住。
+    try { svg.setPointerCapture(e.pointerId); } catch {}
     if (pointers.size === 2) {
       const pts = [...pointers.values()];
       pinch = {
@@ -396,9 +408,8 @@ export function createMap({ container, onPrefectureClick, onCityToggle }) {
   }
   svg.addEventListener('pointerup', endPointer);
   svg.addEventListener('pointercancel', endPointer);
-  svg.addEventListener('pointerleave', (e) => {
-    if (pointers.has(e.pointerId)) endPointer(e);
-  });
+  // 不再用 pointerleave — setPointerCapture 已保證 pointerup/cancel 必到，
+  // 留著反而會在 drag 出 SVG 邊界時誤觸發 endPointer 中斷拖曳
 
   // 拖曳後抑制隨之而來的 click，避免誤觸 polygon
   svg.addEventListener('click', (e) => {
