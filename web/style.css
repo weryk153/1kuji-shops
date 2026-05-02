@@ -514,9 +514,9 @@ main, .page-header {
   transition: fill 0.1s;
   cursor: pointer;
 }
-.map-region.pref.selected { fill: var(--accent); stroke: var(--accent); }
+.map-region.pref.selected { fill: var(--accent); stroke: #7a2613; stroke-width: 0.9; }
 .map-region.city { fill: #ffffff; }
-.map-region.city.selected { fill: var(--accent); stroke: var(--accent); }
+.map-region.city.selected { fill: var(--accent); stroke: #7a2613; stroke-width: 0.9; }
 .map-region.city.disabled {
   fill: url(#map-disabled-pattern);
   cursor: not-allowed;
