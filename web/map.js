@@ -124,12 +124,32 @@ export function createMap({ container, onPrefectureClick, onCityToggle }) {
   backBtn.hidden = true;
   const titleEl = document.createElement('span');
   titleEl.className = 'map-title';
-  toolbar.append(backBtn, titleEl);
+  // Zoom controls
+  const zoomCtl = document.createElement('div');
+  zoomCtl.className = 'map-zoom-ctl';
+  const zoomInBtn = document.createElement('button');
+  zoomInBtn.type = 'button';
+  zoomInBtn.className = 'map-zoom-btn';
+  zoomInBtn.setAttribute('aria-label', '放大');
+  zoomInBtn.textContent = '＋';
+  const zoomOutBtn = document.createElement('button');
+  zoomOutBtn.type = 'button';
+  zoomOutBtn.className = 'map-zoom-btn';
+  zoomOutBtn.setAttribute('aria-label', '縮小');
+  zoomOutBtn.textContent = '－';
+  const zoomResetBtn = document.createElement('button');
+  zoomResetBtn.type = 'button';
+  zoomResetBtn.className = 'map-zoom-btn map-zoom-reset';
+  zoomResetBtn.setAttribute('aria-label', '重置縮放');
+  zoomResetBtn.textContent = '↺';
+  zoomCtl.append(zoomOutBtn, zoomInBtn, zoomResetBtn);
+  toolbar.append(backBtn, titleEl, zoomCtl);
 
   const svg = document.createElementNS(NS, 'svg');
   svg.setAttribute('viewBox', `0 0 ${TARGET_W} ${TARGET_W}`);
   svg.setAttribute('preserveAspectRatio', 'xMidYMid meet');
   svg.classList.add('map-svg');
+  svg.style.touchAction = 'none'; // 自己處理手勢，避免瀏覽器 pan/zoom 衝突
 
   // 灰色斜線 pattern 給「無店舖」city 用（顏色 + 紋理雙重編碼，符合 WCAG color-not-only）
   const defs = document.createElementNS(NS, 'defs');
@@ -153,6 +173,11 @@ export function createMap({ container, onPrefectureClick, onCityToggle }) {
   `;
   const legendDisabledItem = legend.querySelector('.legend-disabled');
 
+  // 容納所有可縮放內容的 group，transform 由 zoom 控制
+  const zoomGroup = document.createElementNS(NS, 'g');
+  zoomGroup.classList.add('map-zoom-group');
+  svg.appendChild(zoomGroup);
+
   wrap.append(toolbar, svg, legend);
   container.appendChild(wrap);
 
@@ -160,7 +185,8 @@ export function createMap({ container, onPrefectureClick, onCityToggle }) {
   const cityCache = new Map();
   const state = {
     prefectureCode: null,
-    cityCodes: new Set(), // 已選市町村的 5 碼
+    cityCodes: new Set(), // 已選市町村的 5 碼（有 city_code 才填）
+    cityNames: new Set(), // 已選市町村名稱（總是填，給沒 code 時用）
     available: [], // [{ name, code, count }] 該縣可選清單
   };
 
@@ -195,18 +221,173 @@ export function createMap({ container, onPrefectureClick, onCityToggle }) {
   }
 
   function clearSvg() {
-    for (const child of [...svg.children]) {
-      if (child.tagName.toLowerCase() !== 'defs') svg.removeChild(child);
-    }
+    while (zoomGroup.firstChild) zoomGroup.removeChild(zoomGroup.firstChild);
   }
 
   // 觸發切換 view 時的淡入動畫
   function triggerFade() {
     svg.classList.remove('fade-in');
-    // force reflow 才能重啟動畫
     void svg.offsetWidth;
     svg.classList.add('fade-in');
   }
+
+  // ========== Zoom & Pan ==========
+  const MIN_ZOOM = 1;
+  const MAX_ZOOM = 8;
+  let zoomState = { scale: 1, tx: 0, ty: 0 };
+
+  function applyZoom() {
+    zoomGroup.setAttribute(
+      'transform',
+      `translate(${zoomState.tx.toFixed(2)} ${zoomState.ty.toFixed(2)}) scale(${zoomState.scale.toFixed(3)})`
+    );
+    zoomOutBtn.disabled = zoomState.scale <= MIN_ZOOM + 0.001;
+    zoomInBtn.disabled = zoomState.scale >= MAX_ZOOM - 0.001;
+    zoomResetBtn.disabled = zoomState.scale === 1 && zoomState.tx === 0 && zoomState.ty === 0;
+  }
+
+  function resetZoom() {
+    zoomState = { scale: 1, tx: 0, ty: 0 };
+    applyZoom();
+  }
+
+  // 相對於 SVG viewBox 座標的縮放（pivot 在 viewBox 系，不是 zoomGroup local）
+  function zoomBy(factor, pivotX, pivotY) {
+    const newScale = Math.max(MIN_ZOOM, Math.min(MAX_ZOOM, zoomState.scale * factor));
+    const real = newScale / zoomState.scale;
+    zoomState.tx = pivotX - (pivotX - zoomState.tx) * real;
+    zoomState.ty = pivotY - (pivotY - zoomState.ty) * real;
+    zoomState.scale = newScale;
+    clampPan();
+    applyZoom();
+  }
+
+  // 平移上限：縮放後內容不應超出 viewBox 太多（避免拖到看不見）
+  function clampPan() {
+    const [vbW, vbH] = svg.getAttribute('viewBox').split(' ').slice(2).map(Number);
+    const contentW = vbW * zoomState.scale;
+    const contentH = vbH * zoomState.scale;
+    // 允許邊緣略微滑出（緩衝）
+    const minTx = vbW - contentW;
+    const maxTx = 0;
+    const minTy = vbH - contentH;
+    const maxTy = 0;
+    if (contentW > vbW) zoomState.tx = Math.min(maxTx, Math.max(minTx, zoomState.tx));
+    else zoomState.tx = (vbW - contentW) / 2;
+    if (contentH > vbH) zoomState.ty = Math.min(maxTy, Math.max(minTy, zoomState.ty));
+    else zoomState.ty = (vbH - contentH) / 2;
+  }
+
+  function clientToSvg(clientX, clientY) {
+    const ctm = svg.getScreenCTM();
+    if (!ctm) return { x: 0, y: 0 };
+    const inv = ctm.inverse();
+    const x = clientX * inv.a + clientY * inv.c + inv.e;
+    const y = clientX * inv.b + clientY * inv.d + inv.f;
+    return { x, y };
+  }
+
+  zoomInBtn.addEventListener('click', () => {
+    const [vbW, vbH] = svg.getAttribute('viewBox').split(' ').slice(2).map(Number);
+    zoomBy(1.5, vbW / 2, vbH / 2);
+  });
+  zoomOutBtn.addEventListener('click', () => {
+    const [vbW, vbH] = svg.getAttribute('viewBox').split(' ').slice(2).map(Number);
+    zoomBy(1 / 1.5, vbW / 2, vbH / 2);
+  });
+  zoomResetBtn.addEventListener('click', resetZoom);
+
+  // 滾輪縮放（pivot 在游標位置）
+  svg.addEventListener('wheel', (e) => {
+    e.preventDefault();
+    const p = clientToSvg(e.clientX, e.clientY);
+    const factor = e.deltaY < 0 ? 1.2 : 1 / 1.2;
+    zoomBy(factor, p.x, p.y);
+  }, { passive: false });
+
+  // Pointer events：1 指 pan、2 指 pinch
+  const pointers = new Map();
+  let pinch = null;
+  let drag = null;
+  let suppressNextClick = false;
+
+  svg.addEventListener('pointerdown', (e) => {
+    pointers.set(e.pointerId, { x: e.clientX, y: e.clientY });
+    if (pointers.size === 2) {
+      const pts = [...pointers.values()];
+      pinch = {
+        startDist: Math.hypot(pts[0].x - pts[1].x, pts[0].y - pts[1].y),
+        startScale: zoomState.scale,
+        startTx: zoomState.tx,
+        startTy: zoomState.ty,
+        pivot: clientToSvg((pts[0].x + pts[1].x) / 2, (pts[0].y + pts[1].y) / 2),
+      };
+      drag = null;
+    } else if (pointers.size === 1) {
+      drag = {
+        startClientX: e.clientX,
+        startClientY: e.clientY,
+        startTx: zoomState.tx,
+        startTy: zoomState.ty,
+        moved: 0,
+      };
+    }
+  });
+
+  svg.addEventListener('pointermove', (e) => {
+    if (!pointers.has(e.pointerId)) return;
+    pointers.set(e.pointerId, { x: e.clientX, y: e.clientY });
+    if (pinch && pointers.size === 2) {
+      const pts = [...pointers.values()];
+      const dist = Math.hypot(pts[0].x - pts[1].x, pts[0].y - pts[1].y);
+      const newScale = Math.max(MIN_ZOOM, Math.min(MAX_ZOOM, pinch.startScale * dist / pinch.startDist));
+      const real = newScale / pinch.startScale;
+      zoomState.tx = pinch.pivot.x - (pinch.pivot.x - pinch.startTx) * real;
+      zoomState.ty = pinch.pivot.y - (pinch.pivot.y - pinch.startTy) * real;
+      zoomState.scale = newScale;
+      clampPan();
+      applyZoom();
+      suppressNextClick = true;
+    } else if (drag && pointers.size === 1) {
+      const dxClient = e.clientX - drag.startClientX;
+      const dyClient = e.clientY - drag.startClientY;
+      const moved = Math.hypot(dxClient, dyClient);
+      drag.moved = Math.max(drag.moved, moved);
+      if (moved > 4) {
+        const ctm = svg.getScreenCTM();
+        if (ctm) {
+          const inv = ctm.inverse();
+          const dxSvg = dxClient * inv.a + dyClient * inv.c;
+          const dySvg = dxClient * inv.b + dyClient * inv.d;
+          zoomState.tx = drag.startTx + dxSvg;
+          zoomState.ty = drag.startTy + dySvg;
+          clampPan();
+          applyZoom();
+          suppressNextClick = true;
+        }
+      }
+    }
+  });
+
+  function endPointer(e) {
+    pointers.delete(e.pointerId);
+    if (pointers.size < 2) pinch = null;
+    if (pointers.size === 0) drag = null;
+  }
+  svg.addEventListener('pointerup', endPointer);
+  svg.addEventListener('pointercancel', endPointer);
+  svg.addEventListener('pointerleave', (e) => {
+    if (pointers.has(e.pointerId)) endPointer(e);
+  });
+
+  // 拖曳後抑制隨之而來的 click，避免誤觸 polygon
+  svg.addEventListener('click', (e) => {
+    if (suppressNextClick) {
+      e.stopPropagation();
+      e.preventDefault();
+      suppressNextClick = false;
+    }
+  }, { capture: true });
 
   async function renderJapan() {
     backBtn.hidden = true;
@@ -222,6 +403,7 @@ export function createMap({ container, onPrefectureClick, onCityToggle }) {
     const proj = makeProjection(data.features, { dropOutliers: 12 });
     const project = proj.project;
     svg.setAttribute('viewBox', `0 0 ${proj.viewBox[0]} ${proj.viewBox[1]}`);
+    resetZoom();
     clearSvg();
     triggerFade();
     const labels = [];
@@ -236,7 +418,7 @@ export function createMap({ container, onPrefectureClick, onCityToggle }) {
       const t = document.createElementNS(NS, 'title');
       t.textContent = f.properties.nam_ja;
       path.appendChild(t);
-      svg.appendChild(path);
+      zoomGroup.appendChild(path);
       const anchor = labelAnchor(f.geometry);
       if (anchor) labels.push({ name: f.properties.nam_ja, anchor, code });
     }
@@ -257,30 +439,43 @@ export function createMap({ container, onPrefectureClick, onCityToggle }) {
     const proj = makeProjection(data.features, { dropOutliers: 1 });
     const project = proj.project;
     svg.setAttribute('viewBox', `0 0 ${proj.viewBox[0]} ${proj.viewBox[1]}`);
+    resetZoom();
     clearSvg();
     triggerFade();
-    const codeToName = new Map(state.available.map((c) => [c.code, c.name]));
+    // 雙重 lookup：code 或 name 都可比對（city_code 在舊資料可能空）
+    const codeToName = new Map();
+    const nameSet = new Set();
+    for (const c of state.available) {
+      if (c.code) codeToName.set(c.code, c.name);
+      if (c.name) nameSet.add(c.name);
+    }
     const labels = [];
     for (const f of proj.features) {
       const cityCode = String(f.properties.N03_007 || '');
+      const fullName = (f.properties.N03_003 || '') + (f.properties.N03_004 || '');
+      const shortName = f.properties.N03_004 || '';
       const path = document.createElementNS(NS, 'path');
       path.setAttribute('d', pathD(f.geometry, project));
       path.classList.add('map-region', 'city');
-      const name = codeToName.get(cityCode);
-      const fallback = (f.properties.N03_003 || '') + (f.properties.N03_004 || '');
-      const displayName = name || fallback;
-      if (!name) {
+      // 優先 by code，其次 by 全名（札幌市中央区），最後 by 短名（中央区）
+      let matchedName = codeToName.get(cityCode);
+      if (!matchedName && nameSet.has(fullName)) matchedName = fullName;
+      if (!matchedName && nameSet.has(shortName)) matchedName = shortName;
+      const displayName = matchedName || fullName;
+      if (!matchedName) {
         path.classList.add('disabled');
       } else {
-        if (state.cityCodes.has(cityCode)) path.classList.add('selected');
+        if (state.cityCodes.has(cityCode) || state.cityNames.has(matchedName)) {
+          path.classList.add('selected');
+        }
         path.dataset.code = cityCode;
-        path.dataset.name = name;
-        path.addEventListener('click', () => onCityToggle(name));
+        path.dataset.name = matchedName;
+        path.addEventListener('click', () => onCityToggle(matchedName));
       }
       const t = document.createElementNS(NS, 'title');
       t.textContent = displayName;
       path.appendChild(t);
-      svg.appendChild(path);
+      zoomGroup.appendChild(path);
       const anchor = labelAnchor(f.geometry);
       if (anchor && displayName) {
         labels.push({ name: displayName, anchor, code: cityCode, disabled: !name });
@@ -314,14 +509,16 @@ export function createMap({ container, onPrefectureClick, onCityToggle }) {
       text.classList.add('map-label');
       if (disabled) text.classList.add('disabled');
       text.textContent = name;
-      svg.appendChild(text);
+      zoomGroup.appendChild(text);
     }
   }
 
   function updateCityHighlights() {
     if (!state.prefectureCode) return;
-    for (const path of svg.querySelectorAll('.map-region.city:not(.disabled)')) {
-      path.classList.toggle('selected', state.cityCodes.has(path.dataset.code));
+    for (const path of zoomGroup.querySelectorAll('.map-region.city:not(.disabled)')) {
+      const byCode = path.dataset.code && state.cityCodes.has(path.dataset.code);
+      const byName = path.dataset.name && state.cityNames.has(path.dataset.name);
+      path.classList.toggle('selected', byCode || byName);
     }
   }
 
@@ -335,9 +532,10 @@ export function createMap({ container, onPrefectureClick, onCityToggle }) {
     },
     setSelectedCities(cityNames, available) {
       state.available = available || state.available;
+      state.cityNames = new Set(cityNames);
       state.cityCodes = new Set();
       for (const c of state.available) {
-        if (cityNames.has(c.name)) state.cityCodes.add(c.code);
+        if (cityNames.has(c.name) && c.code) state.cityCodes.add(c.code);
       }
       updateCityHighlights();
     },

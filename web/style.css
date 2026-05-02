@@ -427,12 +427,42 @@ main, .page-header {
 .map-toolbar {
   display: flex;
   align-items: center;
-  justify-content: space-between;
   gap: 0.5rem;
-  padding: 0.5rem 0.75rem;
+  padding: 0.4rem 0.6rem;
   border-bottom: 1px solid var(--border);
   background: var(--bg);
 }
+.map-toolbar .map-title { flex: 1; }
+.map-zoom-ctl {
+  display: inline-flex;
+  gap: 4px;
+}
+.map-zoom-btn {
+  width: 32px;
+  height: 32px;
+  padding: 0;
+  border: 1px solid var(--border);
+  background: var(--surface);
+  border-radius: var(--radius-sm);
+  font-size: 1rem;
+  font-weight: 600;
+  color: var(--fg);
+  cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  line-height: 1;
+}
+.map-zoom-btn:hover:not(:disabled) {
+  border-color: var(--accent);
+  color: var(--accent);
+}
+.map-zoom-btn:focus-visible {
+  outline: none;
+  box-shadow: var(--shadow-focus);
+}
+.map-zoom-btn:disabled { opacity: 0.4; cursor: not-allowed; }
+.map-zoom-reset { font-size: 0.95rem; }
 .map-title {
   font-size: 0.85rem;
   color: var(--muted);

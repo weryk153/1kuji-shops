@@ -1,5 +1,6 @@
 import { generateCsv, generateFilename } from './csv.js';
 import { translateShopName } from './translate.js';
+import { buildSearchBlob } from './aliases.js';
 import { createMap } from './map.js';
 
 const $ = (id) => document.getElementById(id);
@@ -71,7 +72,7 @@ function renderLotteryCard(lottery) {
   card.type = 'button';
   card.className = 'lottery-card';
   card.dataset.id = lottery.id;
-  card.dataset.search = lottery.name_ja;
+  card.dataset.search = buildSearchBlob(lottery);
   card.setAttribute('role', 'radio');
   card.setAttribute('aria-checked', 'false');
   card.innerHTML = `
