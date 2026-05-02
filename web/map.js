@@ -312,6 +312,10 @@ export function createMap({ container, onPrefectureClick, onCityToggle }) {
   let suppressNextClick = false;
 
   svg.addEventListener('pointerdown', (e) => {
+    // 新的觸控起點 — 清掉前一輪殘留的 suppressNextClick。萬一前一輪 click 沒派發
+    // 到（瀏覽器把 click 派到別處 / 沒派 / re-render 把 target 換掉），這個 flag
+    // 會卡在 true 把下一次 tap 也吃掉，造成「進到新畫面後第一次 tap 沒反應」
+    if (pointers.size === 0) suppressNextClick = false;
     pointers.set(e.pointerId, { x: e.clientX, y: e.clientY });
     if (pointers.size === 2) {
       const pts = [...pointers.values()];
