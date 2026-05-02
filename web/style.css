@@ -29,6 +29,9 @@ body {
   font-size: 16px;
   line-height: 1.6;
   -webkit-font-smoothing: antialiased;
+  /* 防 lottery-picker 負邊距 / 動態內容意外撐寬讓整頁能橫向 scroll；
+     picker 自己的 overflow-x: auto 內部 scroll 不受影響 */
+  overflow-x: clip;
 }
 
 main, .page-header {
