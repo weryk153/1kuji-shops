@@ -17,10 +17,12 @@ const WINDOW_AFTER_DAYS = 14;
 const LOTTERY_CONCURRENCY = 3;
 
 function withinWindow(release_date: string, now: Date): boolean {
-  const d = new Date(release_date + 'T00:00:00+09:00');
-  const lo = new Date(now); lo.setUTCDate(lo.getUTCDate() - WINDOW_BEFORE_DAYS);
-  const hi = new Date(now); hi.setUTCDate(hi.getUTCDate() + WINDOW_AFTER_DAYS);
-  return d >= lo && d <= hi;
+  // 全部用 ms timestamp 比，避免 UTC vs JST 在午夜 boundary 差一天
+  const releaseMs = new Date(release_date + 'T00:00:00+09:00').getTime();
+  const nowMs = now.getTime();
+  const dayMs = 86400_000;
+  return releaseMs >= nowMs - WINDOW_BEFORE_DAYS * dayMs
+      && releaseMs <= nowMs + WINDOW_AFTER_DAYS * dayMs;
 }
 
 async function main() {
@@ -52,6 +54,7 @@ async function main() {
   );
 
   // 對每個視窗內 lottery 並行抓店舖
+  let failed = 0;
   await pool(lotteries, LOTTERY_CONCURRENCY, async (lottery) => {
     console.log(`fetching shops for ${lottery.id} (product_id=${lottery.product_id})...`);
     const t = Date.now();
@@ -69,6 +72,7 @@ async function main() {
       console.log(`  -> ${lottery.id}: ${shops.length} shops in ${((Date.now() - t) / 1000).toFixed(0)}s`);
     } catch (err) {
       console.warn(`  ! ${lottery.id} failed: ${(err as Error).message}`);
+      failed++;
       process.exitCode = 1;
     }
   });
@@ -87,7 +91,11 @@ async function main() {
     }
   }
 
-  console.log('done.');
+  if (failed > 0) {
+    console.log(`done with ${failed} failure(s).`);
+  } else {
+    console.log('done.');
+  }
 }
 
 main().catch((err) => {

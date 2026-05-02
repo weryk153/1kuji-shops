@@ -36,10 +36,19 @@ export async function fetchShops(lottery: Lottery, session: Session): Promise<Sh
       await sleep(THROTTLE_MS);
       const shops = await fetchCityShops(lottery.product_id, city.code, session);
       for (const s of shops) {
+        // 單筆地址解 prefecture 失敗（例如 1kuji 偶有怪資料）就 skip 那筆，
+        // 不要連帶 throw 把整個縣的店都丟掉
+        let prefCode: string;
+        try {
+          prefCode = addressToPrefectureCode(s.address);
+        } catch (err) {
+          console.warn(`    skip shop "${s.name}" - ${(err as Error).message}`);
+          continue;
+        }
         found.push({
           name: s.name,
           address: s.address,
-          prefecture_code: addressToPrefectureCode(s.address),
+          prefecture_code: prefCode,
           city: city.name,
           city_code: city.code,
           release_datetime: s.active_datetime,

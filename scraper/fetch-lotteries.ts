@@ -23,9 +23,17 @@ export async function fetchLotteries(session?: Session): Promise<Lottery[]> {
   }
 
   // 對每筆 lottery 二次抓 detail page，解 release_date。1 秒一個請求節流。
+  // 單篇 parse 失敗（HTML 改版 / 該 lottery 暫時 down）跳過就好，不要把整個 scrape 拖累。
   const lotteries: Lottery[] = [];
   for (const p of data.products) {
-    const release_date = await fetchReleaseDate(p.show_url);
+    let release_date: string;
+    try {
+      release_date = await fetchReleaseDate(p.show_url);
+    } catch (err) {
+      console.warn(`  ! skip ${p.show_url}: ${(err as Error).message}`);
+      await sleep(1000);
+      continue;
+    }
     lotteries.push({
       id: p.show_url,
       product_id: p.id,
