@@ -355,6 +355,8 @@ export function createMap({ container, onPrefectureClick, onCityToggle }) {
       const dyClient = e.clientY - drag.startClientY;
       const moved = Math.hypot(dxClient, dyClient);
       drag.moved = Math.max(drag.moved, moved);
+      drag.lastDx = dxClient;
+      drag.lastDy = dyClient;
       if (moved > drag.threshold) {
         const ctm = svg.getScreenCTM();
         if (ctm) {
@@ -365,13 +367,20 @@ export function createMap({ container, onPrefectureClick, onCityToggle }) {
           zoomState.ty = drag.startTy + dySvg;
           clampPan();
           applyZoom();
-          suppressNextClick = true;
+          // 不在這裡 suppress — 用 pointerup 當下的最終位移判定，
+          // 避免 tap 中途瞬間抖出 > threshold 又回來時把第一次 click 吃掉
         }
       }
     }
   });
 
   function endPointer(e) {
+    // 只有最終位移仍超過 threshold 才視為真 pan、suppress click；
+    // 中途抖出又回來的 tap 不會被誤判
+    if (drag && pointers.size === 1) {
+      const finalMoved = Math.hypot(drag.lastDx || 0, drag.lastDy || 0);
+      if (finalMoved > drag.threshold) suppressNextClick = true;
+    }
     pointers.delete(e.pointerId);
     if (pointers.size < 2) pinch = null;
     if (pointers.size === 0) drag = null;
