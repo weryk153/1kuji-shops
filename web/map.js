@@ -178,7 +178,19 @@ export function createMap({ container, onPrefectureClick, onCityToggle }) {
   zoomGroup.classList.add('map-zoom-group');
   svg.appendChild(zoomGroup);
 
-  wrap.append(toolbar, svg, legend);
+  // DEBUG — 暫時加的事件 log，定位 Pixel tap 不進下一層的問題；解完移除
+  const dbgPanel = document.createElement('div');
+  dbgPanel.style.cssText = 'font:11px ui-monospace,monospace;background:#111;color:#9fe;padding:4px 6px;max-height:140px;overflow-y:auto;white-space:pre;line-height:1.35;';
+  const dbgLines = [];
+  function dbg(msg) {
+    const ts = new Date().toISOString().slice(17, 23);
+    dbgLines.unshift(ts + ' ' + msg);
+    if (dbgLines.length > 14) dbgLines.length = 14;
+    dbgPanel.textContent = dbgLines.join('\n');
+  }
+  window.__mapDbg = dbg;
+
+  wrap.append(toolbar, svg, legend, dbgPanel);
   container.appendChild(wrap);
 
   let japanData = null;
@@ -312,6 +324,7 @@ export function createMap({ container, onPrefectureClick, onCityToggle }) {
   let suppressNextClick = false;
 
   svg.addEventListener('pointerdown', (e) => {
+    dbg('svg-down ' + e.pointerType + ' id=' + e.pointerId + ' tgt=' + (e.target.tagName || '?') + '.' + (e.target.dataset?.code || '-'));
     pointers.set(e.pointerId, { x: e.clientX, y: e.clientY });
     if (pointers.size === 2) {
       const pts = [...pointers.values()];
@@ -377,9 +390,16 @@ export function createMap({ container, onPrefectureClick, onCityToggle }) {
   function endPointer(e) {
     // 只有最終位移仍超過 threshold 才視為真 pan、suppress click；
     // 中途抖出又回來的 tap 不會被誤判
+    let suppressed = false;
     if (drag && pointers.size === 1) {
       const finalMoved = Math.hypot(drag.lastDx || 0, drag.lastDy || 0);
-      if (finalMoved > drag.threshold) suppressNextClick = true;
+      if (finalMoved > drag.threshold) {
+        suppressNextClick = true;
+        suppressed = true;
+      }
+      dbg('svg-' + e.type + ' id=' + e.pointerId + ' finalDx=' + (drag.lastDx || 0).toFixed(1) + ' dy=' + (drag.lastDy || 0).toFixed(1) + ' peak=' + drag.moved.toFixed(1) + ' suppress=' + suppressed);
+    } else {
+      dbg('svg-' + e.type + ' id=' + e.pointerId + ' (no drag)');
     }
     pointers.delete(e.pointerId);
     if (pointers.size < 2) pinch = null;
@@ -393,6 +413,7 @@ export function createMap({ container, onPrefectureClick, onCityToggle }) {
 
   // 拖曳後抑制隨之而來的 click，避免誤觸 polygon
   svg.addEventListener('click', (e) => {
+    dbg('svg-click(capture) tgt=' + (e.target.tagName || '?') + '.' + (e.target.dataset?.code || '-') + ' suppress=' + suppressNextClick);
     if (suppressNextClick) {
       e.stopPropagation();
       e.preventDefault();
@@ -425,7 +446,10 @@ export function createMap({ container, onPrefectureClick, onCityToggle }) {
       path.classList.add('map-region', 'pref');
       if (code === state.prefectureCode) path.classList.add('selected');
       path.dataset.code = code;
-      path.addEventListener('click', () => onPrefectureClick(code));
+      path.addEventListener('click', () => {
+        dbg('path-click pref ' + code + ' → onPrefectureClick');
+        onPrefectureClick(code);
+      });
       const t = document.createElementNS(NS, 'title');
       t.textContent = f.properties.nam_ja;
       path.appendChild(t);
@@ -481,7 +505,10 @@ export function createMap({ container, onPrefectureClick, onCityToggle }) {
         }
         path.dataset.code = cityCode;
         path.dataset.name = matchedName;
-        path.addEventListener('click', () => onCityToggle(matchedName));
+        path.addEventListener('click', () => {
+          dbg('path-click city ' + matchedName + ' → onCityToggle');
+          onCityToggle(matchedName);
+        });
       }
       const t = document.createElementNS(NS, 'title');
       t.textContent = displayName;
