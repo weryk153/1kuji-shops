@@ -431,7 +431,11 @@ export function createMap({ container, onPrefectureClick, onCityToggle }) {
       path.appendChild(t);
       zoomGroup.appendChild(path);
       const anchor = labelAnchor(f.geometry);
-      if (anchor) labels.push({ name: f.properties.nam_ja, anchor, code });
+      // label 用短名（去 県/府/都 後綴），bbox 窄一些好塞；tooltip 仍用全名
+      // 北海道是固有名稱，不能去「道」
+      const fullName = f.properties.nam_ja;
+      const shortName = fullName === '北海道' ? '北海道' : fullName.replace(/[県府都]$/, '');
+      if (anchor) labels.push({ name: shortName, anchor, code });
     }
     drawLabels(labels, project, 6, 'pref');
   }
@@ -495,7 +499,7 @@ export function createMap({ container, onPrefectureClick, onCityToggle }) {
     drawLabels(labels, project, 6, 'city');
   }
 
-  // 畫 labels — 大的優先放，新 label 若與已放的 bbox 重疊就跳過
+  // 畫 labels — 大的優先放；city 嚴格不重疊，pref 一律全放（碰撞時略偏移避字疊字）
   function drawLabels(labels, project, fontSize, kind) {
     labels.sort((a, b) => b.anchor[2] - a.anchor[2]);
     const minAreaThreshold = kind === 'pref' ? 0 : 0.0008;
@@ -504,12 +508,30 @@ export function createMap({ container, onPrefectureClick, onCityToggle }) {
       !(a[2] < b[0] || a[0] > b[2] || a[3] < b[1] || a[1] > b[3]);
     for (const { name, anchor, disabled } of labels) {
       if (anchor[2] < minAreaThreshold) continue;
-      const [px, py] = project([anchor[0], anchor[1]]);
+      let [px, py] = project([anchor[0], anchor[1]]);
       // 估算 bbox（中文字寬 ≈ fontSize × 1.0）
       const w = name.length * fontSize * 1.0;
       const h = fontSize * 1.1;
-      const box = [px - w / 2, py - h / 2, px + w / 2, py + h / 2];
-      if (placed.some((p) => overlaps(box, p))) continue;
+      let box = [px - w / 2, py - h / 2, px + w / 2, py + h / 2];
+      if (placed.some((p) => overlaps(box, p))) {
+        if (kind !== 'pref') continue; // city：嚴格不重疊
+        // pref：嘗試上下左右偏移 1~3 倍 h，找到不重疊就放，找不到也硬放（保證 47 都顯示）
+        const offsets = [
+          [0, -h], [0, h], [-w * 0.6, 0], [w * 0.6, 0],
+          [0, -2 * h], [0, 2 * h], [-w * 0.8, -h], [w * 0.8, -h],
+          [-w * 0.8, h], [w * 0.8, h], [0, -3 * h], [0, 3 * h],
+        ];
+        for (const [dx, dy] of offsets) {
+          const nbox = [px + dx - w / 2, py + dy - h / 2, px + dx + w / 2, py + dy + h / 2];
+          if (!placed.some((p) => overlaps(nbox, p))) {
+            px += dx;
+            py += dy;
+            box = nbox;
+            break;
+          }
+        }
+        // 找不到就 fall through，照原位畫（會略疊但全部顯示）
+      }
       placed.push(box);
       const text = document.createElementNS(NS, 'text');
       text.setAttribute('x', px.toFixed(1));
