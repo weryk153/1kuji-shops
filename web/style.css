@@ -521,8 +521,9 @@ main, .page-header {
   fill: url(#map-disabled-pattern);
   cursor: not-allowed;
 }
-/* hover 預覽（限可懸停的指標裝置；觸控不適用，避免 sticky hover） */
-@media (hover: hover) {
+/* hover 預覽（限滑鼠類精細指標；觸控/混合裝置不適用，避免 sticky hover）
+   只用 (hover: hover) 不夠 — 部分手機/DevTools 模擬會回 true，需再加 (pointer: fine) */
+@media (hover: hover) and (pointer: fine) {
   .map-region.pref:hover:not(.selected) {
     fill: var(--accent-soft);
     stroke: var(--accent);

@@ -330,6 +330,8 @@ export function createMap({ container, onPrefectureClick, onCityToggle }) {
         startTx: zoomState.tx,
         startTy: zoomState.ty,
         moved: 0,
+        // 觸控感測器抖動較大，閾值放寬避免單純 tap 被誤判為 pan 而吃掉 click
+        threshold: e.pointerType === 'touch' ? 8 : 4,
       };
     }
   });
@@ -353,7 +355,7 @@ export function createMap({ container, onPrefectureClick, onCityToggle }) {
       const dyClient = e.clientY - drag.startClientY;
       const moved = Math.hypot(dxClient, dyClient);
       drag.moved = Math.max(drag.moved, moved);
-      if (moved > 4) {
+      if (moved > drag.threshold) {
         const ctm = svg.getScreenCTM();
         if (ctm) {
           const inv = ctm.inverse();
