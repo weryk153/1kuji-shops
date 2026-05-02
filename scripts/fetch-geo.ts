@@ -11,9 +11,9 @@ import { join } from 'node:path';
 
 const OUT = 'web/geo';
 const REPO_URL = 'https://github.com/niiyz/JapanCityGeoJson.git';
-// 5% 太狠把小 ward 砍到剩幾個頂點、面積近 0、label 過濾門檻誤殺。
-// 15% 在檔案大小和小區精準度間平衡比較好。
-const SIMPLIFY_PCT = '15%';
+// 5% 太狠把小 ward 砍到剩幾個頂點、面積近 0；15% 大縣（北海道）膨脹到 4MB+。
+// 10% 折衷：小 ward 形狀保留尚可、Hokkaido ~3MB 仍偏大但能接受。
+const SIMPLIFY_PCT = '10%';
 
 async function main() {
   const TMP = join(tmpdir(), `fetch-geo-${process.pid}`);
