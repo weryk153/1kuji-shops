@@ -375,11 +375,16 @@ export function createMap({ container, onPrefectureClick, onCityToggle }) {
   });
 
   function endPointer(e) {
-    // 只有最終位移仍超過 threshold 才視為真 pan、suppress click；
-    // 中途抖出又回來的 tap 不會被誤判
+    // 真 pan 判定：用 pointerup 自己的 clientX/Y 算最終位移
+    //   1. 比起 lastDx/Dy（最後一次 pointermove 的 delta）更準 — Pixel 觸控時
+    //      pointerup 落點可能跟最後 pointermove 不同（感測器噪訊／追不上）
+    //   2. 用 threshold × 1.5 當 suppress 邊界（pan 起始仍用 threshold），給
+    //      tap 抖動更多容錯（觸控 12px、滑鼠 6px）
     if (drag && pointers.size === 1) {
-      const finalMoved = Math.hypot(drag.lastDx || 0, drag.lastDy || 0);
-      if (finalMoved > drag.threshold) suppressNextClick = true;
+      const dx = (e.clientX || 0) - drag.startClientX;
+      const dy = (e.clientY || 0) - drag.startClientY;
+      const finalMoved = Math.hypot(dx, dy);
+      if (finalMoved > drag.threshold * 1.5) suppressNextClick = true;
     }
     pointers.delete(e.pointerId);
     if (pointers.size < 2) pinch = null;
