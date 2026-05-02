@@ -179,6 +179,7 @@ function markSelectedCard(id) {
 let pendingLotteryId = null;
 async function selectLottery(id, opts = {}) {
   if (id === currentLotteryId && !opts.force) return;
+  if (id === pendingLotteryId) return; // 同 id 已在 fetch 中，避免重複 request
   pendingLotteryId = id;
   currentLotteryId = null;
   currentShops = [];
@@ -285,11 +286,6 @@ function updateCitySummaryCount() {
     : `（已選 ${sel}/${total}）`;
 }
 
-function updateOnboardingState() {
-  if (!filtersSection) return;
-  filtersSection.classList.toggle('disabled', !currentLotteryId);
-}
-
 function onCityToggle(e) {
   const v = e.target.value;
   if (e.target.checked) selectedCities.add(v);
@@ -317,7 +313,7 @@ function onCityClear() {
 
 function render() {
   updateCitySummaryCount();
-  updateOnboardingState();
+  if (filtersSection) filtersSection.classList.toggle('disabled', !currentLotteryId);
   const prefCode = prefectureSelect.value;
   listEl.innerHTML = '';
 

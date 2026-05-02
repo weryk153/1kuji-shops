@@ -187,9 +187,8 @@ export function createMap({ container, onPrefectureClick, onCityToggle }) {
   const cityCache = new Map();
   const state = {
     prefectureCode: null,
-    cityCodes: new Set(), // 已選市町村的 5 碼（有 city_code 才填）
-    cityNames: new Set(), // 已選市町村名稱（總是填，給沒 code 時用）
-    available: [], // [{ name, code, count }] 該縣可選清單
+    cityNames: new Set(), // 已選市町村名稱（matchedName，與 path.dataset.name 對齊）
+    available: [], // [{ name, code, count }] 該縣可選清單，給 codeToName/nameSet lookup
   };
 
   backBtn.addEventListener('click', () => {
@@ -500,9 +499,7 @@ export function createMap({ container, onPrefectureClick, onCityToggle }) {
       if (!matchedName) {
         path.classList.add('disabled');
       } else {
-        if (state.cityCodes.has(cityCode) || state.cityNames.has(matchedName)) {
-          path.classList.add('selected');
-        }
+        if (state.cityNames.has(matchedName)) path.classList.add('selected');
         path.dataset.code = cityCode;
         path.dataset.name = matchedName;
         path.addEventListener('click', () => onCityToggle(matchedName));
@@ -566,9 +563,7 @@ export function createMap({ container, onPrefectureClick, onCityToggle }) {
   function updateCityHighlights() {
     if (!state.prefectureCode) return;
     for (const path of zoomGroup.querySelectorAll('.map-region.city:not(.disabled)')) {
-      const byCode = path.dataset.code && state.cityCodes.has(path.dataset.code);
-      const byName = path.dataset.name && state.cityNames.has(path.dataset.name);
-      path.classList.toggle('selected', byCode || byName);
+      path.classList.toggle('selected', !!(path.dataset.name && state.cityNames.has(path.dataset.name)));
     }
   }
 
@@ -583,10 +578,6 @@ export function createMap({ container, onPrefectureClick, onCityToggle }) {
     setSelectedCities(cityNames, available) {
       state.available = available || state.available;
       state.cityNames = new Set(cityNames);
-      state.cityCodes = new Set();
-      for (const c of state.available) {
-        if (cityNames.has(c.name) && c.code) state.cityCodes.add(c.code);
-      }
       updateCityHighlights();
     },
     init() {
