@@ -40,6 +40,8 @@ export async function fetchShops(lottery: Lottery, session: Session): Promise<Sh
           name: s.name,
           address: s.address,
           prefecture_code: addressToPrefectureCode(s.address),
+          city: city.name,
+          city_code: city.code,
           release_datetime: s.active_datetime,
         });
       }
