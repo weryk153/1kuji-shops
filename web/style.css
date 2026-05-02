@@ -36,6 +36,9 @@ main, .page-header {
   margin: 0 auto;
   padding: 0 1rem;
 }
+main {
+  padding-bottom: 3rem;
+}
 
 /* Header */
 .page-header {
