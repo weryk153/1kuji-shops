@@ -457,7 +457,7 @@ export function createMap({ container, onPrefectureClick, onCityToggle }) {
       const anchor = labelAnchor(f.geometry);
       if (anchor) labels.push({ name: f.properties.nam_ja, anchor, code });
     }
-    drawLabels(labels, project, 8, 'pref');
+    drawLabels(labels, project, 6, 'pref');
   }
 
   async function renderPrefecture(code) {
