@@ -487,17 +487,27 @@ main, .page-header {
   transition: fill 0.1s;
   cursor: pointer;
 }
-.map-region.pref:hover { fill: var(--accent-soft); stroke: var(--accent); stroke-width: 1.2; }
 .map-region.pref.selected { fill: var(--accent); stroke: var(--accent); }
 .map-region.city { fill: #ffffff; }
-.map-region.city:hover { fill: var(--accent-soft); stroke: var(--accent); stroke-width: 1.2; }
 .map-region.city.selected { fill: var(--accent); stroke: var(--accent); }
 .map-region.city.disabled {
   fill: url(#map-disabled-pattern);
   cursor: not-allowed;
 }
-/* 按壓回饋：用 brightness 微暗，避免 fill-opacity 造成的「紅框→全紅」閃爍 */
-.map-region:active:not(.disabled) { filter: brightness(0.9); }
+/* hover 預覽（限可懸停的指標裝置；觸控不適用，避免 sticky hover） */
+@media (hover: hover) {
+  .map-region.pref:hover:not(.selected) {
+    fill: var(--accent-soft);
+    stroke: var(--accent);
+    stroke-width: 1.2;
+  }
+  .map-region.city:hover:not(.selected):not(.disabled) {
+    fill: var(--accent-soft);
+    stroke: var(--accent);
+    stroke-width: 1.2;
+  }
+  .map-region.selected:hover { stroke-width: 1.2; }
+}
 
 .map-legend {
   display: flex;
