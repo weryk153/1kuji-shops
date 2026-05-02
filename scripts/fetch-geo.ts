@@ -11,7 +11,9 @@ import { join } from 'node:path';
 
 const OUT = 'web/geo';
 const REPO_URL = 'https://github.com/niiyz/JapanCityGeoJson.git';
-const SIMPLIFY_PCT = '5%';
+// 5% 太狠把小 ward 砍到剩幾個頂點、面積近 0、label 過濾門檻誤殺。
+// 15% 在檔案大小和小區精準度間平衡比較好。
+const SIMPLIFY_PCT = '15%';
 
 async function main() {
   const TMP = join(tmpdir(), `fetch-geo-${process.pid}`);
