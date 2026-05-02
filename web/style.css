@@ -576,11 +576,6 @@ main, .page-header {
   pointer-events: none;
   user-select: none;
 }
-/* 可點 label（偏移後可能蓋在別 polygon 上 — 自己接 click 才會走對的 handler） */
-.map-label.clickable {
-  pointer-events: auto;
-  cursor: pointer;
-}
 .map-label.disabled { fill: #888; opacity: 0.7; }
 
 .shop-list {
