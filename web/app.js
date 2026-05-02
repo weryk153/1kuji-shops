@@ -73,23 +73,27 @@ function renderLotteryCard(lottery) {
   card.className = 'lottery-card';
   card.dataset.id = lottery.id;
   card.dataset.search = buildSearchBlob(lottery);
-  card.setAttribute('role', 'radio');
-  card.setAttribute('aria-checked', 'false');
-  card.innerHTML = `
-    <div class="img-wrap">
-      <img loading="lazy" alt="" />
-    </div>
-    <div class="name"></div>
-    <div class="date"></div>
-  `;
-  const imgWrap = card.querySelector('.img-wrap');
-  const img = card.querySelector('img');
+  card.setAttribute('aria-pressed', 'false');
+
+  const imgWrap = document.createElement('div');
+  imgWrap.className = 'img-wrap';
+  const img = document.createElement('img');
+  img.loading = 'lazy';
   img.alt = lottery.name_ja;
   img.addEventListener('load', () => imgWrap.classList.add('loaded'));
   img.addEventListener('error', () => imgWrap.classList.add('loaded'));
   if (lottery.image_url) img.src = lottery.image_url;
-  card.querySelector('.name').textContent = lottery.name_ja;
-  card.querySelector('.date').textContent = `${lottery.release_date} 開賣`;
+  imgWrap.appendChild(img);
+
+  const nameEl = document.createElement('div');
+  nameEl.className = 'name';
+  nameEl.textContent = lottery.name_ja;
+
+  const dateEl = document.createElement('div');
+  dateEl.className = 'date';
+  dateEl.textContent = `${lottery.release_date} 開賣`;
+
+  card.append(imgWrap, nameEl, dateEl);
   card.addEventListener('click', () => selectLottery(lottery.id));
   return card;
 }
@@ -166,12 +170,16 @@ function markSelectedCard(id) {
   for (const card of lotteryPicker.querySelectorAll('.lottery-card')) {
     const isSelected = card.dataset.id === id;
     card.classList.toggle('selected', isSelected);
-    card.setAttribute('aria-checked', String(isSelected));
+    card.setAttribute('aria-pressed', String(isSelected));
   }
 }
 
-async function selectLottery(id) {
-  if (id === currentLotteryId) return;
+// pendingLotteryId 是「目前正在 fetch 的 id」token；新一輪 selectLottery 進來
+// 會把它推進，讓上一輪 fetch 即使後完成也認得自己過期，不要覆蓋現狀。
+let pendingLotteryId = null;
+async function selectLottery(id, opts = {}) {
+  if (id === currentLotteryId && !opts.force) return;
+  pendingLotteryId = id;
   currentLotteryId = null;
   currentShops = [];
   markSelectedCard(id);
@@ -180,6 +188,8 @@ async function selectLottery(id) {
   try {
     statusEl.textContent = '載入店舖資料中…';
     const res = await fetch(`data/shops/${encodeURIComponent(id)}.json`);
+    // 過期 fetch — 使用者已切到別的 id，不要覆蓋
+    if (pendingLotteryId !== id) return;
     if (!res.ok) {
       statusEl.textContent = '找不到此一番賞，可能已下檔';
       markSelectedCard('');
@@ -187,15 +197,19 @@ async function selectLottery(id) {
       return;
     }
     const data = await res.json();
+    if (pendingLotteryId !== id) return; // 再 check 一次（json 解析也是 await）
     currentShops = data.shops;
     currentLotteryId = id;
-    selectedCities = new Set();
-    rebuildCities();
-    syncMapFromState();
-    statusEl.textContent = '';
-    updateUrl();
-    render();
+    if (!opts.skipReset) {
+      selectedCities = new Set();
+      rebuildCities();
+      syncMapFromState();
+      statusEl.textContent = '';
+      updateUrl();
+      render();
+    }
   } catch (err) {
+    if (pendingLotteryId !== id) return;
     statusEl.textContent = '店舖資料載入失敗';
     console.error(err);
   }
@@ -367,9 +381,13 @@ function renderGrouped(shops) {
     if (key) {
       const h = document.createElement('h3');
       h.className = 'city-group-header';
-      const count = groups.get(key).length;
-      h.innerHTML = `<span class="title"></span><span class="count">${count} 家</span>`;
-      h.querySelector('.title').textContent = key;
+      const titleSpan = document.createElement('span');
+      titleSpan.className = 'title';
+      titleSpan.textContent = key;
+      const countSpan = document.createElement('span');
+      countSpan.className = 'count';
+      countSpan.textContent = `${groups.get(key).length} 家`;
+      h.append(titleSpan, countSpan);
       group.appendChild(h);
     }
     const ul = document.createElement('ul');
@@ -383,19 +401,32 @@ function renderGrouped(shops) {
 function renderShop(shop) {
   const li = document.createElement('li');
   li.className = 'shop-card';
-  const mapUrl = `https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(shop.address)}`;
-  li.innerHTML = `
-    <div class="name"></div>
-    <div class="address"></div>
-    <div class="release"></div>
-    <a class="map-link" href="${mapUrl}" target="_blank" rel="noopener" title="在 Google 地圖開啟">開啟地圖</a>
-  `;
+
   const translated = translateShopName(shop.name);
-  const nameEl = li.querySelector('.name');
+  const nameEl = document.createElement('div');
+  nameEl.className = 'name';
   nameEl.textContent = translated;
   if (translated !== shop.name) nameEl.title = shop.name;
-  li.querySelector('.address').textContent = shop.address;
-  li.querySelector('.release').textContent = `開賣 ${formatDateTime(shop.release_datetime)}`;
+
+  const addrEl = document.createElement('div');
+  addrEl.className = 'address';
+  addrEl.textContent = shop.address;
+
+  const relEl = document.createElement('div');
+  relEl.className = 'release';
+  relEl.textContent = `開賣 ${formatDateTime(shop.release_datetime)}`;
+
+  // shop.address 是 1kuji.com 拉的第三方資料 — 用 setAttribute('href', ...)
+  // 而非 innerHTML 模板，避免奇怪字元造成 attribute escape 問題
+  const link = document.createElement('a');
+  link.className = 'map-link';
+  link.href = `https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(shop.address)}`;
+  link.target = '_blank';
+  link.rel = 'noopener';
+  link.title = '在 Google 地圖開啟';
+  link.textContent = '開啟地圖';
+
+  li.append(nameEl, addrEl, relEl, link);
   return li;
 }
 
@@ -418,12 +449,22 @@ async function restoreFromUrl() {
   const lid = params.get('lottery');
   const pcode = params.get('prefecture');
   const citiesParam = params.get('cities');
-  if (lid && lotteries.some((l) => l.id === lid)) {
-    await selectLottery(lid);
+  const validLottery = lid && lotteries.some((l) => l.id === lid);
+  const validPref = pcode && prefectures.some((p) => p.code === pcode);
+
+  // 沒 URL state 就只跑空 render（不 await selectLottery 再跑一次）
+  if (!validLottery) {
+    render();
+    return;
   }
-  if (pcode && prefectures.some((p) => p.code === pcode)) {
+
+  // 跳過 selectLottery 內部的 reset+render，由我們最後統一 render 一次避免閃爍
+  await selectLottery(lid, { skipReset: true });
+  // selectLottery 完成或被取代都會走到這 — 但 currentLotteryId 只在成功時被設
+  if (currentLotteryId !== lid) return;
+
+  if (validPref) {
     prefectureSelect.value = pcode;
-    selectedCities = new Set();
     rebuildCities();
     if (citiesParam) {
       const wanted = new Set(citiesParam.split(',').filter(Boolean));
@@ -431,16 +472,30 @@ async function restoreFromUrl() {
       selectedCities = new Set([...wanted].filter((c) => valid.has(c)));
       syncCityCheckboxes();
     }
-    syncMapFromState();
-    updateUrl();
-    render();
   }
+  syncMapFromState();
+  updateUrl();
+  render();
 }
 
 async function onCopyLink() {
-  await navigator.clipboard.writeText(window.location.href);
-  copyBtn.textContent = '已複製';
-  copyBtn.classList.add('success');
+  try {
+    await navigator.clipboard.writeText(window.location.href);
+    copyBtn.textContent = '已複製';
+    copyBtn.classList.add('success');
+  } catch {
+    // Safari / non-HTTPS / 沒 user gesture 都可能 reject — 用 textarea fallback
+    const ta = document.createElement('textarea');
+    ta.value = window.location.href;
+    ta.style.cssText = 'position:fixed;top:-9999px;left:-9999px;';
+    document.body.appendChild(ta);
+    ta.select();
+    let ok = false;
+    try { ok = document.execCommand('copy'); } catch {}
+    ta.remove();
+    copyBtn.textContent = ok ? '已複製' : '複製失敗';
+    if (ok) copyBtn.classList.add('success');
+  }
   setTimeout(() => {
     copyBtn.textContent = '複製分享連結';
     copyBtn.classList.remove('success');
