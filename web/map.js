@@ -435,7 +435,12 @@ export function createMap({ container, onPrefectureClick, onCityToggle }) {
       // 北海道是固有名稱，不能去「道」
       const fullName = f.properties.nam_ja;
       const shortName = fullName === '北海道' ? '北海道' : fullName.replace(/[県府都]$/, '');
-      if (anchor) labels.push({ name: shortName, anchor, code });
+      if (anchor) labels.push({
+        name: shortName,
+        anchor,
+        code,
+        onClick: () => onPrefectureClick(code), // 點 label 也算點該縣（label 可能被偏移到別的 polygon 上）
+      });
     }
     drawLabels(labels, project, 6, 'pref');
   }
@@ -493,7 +498,13 @@ export function createMap({ container, onPrefectureClick, onCityToggle }) {
       zoomGroup.appendChild(path);
       const anchor = labelAnchor(f.geometry);
       if (anchor && displayName) {
-        labels.push({ name: displayName, anchor, code: cityCode, disabled: !name });
+        labels.push({
+          name: displayName,
+          anchor,
+          code: cityCode,
+          disabled: !matchedName,
+          onClick: matchedName ? () => onCityToggle(matchedName) : null,
+        });
       }
     }
     drawLabels(labels, project, 6, 'city');
@@ -506,7 +517,7 @@ export function createMap({ container, onPrefectureClick, onCityToggle }) {
     const placed = []; // [x1,y1,x2,y2]
     const overlaps = (a, b) =>
       !(a[2] < b[0] || a[0] > b[2] || a[3] < b[1] || a[1] > b[3]);
-    for (const { name, anchor, disabled } of labels) {
+    for (const { name, anchor, disabled, onClick } of labels) {
       if (anchor[2] < minAreaThreshold) continue;
       let [px, py] = project([anchor[0], anchor[1]]);
       // 估算 bbox（中文字寬 ≈ fontSize × 1.0）
@@ -541,6 +552,10 @@ export function createMap({ container, onPrefectureClick, onCityToggle }) {
       text.setAttribute('font-size', String(fontSize));
       text.classList.add('map-label');
       if (disabled) text.classList.add('disabled');
+      if (onClick) {
+        text.classList.add('clickable');
+        text.addEventListener('click', onClick);
+      }
       text.textContent = name;
       zoomGroup.appendChild(text);
     }
