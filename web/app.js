@@ -98,19 +98,13 @@ function initMap() {
   map = createMap({
     container: mapContainer,
     onPrefectureClick: (code) => {
-      window.__mapDbg?.('app.onPrefectureClick code=' + code + ' lottery=' + currentLotteryId + ' curPref=' + prefectureSelect.value);
-      if (!currentLotteryId) {
-        window.__mapDbg?.('  → bail: no lottery');
-        return;
-      }
+      if (!currentLotteryId) return;
       if (prefectureSelect.value === code) {
         // 同一縣：已從全國視圖點回來，只重畫地圖即可，保留已選市区町村
-        window.__mapDbg?.('  → same pref, refresh map');
         map.setPrefecture(code, availableCities);
         map.setSelectedCities(selectedCities, availableCities);
         return;
       }
-      window.__mapDbg?.('  → switch pref → onPrefectureChange');
       prefectureSelect.value = code;
       onPrefectureChange();
     },
