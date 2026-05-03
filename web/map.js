@@ -151,7 +151,16 @@ export function createMap({ container, onPrefectureClick, onCityToggle, onLocate
   locateBtn.className = 'map-locate-btn';
   locateBtn.setAttribute('aria-label', '使用我的位置');
   locateBtn.title = '使用我的位置';
-  locateBtn.textContent = '📍';
+  locateBtn.innerHTML = `
+    <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true">
+      <circle cx="12" cy="12" r="7"/>
+      <circle cx="12" cy="12" r="2" fill="currentColor" stroke="none"/>
+      <line x1="12" y1="2" x2="12" y2="4"/>
+      <line x1="12" y1="20" x2="12" y2="22"/>
+      <line x1="2" y1="12" x2="4" y2="12"/>
+      <line x1="20" y1="12" x2="22" y2="12"/>
+    </svg>
+  `;
   toolbar.append(backBtn, titleEl, locateBtn, zoomCtl);
 
   let locating = false;

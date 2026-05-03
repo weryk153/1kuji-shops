@@ -490,7 +490,7 @@ main {
   border: 1px solid var(--border);
   background: var(--surface);
   border-radius: var(--radius-sm);
-  font-size: 0.95rem;
+  color: var(--fg);
   cursor: pointer;
   display: inline-flex;
   align-items: center;
@@ -499,6 +499,7 @@ main {
 }
 .map-locate-btn:hover:not(:disabled) {
   border-color: var(--accent);
+  color: var(--accent);
 }
 .map-locate-btn:focus-visible {
   outline: none;
