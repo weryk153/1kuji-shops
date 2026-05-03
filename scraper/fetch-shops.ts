@@ -54,17 +54,17 @@ export async function fetchShops(lottery: Lottery, session: Session): Promise<Sh
           console.warn(`    skip shop "${s.name}" - invalid lat/lon (${s.lat}, ${s.lon})`);
           continue;
         }
-        found.push({
+        const shop: Shop = {
           name: s.name,
           address: s.address,
           prefecture_code: prefCode,
           city: city.name,
-          city_code: city.code,
           release_datetime: s.active_datetime,
-          lat,
-          lon,
-          sellout_flag: s.sellout_flag,
-        });
+          lat: Math.round(lat * 1e4) / 1e4,
+          lon: Math.round(lon * 1e4) / 1e4,
+        };
+        if (s.sellout_flag === 1) shop.sellout_flag = 1;
+        found.push(shop);
       }
     }
     return found;

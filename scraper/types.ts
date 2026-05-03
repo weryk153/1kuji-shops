@@ -25,11 +25,10 @@ export interface Shop {
   address: string;
   prefecture_code: PrefectureCode;
   city: string; // 市区町村名稱，例：「新宿区」「札幌市中央区」（來自 1kuji cities API）
-  city_code: string; // 5 碼市町村代碼（對應 GeoJSON 的 N03_007）
   release_datetime: string; // ISO 8601 with JST offset
-  lat: number;
+  lat: number; // 4 位小數，~11m 精度
   lon: number;
-  sellout_flag: number; // 0 = 還有貨, 1 = 售完
+  sellout_flag?: 1; // 售完才出現；undefined / 0 = 還有貨
 }
 
 export interface ShopsFile {

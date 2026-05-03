@@ -65,9 +65,10 @@ async function main() {
         scraped_at: new Date().toISOString(),
         shops,
       };
+      // 不縮排，省 ~50% raw 大小（gzip 後差距小，但下載完到瀏覽器解析速度有差）
       await writeFile(
         join(SHOPS_DIR, `${lottery.id}.json`),
-        JSON.stringify(file, null, 2) + '\n'
+        JSON.stringify(file) + '\n'
       );
       console.log(`  -> ${lottery.id}: ${shops.length} shops in ${((Date.now() - t) / 1000).toFixed(0)}s`);
     } catch (err) {

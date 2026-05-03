@@ -434,6 +434,10 @@ function withDistance(shop) {
   return haversineKm(userLocation.lat, userLocation.lon, shop.lat, shop.lon);
 }
 
+function soldOutLast(a, b) {
+  return (a.sellout_flag === 1 ? 1 : 0) - (b.sellout_flag === 1 ? 1 : 0);
+}
+
 function renderGrouped(shops) {
   const groups = new Map();
   for (const s of shops) {
@@ -441,6 +445,8 @@ function renderGrouped(shops) {
     if (!groups.has(key)) groups.set(key, []);
     groups.get(key).push(s);
   }
+  // 售完店排到每組最後（pagination 預設藏在「展開更多」裡）
+  for (const arr of groups.values()) arr.sort(soldOutLast);
   const keys = [...groups.keys()].sort((a, b) => a.localeCompare(b, 'ja'));
   for (const key of keys) {
     const group = document.createElement('section');
@@ -488,7 +494,10 @@ function renderByDistance(shops) {
   const withDist = shops
     .map((s) => ({ s, d: withDistance(s) }))
     .filter((x) => x.d != null)
-    .sort((a, b) => a.d - b.d);
+    .sort((a, b) => {
+      const diff = soldOutLast(a.s, b.s);
+      return diff !== 0 ? diff : a.d - b.d;
+    });
   const noDist = shops.length - withDist.length;
   const ul = document.createElement('ul');
   ul.className = 'city-shops';
@@ -505,12 +514,20 @@ function renderByDistance(shops) {
 function renderShop(shop, precomputedKm) {
   const li = document.createElement('li');
   li.className = 'shop-card';
+  const soldOut = shop.sellout_flag === 1;
+  if (soldOut) li.classList.add('sold-out');
 
   const translated = translateShopName(shop.name);
   const nameEl = document.createElement('div');
   nameEl.className = 'name';
   nameEl.textContent = translated;
   if (translated !== shop.name) nameEl.title = shop.name;
+  if (soldOut) {
+    const badge = document.createElement('span');
+    badge.className = 'sellout-badge';
+    badge.textContent = '售完';
+    nameEl.appendChild(badge);
+  }
 
   const addrEl = document.createElement('div');
   addrEl.className = 'address';

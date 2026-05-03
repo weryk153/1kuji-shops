@@ -754,6 +754,37 @@ main {
   outline: none;
 }
 
+/* 完售卡片：整張灰掉，售完 badge 標出來 */
+.shop-card.sold-out {
+  background: var(--bg);
+  border-color: var(--border);
+  opacity: 0.7;
+}
+.shop-card.sold-out .name,
+.shop-card.sold-out .address {
+  color: var(--soft);
+}
+.shop-card.sold-out .map-link {
+  color: var(--soft);
+  border-color: var(--border);
+}
+.shop-card.sold-out .map-link:hover,
+.shop-card.sold-out .map-link:focus-visible {
+  background: var(--soft);
+  border-color: var(--soft);
+}
+.sellout-badge {
+  display: inline-block;
+  margin-left: 0.5rem;
+  padding: 0.05rem 0.4rem;
+  font-size: 0.7rem;
+  font-weight: 700;
+  color: #fff;
+  background: var(--soft);
+  border-radius: 4px;
+  vertical-align: 1px;
+}
+
 @media (max-width: 480px) {
   .shop-card {
     grid-template-columns: 1fr;
