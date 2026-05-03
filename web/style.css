@@ -483,6 +483,33 @@ main {
 }
 .map-zoom-btn:disabled { opacity: 0.4; cursor: not-allowed; }
 .map-zoom-reset { font-size: 0.95rem; }
+.map-locate-btn {
+  width: 32px;
+  height: 32px;
+  padding: 0;
+  border: 1px solid var(--border);
+  background: var(--surface);
+  border-radius: var(--radius-sm);
+  font-size: 0.95rem;
+  cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  line-height: 1;
+}
+.map-locate-btn:hover:not(:disabled) {
+  border-color: var(--accent);
+}
+.map-locate-btn:focus-visible {
+  outline: none;
+  box-shadow: var(--shadow-focus);
+}
+.map-locate-btn:disabled { opacity: 0.55; cursor: progress; }
+.map-locate-btn.loading { animation: locate-pulse 1.2s ease-in-out infinite; }
+@keyframes locate-pulse {
+  0%, 100% { opacity: 0.55; }
+  50% { opacity: 1; }
+}
 .map-title {
   font-size: 0.85rem;
   color: var(--muted);
@@ -571,10 +598,65 @@ main {
 }
 .map-label.disabled { fill: #888; opacity: 0.7; }
 
+.sort-toggle {
+  display: inline-flex;
+  border: 1px solid var(--border);
+  border-radius: 999px;
+  background: var(--surface);
+  padding: 2px;
+  margin-bottom: 0.9rem;
+  gap: 2px;
+}
+.sort-toggle[hidden] { display: none; }
+.sort-toggle .sort-opt {
+  border: none;
+  background: transparent;
+  color: var(--muted);
+  padding: 0.3rem 0.85rem;
+  font: inherit;
+  font-size: 0.82rem;
+  font-weight: 500;
+  border-radius: 999px;
+  cursor: pointer;
+  transition: background 0.12s, color 0.12s;
+}
+.sort-toggle .sort-opt:hover:not(.selected) { color: var(--fg); }
+.sort-toggle .sort-opt:focus-visible {
+  outline: none;
+  box-shadow: var(--shadow-focus);
+}
+.sort-toggle .sort-opt.selected {
+  background: var(--accent);
+  color: #fff;
+}
+
 .shop-list {
   display: flex;
   flex-direction: column;
   gap: 1.2rem;
+}
+.expand-btn {
+  align-self: flex-start;
+  margin-top: 0.3rem;
+  padding: 0.35rem 0.9rem;
+  font: inherit;
+  font-size: 0.82rem;
+  font-weight: 500;
+  color: var(--accent);
+  background: var(--surface);
+  border: 1px dashed var(--border);
+  border-radius: var(--radius-sm);
+  cursor: pointer;
+}
+.expand-btn:hover { border-color: var(--accent); border-style: solid; }
+.expand-btn:focus-visible {
+  outline: none;
+  box-shadow: var(--shadow-focus);
+}
+.distance-note {
+  margin: 0.5rem 0 0 0;
+  color: var(--soft);
+  font-size: 0.78rem;
 }
 .city-group {
   display: flex;
@@ -608,10 +690,22 @@ main {
   border-radius: var(--radius-md);
   padding: 0.9rem 1rem;
   display: grid;
-  grid-template-columns: 1fr auto;
+  grid-template-columns: 1fr auto auto;
   grid-template-rows: auto auto auto;
   gap: 0.15rem 0.75rem;
   align-items: start;
+}
+.shop-card .distance {
+  grid-column: 2;
+  grid-row: 1 / span 3;
+  align-self: center;
+  background: var(--accent-soft);
+  color: var(--accent);
+  font-size: 0.78rem;
+  font-weight: 600;
+  padding: 0.2rem 0.55rem;
+  border-radius: 999px;
+  white-space: nowrap;
 }
 .shop-card .name {
   grid-column: 1;
@@ -634,7 +728,7 @@ main {
   margin-top: 0.15rem;
 }
 .shop-card .map-link {
-  grid-column: 2;
+  grid-column: 3;
   grid-row: 1 / span 3;
   align-self: center;
   display: inline-block;
@@ -660,6 +754,13 @@ main {
   .shop-card {
     grid-template-columns: 1fr;
     grid-template-rows: auto auto auto auto;
+  }
+  .shop-card .distance {
+    grid-column: 1;
+    grid-row: 4;
+    align-self: start;
+    justify-self: start;
+    margin-top: 0.4rem;
   }
   .shop-card .map-link {
     grid-column: 1;

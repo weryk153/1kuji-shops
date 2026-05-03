@@ -4,6 +4,8 @@
 //   都道府縣：properties.id (數字 1-47)、properties.nam_ja
 //   市区町村：properties.N03_007（5 碼 city code）、N03_003 (政令都市)、N03_004（市区町村名）
 
+import { pointInGeometry } from './geo-utils.js';
+
 const NS = 'http://www.w3.org/2000/svg';
 const TARGET_W = 600; // SVG viewBox 寬度（高度依內容 bbox 比例計算）
 const PAD = 6;
@@ -111,7 +113,7 @@ function labelAnchor(geom) {
   return [sx / largest.length, sy / largest.length, largestArea];
 }
 
-export function createMap({ container, onPrefectureClick, onCityToggle }) {
+export function createMap({ container, onPrefectureClick, onCityToggle, onLocate }) {
   const wrap = document.createElement('div');
   wrap.className = 'map-canvas';
 
@@ -143,7 +145,55 @@ export function createMap({ container, onPrefectureClick, onCityToggle }) {
   zoomResetBtn.setAttribute('aria-label', '重置縮放');
   zoomResetBtn.textContent = '↺';
   zoomCtl.append(zoomOutBtn, zoomInBtn, zoomResetBtn);
-  toolbar.append(backBtn, titleEl, zoomCtl);
+  // 「使用我的位置」按鈕
+  const locateBtn = document.createElement('button');
+  locateBtn.type = 'button';
+  locateBtn.className = 'map-locate-btn';
+  locateBtn.setAttribute('aria-label', '使用我的位置');
+  locateBtn.title = '使用我的位置';
+  locateBtn.textContent = '📍';
+  toolbar.append(backBtn, titleEl, locateBtn, zoomCtl);
+
+  let locating = false;
+  locateBtn.addEventListener('click', async () => {
+    if (locating || !onLocate) return;
+    if (!navigator.geolocation) {
+      onLocate({ error: 'unsupported' });
+      return;
+    }
+    locating = true;
+    locateBtn.classList.add('loading');
+    locateBtn.disabled = true;
+    try {
+      const coords = await new Promise((resolve, reject) => {
+        navigator.geolocation.getCurrentPosition(
+          (pos) => resolve({ lat: pos.coords.latitude, lon: pos.coords.longitude }),
+          (err) => reject(err),
+          { enableHighAccuracy: false, timeout: 10000, maximumAge: 60000 }
+        );
+      });
+      const data = await ensureJapan().catch(() => null);
+      let prefCode = null;
+      if (data) {
+        for (const f of data.features) {
+          if (pointInGeometry([coords.lon, coords.lat], f.geometry)) {
+            prefCode = String(f.properties.id).padStart(2, '0');
+            break;
+          }
+        }
+      }
+      onLocate({ coords, prefCode });
+    } catch (err) {
+      const code = err && err.code === 1 ? 'denied'
+        : err && err.code === 3 ? 'timeout'
+        : 'unavailable';
+      onLocate({ error: code });
+    } finally {
+      locating = false;
+      locateBtn.classList.remove('loading');
+      locateBtn.disabled = false;
+    }
+  });
 
   const svg = document.createElementNS(NS, 'svg');
   svg.setAttribute('viewBox', `0 0 ${TARGET_W} ${TARGET_W}`);

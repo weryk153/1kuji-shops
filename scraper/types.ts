@@ -27,6 +27,9 @@ export interface Shop {
   city: string; // 市区町村名稱，例：「新宿区」「札幌市中央区」（來自 1kuji cities API）
   city_code: string; // 5 碼市町村代碼（對應 GeoJSON 的 N03_007）
   release_datetime: string; // ISO 8601 with JST offset
+  lat: number;
+  lon: number;
+  sellout_flag: number; // 0 = 還有貨, 1 = 售完
 }
 
 export interface ShopsFile {

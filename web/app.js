@@ -2,6 +2,7 @@ import { generateCsv, generateFilename } from './csv.js';
 import { translateShopName } from './translate.js';
 import { buildSearchBlob } from './aliases.js';
 import { createMap } from './map.js';
+import { haversineKm, formatDistance } from './geo-utils.js';
 
 const $ = (id) => document.getElementById(id);
 const lotteryPicker = $('lottery-picker');
@@ -18,9 +19,12 @@ const downloadBtn = $('download-csv');
 const filtersSection = document.querySelector('.filters');
 const statusEl = $('status');
 const listEl = $('shop-list');
+const sortToggleEl = $('sort-toggle');
 const mapContainer = $('map-container');
 const scrapedAtEl = $('scraped-at');
 const staleWarning = $('stale-warning');
+
+const PAGE_SIZE = 5;
 
 let lotteries = [];
 let prefectures = [];
@@ -29,6 +33,9 @@ let currentLotteryId = null;
 let selectedCities = new Set();
 let availableCities = []; // [{name, code, count}] for currently picked prefecture
 let map = null;
+let userLocation = null; // { lat, lon } | null
+let sortMode = 'city'; // 'city' | 'distance'
+let expandedCities = new Set(); // city names whose pagination is expanded
 
 async function init() {
   try {
@@ -120,8 +127,40 @@ function initMap() {
       updateUrl();
       render();
     },
+    onLocate: handleLocate,
   });
   map.init();
+}
+
+const LOCATE_ERROR_MSG = {
+  unsupported: '此瀏覽器不支援定位',
+  denied: '已拒絕定位授權，請在瀏覽器設定開啟',
+  timeout: '定位逾時，請再試一次',
+  unavailable: '無法取得位置，請再試一次',
+};
+
+function handleLocate({ coords, prefCode, error }) {
+  if (error) {
+    statusEl.textContent = LOCATE_ERROR_MSG[error] || '定位失敗';
+    return;
+  }
+  userLocation = coords;
+  syncSortToggleVisibility();
+  if (!currentLotteryId) {
+    statusEl.textContent = '已取得位置，請先選一番賞';
+    return;
+  }
+  if (prefCode && prefectureSelect.value !== prefCode) {
+    if (prefectures.some((p) => p.code === prefCode)) {
+      prefectureSelect.value = prefCode;
+      onPrefectureChange();
+      return;
+    }
+  }
+  if (!prefCode) {
+    statusEl.textContent = '位置不在日本境內，請手動選都道府縣';
+  }
+  render();
 }
 
 function syncCityCheckboxes() {
@@ -148,6 +187,26 @@ function bindEvents() {
   downloadBtn.addEventListener('click', onDownloadCsv);
   lotterySearchInput.addEventListener('input', onLotterySearch);
   citySearchInput.addEventListener('input', onCitySearch);
+  for (const btn of sortToggleEl.querySelectorAll('.sort-opt')) {
+    btn.addEventListener('click', () => onSortModeChange(btn.dataset.mode));
+  }
+}
+
+function onSortModeChange(mode) {
+  if (mode === sortMode) return;
+  if (mode === 'distance' && !userLocation) return;
+  sortMode = mode;
+  for (const btn of sortToggleEl.querySelectorAll('.sort-opt')) {
+    const on = btn.dataset.mode === mode;
+    btn.classList.toggle('selected', on);
+    btn.setAttribute('aria-checked', String(on));
+  }
+  render();
+}
+
+function syncSortToggleVisibility() {
+  // 有定位才顯示 toggle（沒定位時依距離無從計算）
+  sortToggleEl.hidden = !userLocation;
 }
 
 function onLotterySearch() {
@@ -218,6 +277,7 @@ async function selectLottery(id, opts = {}) {
 
 function onPrefectureChange() {
   selectedCities = new Set();
+  expandedCities = new Set();
   rebuildCities();
   syncMapFromState();
   updateUrl();
@@ -290,6 +350,7 @@ function onCityToggle(e) {
   const v = e.target.value;
   if (e.target.checked) selectedCities.add(v);
   else selectedCities.delete(v);
+  expandedCities.delete(v);
   map?.setSelectedCities(selectedCities, availableCities);
   updateUrl();
   render();
@@ -297,6 +358,7 @@ function onCityToggle(e) {
 
 function onCitySelectAll() {
   selectedCities = new Set(availableCities.map((c) => c.name));
+  expandedCities = new Set();
   syncCityCheckboxes();
   map?.setSelectedCities(selectedCities, availableCities);
   updateUrl();
@@ -305,6 +367,7 @@ function onCitySelectAll() {
 
 function onCityClear() {
   selectedCities = new Set();
+  expandedCities = new Set();
   syncCityCheckboxes();
   map?.setSelectedCities(selectedCities, availableCities);
   updateUrl();
@@ -313,6 +376,7 @@ function onCityClear() {
 
 function render() {
   updateCitySummaryCount();
+  syncSortToggleVisibility();
   if (filtersSection) filtersSection.classList.toggle('disabled', !currentLotteryId);
   const prefCode = prefectureSelect.value;
   listEl.innerHTML = '';
@@ -359,8 +423,15 @@ function render() {
     ? `${prefName} ${cityCount} 個市区町村，共 ${filtered.length} 家店舖`
     : `${prefName} 共 ${filtered.length} 家店舖`;
 
-  renderGrouped(filtered);
+  if (sortMode === 'distance' && userLocation) renderByDistance(filtered);
+  else renderGrouped(filtered);
   setActionsEnabled(true);
+}
+
+function withDistance(shop) {
+  if (!userLocation) return null;
+  if (!Number.isFinite(shop.lat) || !Number.isFinite(shop.lon)) return null;
+  return haversineKm(userLocation.lat, userLocation.lon, shop.lat, shop.lon);
 }
 
 function renderGrouped(shops) {
@@ -374,6 +445,7 @@ function renderGrouped(shops) {
   for (const key of keys) {
     const group = document.createElement('section');
     group.className = 'city-group';
+    const items = groups.get(key);
     if (key) {
       const h = document.createElement('h3');
       h.className = 'city-group-header';
@@ -382,19 +454,55 @@ function renderGrouped(shops) {
       titleSpan.textContent = key;
       const countSpan = document.createElement('span');
       countSpan.className = 'count';
-      countSpan.textContent = `${groups.get(key).length} 家`;
+      countSpan.textContent = `${items.length} 家`;
       h.append(titleSpan, countSpan);
       group.appendChild(h);
     }
     const ul = document.createElement('ul');
     ul.className = 'city-shops';
-    for (const shop of groups.get(key)) ul.appendChild(renderShop(shop));
+    const expanded = expandedCities.has(key);
+    const visible = expanded ? items : items.slice(0, PAGE_SIZE);
+    for (const shop of visible) ul.appendChild(renderShop(shop));
     group.appendChild(ul);
+    if (items.length > PAGE_SIZE) {
+      const more = document.createElement('button');
+      more.type = 'button';
+      more.className = 'expand-btn';
+      if (expanded) {
+        more.textContent = '收合';
+      } else {
+        more.textContent = `還有 ${items.length - PAGE_SIZE} 家 ▾`;
+      }
+      more.addEventListener('click', () => {
+        if (expandedCities.has(key)) expandedCities.delete(key);
+        else expandedCities.add(key);
+        render();
+      });
+      group.appendChild(more);
+    }
     listEl.appendChild(group);
   }
 }
 
-function renderShop(shop) {
+function renderByDistance(shops) {
+  const withDist = shops
+    .map((s) => ({ s, d: withDistance(s) }))
+    .filter((x) => x.d != null)
+    .sort((a, b) => a.d - b.d);
+  const noDist = shops.length - withDist.length;
+  const ul = document.createElement('ul');
+  ul.className = 'city-shops';
+  for (const { s, d } of withDist) ul.appendChild(renderShop(s, d));
+  listEl.appendChild(ul);
+  if (noDist > 0) {
+    const note = document.createElement('p');
+    note.className = 'distance-note';
+    note.textContent = `${noDist} 家無座標資料、未列入距離排序`;
+    listEl.appendChild(note);
+  }
+}
+
+function renderShop(shop, precomputedKm) {
   const li = document.createElement('li');
   li.className = 'shop-card';
 
@@ -423,6 +531,14 @@ function renderShop(shop) {
   link.textContent = '開啟地圖';
 
   li.append(nameEl, addrEl, relEl, link);
+
+  const km = precomputedKm != null ? precomputedKm : withDistance(shop);
+  if (km != null) {
+    const dist = document.createElement('span');
+    dist.className = 'distance';
+    dist.textContent = formatDistance(km);
+    li.appendChild(dist);
+  }
   return li;
 }
 

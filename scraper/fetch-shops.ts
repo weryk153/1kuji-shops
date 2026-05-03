@@ -23,6 +23,9 @@ interface SearchApiResponse {
     name: string;
     address: string;
     active_datetime: string; // ISO 8601 with JST offset
+    lat: string; // 1kuji 回字串，前端要 parse
+    lon: string;
+    sellout_flag: number; // 0 / 1
   }>;
 }
 
@@ -45,6 +48,12 @@ export async function fetchShops(lottery: Lottery, session: Session): Promise<Sh
           console.warn(`    skip shop "${s.name}" - ${(err as Error).message}`);
           continue;
         }
+        const lat = parseFloat(s.lat);
+        const lon = parseFloat(s.lon);
+        if (!Number.isFinite(lat) || !Number.isFinite(lon)) {
+          console.warn(`    skip shop "${s.name}" - invalid lat/lon (${s.lat}, ${s.lon})`);
+          continue;
+        }
         found.push({
           name: s.name,
           address: s.address,
@@ -52,6 +61,9 @@ export async function fetchShops(lottery: Lottery, session: Session): Promise<Sh
           city: city.name,
           city_code: city.code,
           release_datetime: s.active_datetime,
+          lat,
+          lon,
+          sellout_flag: s.sellout_flag,
         });
       }
     }
