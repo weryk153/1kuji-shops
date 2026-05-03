@@ -1,5 +1,5 @@
 {
-  "scraped_at": "2026-05-02T07:37:30.086Z",
+  "scraped_at": "2026-05-03T11:52:31.231Z",
   "lotteries": [
     {
       "id": "kirby25",
@@ -200,14 +200,6 @@
       "release_date": "2026-04-04",
       "image_url": "https://assets.1kuji.com/uploads/product/image/10640/76770cd4-c44a-4d3b-966e-c1c9b3fb263f.webp",
       "source_url": "https://1kuji.com/products/doubutsuno_mori6"
-    },
-    {
-      "id": "medalist",
-      "product_id": 10636,
-      "name_ja": "一番くじ TVアニメ「メダリスト」",
-      "release_date": "2026-04-03",
-      "image_url": "https://assets.1kuji.com/uploads/product/image/10636/c6eaaf2a-aaec-4e35-8604-dd3b2b69da40.webp",
-      "source_url": "https://1kuji.com/products/medalist"
     }
   ]
 }

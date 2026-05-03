@@ -1,34 +1,50 @@
 {
   "lottery_id": "doubutsuno_mori6",
-  "scraped_at": "2026-05-02T08:10:49.568Z",
+  "scraped_at": "2026-05-03T12:25:50.819Z",
   "shops": [
     {
       "name": "Nintendo TOKYO",
       "address": "東京都渋谷区宇田川町15-1",
       "prefecture_code": "13",
       "city": "渋谷区",
-      "release_datetime": "2026-04-04T00:00:00.000+09:00"
+      "city_code": "13113",
+      "release_datetime": "2026-04-04T00:00:00.000+09:00",
+      "lat": 35.662116,
+      "lon": 139.698639,
+      "sellout_flag": 0
     },
     {
       "name": "Nintendo KYOTO",
       "address": "京都府京都市下京区四条通寺町東入2丁目御旅町35",
       "prefecture_code": "26",
       "city": "京都市下京区",
-      "release_datetime": "2026-04-04T00:00:00.000+09:00"
+      "city_code": "26106",
+      "release_datetime": "2026-04-04T00:00:00.000+09:00",
+      "lat": 35.003527,
+      "lon": 135.768255,
+      "sellout_flag": 0
     },
     {
       "name": "Nintendo OSAKA",
       "address": "大阪府大阪市北区梅田3-1-1",
       "prefecture_code": "27",
       "city": "大阪市北区",
-      "release_datetime": "2026-04-04T00:00:00.000+09:00"
+      "city_code": "27127",
+      "release_datetime": "2026-04-04T00:00:00.000+09:00",
+      "lat": 34.701789,
+      "lon": 135.496576,
+      "sellout_flag": 0
     },
     {
       "name": "Nintendo FUKUOKA",
       "address": "福岡県福岡市博多区博多駅中央街1-1",
       "prefecture_code": "40",
       "city": "福岡市博多区",
-      "release_datetime": "2026-04-04T00:00:00.000+09:00"
+      "city_code": "40132",
+      "release_datetime": "2026-04-04T00:00:00.000+09:00",
+      "lat": 33.58981,
+      "lon": 130.420432,
+      "sellout_flag": 0
     }
   ]
 }
