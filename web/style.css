@@ -18,6 +18,9 @@
 
 * { box-sizing: border-box; }
 
+/* 防 .lottery-card / .city-row 等 display: flex 蓋過 [hidden] 的 UA 預設 */
+[hidden] { display: none !important; }
+
 html { -webkit-text-size-adjust: 100%; }
 
 body {
