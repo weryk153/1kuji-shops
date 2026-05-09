@@ -1,5 +1,5 @@
 {
-  "scraped_at": "2026-05-08T20:10:58.035Z",
+  "scraped_at": "2026-05-09T19:59:21.648Z",
   "lotteries": [
     {
       "id": "lilalamode",
@@ -192,22 +192,6 @@
       "release_date": "2026-04-11",
       "image_url": "https://assets.1kuji.com/uploads/product/image/10643/9c21deab-a849-42bd-ad28-6e3bf6316a43.webp",
       "source_url": "https://1kuji.com/products/utagawa"
-    },
-    {
-      "id": "fruitszipper",
-      "product_id": 10633,
-      "name_ja": "一番くじ FRUITS ZIPPER ねえ？ねえ？ねえ？わたしの一番くじに気付いてる？",
-      "release_date": "2026-04-10",
-      "image_url": "https://assets.1kuji.com/uploads/product/image/10633/f5d40a23-3b07-4c36-bdc0-56d2966414fb.webp",
-      "source_url": "https://1kuji.com/products/fruitszipper"
-    },
-    {
-      "id": "frieren",
-      "product_id": 10632,
-      "name_ja": "一番くじ 葬送のフリーレン",
-      "release_date": "2026-04-10",
-      "image_url": "https://assets.1kuji.com/uploads/product/image/10632/3b1cb846-586a-43e0-bb67-462a019fcf68.webp",
-      "source_url": "https://1kuji.com/products/frieren"
     }
   ]
 }
