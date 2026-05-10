@@ -1,5 +1,5 @@
 {
-  "scraped_at": "2026-05-09T19:59:21.648Z",
+  "scraped_at": "2026-05-10T20:01:35.121Z",
   "lotteries": [
     {
       "id": "lilalamode",
@@ -176,22 +176,6 @@
       "release_date": "2026-04-14",
       "image_url": "https://assets.1kuji.com/uploads/product/image/10617/b7999d17-f908-455d-b11c-8c4488811780.webp",
       "source_url": "https://1kuji.com/products/winbre6"
-    },
-    {
-      "id": "tomandjerry6",
-      "product_id": 10608,
-      "name_ja": "一番くじ トムとジェリー Colorful Funny Time!",
-      "release_date": "2026-04-11",
-      "image_url": "https://assets.1kuji.com/uploads/product/image/10608/439c6b21-4a82-4e90-8d49-35ffb72307e8.webp",
-      "source_url": "https://1kuji.com/products/tomandjerry6"
-    },
-    {
-      "id": "utagawa",
-      "product_id": 10643,
-      "name_ja": "一番くじ 歌川一門",
-      "release_date": "2026-04-11",
-      "image_url": "https://assets.1kuji.com/uploads/product/image/10643/9c21deab-a849-42bd-ad28-6e3bf6316a43.webp",
-      "source_url": "https://1kuji.com/products/utagawa"
     }
   ]
 }
