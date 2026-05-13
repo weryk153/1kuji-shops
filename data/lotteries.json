@@ -1,13 +1,37 @@
 {
-  "scraped_at": "2026-05-12T20:46:01.520Z",
+  "scraped_at": "2026-05-13T20:49:43.534Z",
   "lotteries": [
     {
-      "id": "lilalamode",
-      "product_id": 10657,
-      "name_ja": "一番くじ Lil ala mode ～Sweets Dresser～",
-      "release_date": "2026-05-16",
-      "image_url": "https://assets.1kuji.com/uploads/product/image/10657/2c60223c-e2c8-4ecf-955a-f863c502599d.webp",
-      "source_url": "https://1kuji.com/products/lilalamode"
+      "id": "doremi3",
+      "product_id": 10652,
+      "name_ja": "一番くじ おジャ魔女どれみ～WELCOME MAHO堂～",
+      "release_date": "2026-05-23",
+      "image_url": "https://assets.1kuji.com/uploads/product/image/10652/60d7d2ea-cff2-41a7-a350-48183784561f.webp",
+      "source_url": "https://1kuji.com/products/doremi3"
+    },
+    {
+      "id": "hxh10",
+      "product_id": 10646,
+      "name_ja": "一番くじ HUNTER×HUNTER ZAOLDYECK FAMILY",
+      "release_date": "2026-05-22",
+      "image_url": "https://assets.1kuji.com/uploads/product/image/10646/f776b903-15ea-4053-920d-ff3323637ad4.png",
+      "source_url": "https://1kuji.com/products/hxh10"
+    },
+    {
+      "id": "bleach7",
+      "product_id": 10654,
+      "name_ja": "一番くじ BLEACH Stirring Souls vol.4",
+      "release_date": "2026-05-22",
+      "image_url": "https://assets.1kuji.com/uploads/product/image/10654/abaf4e6b-98c8-4790-ab5d-9e533df5522c.webp",
+      "source_url": "https://1kuji.com/products/bleach7"
+    },
+    {
+      "id": "gundam-gquuuuuux4",
+      "product_id": 10655,
+      "name_ja": "一番くじ 機動戦士Gundam GQuuuuuuX（ジークアクス） vol.4",
+      "release_date": "2026-05-22",
+      "image_url": "https://assets.1kuji.com/uploads/product/image/10655/26481211-28a4-4f65-af31-c9e65a9f01f3.webp",
+      "source_url": "https://1kuji.com/products/gundam-gquuuuuux4"
     },
     {
       "id": "reborn3",
@@ -16,6 +40,14 @@
       "release_date": "2026-05-16",
       "image_url": "https://assets.1kuji.com/uploads/product/image/10649/c0e83e55-4567-4c80-9681-2ec1e4ef359c.webp",
       "source_url": "https://1kuji.com/products/reborn3"
+    },
+    {
+      "id": "lilalamode",
+      "product_id": 10657,
+      "name_ja": "一番くじ Lil ala mode ～Sweets Dresser～",
+      "release_date": "2026-05-16",
+      "image_url": "https://assets.1kuji.com/uploads/product/image/10657/2c60223c-e2c8-4ecf-955a-f863c502599d.webp",
+      "source_url": "https://1kuji.com/products/lilalamode"
     },
     {
       "id": "kirby25",
@@ -168,14 +200,6 @@
       "release_date": "2026-04-17",
       "image_url": "https://assets.1kuji.com/uploads/product/image/10639/e287bdc6-71a5-4d34-91d4-754396414da4.webp",
       "source_url": "https://1kuji.com/products/kingdom5"
-    },
-    {
-      "id": "winbre6",
-      "product_id": 10617,
-      "name_ja": "一番くじ WIND BREAKER -原作5周年-",
-      "release_date": "2026-04-14",
-      "image_url": "https://assets.1kuji.com/uploads/product/image/10617/b7999d17-f908-455d-b11c-8c4488811780.webp",
-      "source_url": "https://1kuji.com/products/winbre6"
     }
   ]
 }
