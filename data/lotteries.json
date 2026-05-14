@@ -1,5 +1,5 @@
 {
-  "scraped_at": "2026-05-13T20:49:43.534Z",
+  "scraped_at": "2026-05-14T20:39:49.357Z",
   "lotteries": [
     {
       "id": "doremi3",
@@ -34,20 +34,20 @@
       "source_url": "https://1kuji.com/products/gundam-gquuuuuux4"
     },
     {
-      "id": "reborn3",
-      "product_id": 10649,
-      "name_ja": "一番くじ 家庭教師ヒットマンREBORN! リング争奪戦",
-      "release_date": "2026-05-16",
-      "image_url": "https://assets.1kuji.com/uploads/product/image/10649/c0e83e55-4567-4c80-9681-2ec1e4ef359c.webp",
-      "source_url": "https://1kuji.com/products/reborn3"
-    },
-    {
       "id": "lilalamode",
       "product_id": 10657,
       "name_ja": "一番くじ Lil ala mode ～Sweets Dresser～",
       "release_date": "2026-05-16",
       "image_url": "https://assets.1kuji.com/uploads/product/image/10657/2c60223c-e2c8-4ecf-955a-f863c502599d.webp",
       "source_url": "https://1kuji.com/products/lilalamode"
+    },
+    {
+      "id": "reborn3",
+      "product_id": 10649,
+      "name_ja": "一番くじ 家庭教師ヒットマンREBORN! リング争奪戦",
+      "release_date": "2026-05-16",
+      "image_url": "https://assets.1kuji.com/uploads/product/image/10649/c0e83e55-4567-4c80-9681-2ec1e4ef359c.webp",
+      "source_url": "https://1kuji.com/products/reborn3"
     },
     {
       "id": "kirby25",
