@@ -1,6 +1,14 @@
 {
-  "scraped_at": "2026-05-14T20:39:49.357Z",
+  "scraped_at": "2026-05-15T20:19:06.913Z",
   "lotteries": [
+    {
+      "id": "mario_yoshi",
+      "product_id": 10682,
+      "name_ja": "一番くじ スーパーマリオ with YOSHI",
+      "release_date": "2026-05-23",
+      "image_url": "https://assets.1kuji.com/uploads/product/image/10682/76729c2f-a3c6-498e-8426-699bd0428835.webp",
+      "source_url": "https://1kuji.com/products/mario_yoshi"
+    },
     {
       "id": "doremi3",
       "product_id": 10652,
