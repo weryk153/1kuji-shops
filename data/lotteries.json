@@ -1,5 +1,5 @@
 {
-  "scraped_at": "2026-05-15T20:19:06.913Z",
+  "scraped_at": "2026-05-16T20:04:28.120Z",
   "lotteries": [
     {
       "id": "mario_yoshi",
@@ -200,14 +200,6 @@
       "release_date": "2026-04-18",
       "image_url": "https://assets.1kuji.com/uploads/product/image/10650/cfa20e32-d535-4d53-847b-b2f56788a4c0.webp",
       "source_url": "https://1kuji.com/products/monst7"
-    },
-    {
-      "id": "kingdom5",
-      "product_id": 10639,
-      "name_ja": "一番くじ 春秋戦国大戦キングダム The Animation 秦国の未来",
-      "release_date": "2026-04-17",
-      "image_url": "https://assets.1kuji.com/uploads/product/image/10639/e287bdc6-71a5-4d34-91d4-754396414da4.webp",
-      "source_url": "https://1kuji.com/products/kingdom5"
     }
   ]
 }
