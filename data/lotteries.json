@@ -1,5 +1,5 @@
 {
-  "scraped_at": "2026-05-16T20:04:28.120Z",
+  "scraped_at": "2026-05-17T20:06:45.951Z",
   "lotteries": [
     {
       "id": "mario_yoshi",
@@ -176,30 +176,6 @@
       "release_date": "2026-04-20",
       "image_url": "https://assets.1kuji.com/uploads/product/image/10668/844cc60c-dad9-459e-bae9-088614246fdd.webp",
       "source_url": "https://1kuji.com/products/luluttolilly"
-    },
-    {
-      "id": "pandorobou-2",
-      "product_id": 10638,
-      "name_ja": "一番くじ パンどろぼう ～いとしのパン～",
-      "release_date": "2026-04-18",
-      "image_url": "https://assets.1kuji.com/uploads/product/image/10638/227ad9c1-ad67-4ab6-b11b-b676ce5a120b.webp",
-      "source_url": "https://1kuji.com/products/pandorobou-2"
-    },
-    {
-      "id": "jojo_24",
-      "product_id": 10634,
-      "name_ja": "一番くじ ジョジョの奇妙な冒険 The Gathering of STARS",
-      "release_date": "2026-04-18",
-      "image_url": "https://assets.1kuji.com/uploads/product/image/10634/36bd3bab-844d-4342-b920-33f6cf7ecd57.webp",
-      "source_url": "https://1kuji.com/products/jojo_24"
-    },
-    {
-      "id": "monst7",
-      "product_id": 10650,
-      "name_ja": "一番くじ モンスターストライク 2026",
-      "release_date": "2026-04-18",
-      "image_url": "https://assets.1kuji.com/uploads/product/image/10650/cfa20e32-d535-4d53-847b-b2f56788a4c0.webp",
-      "source_url": "https://1kuji.com/products/monst7"
     }
   ]
 }
