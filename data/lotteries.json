@@ -1,5 +1,5 @@
 {
-  "scraped_at": "2026-05-18T20:41:18.897Z",
+  "scraped_at": "2026-05-19T20:47:46.826Z",
   "lotteries": [
     {
       "id": "mario_yoshi",
@@ -168,14 +168,6 @@
       "release_date": "2026-04-24",
       "image_url": "https://assets.1kuji.com/uploads/product/image/10620/7db508f7-1b8c-4171-82e8-abab5ff3fa96.webp",
       "source_url": "https://1kuji.com/products/spongebob"
-    },
-    {
-      "id": "luluttolilly",
-      "product_id": 10668,
-      "name_ja": "一番くじちょこっと 魔法の姉妹ルルットリリィ＆魔法の天使クリィミーマミ",
-      "release_date": "2026-04-20",
-      "image_url": "https://assets.1kuji.com/uploads/product/image/10668/844cc60c-dad9-459e-bae9-088614246fdd.webp",
-      "source_url": "https://1kuji.com/products/luluttolilly"
     }
   ]
 }
