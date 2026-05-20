@@ -1,6 +1,30 @@
 {
-  "scraped_at": "2026-05-19T20:47:46.826Z",
+  "scraped_at": "2026-05-20T21:03:16.180Z",
   "lotteries": [
+    {
+      "id": "pk30th_1",
+      "product_id": 10674,
+      "name_ja": "一番くじ Pokémon 30th ANNIVERSARY vol.1",
+      "release_date": "2026-05-30",
+      "image_url": "https://assets.1kuji.com/uploads/product/image/10674/ecca1dc6-9919-46bd-89f9-65badab1799e.webp",
+      "source_url": "https://1kuji.com/products/pk30th_1"
+    },
+    {
+      "id": "aikatsu7",
+      "product_id": 10662,
+      "name_ja": "一番くじ アイカツ！～私のアツいアイドル活動！～",
+      "release_date": "2026-05-30",
+      "image_url": "https://assets.1kuji.com/uploads/product/image/10662/bd67c389-c902-498f-bc97-220f913a82e9.webp",
+      "source_url": "https://1kuji.com/products/aikatsu7"
+    },
+    {
+      "id": "teraokanatsumi",
+      "product_id": 10670,
+      "name_ja": "一番くじちょこっと いぬとの暮らし illustration by てらおかなつみ",
+      "release_date": "2026-05-26",
+      "image_url": "https://assets.1kuji.com/uploads/product/image/10670/56ecbb53-bbaa-447f-87b4-a1ae785057af.webp",
+      "source_url": "https://1kuji.com/products/teraokanatsumi"
+    },
     {
       "id": "mario_yoshi",
       "product_id": 10682,
