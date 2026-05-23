@@ -1,5 +1,5 @@
 {
-  "scraped_at": "2026-05-22T20:44:31.500Z",
+  "scraped_at": "2026-05-23T20:09:14.051Z",
   "lotteries": [
     {
       "id": "pk30th_1",
@@ -176,22 +176,6 @@
       "release_date": "2026-04-25",
       "image_url": "https://assets.1kuji.com/uploads/product/image/10625/469b4687-24a9-4fca-a09e-05d87034b8da.webp",
       "source_url": "https://1kuji.com/products/bluearchive3"
-    },
-    {
-      "id": "mario_movie2",
-      "product_id": 10644,
-      "name_ja": "一番くじ 『ザ・スーパーマリオギャラクシー・ムービー』",
-      "release_date": "2026-04-24",
-      "image_url": "https://assets.1kuji.com/uploads/product/image/10644/957d1363-5400-49c2-9536-0407d050d293.webp",
-      "source_url": "https://1kuji.com/products/mario_movie2"
-    },
-    {
-      "id": "spongebob",
-      "product_id": 10620,
-      "name_ja": "一番くじ スポンジ・ボブ～ようこそビキニタウンへ！～",
-      "release_date": "2026-04-24",
-      "image_url": "https://assets.1kuji.com/uploads/product/image/10620/7db508f7-1b8c-4171-82e8-abab5ff3fa96.webp",
-      "source_url": "https://1kuji.com/products/spongebob"
     }
   ]
 }
