@@ -1,5 +1,5 @@
 {
-  "scraped_at": "2026-05-23T20:09:14.051Z",
+  "scraped_at": "2026-05-24T20:12:03.806Z",
   "lotteries": [
     {
       "id": "pk30th_1",
@@ -152,30 +152,6 @@
       "release_date": "2026-04-30",
       "image_url": "https://assets.1kuji.com/uploads/product/image/10637/24cc3bfb-fa71-4b46-9e29-73f030efd13e.gif",
       "source_url": "https://1kuji.com/products/shingeki14"
-    },
-    {
-      "id": "gundam_orphans",
-      "product_id": 10630,
-      "name_ja": "一番くじ 機動戦士ガンダム 鉄血のオルフェンズ",
-      "release_date": "2026-04-25",
-      "image_url": "https://assets.1kuji.com/uploads/product/image/10630/e27366b3-b256-41c9-a21e-78b708362810.webp",
-      "source_url": "https://1kuji.com/products/gundam_orphans"
-    },
-    {
-      "id": "jujutsu18",
-      "product_id": 10629,
-      "name_ja": "一番くじ 呪術廻戦 死滅回游 ～弐～",
-      "release_date": "2026-04-25",
-      "image_url": "https://assets.1kuji.com/uploads/product/image/10629/296c24b6-525b-4e3d-8fda-d9b3572b5eae.gif",
-      "source_url": "https://1kuji.com/products/jujutsu18"
-    },
-    {
-      "id": "bluearchive3",
-      "product_id": 10625,
-      "name_ja": "一番くじ ブルーアーカイブ vol.3",
-      "release_date": "2026-04-25",
-      "image_url": "https://assets.1kuji.com/uploads/product/image/10625/469b4687-24a9-4fca-a09e-05d87034b8da.webp",
-      "source_url": "https://1kuji.com/products/bluearchive3"
     }
   ]
 }
