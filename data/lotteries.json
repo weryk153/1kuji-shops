@@ -1,6 +1,38 @@
 {
-  "scraped_at": "2026-05-26T20:58:00.637Z",
+  "scraped_at": "2026-05-27T21:05:20.242Z",
   "lotteries": [
+    {
+      "id": "mother2_2",
+      "product_id": 10695,
+      "name_ja": "一番くじ MOTHER2 ギーグの逆襲 第二弾",
+      "release_date": "2026-06-06",
+      "image_url": "https://assets.1kuji.com/uploads/product/image/10695/e4daf3c5-a18c-497b-9ff5-1ef8d417e076.webp",
+      "source_url": "https://1kuji.com/products/mother2_2"
+    },
+    {
+      "id": "onep102",
+      "product_id": 10679,
+      "name_ja": "一番くじ ワンピース 赤髪海賊団",
+      "release_date": "2026-06-06",
+      "image_url": "https://assets.1kuji.com/uploads/product/image/10679/a1fd6ea0-ed84-4135-a40c-ec7152eb9284.webp",
+      "source_url": "https://1kuji.com/products/onep102"
+    },
+    {
+      "id": "disney4",
+      "product_id": 10641,
+      "name_ja": "一番くじ 〈Disney〉 World of Imagination",
+      "release_date": "2026-06-05",
+      "image_url": "https://assets.1kuji.com/uploads/product/image/10641/32b666b6-3549-4c1a-a9b5-42d6e7e27515.webp",
+      "source_url": "https://1kuji.com/products/disney4"
+    },
+    {
+      "id": "kusuriya",
+      "product_id": 10624,
+      "name_ja": "一番くじ TVアニメ『薬屋のひとりごと』",
+      "release_date": "2026-06-05",
+      "image_url": "https://assets.1kuji.com/uploads/product/image/10624/14eff948-197b-4b13-8994-510edc685d19.webp",
+      "source_url": "https://1kuji.com/products/kusuriya"
+    },
     {
       "id": "pk30th_1",
       "product_id": 10674,
