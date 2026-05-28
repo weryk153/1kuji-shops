@@ -1,14 +1,6 @@
 {
-  "scraped_at": "2026-05-27T21:05:20.242Z",
+  "scraped_at": "2026-05-28T21:12:33.107Z",
   "lotteries": [
-    {
-      "id": "mother2_2",
-      "product_id": 10695,
-      "name_ja": "一番くじ MOTHER2 ギーグの逆襲 第二弾",
-      "release_date": "2026-06-06",
-      "image_url": "https://assets.1kuji.com/uploads/product/image/10695/e4daf3c5-a18c-497b-9ff5-1ef8d417e076.webp",
-      "source_url": "https://1kuji.com/products/mother2_2"
-    },
     {
       "id": "onep102",
       "product_id": 10679,
@@ -16,6 +8,14 @@
       "release_date": "2026-06-06",
       "image_url": "https://assets.1kuji.com/uploads/product/image/10679/a1fd6ea0-ed84-4135-a40c-ec7152eb9284.webp",
       "source_url": "https://1kuji.com/products/onep102"
+    },
+    {
+      "id": "mother2_2",
+      "product_id": 10695,
+      "name_ja": "一番くじ MOTHER2 ギーグの逆襲 第二弾",
+      "release_date": "2026-06-06",
+      "image_url": "https://assets.1kuji.com/uploads/product/image/10695/e4daf3c5-a18c-497b-9ff5-1ef8d417e076.webp",
+      "source_url": "https://1kuji.com/products/mother2_2"
     },
     {
       "id": "disney4",
