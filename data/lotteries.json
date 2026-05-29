@@ -1,5 +1,5 @@
 {
-  "scraped_at": "2026-05-28T21:12:33.107Z",
+  "scraped_at": "2026-05-29T21:11:10.569Z",
   "lotteries": [
     {
       "id": "onep102",
@@ -176,14 +176,6 @@
       "release_date": "2026-05-01",
       "image_url": "https://assets.1kuji.com/uploads/product/image/10669/aa16946a-e226-47fc-8541-4ecbdf52c663.webp",
       "source_url": "https://1kuji.com/products/nikke7"
-    },
-    {
-      "id": "shingeki14",
-      "product_id": 10637,
-      "name_ja": "一番くじ 進撃の巨人 ～それぞれの決意～",
-      "release_date": "2026-04-30",
-      "image_url": "https://assets.1kuji.com/uploads/product/image/10637/24cc3bfb-fa71-4b46-9e29-73f030efd13e.gif",
-      "source_url": "https://1kuji.com/products/shingeki14"
     }
   ]
 }
