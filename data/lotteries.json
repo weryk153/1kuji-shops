@@ -1,5 +1,5 @@
 {
-  "scraped_at": "2026-05-29T21:11:10.569Z",
+  "scraped_at": "2026-05-30T20:12:30.551Z",
   "lotteries": [
     {
       "id": "onep102",
@@ -160,22 +160,6 @@
       "release_date": "2026-05-02",
       "image_url": "https://assets.1kuji.com/uploads/product/image/10658/76e2e436-5d97-4ad0-a535-9a286df4cd63.webp",
       "source_url": "https://1kuji.com/products/bluelock8"
-    },
-    {
-      "id": "tamagotchi3-2",
-      "product_id": 10648,
-      "name_ja": "一番くじ たまごっち ～令和で発見！！あのころのお部屋とたまごっち～",
-      "release_date": "2026-05-01",
-      "image_url": "https://assets.1kuji.com/uploads/product/image/10648/2a751790-df89-4473-b1bc-494d9390ff12.webp",
-      "source_url": "https://1kuji.com/products/tamagotchi3-2"
-    },
-    {
-      "id": "nikke7",
-      "product_id": 10669,
-      "name_ja": "一番くじ 勝利の女神：NIKKE CHAPTER7",
-      "release_date": "2026-05-01",
-      "image_url": "https://assets.1kuji.com/uploads/product/image/10669/aa16946a-e226-47fc-8541-4ecbdf52c663.webp",
-      "source_url": "https://1kuji.com/products/nikke7"
     }
   ]
 }
