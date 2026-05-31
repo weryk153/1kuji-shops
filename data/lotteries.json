@@ -1,5 +1,5 @@
 {
-  "scraped_at": "2026-05-30T20:12:30.551Z",
+  "scraped_at": "2026-05-31T20:16:59.542Z",
   "lotteries": [
     {
       "id": "onep102",
@@ -144,22 +144,6 @@
       "release_date": "2026-05-08",
       "image_url": "https://assets.1kuji.com/uploads/product/image/10653/30646f31-7fa6-40a1-a518-1fcd39193819.webp",
       "source_url": "https://1kuji.com/products/ppg2"
-    },
-    {
-      "id": "onep101",
-      "product_id": 10664,
-      "name_ja": "一番くじ ワンピース MONKEY.D.LUFFY－冒険の記憶と未来への航路－",
-      "release_date": "2026-05-02",
-      "image_url": "https://assets.1kuji.com/uploads/product/image/10664/b1631717-82e8-47b1-80bb-44c8ff5abe36.webp",
-      "source_url": "https://1kuji.com/products/onep101"
-    },
-    {
-      "id": "bluelock8",
-      "product_id": 10658,
-      "name_ja": "一番くじ ブルーロック あでぃしょなる・たいむ！",
-      "release_date": "2026-05-02",
-      "image_url": "https://assets.1kuji.com/uploads/product/image/10658/76e2e436-5d97-4ad0-a535-9a286df4cd63.webp",
-      "source_url": "https://1kuji.com/products/bluelock8"
     }
   ]
 }
