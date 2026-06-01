@@ -1,6 +1,14 @@
 {
-  "scraped_at": "2026-05-31T20:16:59.542Z",
+  "scraped_at": "2026-06-01T22:13:46.352Z",
   "lotteries": [
+    {
+      "id": "jfa",
+      "product_id": 10680,
+      "name_ja": "一番くじ サッカー日本代表ver. ～最高の景色を2026～",
+      "release_date": "2026-06-13",
+      "image_url": "https://assets.1kuji.com/uploads/product/image/10680/2cb19107-c49c-48e7-a62b-4918a05291fb.webp",
+      "source_url": "https://1kuji.com/products/jfa"
+    },
     {
       "id": "onep102",
       "product_id": 10679,
