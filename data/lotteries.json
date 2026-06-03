@@ -1,6 +1,14 @@
 {
-  "scraped_at": "2026-06-02T21:54:18.134Z",
+  "scraped_at": "2026-06-03T21:55:50.730Z",
   "lotteries": [
+    {
+      "id": "db_ex11",
+      "product_id": 10681,
+      "name_ja": "一番くじ ドラゴンボール EX 対決!レッドリボン軍",
+      "release_date": "2026-06-13",
+      "image_url": "https://assets.1kuji.com/uploads/product/image/10681/0ff06f99-2ec0-4e6c-ae9f-345c6ba6362b.webp",
+      "source_url": "https://1kuji.com/products/db_ex11"
+    },
     {
       "id": "jfa",
       "product_id": 10680,
