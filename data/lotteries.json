@@ -1,5 +1,5 @@
 {
-  "scraped_at": "2026-06-05T20:50:40.692Z",
+  "scraped_at": "2026-06-06T20:15:42.750Z",
   "lotteries": [
     {
       "id": "db_ex11",
@@ -144,22 +144,6 @@
       "release_date": "2026-05-09",
       "image_url": "https://assets.1kuji.com/uploads/product/image/10661/a344648b-18aa-4901-b9c7-e8bec9d66235.webp",
       "source_url": "https://1kuji.com/products/obungu5"
-    },
-    {
-      "id": "db_goku",
-      "product_id": 10651,
-      "name_ja": "一番くじ ドラゴンボール THE CHRONICLE OF GOKU",
-      "release_date": "2026-05-08",
-      "image_url": "https://assets.1kuji.com/uploads/product/image/10651/bc0e8f35-9a5c-4dfc-a5a8-ba9659f2c6be.webp",
-      "source_url": "https://1kuji.com/products/db_goku"
-    },
-    {
-      "id": "ppg2",
-      "product_id": 10653,
-      "name_ja": "一番くじ パワーパフ ガールズ ～強くてかわいい正義の味方は大忙し！～",
-      "release_date": "2026-05-08",
-      "image_url": "https://assets.1kuji.com/uploads/product/image/10653/30646f31-7fa6-40a1-a518-1fcd39193819.webp",
-      "source_url": "https://1kuji.com/products/ppg2"
     }
   ]
 }
