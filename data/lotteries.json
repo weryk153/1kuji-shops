@@ -1,5 +1,5 @@
 {
-  "scraped_at": "2026-06-06T20:15:42.750Z",
+  "scraped_at": "2026-06-07T20:19:15.009Z",
   "lotteries": [
     {
       "id": "db_ex11",
@@ -128,22 +128,6 @@
       "release_date": "2026-05-16",
       "image_url": "https://assets.1kuji.com/uploads/product/image/10649/c0e83e55-4567-4c80-9681-2ec1e4ef359c.webp",
       "source_url": "https://1kuji.com/products/reborn3"
-    },
-    {
-      "id": "kirby25",
-      "product_id": 10683,
-      "name_ja": "一番くじ 星のカービィ PUPUPU GOURMET",
-      "release_date": "2026-05-09",
-      "image_url": "https://assets.1kuji.com/uploads/product/image/10683/8a79a8b8-fadb-4530-bc32-2ffd80ff131d.webp",
-      "source_url": "https://1kuji.com/products/kirby25"
-    },
-    {
-      "id": "obungu5",
-      "product_id": 10661,
-      "name_ja": "一番くじ お文具といっしょ ～いっぱいたべたいな～",
-      "release_date": "2026-05-09",
-      "image_url": "https://assets.1kuji.com/uploads/product/image/10661/a344648b-18aa-4901-b9c7-e8bec9d66235.webp",
-      "source_url": "https://1kuji.com/products/obungu5"
     }
   ]
 }
