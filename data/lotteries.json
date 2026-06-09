@@ -1,6 +1,14 @@
 {
-  "scraped_at": "2026-06-08T21:12:34.390Z",
+  "scraped_at": "2026-06-09T21:03:35.697Z",
   "lotteries": [
+    {
+      "id": "lilo-stitch2",
+      "product_id": 10666,
+      "name_ja": "一番くじ〈スティッチ〉Every day with you!",
+      "release_date": "2026-06-19",
+      "image_url": "https://assets.1kuji.com/uploads/product/image/10666/e7fb99ea-e05f-4187-b344-ca198e904b2c.webp",
+      "source_url": "https://1kuji.com/products/lilo-stitch2"
+    },
     {
       "id": "db_ex11",
       "product_id": 10681,
