@@ -1,14 +1,6 @@
 {
-  "scraped_at": "2026-06-10T21:26:54.402Z",
+  "scraped_at": "2026-06-11T21:26:52.899Z",
   "lotteries": [
-    {
-      "id": "hokuto-no-ken",
-      "product_id": 10686,
-      "name_ja": "一番くじ 北斗の拳 -FIST OF THE NORTH STAR-",
-      "release_date": "2026-06-20",
-      "image_url": "https://assets.1kuji.com/uploads/product/image/10686/9af5c68e-11bc-4328-a725-a159c32c10e7.webp",
-      "source_url": "https://1kuji.com/products/hokuto-no-ken"
-    },
     {
       "id": "myhero46",
       "product_id": 10663,
@@ -16,6 +8,14 @@
       "release_date": "2026-06-20",
       "image_url": "https://assets.1kuji.com/uploads/product/image/10663/3bb7a85d-4641-4121-8795-37b1c6394f0d.webp",
       "source_url": "https://1kuji.com/products/myhero46"
+    },
+    {
+      "id": "hokuto-no-ken",
+      "product_id": 10686,
+      "name_ja": "一番くじ 北斗の拳 -FIST OF THE NORTH STAR-",
+      "release_date": "2026-06-20",
+      "image_url": "https://assets.1kuji.com/uploads/product/image/10686/9af5c68e-11bc-4328-a725-a159c32c10e7.webp",
+      "source_url": "https://1kuji.com/products/hokuto-no-ken"
     },
     {
       "id": "lilo-stitch2",
