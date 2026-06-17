@@ -1,6 +1,38 @@
 {
-  "scraped_at": "2026-06-16T21:44:05.583Z",
+  "scraped_at": "2026-06-17T21:15:09.986Z",
   "lotteries": [
+    {
+      "id": "dandadan4",
+      "product_id": 10678,
+      "name_ja": "一番くじ TVアニメ『ダンダダン』 ～音楽室のお舞踏（パーティー）、開演！～",
+      "release_date": "2026-06-27",
+      "image_url": "https://assets.1kuji.com/uploads/product/image/10678/c59c51f6-0ea6-48e1-9be1-3ce58f972836.webp",
+      "source_url": "https://1kuji.com/products/dandadan4"
+    },
+    {
+      "id": "jojo_25",
+      "product_id": 10676,
+      "name_ja": "一番くじ ジョジョの奇妙な冒険 STEEL BALL RUN",
+      "release_date": "2026-06-27",
+      "image_url": "https://assets.1kuji.com/uploads/product/image/10676/24376a8b-7ea0-4442-a997-e33d542a1865.png",
+      "source_url": "https://1kuji.com/products/jojo_25"
+    },
+    {
+      "id": "wbtiger",
+      "product_id": 10675,
+      "name_ja": "一番くじ ホワイトタイガーとブラックタイガー ～みんなでパーティ～",
+      "release_date": "2026-06-27",
+      "image_url": "https://assets.1kuji.com/uploads/product/image/10675/6c5ec924-dca0-43e6-ac98-17bc5cfc7e77.png",
+      "source_url": "https://1kuji.com/products/wbtiger"
+    },
+    {
+      "id": "naruto10",
+      "product_id": 10659,
+      "name_ja": "一番くじ NARUTO-ナルト- 疾風伝 風影奪還編",
+      "release_date": "2026-06-26",
+      "image_url": "https://assets.1kuji.com/uploads/product/image/10659/d5266ec7-4bd7-495f-b2ca-eab250c3de9f.webp",
+      "source_url": "https://1kuji.com/products/naruto10"
+    },
     {
       "id": "myhero46",
       "product_id": 10663,
