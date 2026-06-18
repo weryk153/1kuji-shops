@@ -1,14 +1,6 @@
 {
-  "scraped_at": "2026-06-17T21:15:09.986Z",
+  "scraped_at": "2026-06-18T21:24:57.970Z",
   "lotteries": [
-    {
-      "id": "dandadan4",
-      "product_id": 10678,
-      "name_ja": "一番くじ TVアニメ『ダンダダン』 ～音楽室のお舞踏（パーティー）、開演！～",
-      "release_date": "2026-06-27",
-      "image_url": "https://assets.1kuji.com/uploads/product/image/10678/c59c51f6-0ea6-48e1-9be1-3ce58f972836.webp",
-      "source_url": "https://1kuji.com/products/dandadan4"
-    },
     {
       "id": "jojo_25",
       "product_id": 10676,
@@ -16,6 +8,14 @@
       "release_date": "2026-06-27",
       "image_url": "https://assets.1kuji.com/uploads/product/image/10676/24376a8b-7ea0-4442-a997-e33d542a1865.png",
       "source_url": "https://1kuji.com/products/jojo_25"
+    },
+    {
+      "id": "dandadan4",
+      "product_id": 10678,
+      "name_ja": "一番くじ TVアニメ『ダンダダン』 ～音楽室のお舞踏（パーティー）、開演！～",
+      "release_date": "2026-06-27",
+      "image_url": "https://assets.1kuji.com/uploads/product/image/10678/c59c51f6-0ea6-48e1-9be1-3ce58f972836.webp",
+      "source_url": "https://1kuji.com/products/dandadan4"
     },
     {
       "id": "wbtiger",
