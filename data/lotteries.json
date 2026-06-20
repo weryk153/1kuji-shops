@@ -1,5 +1,5 @@
 {
-  "scraped_at": "2026-06-19T20:40:42.069Z",
+  "scraped_at": "2026-06-20T20:20:56.075Z",
   "lotteries": [
     {
       "id": "jojo_25",
@@ -152,30 +152,6 @@
       "release_date": "2026-05-23",
       "image_url": "https://assets.1kuji.com/uploads/product/image/10652/60d7d2ea-cff2-41a7-a350-48183784561f.webp",
       "source_url": "https://1kuji.com/products/doremi3"
-    },
-    {
-      "id": "hxh10",
-      "product_id": 10646,
-      "name_ja": "一番くじ HUNTER×HUNTER ZAOLDYECK FAMILY",
-      "release_date": "2026-05-22",
-      "image_url": "https://assets.1kuji.com/uploads/product/image/10646/f776b903-15ea-4053-920d-ff3323637ad4.png",
-      "source_url": "https://1kuji.com/products/hxh10"
-    },
-    {
-      "id": "bleach7",
-      "product_id": 10654,
-      "name_ja": "一番くじ BLEACH Stirring Souls vol.4",
-      "release_date": "2026-05-22",
-      "image_url": "https://assets.1kuji.com/uploads/product/image/10654/abaf4e6b-98c8-4790-ab5d-9e533df5522c.webp",
-      "source_url": "https://1kuji.com/products/bleach7"
-    },
-    {
-      "id": "gundam-gquuuuuux4",
-      "product_id": 10655,
-      "name_ja": "一番くじ 機動戦士Gundam GQuuuuuuX（ジークアクス） vol.4",
-      "release_date": "2026-05-22",
-      "image_url": "https://assets.1kuji.com/uploads/product/image/10655/26481211-28a4-4f65-af31-c9e65a9f01f3.webp",
-      "source_url": "https://1kuji.com/products/gundam-gquuuuuux4"
     }
   ]
 }
