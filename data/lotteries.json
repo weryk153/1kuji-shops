@@ -1,5 +1,5 @@
 {
-  "scraped_at": "2026-06-20T20:20:56.075Z",
+  "scraped_at": "2026-06-21T20:42:47.949Z",
   "lotteries": [
     {
       "id": "jojo_25",
@@ -136,22 +136,6 @@
       "release_date": "2026-05-26",
       "image_url": "https://assets.1kuji.com/uploads/product/image/10670/56ecbb53-bbaa-447f-87b4-a1ae785057af.webp",
       "source_url": "https://1kuji.com/products/teraokanatsumi"
-    },
-    {
-      "id": "mario_yoshi",
-      "product_id": 10682,
-      "name_ja": "一番くじ スーパーマリオ with YOSHI",
-      "release_date": "2026-05-23",
-      "image_url": "https://assets.1kuji.com/uploads/product/image/10682/76729c2f-a3c6-498e-8426-699bd0428835.webp",
-      "source_url": "https://1kuji.com/products/mario_yoshi"
-    },
-    {
-      "id": "doremi3",
-      "product_id": 10652,
-      "name_ja": "一番くじ おジャ魔女どれみ～WELCOME MAHO堂～",
-      "release_date": "2026-05-23",
-      "image_url": "https://assets.1kuji.com/uploads/product/image/10652/60d7d2ea-cff2-41a7-a350-48183784561f.webp",
-      "source_url": "https://1kuji.com/products/doremi3"
     }
   ]
 }
