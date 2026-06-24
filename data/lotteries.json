@@ -1,6 +1,30 @@
 {
-  "scraped_at": "2026-06-23T21:03:33.767Z",
+  "scraped_at": "2026-06-24T20:51:16.648Z",
   "lotteries": [
+    {
+      "id": "keroro2",
+      "product_id": 10684,
+      "name_ja": "一番くじ ケロロ軍曹 復活して速攻２弾であります！",
+      "release_date": "2026-07-04",
+      "image_url": "https://assets.1kuji.com/uploads/product/image/10684/63e9fcf4-d17b-4d43-8b81-a1a8ac709bda.webp",
+      "source_url": "https://1kuji.com/products/keroro2"
+    },
+    {
+      "id": "onep103",
+      "product_id": 10709,
+      "name_ja": "一番くじ ワンピース -エルバフ編- GIANT BASH!! Vol.1",
+      "release_date": "2026-07-03",
+      "image_url": "https://assets.1kuji.com/uploads/product/image/10709/6d3ab733-b082-4ba1-a0db-914642934d53.webp",
+      "source_url": "https://1kuji.com/products/onep103"
+    },
+    {
+      "id": "marriagetoxin",
+      "product_id": 10677,
+      "name_ja": "一番くじちょこっと マリッジトキシン",
+      "release_date": "2026-06-30",
+      "image_url": "https://assets.1kuji.com/uploads/product/image/10677/8755d38b-147d-4592-a65d-14f8fadb35db.webp",
+      "source_url": "https://1kuji.com/products/marriagetoxin"
+    },
     {
       "id": "jojo_25",
       "product_id": 10676,
@@ -128,14 +152,6 @@
       "release_date": "2026-05-30",
       "image_url": "https://assets.1kuji.com/uploads/product/image/10662/bd67c389-c902-498f-bc97-220f913a82e9.webp",
       "source_url": "https://1kuji.com/products/aikatsu7"
-    },
-    {
-      "id": "teraokanatsumi",
-      "product_id": 10670,
-      "name_ja": "一番くじちょこっと いぬとの暮らし illustration by てらおかなつみ",
-      "release_date": "2026-05-26",
-      "image_url": "https://assets.1kuji.com/uploads/product/image/10670/56ecbb53-bbaa-447f-87b4-a1ae785057af.webp",
-      "source_url": "https://1kuji.com/products/teraokanatsumi"
     }
   ]
 }
