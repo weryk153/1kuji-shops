@@ -1,5 +1,5 @@
 {
-  "scraped_at": "2026-06-27T20:14:06.530Z",
+  "scraped_at": "2026-06-28T20:18:30.383Z",
   "lotteries": [
     {
       "id": "keroro2",
@@ -136,22 +136,6 @@
       "release_date": "2026-06-05",
       "image_url": "https://assets.1kuji.com/uploads/product/image/10624/14eff948-197b-4b13-8994-510edc685d19.webp",
       "source_url": "https://1kuji.com/products/kusuriya"
-    },
-    {
-      "id": "pk30th_1",
-      "product_id": 10674,
-      "name_ja": "一番くじ Pokémon 30th ANNIVERSARY vol.1",
-      "release_date": "2026-05-30",
-      "image_url": "https://assets.1kuji.com/uploads/product/image/10674/ecca1dc6-9919-46bd-89f9-65badab1799e.webp",
-      "source_url": "https://1kuji.com/products/pk30th_1"
-    },
-    {
-      "id": "aikatsu7",
-      "product_id": 10662,
-      "name_ja": "一番くじ アイカツ！～私のアツいアイドル活動！～",
-      "release_date": "2026-05-30",
-      "image_url": "https://assets.1kuji.com/uploads/product/image/10662/bd67c389-c902-498f-bc97-220f913a82e9.webp",
-      "source_url": "https://1kuji.com/products/aikatsu7"
     }
   ]
 }
