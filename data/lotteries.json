@@ -1,6 +1,14 @@
 {
-  "scraped_at": "2026-06-28T20:18:30.383Z",
+  "scraped_at": "2026-06-29T20:52:39.978Z",
   "lotteries": [
+    {
+      "id": "disney_toy7",
+      "product_id": 10700,
+      "name_ja": "一番くじ 〈トイ・ストーリー5〉",
+      "release_date": "2026-07-10",
+      "image_url": "https://assets.1kuji.com/uploads/product/image/10700/c8305147-786b-4f2a-afa4-7b4f4bd3968a.webp",
+      "source_url": "https://1kuji.com/products/disney_toy7"
+    },
     {
       "id": "keroro2",
       "product_id": 10684,
