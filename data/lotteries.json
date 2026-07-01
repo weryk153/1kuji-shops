@@ -1,6 +1,22 @@
 {
-  "scraped_at": "2026-06-30T21:01:04.428Z",
+  "scraped_at": "2026-07-01T20:50:35.828Z",
   "lotteries": [
+    {
+      "id": "db_sb",
+      "product_id": 10693,
+      "name_ja": "一番くじ ドラゴンボール スペクタクルバトル",
+      "release_date": "2026-07-11",
+      "image_url": "https://assets.1kuji.com/uploads/product/image/10693/8cd4838b-0a2e-42be-9f72-e8673f1eca50.png",
+      "source_url": "https://1kuji.com/products/db_sb"
+    },
+    {
+      "id": "morinaga",
+      "product_id": 10687,
+      "name_ja": "一番くじ 森永製菓",
+      "release_date": "2026-07-11",
+      "image_url": "https://assets.1kuji.com/uploads/product/image/10687/f16c48e8-2c8a-4f87-919f-c68680e64f23.webp",
+      "source_url": "https://1kuji.com/products/morinaga"
+    },
     {
       "id": "disney_toy7",
       "product_id": 10700,
@@ -8,6 +24,14 @@
       "release_date": "2026-07-10",
       "image_url": "https://assets.1kuji.com/uploads/product/image/10700/c8305147-786b-4f2a-afa4-7b4f4bd3968a.webp",
       "source_url": "https://1kuji.com/products/disney_toy7"
+    },
+    {
+      "id": "kaiji2",
+      "product_id": 10689,
+      "name_ja": "一番くじ 鬮破滅録カイジ くじを引くのが 気持ちのいい人生ってもんだろっ・・・！",
+      "release_date": "2026-07-07",
+      "image_url": "https://assets.1kuji.com/uploads/product/image/10689/4e994506-ff67-47d7-b55a-333b6cdddb2d.webp",
+      "source_url": "https://1kuji.com/products/kaiji2"
     },
     {
       "id": "keroro2",
