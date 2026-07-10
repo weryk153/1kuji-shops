@@ -1,6 +1,30 @@
 {
-  "scraped_at": "2026-07-07T20:52:43.099Z",
+  "scraped_at": "2026-07-10T21:24:35.040Z",
   "lotteries": [
+    {
+      "id": "pk30th_2",
+      "product_id": 10696,
+      "name_ja": "一番くじ Pokémon 30th ANNIVERSARY vol.2",
+      "release_date": "2026-07-18",
+      "image_url": "https://assets.1kuji.com/uploads/product/image/10696/3e0c5d5c-91db-4a8f-ba63-4aa9c8473157.webp",
+      "source_url": "https://1kuji.com/products/pk30th_2"
+    },
+    {
+      "id": "baki3",
+      "product_id": 10699,
+      "name_ja": "一番くじ 刃牙～巨大なる鼓動～",
+      "release_date": "2026-07-18",
+      "image_url": "https://assets.1kuji.com/uploads/product/image/10699/3c142b1b-e0ba-479b-ac07-eb8c9a33e417.webp",
+      "source_url": "https://1kuji.com/products/baki3"
+    },
+    {
+      "id": "overlord",
+      "product_id": 10688,
+      "name_ja": "一番くじ オーバーロード",
+      "release_date": "2026-07-17",
+      "image_url": "https://assets.1kuji.com/uploads/product/image/10688/c5acca08-ebe3-48a6-b8dd-838c874b57de.webp",
+      "source_url": "https://1kuji.com/products/overlord"
+    },
     {
       "id": "db_sb",
       "product_id": 10693,
