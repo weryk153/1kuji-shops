@@ -1,4 +1,5 @@
-const UA = '1kuji-shops-scraper/1.0 (+https://github.com/weryk153/1kuji-shops)';
+// 站方 WAF 會 403 掉非瀏覽器 UA，故偽裝成一般瀏覽器 (repo: github.com/weryk153/1kuji-shops)
+const UA = 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36';
 
 export interface Session {
   cookies: string;        // "_bsp_lt_pro_general_sid=...; _foo=..."
