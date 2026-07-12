@@ -1,5 +1,5 @@
 {
-  "scraped_at": "2026-07-11T20:08:02.189Z",
+  "scraped_at": "2026-07-12T20:08:04.856Z",
   "lotteries": [
     {
       "id": "pk30th_2",
@@ -144,22 +144,6 @@
       "release_date": "2026-06-19",
       "image_url": "https://assets.1kuji.com/uploads/product/image/10642/16e56071-7340-472f-a8d6-89027c5d57c1.webp",
       "source_url": "https://1kuji.com/products/gkmas05"
-    },
-    {
-      "id": "db_ex11",
-      "product_id": 10681,
-      "name_ja": "一番くじ ドラゴンボール EX 対決!レッドリボン軍",
-      "release_date": "2026-06-13",
-      "image_url": "https://assets.1kuji.com/uploads/product/image/10681/0ff06f99-2ec0-4e6c-ae9f-345c6ba6362b.webp",
-      "source_url": "https://1kuji.com/products/db_ex11"
-    },
-    {
-      "id": "jfa",
-      "product_id": 10680,
-      "name_ja": "一番くじ サッカー日本代表ver. ～最高の景色を2026～",
-      "release_date": "2026-06-13",
-      "image_url": "https://assets.1kuji.com/uploads/product/image/10680/2cb19107-c49c-48e7-a62b-4918a05291fb.webp",
-      "source_url": "https://1kuji.com/products/jfa"
     }
   ]
 }
