@@ -1,6 +1,38 @@
 {
-  "scraped_at": "2026-07-14T20:18:23.298Z",
+  "scraped_at": "2026-07-15T20:15:34.096Z",
   "lotteries": [
+    {
+      "id": "tamagotchi5",
+      "product_id": 10673,
+      "name_ja": "一番くじ たまごっち～ぐるぐる発見！Tamagotchi Paradise！～",
+      "release_date": "2026-07-25",
+      "image_url": "https://assets.1kuji.com/uploads/product/image/10673/6795591f-43dc-4875-9101-147b769f440b.webp",
+      "source_url": "https://1kuji.com/products/tamagotchi5"
+    },
+    {
+      "id": "godzilla9",
+      "product_id": 10690,
+      "name_ja": "一番くじ ゴジラ 最恐怪獣王列伝",
+      "release_date": "2026-07-25",
+      "image_url": "https://assets.1kuji.com/uploads/product/image/10690/54a3463f-4955-450f-a1f8-0481d8398bfe.webp",
+      "source_url": "https://1kuji.com/products/godzilla9"
+    },
+    {
+      "id": "van-gogh",
+      "product_id": 10685,
+      "name_ja": "一番くじ フィンセント・ファン・ゴッホ",
+      "release_date": "2026-07-25",
+      "image_url": "https://assets.1kuji.com/uploads/product/image/10685/b1f77822-bdb2-40cf-8882-1b8543152af9.webp",
+      "source_url": "https://1kuji.com/products/van-gogh"
+    },
+    {
+      "id": "ultra23",
+      "product_id": 10702,
+      "name_ja": "一番くじ ウルトラマン 60th Anniversary",
+      "release_date": "2026-07-24",
+      "image_url": "https://assets.1kuji.com/uploads/product/image/10702/aea53beb-e6e1-4d9d-a1cf-93fdbd8a264e.png",
+      "source_url": "https://1kuji.com/products/ultra23"
+    },
     {
       "id": "pk30th_2",
       "product_id": 10696,
