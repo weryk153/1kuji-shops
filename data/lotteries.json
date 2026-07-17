@@ -1,5 +1,5 @@
 {
-  "scraped_at": "2026-07-16T20:06:39.932Z",
+  "scraped_at": "2026-07-17T20:10:59.158Z",
   "lotteries": [
     {
       "id": "tamagotchi5",
@@ -10,20 +10,20 @@
       "source_url": "https://1kuji.com/products/tamagotchi5"
     },
     {
-      "id": "godzilla9",
-      "product_id": 10690,
-      "name_ja": "一番くじ ゴジラ 最恐怪獣王列伝",
-      "release_date": "2026-07-25",
-      "image_url": "https://assets.1kuji.com/uploads/product/image/10690/54a3463f-4955-450f-a1f8-0481d8398bfe.webp",
-      "source_url": "https://1kuji.com/products/godzilla9"
-    },
-    {
       "id": "van-gogh",
       "product_id": 10685,
       "name_ja": "一番くじ フィンセント・ファン・ゴッホ",
       "release_date": "2026-07-25",
       "image_url": "https://assets.1kuji.com/uploads/product/image/10685/b1f77822-bdb2-40cf-8882-1b8543152af9.webp",
       "source_url": "https://1kuji.com/products/van-gogh"
+    },
+    {
+      "id": "godzilla9",
+      "product_id": 10690,
+      "name_ja": "一番くじ ゴジラ 最恐怪獣王列伝",
+      "release_date": "2026-07-25",
+      "image_url": "https://assets.1kuji.com/uploads/product/image/10690/54a3463f-4955-450f-a1f8-0481d8398bfe.webp",
+      "source_url": "https://1kuji.com/products/godzilla9"
     },
     {
       "id": "ultra23",
