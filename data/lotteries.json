@@ -1,5 +1,5 @@
 {
-  "scraped_at": "2026-07-17T20:10:59.158Z",
+  "scraped_at": "2026-07-18T20:05:57.585Z",
   "lotteries": [
     {
       "id": "tamagotchi5",
@@ -160,22 +160,6 @@
       "release_date": "2026-06-20",
       "image_url": "https://assets.1kuji.com/uploads/product/image/10686/9af5c68e-11bc-4328-a725-a159c32c10e7.webp",
       "source_url": "https://1kuji.com/products/hokuto-no-ken"
-    },
-    {
-      "id": "lilo-stitch2",
-      "product_id": 10666,
-      "name_ja": "一番くじ〈スティッチ〉Every day with you!",
-      "release_date": "2026-06-19",
-      "image_url": "https://assets.1kuji.com/uploads/product/image/10666/e7fb99ea-e05f-4187-b344-ca198e904b2c.webp",
-      "source_url": "https://1kuji.com/products/lilo-stitch2"
-    },
-    {
-      "id": "gkmas05",
-      "product_id": 10642,
-      "name_ja": "一番くじ 学園アイドルマスター Part5",
-      "release_date": "2026-06-19",
-      "image_url": "https://assets.1kuji.com/uploads/product/image/10642/16e56071-7340-472f-a8d6-89027c5d57c1.webp",
-      "source_url": "https://1kuji.com/products/gkmas05"
     }
   ]
 }
