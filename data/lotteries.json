@@ -1,5 +1,5 @@
 {
-  "scraped_at": "2026-07-18T20:05:57.585Z",
+  "scraped_at": "2026-07-19T20:09:16.944Z",
   "lotteries": [
     {
       "id": "tamagotchi5",
@@ -144,22 +144,6 @@
       "release_date": "2026-06-26",
       "image_url": "https://assets.1kuji.com/uploads/product/image/10659/d5266ec7-4bd7-495f-b2ca-eab250c3de9f.webp",
       "source_url": "https://1kuji.com/products/naruto10"
-    },
-    {
-      "id": "myhero46",
-      "product_id": 10663,
-      "name_ja": "一番くじ 僕のヒーローアカデミア -いつまでも手を差し伸べ続ける物語-",
-      "release_date": "2026-06-20",
-      "image_url": "https://assets.1kuji.com/uploads/product/image/10663/3bb7a85d-4641-4121-8795-37b1c6394f0d.webp",
-      "source_url": "https://1kuji.com/products/myhero46"
-    },
-    {
-      "id": "hokuto-no-ken",
-      "product_id": 10686,
-      "name_ja": "一番くじ 北斗の拳 -FIST OF THE NORTH STAR-",
-      "release_date": "2026-06-20",
-      "image_url": "https://assets.1kuji.com/uploads/product/image/10686/9af5c68e-11bc-4328-a725-a159c32c10e7.webp",
-      "source_url": "https://1kuji.com/products/hokuto-no-ken"
     }
   ]
 }
