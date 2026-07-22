@@ -1,6 +1,38 @@
 {
-  "scraped_at": "2026-07-21T20:21:41.602Z",
+  "scraped_at": "2026-07-22T20:16:11.534Z",
   "lotteries": [
+    {
+      "id": "minions11",
+      "product_id": 10714,
+      "name_ja": "一番くじ 『ミニオンズ＆モンスターズ』",
+      "release_date": "2026-08-01",
+      "image_url": "https://assets.1kuji.com/uploads/product/image/10714/7739267e-3f73-4020-a34e-81e4c42e1b69.webp",
+      "source_url": "https://1kuji.com/products/minions11"
+    },
+    {
+      "id": "kingdom6",
+      "product_id": 10706,
+      "name_ja": "一番くじ 春秋戦国大戦キングダム The Animation 知と武の両輪",
+      "release_date": "2026-07-31",
+      "image_url": "https://assets.1kuji.com/uploads/product/image/10706/87fdebb2-44b9-471b-a82f-d4b3d79a09d7.webp",
+      "source_url": "https://1kuji.com/products/kingdom6"
+    },
+    {
+      "id": "mofusand7",
+      "product_id": 10692,
+      "name_ja": "一番くじ mofusand ～ひんやりくつろぎ時間～",
+      "release_date": "2026-07-31",
+      "image_url": "https://assets.1kuji.com/uploads/product/image/10692/4d6fc35c-11bc-41cd-80ec-321b2df82345.webp",
+      "source_url": "https://1kuji.com/products/mofusand7"
+    },
+    {
+      "id": "kimetsu30",
+      "product_id": 10703,
+      "name_ja": "一番くじ 鬼滅の刃 ～上弦の弐～",
+      "release_date": "2026-07-30",
+      "image_url": "https://assets.1kuji.com/uploads/product/image/10703/0b9ff2cf-ec96-4ad4-bc10-ea6885c5baed.webp",
+      "source_url": "https://1kuji.com/products/kimetsu30"
+    },
     {
       "id": "tamagotchi5",
       "product_id": 10673,
