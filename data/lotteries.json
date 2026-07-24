@@ -1,6 +1,14 @@
 {
-  "scraped_at": "2026-07-23T20:17:47.041Z",
+  "scraped_at": "2026-07-24T20:24:35.222Z",
   "lotteries": [
+    {
+      "id": "vivant",
+      "product_id": 10694,
+      "name_ja": "一番くじ 日曜劇場「VIVANT」",
+      "release_date": "2026-08-01",
+      "image_url": "https://assets.1kuji.com/uploads/product/image/10694/a0336a9e-c6b5-4c5b-9e43-94b5e29d2a87.webp",
+      "source_url": "https://1kuji.com/products/vivant"
+    },
     {
       "id": "minions11",
       "product_id": 10714,
