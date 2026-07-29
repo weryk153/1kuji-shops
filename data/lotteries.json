@@ -1,6 +1,54 @@
 {
-  "scraped_at": "2026-07-28T20:20:38.247Z",
+  "scraped_at": "2026-07-29T20:15:14.821Z",
   "lotteries": [
+    {
+      "id": "nikke8",
+      "product_id": 10721,
+      "name_ja": "一番くじ 勝利の女神：NIKKE CHAPTER8",
+      "release_date": "2026-08-08",
+      "image_url": "https://assets.1kuji.com/uploads/product/image/10721/a9ee0d7e-2181-4e64-8ab7-ed6c7407cce0.webp",
+      "source_url": "https://1kuji.com/products/nikke8"
+    },
+    {
+      "id": "onep104",
+      "product_id": 10710,
+      "name_ja": "一番くじ ワンピース -エルバフ編- GIANT BASH!! Vol.2",
+      "release_date": "2026-08-08",
+      "image_url": "https://assets.1kuji.com/uploads/product/image/10710/a114da77-054e-468a-b19e-c743e6dee1cb.webp",
+      "source_url": "https://1kuji.com/products/onep104"
+    },
+    {
+      "id": "narumiya2",
+      "product_id": 10708,
+      "name_ja": "一番くじ ナルミヤキャラクターズ ～あの頃のときめきメモリーズ～",
+      "release_date": "2026-08-08",
+      "image_url": "https://assets.1kuji.com/uploads/product/image/10708/adc2aa96-ed1c-40e7-9b4f-44a45ee94794.webp",
+      "source_url": "https://1kuji.com/products/narumiya2"
+    },
+    {
+      "id": "cho-kaguyahime",
+      "product_id": 10764,
+      "name_ja": "一番くじちょこっと 超かぐや姫！",
+      "release_date": "2026-08-06",
+      "image_url": "https://assets.1kuji.com/uploads/product/image/10764/9e2ff56b-e8d1-4fe8-8b9e-8bae70bd7bbb.webp",
+      "source_url": "https://1kuji.com/products/cho-kaguyahime"
+    },
+    {
+      "id": "shingeki15",
+      "product_id": 10720,
+      "name_ja": "一番くじ 進撃の巨人 ～選択と結果～",
+      "release_date": "2026-08-05",
+      "image_url": "https://assets.1kuji.com/uploads/product/image/10720/35856405-f611-4e5d-bc34-b434f4d2679a.webp",
+      "source_url": "https://1kuji.com/products/shingeki15"
+    },
+    {
+      "id": "cutiestreet",
+      "product_id": 10731,
+      "name_ja": "一番くじ CUTIE STREET くじを手にする戦いなのです！",
+      "release_date": "2026-08-04",
+      "image_url": "https://assets.1kuji.com/uploads/product/image/10731/ecccf571-e3b9-498b-8e29-a5797d7a56d7.webp",
+      "source_url": "https://1kuji.com/products/cutiestreet"
+    },
     {
       "id": "vivant",
       "product_id": 10694,
@@ -144,14 +192,6 @@
       "release_date": "2026-07-03",
       "image_url": "https://assets.1kuji.com/uploads/product/image/10709/6d3ab733-b082-4ba1-a0db-914642934d53.webp",
       "source_url": "https://1kuji.com/products/onep103"
-    },
-    {
-      "id": "marriagetoxin",
-      "product_id": 10677,
-      "name_ja": "一番くじちょこっと マリッジトキシン",
-      "release_date": "2026-06-30",
-      "image_url": "https://assets.1kuji.com/uploads/product/image/10677/8755d38b-147d-4592-a65d-14f8fadb35db.webp",
-      "source_url": "https://1kuji.com/products/marriagetoxin"
     }
   ]
 }
