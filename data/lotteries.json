@@ -1,5 +1,5 @@
 {
-  "scraped_at": "2026-07-31T20:23:58.579Z",
+  "scraped_at": "2026-08-01T20:12:14.958Z",
   "lotteries": [
     {
       "id": "onep104",
@@ -192,14 +192,6 @@
       "release_date": "2026-07-04",
       "image_url": "https://assets.1kuji.com/uploads/product/image/10684/63e9fcf4-d17b-4d43-8b81-a1a8ac709bda.webp",
       "source_url": "https://1kuji.com/products/keroro2"
-    },
-    {
-      "id": "onep103",
-      "product_id": 10709,
-      "name_ja": "一番くじ ワンピース -エルバフ編- GIANT BASH!! Vol.1",
-      "release_date": "2026-07-03",
-      "image_url": "https://assets.1kuji.com/uploads/product/image/10709/6d3ab733-b082-4ba1-a0db-914642934d53.webp",
-      "source_url": "https://1kuji.com/products/onep103"
     }
   ]
 }
