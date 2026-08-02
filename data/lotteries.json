@@ -1,5 +1,5 @@
 {
-  "scraped_at": "2026-08-01T20:12:14.958Z",
+  "scraped_at": "2026-08-02T20:14:12.612Z",
   "lotteries": [
     {
       "id": "onep104",
@@ -184,14 +184,6 @@
       "release_date": "2026-07-07",
       "image_url": "https://assets.1kuji.com/uploads/product/image/10689/4e994506-ff67-47d7-b55a-333b6cdddb2d.webp",
       "source_url": "https://1kuji.com/products/kaiji2"
-    },
-    {
-      "id": "keroro2",
-      "product_id": 10684,
-      "name_ja": "一番くじ ケロロ軍曹 復活して速攻２弾であります！",
-      "release_date": "2026-07-04",
-      "image_url": "https://assets.1kuji.com/uploads/product/image/10684/63e9fcf4-d17b-4d43-8b81-a1a8ac709bda.webp",
-      "source_url": "https://1kuji.com/products/keroro2"
     }
   ]
 }
