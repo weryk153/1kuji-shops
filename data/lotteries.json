@@ -1,6 +1,14 @@
 {
-  "scraped_at": "2026-08-02T20:14:12.612Z",
+  "scraped_at": "2026-08-03T20:35:50.584Z",
   "lotteries": [
+    {
+      "id": "touhou",
+      "product_id": 10713,
+      "name_ja": "一番くじ 東方Project",
+      "release_date": "2026-08-14",
+      "image_url": "https://assets.1kuji.com/uploads/product/image/10713/e5f904dc-0224-4b99-9332-c92225f5826a.webp",
+      "source_url": "https://1kuji.com/products/touhou"
+    },
     {
       "id": "onep104",
       "product_id": 10710,
