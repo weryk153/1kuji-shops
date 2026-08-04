@@ -1,6 +1,14 @@
 {
-  "scraped_at": "2026-08-03T20:35:50.584Z",
+  "scraped_at": "2026-08-04T20:37:29.857Z",
   "lotteries": [
+    {
+      "id": "disney_kh5",
+      "product_id": 10672,
+      "name_ja": "一番くじ KINGDOM HEARTS -25th Anniversary-",
+      "release_date": "2026-08-15",
+      "image_url": "https://assets.1kuji.com/uploads/product/image/10672/1349f9a6-caee-4c03-b900-492624e3a64b.webp",
+      "source_url": "https://1kuji.com/products/disney_kh5"
+    },
     {
       "id": "touhou",
       "product_id": 10713,
