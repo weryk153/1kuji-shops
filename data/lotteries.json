@@ -1,6 +1,22 @@
 {
-  "scraped_at": "2026-08-04T20:37:29.857Z",
+  "scraped_at": "2026-08-05T20:35:48.799Z",
   "lotteries": [
+    {
+      "id": "re-zero17",
+      "product_id": 10711,
+      "name_ja": "一番くじちょこっと Re:ゼロから始める異世界生活",
+      "release_date": "2026-08-20",
+      "image_url": "https://assets.1kuji.com/uploads/product/image/10711/07af9465-c96d-4734-92ee-4e68e31eb0c8.webp",
+      "source_url": "https://1kuji.com/products/re-zero17"
+    },
+    {
+      "id": "haikyu32",
+      "product_id": 10719,
+      "name_ja": "一番くじ ハイキュー!! -烏野の未来-",
+      "release_date": "2026-08-15",
+      "image_url": "https://assets.1kuji.com/uploads/product/image/10719/ea7c5063-f695-4fa5-8828-78e2589bcfc8.webp",
+      "source_url": "https://1kuji.com/products/haikyu32"
+    },
     {
       "id": "disney_kh5",
       "product_id": 10672,
@@ -8,6 +24,14 @@
       "release_date": "2026-08-15",
       "image_url": "https://assets.1kuji.com/uploads/product/image/10672/1349f9a6-caee-4c03-b900-492624e3a64b.webp",
       "source_url": "https://1kuji.com/products/disney_kh5"
+    },
+    {
+      "id": "natsume48",
+      "product_id": 10716,
+      "name_ja": "一番くじ 夏目友人帳 雨の日も、晴れの日も。",
+      "release_date": "2026-08-14",
+      "image_url": "https://assets.1kuji.com/uploads/product/image/10716/aebb8183-7da6-4210-b3e8-082c3a54f603.png",
+      "source_url": "https://1kuji.com/products/natsume48"
     },
     {
       "id": "touhou",
@@ -192,14 +216,6 @@
       "release_date": "2026-07-10",
       "image_url": "https://assets.1kuji.com/uploads/product/image/10700/c8305147-786b-4f2a-afa4-7b4f4bd3968a.webp",
       "source_url": "https://1kuji.com/products/disney_toy7"
-    },
-    {
-      "id": "kaiji2",
-      "product_id": 10689,
-      "name_ja": "一番くじ 鬮破滅録カイジ くじを引くのが 気持ちのいい人生ってもんだろっ・・・！",
-      "release_date": "2026-07-07",
-      "image_url": "https://assets.1kuji.com/uploads/product/image/10689/4e994506-ff67-47d7-b55a-333b6cdddb2d.webp",
-      "source_url": "https://1kuji.com/products/kaiji2"
     }
   ]
 }
