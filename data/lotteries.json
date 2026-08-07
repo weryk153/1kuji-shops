@@ -1,6 +1,14 @@
 {
-  "scraped_at": "2026-08-05T20:35:48.799Z",
+  "scraped_at": "2026-08-07T00:43:20.457Z",
   "lotteries": [
+    {
+      "id": "gintama22",
+      "product_id": 10717,
+      "name_ja": "一番くじ 銀魂 生誕20周年記念　銀魂展　～はたちのつどい～ その弐",
+      "release_date": "2026-08-21",
+      "image_url": "https://assets.1kuji.com/uploads/product/image/10717/924b7c67-ee15-4a36-a724-af42b9e26273.webp",
+      "source_url": "https://1kuji.com/products/gintama22"
+    },
     {
       "id": "re-zero17",
       "product_id": 10711,
