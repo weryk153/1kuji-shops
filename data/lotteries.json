@@ -1,6 +1,14 @@
 {
-  "scraped_at": "2026-08-07T00:43:20.457Z",
+  "scraped_at": "2026-08-07T19:54:23.247Z",
   "lotteries": [
+    {
+      "id": "db_gt",
+      "product_id": 10725,
+      "name_ja": "一番くじ ドラゴンボールGT",
+      "release_date": "2026-08-22",
+      "image_url": "https://assets.1kuji.com/uploads/product/image/10725/2461f8c7-c647-4111-b22e-5ad165614809.png",
+      "source_url": "https://1kuji.com/products/db_gt"
+    },
     {
       "id": "gintama22",
       "product_id": 10717,
