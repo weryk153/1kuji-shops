@@ -1,5 +1,5 @@
 {
-  "scraped_at": "2026-08-07T19:54:23.247Z",
+  "scraped_at": "2026-08-08T19:35:48.725Z",
   "lotteries": [
     {
       "id": "db_gt",
@@ -26,20 +26,20 @@
       "source_url": "https://1kuji.com/products/re-zero17"
     },
     {
-      "id": "haikyu32",
-      "product_id": 10719,
-      "name_ja": "一番くじ ハイキュー!! -烏野の未来-",
-      "release_date": "2026-08-15",
-      "image_url": "https://assets.1kuji.com/uploads/product/image/10719/ea7c5063-f695-4fa5-8828-78e2589bcfc8.webp",
-      "source_url": "https://1kuji.com/products/haikyu32"
-    },
-    {
       "id": "disney_kh5",
       "product_id": 10672,
       "name_ja": "一番くじ KINGDOM HEARTS -25th Anniversary-",
       "release_date": "2026-08-15",
       "image_url": "https://assets.1kuji.com/uploads/product/image/10672/1349f9a6-caee-4c03-b900-492624e3a64b.webp",
       "source_url": "https://1kuji.com/products/disney_kh5"
+    },
+    {
+      "id": "haikyu32",
+      "product_id": 10719,
+      "name_ja": "一番くじ ハイキュー!! -烏野の未来-",
+      "release_date": "2026-08-15",
+      "image_url": "https://assets.1kuji.com/uploads/product/image/10719/ea7c5063-f695-4fa5-8828-78e2589bcfc8.webp",
+      "source_url": "https://1kuji.com/products/haikyu32"
     },
     {
       "id": "natsume48",
@@ -224,14 +224,6 @@
       "release_date": "2026-07-11",
       "image_url": "https://assets.1kuji.com/uploads/product/image/10687/f16c48e8-2c8a-4f87-919f-c68680e64f23.webp",
       "source_url": "https://1kuji.com/products/morinaga"
-    },
-    {
-      "id": "disney_toy7",
-      "product_id": 10700,
-      "name_ja": "一番くじ 〈トイ・ストーリー5〉",
-      "release_date": "2026-07-10",
-      "image_url": "https://assets.1kuji.com/uploads/product/image/10700/c8305147-786b-4f2a-afa4-7b4f4bd3968a.webp",
-      "source_url": "https://1kuji.com/products/disney_toy7"
     }
   ]
 }
