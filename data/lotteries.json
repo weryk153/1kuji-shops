@@ -1,5 +1,5 @@
 {
-  "scraped_at": "2026-08-08T19:35:48.725Z",
+  "scraped_at": "2026-08-09T19:39:12.377Z",
   "lotteries": [
     {
       "id": "db_gt",
@@ -208,22 +208,6 @@
       "release_date": "2026-07-17",
       "image_url": "https://assets.1kuji.com/uploads/product/image/10688/c5acca08-ebe3-48a6-b8dd-838c874b57de.webp",
       "source_url": "https://1kuji.com/products/overlord"
-    },
-    {
-      "id": "db_sb",
-      "product_id": 10693,
-      "name_ja": "一番くじ ドラゴンボール スペクタクルバトル",
-      "release_date": "2026-07-11",
-      "image_url": "https://assets.1kuji.com/uploads/product/image/10693/8cd4838b-0a2e-42be-9f72-e8673f1eca50.png",
-      "source_url": "https://1kuji.com/products/db_sb"
-    },
-    {
-      "id": "morinaga",
-      "product_id": 10687,
-      "name_ja": "一番くじ 森永製菓",
-      "release_date": "2026-07-11",
-      "image_url": "https://assets.1kuji.com/uploads/product/image/10687/f16c48e8-2c8a-4f87-919f-c68680e64f23.webp",
-      "source_url": "https://1kuji.com/products/morinaga"
     }
   ]
 }
