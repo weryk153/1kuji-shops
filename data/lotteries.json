@@ -1,5 +1,5 @@
 {
-  "scraped_at": "2026-08-14T19:50:59.083Z",
+  "scraped_at": "2026-08-15T19:26:01.900Z",
   "lotteries": [
     {
       "id": "db_gt",
@@ -200,14 +200,6 @@
       "release_date": "2026-07-18",
       "image_url": "https://assets.1kuji.com/uploads/product/image/10699/3c142b1b-e0ba-479b-ac07-eb8c9a33e417.webp",
       "source_url": "https://1kuji.com/products/baki3"
-    },
-    {
-      "id": "overlord",
-      "product_id": 10688,
-      "name_ja": "一番くじ オーバーロード",
-      "release_date": "2026-07-17",
-      "image_url": "https://assets.1kuji.com/uploads/product/image/10688/c5acca08-ebe3-48a6-b8dd-838c874b57de.webp",
-      "source_url": "https://1kuji.com/products/overlord"
     }
   ]
 }
