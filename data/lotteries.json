@@ -1,5 +1,5 @@
 {
-  "scraped_at": "2026-08-15T19:26:01.900Z",
+  "scraped_at": "2026-08-16T19:26:00.402Z",
   "lotteries": [
     {
       "id": "db_gt",
@@ -26,20 +26,20 @@
       "source_url": "https://1kuji.com/products/re-zero17"
     },
     {
-      "id": "disney_kh5",
-      "product_id": 10672,
-      "name_ja": "一番くじ KINGDOM HEARTS -25th Anniversary-",
-      "release_date": "2026-08-15",
-      "image_url": "https://assets.1kuji.com/uploads/product/image/10672/1349f9a6-caee-4c03-b900-492624e3a64b.webp",
-      "source_url": "https://1kuji.com/products/disney_kh5"
-    },
-    {
       "id": "haikyu32",
       "product_id": 10719,
       "name_ja": "一番くじ ハイキュー!! -烏野の未来-",
       "release_date": "2026-08-15",
       "image_url": "https://assets.1kuji.com/uploads/product/image/10719/ea7c5063-f695-4fa5-8828-78e2589bcfc8.webp",
       "source_url": "https://1kuji.com/products/haikyu32"
+    },
+    {
+      "id": "disney_kh5",
+      "product_id": 10672,
+      "name_ja": "一番くじ KINGDOM HEARTS -25th Anniversary-",
+      "release_date": "2026-08-15",
+      "image_url": "https://assets.1kuji.com/uploads/product/image/10672/1349f9a6-caee-4c03-b900-492624e3a64b.webp",
+      "source_url": "https://1kuji.com/products/disney_kh5"
     },
     {
       "id": "natsume48",
@@ -184,22 +184,6 @@
       "release_date": "2026-07-24",
       "image_url": "https://assets.1kuji.com/uploads/product/image/10702/aea53beb-e6e1-4d9d-a1cf-93fdbd8a264e.png",
       "source_url": "https://1kuji.com/products/ultra23"
-    },
-    {
-      "id": "pk30th_2",
-      "product_id": 10696,
-      "name_ja": "一番くじ Pokémon 30th ANNIVERSARY vol.2",
-      "release_date": "2026-07-18",
-      "image_url": "https://assets.1kuji.com/uploads/product/image/10696/3e0c5d5c-91db-4a8f-ba63-4aa9c8473157.webp",
-      "source_url": "https://1kuji.com/products/pk30th_2"
-    },
-    {
-      "id": "baki3",
-      "product_id": 10699,
-      "name_ja": "一番くじ 刃牙～巨大なる鼓動～",
-      "release_date": "2026-07-18",
-      "image_url": "https://assets.1kuji.com/uploads/product/image/10699/3c142b1b-e0ba-479b-ac07-eb8c9a33e417.webp",
-      "source_url": "https://1kuji.com/products/baki3"
     }
   ]
 }
