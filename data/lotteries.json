@@ -1,6 +1,14 @@
 {
-  "scraped_at": "2026-08-16T19:26:00.402Z",
+  "scraped_at": "2026-08-17T19:33:16.468Z",
   "lotteries": [
+    {
+      "id": "splatoon-3_03",
+      "product_id": 10737,
+      "name_ja": "一番くじ スプラトゥーン３ 第三弾",
+      "release_date": "2026-08-22",
+      "image_url": "https://assets.1kuji.com/uploads/product/image/10737/7b7aecb5-de2f-4bda-9da5-151a2f7ec5ff.webp",
+      "source_url": "https://1kuji.com/products/splatoon-3_03"
+    },
     {
       "id": "db_gt",
       "product_id": 10725,
