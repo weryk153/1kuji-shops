@@ -1,22 +1,6 @@
 {
-  "scraped_at": "2026-08-19T19:31:39.353Z",
+  "scraped_at": "2026-08-20T19:36:31.991Z",
   "lotteries": [
-    {
-      "id": "pk_masters",
-      "product_id": 10698,
-      "name_ja": "一番くじ ポケモンマスターズ EX 7th Anniversary",
-      "release_date": "2026-08-29",
-      "image_url": "https://assets.1kuji.com/uploads/product/image/10698/00eed3af-e99f-44d5-aa79-60339c6b8e2d.gif",
-      "source_url": "https://1kuji.com/products/pk_masters"
-    },
-    {
-      "id": "reptiles3",
-      "product_id": 10697,
-      "name_ja": "一番くじ 爬虫類＆両生類～Tiny Friends～vol.3",
-      "release_date": "2026-08-29",
-      "image_url": "https://assets.1kuji.com/uploads/product/image/10697/bbcbb8fa-ef9c-466e-8fce-3d7bcb65105b.webp",
-      "source_url": "https://1kuji.com/products/reptiles3"
-    },
     {
       "id": "hxh11",
       "product_id": 10712,
@@ -32,6 +16,22 @@
       "release_date": "2026-08-29",
       "image_url": "https://assets.1kuji.com/uploads/product/image/10660/d7c5a28d-3a79-41eb-977f-597d7563dec9.webp",
       "source_url": "https://1kuji.com/products/eva19"
+    },
+    {
+      "id": "pk_masters",
+      "product_id": 10698,
+      "name_ja": "一番くじ ポケモンマスターズ EX 7th Anniversary",
+      "release_date": "2026-08-29",
+      "image_url": "https://assets.1kuji.com/uploads/product/image/10698/00eed3af-e99f-44d5-aa79-60339c6b8e2d.gif",
+      "source_url": "https://1kuji.com/products/pk_masters"
+    },
+    {
+      "id": "reptiles3",
+      "product_id": 10697,
+      "name_ja": "一番くじ 爬虫類＆両生類～Tiny Friends～vol.3",
+      "release_date": "2026-08-29",
+      "image_url": "https://assets.1kuji.com/uploads/product/image/10697/bbcbb8fa-ef9c-466e-8fce-3d7bcb65105b.webp",
+      "source_url": "https://1kuji.com/products/reptiles3"
     },
     {
       "id": "ppg3",
