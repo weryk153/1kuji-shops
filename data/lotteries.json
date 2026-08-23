@@ -1,5 +1,5 @@
 {
-  "scraped_at": "2026-08-22T19:27:32.141Z",
+  "scraped_at": "2026-08-23T19:27:09.528Z",
   "lotteries": [
     {
       "id": "hxh11",
@@ -200,30 +200,6 @@
       "release_date": "2026-07-30",
       "image_url": "https://assets.1kuji.com/uploads/product/image/10703/0b9ff2cf-ec96-4ad4-bc10-ea6885c5baed.webp",
       "source_url": "https://1kuji.com/products/kimetsu30"
-    },
-    {
-      "id": "tamagotchi5",
-      "product_id": 10673,
-      "name_ja": "一番くじ たまごっち～ぐるぐる発見！Tamagotchi Paradise！～",
-      "release_date": "2026-07-25",
-      "image_url": "https://assets.1kuji.com/uploads/product/image/10673/6795591f-43dc-4875-9101-147b769f440b.webp",
-      "source_url": "https://1kuji.com/products/tamagotchi5"
-    },
-    {
-      "id": "van-gogh",
-      "product_id": 10685,
-      "name_ja": "一番くじ フィンセント・ファン・ゴッホ",
-      "release_date": "2026-07-25",
-      "image_url": "https://assets.1kuji.com/uploads/product/image/10685/b1f77822-bdb2-40cf-8882-1b8543152af9.webp",
-      "source_url": "https://1kuji.com/products/van-gogh"
-    },
-    {
-      "id": "godzilla9",
-      "product_id": 10690,
-      "name_ja": "一番くじ ゴジラ 最恐怪獣王列伝",
-      "release_date": "2026-07-25",
-      "image_url": "https://assets.1kuji.com/uploads/product/image/10690/54a3463f-4955-450f-a1f8-0481d8398bfe.webp",
-      "source_url": "https://1kuji.com/products/godzilla9"
     }
   ]
 }
