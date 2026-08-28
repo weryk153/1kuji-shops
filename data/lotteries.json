@@ -1,14 +1,6 @@
 {
-  "scraped_at": "2026-08-26T21:45:07.208Z",
+  "scraped_at": "2026-08-28T03:32:24.504Z",
   "lotteries": [
-    {
-      "id": "disney_ps13",
-      "product_id": 10722,
-      "name_ja": "一番くじ 〈ディズニープリンセス〉Enchanted Glow",
-      "release_date": "2026-09-05",
-      "image_url": "https://assets.1kuji.com/uploads/product/image/10722/a3406d3a-c59a-4ada-8e2a-8f2c23601b54.webp",
-      "source_url": "https://1kuji.com/products/disney_ps13"
-    },
     {
       "id": "hololive-rpg",
       "product_id": 10701,
@@ -16,6 +8,14 @@
       "release_date": "2026-09-05",
       "image_url": "https://assets.1kuji.com/uploads/product/image/10701/15c1e98d-8f08-4898-b710-a2337c9eee3a.webp",
       "source_url": "https://1kuji.com/products/hololive-rpg"
+    },
+    {
+      "id": "disney_ps13",
+      "product_id": 10722,
+      "name_ja": "一番くじ 〈ディズニープリンセス〉Enchanted Glow",
+      "release_date": "2026-09-05",
+      "image_url": "https://assets.1kuji.com/uploads/product/image/10722/a3406d3a-c59a-4ada-8e2a-8f2c23601b54.webp",
+      "source_url": "https://1kuji.com/products/disney_ps13"
     },
     {
       "id": "hxh11",
