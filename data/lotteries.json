@@ -1,5 +1,5 @@
 {
-  "scraped_at": "2026-08-28T03:32:24.504Z",
+  "scraped_at": "2026-08-29T02:02:08.382Z",
   "lotteries": [
     {
       "id": "hololive-rpg",
@@ -208,14 +208,6 @@
       "release_date": "2026-07-31",
       "image_url": "https://assets.1kuji.com/uploads/product/image/10692/4d6fc35c-11bc-41cd-80ec-321b2df82345.webp",
       "source_url": "https://1kuji.com/products/mofusand7"
-    },
-    {
-      "id": "kimetsu30",
-      "product_id": 10703,
-      "name_ja": "一番くじ 鬼滅の刃 ～上弦の弐～",
-      "release_date": "2026-07-30",
-      "image_url": "https://assets.1kuji.com/uploads/product/image/10703/0b9ff2cf-ec96-4ad4-bc10-ea6885c5baed.webp",
-      "source_url": "https://1kuji.com/products/kimetsu30"
     }
   ]
 }
