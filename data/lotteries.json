@@ -1,5 +1,5 @@
 {
-  "scraped_at": "2026-08-29T21:37:25.935Z",
+  "scraped_at": "2026-08-30T21:52:55.072Z",
   "lotteries": [
     {
       "id": "hololive-rpg",
@@ -176,22 +176,6 @@
       "release_date": "2026-08-04",
       "image_url": "https://assets.1kuji.com/uploads/product/image/10731/ecccf571-e3b9-498b-8e29-a5797d7a56d7.webp",
       "source_url": "https://1kuji.com/products/cutiestreet"
-    },
-    {
-      "id": "vivant",
-      "product_id": 10694,
-      "name_ja": "一番くじ 日曜劇場「VIVANT」",
-      "release_date": "2026-08-01",
-      "image_url": "https://assets.1kuji.com/uploads/product/image/10694/a0336a9e-c6b5-4c5b-9e43-94b5e29d2a87.webp",
-      "source_url": "https://1kuji.com/products/vivant"
-    },
-    {
-      "id": "minions11",
-      "product_id": 10714,
-      "name_ja": "一番くじ 『ミニオンズ＆モンスターズ』",
-      "release_date": "2026-08-01",
-      "image_url": "https://assets.1kuji.com/uploads/product/image/10714/7739267e-3f73-4020-a34e-81e4c42e1b69.webp",
-      "source_url": "https://1kuji.com/products/minions11"
     }
   ]
 }
