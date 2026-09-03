@@ -1,5 +1,5 @@
 {
-  "scraped_at": "2026-09-02T21:42:17.835Z",
+  "scraped_at": "2026-09-03T21:37:24.700Z",
   "lotteries": [
     {
       "id": "myhero47",
@@ -176,14 +176,6 @@
       "release_date": "2026-08-06",
       "image_url": "https://assets.1kuji.com/uploads/product/image/10764/9e2ff56b-e8d1-4fe8-8b9e-8bae70bd7bbb.webp",
       "source_url": "https://1kuji.com/products/cho-kaguyahime"
-    },
-    {
-      "id": "shingeki15",
-      "product_id": 10720,
-      "name_ja": "一番くじ 進撃の巨人 ～選択と結果～",
-      "release_date": "2026-08-05",
-      "image_url": "https://assets.1kuji.com/uploads/product/image/10720/35856405-f611-4e5d-bc34-b434f4d2679a.webp",
-      "source_url": "https://1kuji.com/products/shingeki15"
     }
   ]
 }
