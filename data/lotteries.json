@@ -1,5 +1,5 @@
 {
-  "scraped_at": "2026-09-03T21:37:24.700Z",
+  "scraped_at": "2026-09-04T21:20:27.304Z",
   "lotteries": [
     {
       "id": "myhero47",
@@ -168,14 +168,6 @@
       "release_date": "2026-08-08",
       "image_url": "https://assets.1kuji.com/uploads/product/image/10724/878044ba-d467-496f-840d-dee7166c7ed7.webp",
       "source_url": "https://1kuji.com/products/shinchan13"
-    },
-    {
-      "id": "cho-kaguyahime",
-      "product_id": 10764,
-      "name_ja": "一番くじちょこっと 超かぐや姫！",
-      "release_date": "2026-08-06",
-      "image_url": "https://assets.1kuji.com/uploads/product/image/10764/9e2ff56b-e8d1-4fe8-8b9e-8bae70bd7bbb.webp",
-      "source_url": "https://1kuji.com/products/cho-kaguyahime"
     }
   ]
 }
