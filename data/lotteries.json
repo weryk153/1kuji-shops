@@ -1,5 +1,5 @@
 {
-  "scraped_at": "2026-09-05T21:04:32.141Z",
+  "scraped_at": "2026-09-06T21:10:58.923Z",
   "lotteries": [
     {
       "id": "myhero47",
@@ -136,38 +136,6 @@
       "release_date": "2026-08-14",
       "image_url": "https://assets.1kuji.com/uploads/product/image/10713/e5f904dc-0224-4b99-9332-c92225f5826a.webp",
       "source_url": "https://1kuji.com/products/touhou"
-    },
-    {
-      "id": "onep104",
-      "product_id": 10710,
-      "name_ja": "一番くじ ワンピース -エルバフ編- GIANT BASH!! Vol.2",
-      "release_date": "2026-08-08",
-      "image_url": "https://assets.1kuji.com/uploads/product/image/10710/a114da77-054e-468a-b19e-c743e6dee1cb.webp",
-      "source_url": "https://1kuji.com/products/onep104"
-    },
-    {
-      "id": "nikke8",
-      "product_id": 10721,
-      "name_ja": "一番くじ 勝利の女神：NIKKE CHAPTER8",
-      "release_date": "2026-08-08",
-      "image_url": "https://assets.1kuji.com/uploads/product/image/10721/a9ee0d7e-2181-4e64-8ab7-ed6c7407cce0.webp",
-      "source_url": "https://1kuji.com/products/nikke8"
-    },
-    {
-      "id": "narumiya2",
-      "product_id": 10708,
-      "name_ja": "一番くじ ナルミヤキャラクターズ ～あの頃のときめきメモリーズ～",
-      "release_date": "2026-08-08",
-      "image_url": "https://assets.1kuji.com/uploads/product/image/10708/adc2aa96-ed1c-40e7-9b4f-44a45ee94794.webp",
-      "source_url": "https://1kuji.com/products/narumiya2"
-    },
-    {
-      "id": "shinchan13",
-      "product_id": 10724,
-      "name_ja": "一番くじ クレヨンしんちゃん 夏のバケーションだゾ",
-      "release_date": "2026-08-08",
-      "image_url": "https://assets.1kuji.com/uploads/product/image/10724/878044ba-d467-496f-840d-dee7166c7ed7.webp",
-      "source_url": "https://1kuji.com/products/shinchan13"
     }
   ]
 }
