@@ -1,13 +1,45 @@
 {
-  "scraped_at": "2026-09-08T21:45:05.770Z",
+  "scraped_at": "2026-09-09T21:36:45.842Z",
   "lotteries": [
     {
-      "id": "myhero47",
-      "product_id": 10705,
-      "name_ja": "一番くじ 僕のヒーローアカデミア -最高のヒーローになるまでの物語-",
-      "release_date": "2026-09-12",
-      "image_url": "https://assets.1kuji.com/uploads/product/image/10705/4f8be226-1d5b-4759-9b3a-6752a72b8c35.webp",
-      "source_url": "https://1kuji.com/products/myhero47"
+      "id": "gkmas06",
+      "product_id": 10733,
+      "name_ja": "一番くじ 学園アイドルマスター Part6",
+      "release_date": "2026-09-19",
+      "image_url": "https://assets.1kuji.com/uploads/product/image/10733/ddcf5b11-1920-4fbb-8cfe-81b19959c8b2.webp",
+      "source_url": "https://1kuji.com/products/gkmas06"
+    },
+    {
+      "id": "bleach8",
+      "product_id": 10747,
+      "name_ja": "一番くじ BLEACH Stirring Souls vol.5",
+      "release_date": "2026-09-19",
+      "image_url": "https://assets.1kuji.com/uploads/product/image/10747/4db9753d-2710-49a2-8a86-93171b48f607.webp",
+      "source_url": "https://1kuji.com/products/bleach8"
+    },
+    {
+      "id": "ive2",
+      "product_id": 10704,
+      "name_ja": "一番くじ IVE FROM STARSHIP ENTERTAINMENT WITH AMUSE Vol.2",
+      "release_date": "2026-09-19",
+      "image_url": "https://assets.1kuji.com/uploads/product/image/10704/ff94b837-94a6-42ff-94aa-a3d2a5bf3c0d.webp",
+      "source_url": "https://1kuji.com/products/ive2"
+    },
+    {
+      "id": "chainsawman3",
+      "product_id": 10738,
+      "name_ja": "一番くじ 劇場版『チェンソーマン レゼ篇』第2弾",
+      "release_date": "2026-09-18",
+      "image_url": "https://assets.1kuji.com/uploads/product/image/10738/445320c7-5356-48b5-b844-dec910118b8f.webp",
+      "source_url": "https://1kuji.com/products/chainsawman3"
+    },
+    {
+      "id": "san-x",
+      "product_id": 10765,
+      "name_ja": "一番くじちょこっと サンエックスユニバース",
+      "release_date": "2026-09-16",
+      "image_url": "https://assets.1kuji.com/uploads/product/image/10765/53efffc3-7cd5-41e2-a6c8-6e54f14109bb.webp",
+      "source_url": "https://1kuji.com/products/san-x"
     },
     {
       "id": "houkaistarrail3",
@@ -16,6 +48,14 @@
       "release_date": "2026-09-12",
       "image_url": "https://assets.1kuji.com/uploads/product/image/10718/74bc8dc1-54b5-4c27-9d1b-4c6c24ab506e.webp",
       "source_url": "https://1kuji.com/products/houkaistarrail3"
+    },
+    {
+      "id": "myhero47",
+      "product_id": 10705,
+      "name_ja": "一番くじ 僕のヒーローアカデミア -最高のヒーローになるまでの物語-",
+      "release_date": "2026-09-12",
+      "image_url": "https://assets.1kuji.com/uploads/product/image/10705/4f8be226-1d5b-4759-9b3a-6752a72b8c35.webp",
+      "source_url": "https://1kuji.com/products/myhero47"
     },
     {
       "id": "hololive-rpg",
