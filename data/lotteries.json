@@ -1,14 +1,6 @@
 {
-  "scraped_at": "2026-09-09T21:36:45.842Z",
+  "scraped_at": "2026-09-10T21:31:35.139Z",
   "lotteries": [
-    {
-      "id": "gkmas06",
-      "product_id": 10733,
-      "name_ja": "一番くじ 学園アイドルマスター Part6",
-      "release_date": "2026-09-19",
-      "image_url": "https://assets.1kuji.com/uploads/product/image/10733/ddcf5b11-1920-4fbb-8cfe-81b19959c8b2.webp",
-      "source_url": "https://1kuji.com/products/gkmas06"
-    },
     {
       "id": "bleach8",
       "product_id": 10747,
@@ -16,6 +8,14 @@
       "release_date": "2026-09-19",
       "image_url": "https://assets.1kuji.com/uploads/product/image/10747/4db9753d-2710-49a2-8a86-93171b48f607.webp",
       "source_url": "https://1kuji.com/products/bleach8"
+    },
+    {
+      "id": "gkmas06",
+      "product_id": 10733,
+      "name_ja": "一番くじ 学園アイドルマスター Part6",
+      "release_date": "2026-09-19",
+      "image_url": "https://assets.1kuji.com/uploads/product/image/10733/ddcf5b11-1920-4fbb-8cfe-81b19959c8b2.webp",
+      "source_url": "https://1kuji.com/products/gkmas06"
     },
     {
       "id": "ive2",
