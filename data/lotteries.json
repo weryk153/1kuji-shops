@@ -1,5 +1,5 @@
 {
-  "scraped_at": "2026-09-11T21:39:40.174Z",
+  "scraped_at": "2026-09-12T21:21:12.595Z",
   "lotteries": [
     {
       "id": "bleach8",
@@ -160,22 +160,6 @@
       "release_date": "2026-08-15",
       "image_url": "https://assets.1kuji.com/uploads/product/image/10672/1349f9a6-caee-4c03-b900-492624e3a64b.webp",
       "source_url": "https://1kuji.com/products/disney_kh5"
-    },
-    {
-      "id": "natsume48",
-      "product_id": 10716,
-      "name_ja": "一番くじ 夏目友人帳 雨の日も、晴れの日も。",
-      "release_date": "2026-08-14",
-      "image_url": "https://assets.1kuji.com/uploads/product/image/10716/aebb8183-7da6-4210-b3e8-082c3a54f603.png",
-      "source_url": "https://1kuji.com/products/natsume48"
-    },
-    {
-      "id": "touhou",
-      "product_id": 10713,
-      "name_ja": "一番くじ 東方Project",
-      "release_date": "2026-08-14",
-      "image_url": "https://assets.1kuji.com/uploads/product/image/10713/e5f904dc-0224-4b99-9332-c92225f5826a.webp",
-      "source_url": "https://1kuji.com/products/touhou"
     }
   ]
 }
