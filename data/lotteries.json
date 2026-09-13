@@ -1,5 +1,5 @@
 {
-  "scraped_at": "2026-09-12T21:21:12.595Z",
+  "scraped_at": "2026-09-13T21:22:12.754Z",
   "lotteries": [
     {
       "id": "bleach8",
@@ -144,22 +144,6 @@
       "release_date": "2026-08-20",
       "image_url": "https://assets.1kuji.com/uploads/product/image/10711/07af9465-c96d-4734-92ee-4e68e31eb0c8.webp",
       "source_url": "https://1kuji.com/products/re-zero17"
-    },
-    {
-      "id": "haikyu32",
-      "product_id": 10719,
-      "name_ja": "一番くじ ハイキュー!! -烏野の未来-",
-      "release_date": "2026-08-15",
-      "image_url": "https://assets.1kuji.com/uploads/product/image/10719/ea7c5063-f695-4fa5-8828-78e2589bcfc8.webp",
-      "source_url": "https://1kuji.com/products/haikyu32"
-    },
-    {
-      "id": "disney_kh5",
-      "product_id": 10672,
-      "name_ja": "一番くじ KINGDOM HEARTS -25th Anniversary-",
-      "release_date": "2026-08-15",
-      "image_url": "https://assets.1kuji.com/uploads/product/image/10672/1349f9a6-caee-4c03-b900-492624e3a64b.webp",
-      "source_url": "https://1kuji.com/products/disney_kh5"
     }
   ]
 }
