@@ -1,6 +1,54 @@
 {
-  "scraped_at": "2026-09-15T22:03:20.916Z",
+  "scraped_at": "2026-09-16T22:01:15.754Z",
   "lotteries": [
+    {
+      "id": "theghostintheshell",
+      "product_id": 10736,
+      "name_ja": "一番くじ 攻殻機動隊 THE GHOST IN THE SHELL",
+      "release_date": "2026-09-26",
+      "image_url": "https://assets.1kuji.com/uploads/product/image/10736/0ef32989-afc6-4bee-b114-4bbf266aba3d.webp",
+      "source_url": "https://1kuji.com/products/theghostintheshell"
+    },
+    {
+      "id": "precure5",
+      "product_id": 10729,
+      "name_ja": "一番くじ プリキュア ～Endless Grace～",
+      "release_date": "2026-09-26",
+      "image_url": "https://assets.1kuji.com/uploads/product/image/10729/245b46af-4aea-4e8f-9991-f1b178aee970.webp",
+      "source_url": "https://1kuji.com/products/precure5"
+    },
+    {
+      "id": "jujutsu19",
+      "product_id": 10730,
+      "name_ja": "一番くじ アニメ『呪術廻戦』5周年FINAL！",
+      "release_date": "2026-09-26",
+      "image_url": "https://assets.1kuji.com/uploads/product/image/10730/8f385e66-16e2-4aac-8691-1c9ef827deef.webp",
+      "source_url": "https://1kuji.com/products/jujutsu19"
+    },
+    {
+      "id": "berserk4",
+      "product_id": 10739,
+      "name_ja": "一番くじ ベルセルク 宿命の双極",
+      "release_date": "2026-09-25",
+      "image_url": "https://assets.1kuji.com/uploads/product/image/10739/907bc0ac-f66a-4976-8a66-68dbd052f426.webp",
+      "source_url": "https://1kuji.com/products/berserk4"
+    },
+    {
+      "id": "yuhaku4",
+      "product_id": 10728,
+      "name_ja": "一番くじ 幽☆遊☆白書 魔界の扉編",
+      "release_date": "2026-09-25",
+      "image_url": "https://assets.1kuji.com/uploads/product/image/10728/920a0449-013a-42b9-9482-cfcf574fb1c8.webp",
+      "source_url": "https://1kuji.com/products/yuhaku4"
+    },
+    {
+      "id": "kimishinu",
+      "product_id": 10741,
+      "name_ja": "一番くじ きみが死ぬまで恋をしたい",
+      "release_date": "2026-09-24",
+      "image_url": "https://assets.1kuji.com/uploads/product/image/10741/db7bfca7-7dde-4286-a1c3-95094d99cf59.webp",
+      "source_url": "https://1kuji.com/products/kimishinu"
+    },
     {
       "id": "bleach8",
       "product_id": 10747,
