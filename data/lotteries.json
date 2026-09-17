@@ -1,14 +1,6 @@
 {
-  "scraped_at": "2026-09-16T22:01:15.754Z",
+  "scraped_at": "2026-09-17T22:01:38.386Z",
   "lotteries": [
-    {
-      "id": "theghostintheshell",
-      "product_id": 10736,
-      "name_ja": "一番くじ 攻殻機動隊 THE GHOST IN THE SHELL",
-      "release_date": "2026-09-26",
-      "image_url": "https://assets.1kuji.com/uploads/product/image/10736/0ef32989-afc6-4bee-b114-4bbf266aba3d.webp",
-      "source_url": "https://1kuji.com/products/theghostintheshell"
-    },
     {
       "id": "precure5",
       "product_id": 10729,
@@ -24,6 +16,14 @@
       "release_date": "2026-09-26",
       "image_url": "https://assets.1kuji.com/uploads/product/image/10730/8f385e66-16e2-4aac-8691-1c9ef827deef.webp",
       "source_url": "https://1kuji.com/products/jujutsu19"
+    },
+    {
+      "id": "theghostintheshell",
+      "product_id": 10736,
+      "name_ja": "一番くじ 攻殻機動隊 THE GHOST IN THE SHELL",
+      "release_date": "2026-09-26",
+      "image_url": "https://assets.1kuji.com/uploads/product/image/10736/0ef32989-afc6-4bee-b114-4bbf266aba3d.webp",
+      "source_url": "https://1kuji.com/products/theghostintheshell"
     },
     {
       "id": "berserk4",
