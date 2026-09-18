@@ -1,5 +1,5 @@
 {
-  "scraped_at": "2026-09-17T22:01:38.386Z",
+  "scraped_at": "2026-09-18T21:34:21.921Z",
   "lotteries": [
     {
       "id": "precure5",
@@ -184,14 +184,6 @@
       "release_date": "2026-08-21",
       "image_url": "https://assets.1kuji.com/uploads/product/image/10717/924b7c67-ee15-4a36-a724-af42b9e26273.webp",
       "source_url": "https://1kuji.com/products/gintama22"
-    },
-    {
-      "id": "re-zero17",
-      "product_id": 10711,
-      "name_ja": "一番くじちょこっと Re:ゼロから始める異世界生活",
-      "release_date": "2026-08-20",
-      "image_url": "https://assets.1kuji.com/uploads/product/image/10711/07af9465-c96d-4734-92ee-4e68e31eb0c8.webp",
-      "source_url": "https://1kuji.com/products/re-zero17"
     }
   ]
 }
