@@ -1,5 +1,5 @@
 {
-  "scraped_at": "2026-09-19T21:23:11.808Z",
+  "scraped_at": "2026-09-20T21:23:40.390Z",
   "lotteries": [
     {
       "id": "precure5",
@@ -160,22 +160,6 @@
       "release_date": "2026-08-28",
       "image_url": "https://assets.1kuji.com/uploads/product/image/10754/4cb2d670-287d-4806-b3ea-891dafd493bf.webp",
       "source_url": "https://1kuji.com/products/ppg3"
-    },
-    {
-      "id": "splatoon-3_03",
-      "product_id": 10737,
-      "name_ja": "一番くじ スプラトゥーン３ 第三弾",
-      "release_date": "2026-08-22",
-      "image_url": "https://assets.1kuji.com/uploads/product/image/10737/7b7aecb5-de2f-4bda-9da5-151a2f7ec5ff.webp",
-      "source_url": "https://1kuji.com/products/splatoon-3_03"
-    },
-    {
-      "id": "db_gt",
-      "product_id": 10725,
-      "name_ja": "一番くじ ドラゴンボールGT",
-      "release_date": "2026-08-22",
-      "image_url": "https://assets.1kuji.com/uploads/product/image/10725/2461f8c7-c647-4111-b22e-5ad165614809.png",
-      "source_url": "https://1kuji.com/products/db_gt"
     }
   ]
 }
