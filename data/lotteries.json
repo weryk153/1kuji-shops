@@ -1,6 +1,38 @@
 {
-  "scraped_at": "2026-09-22T21:57:04.566Z",
+  "scraped_at": "2026-09-23T22:10:23.216Z",
   "lotteries": [
+    {
+      "id": "fairytail",
+      "product_id": 10763,
+      "name_ja": "一番くじ FAIRY TAIL 20th ANNIVERSARY",
+      "release_date": "2026-10-03",
+      "image_url": "https://assets.1kuji.com/uploads/product/image/10763/03867a5d-5ba4-4aa0-939d-bf62c51c2028.webp",
+      "source_url": "https://1kuji.com/products/fairytail"
+    },
+    {
+      "id": "slime23",
+      "product_id": 10812,
+      "name_ja": "一番くじちょこっと 転生したらスライムだった件",
+      "release_date": "2026-10-02",
+      "image_url": "https://assets.1kuji.com/uploads/product/image/10812/be751f76-c1d5-4ae1-a513-95b4e65560ea.webp",
+      "source_url": "https://1kuji.com/products/slime23"
+    },
+    {
+      "id": "disney_toy8",
+      "product_id": 10746,
+      "name_ja": "一番くじ 〈トイ・ストーリー〉～Playtime pals forever（遊び仲間は永遠に）～",
+      "release_date": "2026-09-30",
+      "image_url": "https://assets.1kuji.com/uploads/product/image/10746/2126a099-73a6-45b4-ae65-2952e4460ba6.webp",
+      "source_url": "https://1kuji.com/products/disney_toy8"
+    },
+    {
+      "id": "josemaru",
+      "product_id": 10774,
+      "name_ja": "一番くじちょこっと じょせまる ～ふりふり ぷりてぃ ぉいぬ～",
+      "release_date": "2026-09-29",
+      "image_url": "https://assets.1kuji.com/uploads/product/image/10774/5cd634d1-33aa-4637-a619-c3d32edd805d.webp",
+      "source_url": "https://1kuji.com/products/josemaru"
+    },
     {
       "id": "precure5",
       "product_id": 10729,
