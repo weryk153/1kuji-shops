@@ -1,14 +1,6 @@
 {
-  "scraped_at": "2026-09-24T22:11:13.088Z",
+  "scraped_at": "2026-09-25T22:10:25.249Z",
   "lotteries": [
-    {
-      "id": "fairytail",
-      "product_id": 10763,
-      "name_ja": "一番くじ FAIRY TAIL 20th ANNIVERSARY",
-      "release_date": "2026-10-03",
-      "image_url": "https://assets.1kuji.com/uploads/product/image/10763/03867a5d-5ba4-4aa0-939d-bf62c51c2028.webp",
-      "source_url": "https://1kuji.com/products/fairytail"
-    },
     {
       "id": "gundam_ucs2",
       "product_id": 10691,
@@ -16,6 +8,14 @@
       "release_date": "2026-10-03",
       "image_url": "https://assets.1kuji.com/uploads/product/image/10691/d74ba5c2-6215-4e8c-a885-a458cd589a86.webp",
       "source_url": "https://1kuji.com/products/gundam_ucs2"
+    },
+    {
+      "id": "fairytail",
+      "product_id": 10763,
+      "name_ja": "一番くじ FAIRY TAIL 20th ANNIVERSARY",
+      "release_date": "2026-10-03",
+      "image_url": "https://assets.1kuji.com/uploads/product/image/10763/03867a5d-5ba4-4aa0-939d-bf62c51c2028.webp",
+      "source_url": "https://1kuji.com/products/fairytail"
     },
     {
       "id": "slime23",
