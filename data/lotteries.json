@@ -1,6 +1,46 @@
 {
-  "scraped_at": "2026-10-06T22:57:41.759Z",
+  "scraped_at": "2026-10-07T23:32:11.166Z",
   "lotteries": [
+    {
+      "id": "umamusume17",
+      "product_id": 10726,
+      "name_ja": "一番くじ ウマ娘 プリティーダービー 14弾",
+      "release_date": "2026-10-17",
+      "image_url": "https://assets.1kuji.com/uploads/product/image/10726/b28b39ba-58af-4ce3-b85f-b9aa3bb8a5c6.webp",
+      "source_url": "https://1kuji.com/products/umamusume17"
+    },
+    {
+      "id": "db_z8",
+      "product_id": 10727,
+      "name_ja": "一番くじ ドラゴンボール SPIRIT OF THE SAIYAN",
+      "release_date": "2026-10-17",
+      "image_url": "https://assets.1kuji.com/uploads/product/image/10727/89fd817d-9d86-4135-9eb8-7274bc397f7b.webp",
+      "source_url": "https://1kuji.com/products/db_z8"
+    },
+    {
+      "id": "kinniku3",
+      "product_id": 10767,
+      "name_ja": "一番くじ キン肉マン 超人血盟軍",
+      "release_date": "2026-10-17",
+      "image_url": "https://assets.1kuji.com/uploads/product/image/10767/0ab37338-869d-4b2b-8d4f-fd19c47e2ac9.webp",
+      "source_url": "https://1kuji.com/products/kinniku3"
+    },
+    {
+      "id": "glay",
+      "product_id": 10762,
+      "name_ja": "一番くじ GLAY",
+      "release_date": "2026-10-17",
+      "image_url": "https://assets.1kuji.com/uploads/product/image/10762/a11010e7-9852-49f8-a620-1d3d43a77df1.webp",
+      "source_url": "https://1kuji.com/products/glay"
+    },
+    {
+      "id": "disney_monsters-inc",
+      "product_id": 10752,
+      "name_ja": "一番くじ 〈モンスターズ・インク〉",
+      "release_date": "2026-10-17",
+      "image_url": "https://assets.1kuji.com/uploads/product/image/10752/008390d4-a3d5-44b1-b9fc-63ddac0b6539.webp",
+      "source_url": "https://1kuji.com/products/disney_monsters-inc"
+    },
     {
       "id": "disney_pooh7",
       "product_id": 10751,
