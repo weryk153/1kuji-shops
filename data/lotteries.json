@@ -1,13 +1,13 @@
 {
-  "scraped_at": "2026-10-14T22:11:04.921Z",
+  "scraped_at": "2026-10-15T22:05:39.745Z",
   "lotteries": [
     {
-      "id": "kagurabachi",
-      "product_id": 10742,
-      "name_ja": "一番くじ カグラバチ",
-      "release_date": "2026-10-24",
-      "image_url": "https://assets.1kuji.com/uploads/product/image/10742/ed6a3877-922e-45e3-bd9e-c0cf98cdeace.webp",
-      "source_url": "https://1kuji.com/products/kagurabachi"
+      "id": "naruto11",
+      "product_id": 10777,
+      "name_ja": "一番くじ NARUTO-ナルト- 疾風伝 飛段・角都編",
+      "release_date": "2026-10-26",
+      "image_url": "https://assets.1kuji.com/uploads/product/image/10777/5cf6c265-a7f3-4d85-a244-cf2b05125190.webp",
+      "source_url": "https://1kuji.com/products/naruto11"
     },
     {
       "id": "shingeki16",
@@ -16,6 +16,14 @@
       "release_date": "2026-10-24",
       "image_url": "https://assets.1kuji.com/uploads/product/image/10760/e68415d9-c45f-4186-ad5d-f4ee6d1ea8b5.webp",
       "source_url": "https://1kuji.com/products/shingeki16"
+    },
+    {
+      "id": "kagurabachi",
+      "product_id": 10742,
+      "name_ja": "一番くじ カグラバチ",
+      "release_date": "2026-10-24",
+      "image_url": "https://assets.1kuji.com/uploads/product/image/10742/ed6a3877-922e-45e3-bd9e-c0cf98cdeace.webp",
+      "source_url": "https://1kuji.com/products/kagurabachi"
     },
     {
       "id": "ouran",
@@ -208,14 +216,6 @@
       "release_date": "2026-09-18",
       "image_url": "https://assets.1kuji.com/uploads/product/image/10738/445320c7-5356-48b5-b844-dec910118b8f.webp",
       "source_url": "https://1kuji.com/products/chainsawman3"
-    },
-    {
-      "id": "san-x",
-      "product_id": 10765,
-      "name_ja": "一番くじちょこっと サンエックスユニバース",
-      "release_date": "2026-09-16",
-      "image_url": "https://assets.1kuji.com/uploads/product/image/10765/53efffc3-7cd5-41e2-a6c8-6e54f14109bb.webp",
-      "source_url": "https://1kuji.com/products/san-x"
     }
   ]
 }
