@@ -1,5 +1,5 @@
 {
-  "scraped_at": "2026-10-16T21:58:47.992Z",
+  "scraped_at": "2026-10-17T21:22:02.354Z",
   "lotteries": [
     {
       "id": "naruto11",
@@ -208,14 +208,6 @@
       "release_date": "2026-09-19",
       "image_url": "https://assets.1kuji.com/uploads/product/image/10704/ff94b837-94a6-42ff-94aa-a3d2a5bf3c0d.webp",
       "source_url": "https://1kuji.com/products/ive2"
-    },
-    {
-      "id": "chainsawman3",
-      "product_id": 10738,
-      "name_ja": "一番くじ 劇場版『チェンソーマン レゼ篇』第2弾",
-      "release_date": "2026-09-18",
-      "image_url": "https://assets.1kuji.com/uploads/product/image/10738/445320c7-5356-48b5-b844-dec910118b8f.webp",
-      "source_url": "https://1kuji.com/products/chainsawman3"
     }
   ]
 }
