@@ -1,5 +1,5 @@
 {
-  "scraped_at": "2026-10-17T21:22:02.354Z",
+  "scraped_at": "2026-10-18T21:21:45.704Z",
   "lotteries": [
     {
       "id": "naruto11",
@@ -184,30 +184,6 @@
       "release_date": "2026-09-24",
       "image_url": "https://assets.1kuji.com/uploads/product/image/10741/db7bfca7-7dde-4286-a1c3-95094d99cf59.webp",
       "source_url": "https://1kuji.com/products/kimishinu"
-    },
-    {
-      "id": "bleach8",
-      "product_id": 10747,
-      "name_ja": "一番くじ BLEACH Stirring Souls vol.5",
-      "release_date": "2026-09-19",
-      "image_url": "https://assets.1kuji.com/uploads/product/image/10747/4db9753d-2710-49a2-8a86-93171b48f607.webp",
-      "source_url": "https://1kuji.com/products/bleach8"
-    },
-    {
-      "id": "gkmas06",
-      "product_id": 10733,
-      "name_ja": "一番くじ 学園アイドルマスター Part6",
-      "release_date": "2026-09-19",
-      "image_url": "https://assets.1kuji.com/uploads/product/image/10733/ddcf5b11-1920-4fbb-8cfe-81b19959c8b2.webp",
-      "source_url": "https://1kuji.com/products/gkmas06"
-    },
-    {
-      "id": "ive2",
-      "product_id": 10704,
-      "name_ja": "一番くじ IVE FROM STARSHIP ENTERTAINMENT WITH AMUSE Vol.2",
-      "release_date": "2026-09-19",
-      "image_url": "https://assets.1kuji.com/uploads/product/image/10704/ff94b837-94a6-42ff-94aa-a3d2a5bf3c0d.webp",
-      "source_url": "https://1kuji.com/products/ive2"
     }
   ]
 }
