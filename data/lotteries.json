@@ -1,22 +1,6 @@
 {
-  "scraped_at": "2026-10-21T22:13:55.390Z",
+  "scraped_at": "2026-10-22T22:13:50.386Z",
   "lotteries": [
-    {
-      "id": "obungu6",
-      "product_id": 10740,
-      "name_ja": "一番くじ お文具といっしょ ～ちっちゃくなっちゃった!?～",
-      "release_date": "2026-10-31",
-      "image_url": "https://assets.1kuji.com/uploads/product/image/10740/9f448420-dcb3-4e7b-ab9d-e532449b13fc.webp",
-      "source_url": "https://1kuji.com/products/obungu6"
-    },
-    {
-      "id": "miabyss",
-      "product_id": 10748,
-      "name_ja": "一番くじ メイドインアビス",
-      "release_date": "2026-10-31",
-      "image_url": "https://assets.1kuji.com/uploads/product/image/10748/72eba2b3-3b2c-44e9-9d8b-248f3ade4b62.webp",
-      "source_url": "https://1kuji.com/products/miabyss"
-    },
     {
       "id": "disney_coco",
       "product_id": 10757,
@@ -32,6 +16,22 @@
       "release_date": "2026-10-31",
       "image_url": "https://assets.1kuji.com/uploads/product/image/10756/b48b40ce-bda4-4781-9116-c62807f03014.webp",
       "source_url": "https://1kuji.com/products/fate29"
+    },
+    {
+      "id": "obungu6",
+      "product_id": 10740,
+      "name_ja": "一番くじ お文具といっしょ ～ちっちゃくなっちゃった!?～",
+      "release_date": "2026-10-31",
+      "image_url": "https://assets.1kuji.com/uploads/product/image/10740/9f448420-dcb3-4e7b-ab9d-e532449b13fc.webp",
+      "source_url": "https://1kuji.com/products/obungu6"
+    },
+    {
+      "id": "miabyss",
+      "product_id": 10748,
+      "name_ja": "一番くじ メイドインアビス",
+      "release_date": "2026-10-31",
+      "image_url": "https://assets.1kuji.com/uploads/product/image/10748/72eba2b3-3b2c-44e9-9d8b-248f3ade4b62.webp",
+      "source_url": "https://1kuji.com/products/miabyss"
     },
     {
       "id": "onep_o12",
