@@ -1,5 +1,5 @@
 {
-  "scraped_at": "2026-10-22T22:13:50.386Z",
+  "scraped_at": "2026-10-23T21:57:53.942Z",
   "lotteries": [
     {
       "id": "disney_coco",
@@ -224,14 +224,6 @@
       "release_date": "2026-09-25",
       "image_url": "https://assets.1kuji.com/uploads/product/image/10728/920a0449-013a-42b9-9482-cfcf574fb1c8.webp",
       "source_url": "https://1kuji.com/products/yuhaku4"
-    },
-    {
-      "id": "kimishinu",
-      "product_id": 10741,
-      "name_ja": "一番くじ きみが死ぬまで恋をしたい",
-      "release_date": "2026-09-24",
-      "image_url": "https://assets.1kuji.com/uploads/product/image/10741/db7bfca7-7dde-4286-a1c3-95094d99cf59.webp",
-      "source_url": "https://1kuji.com/products/kimishinu"
     }
   ]
 }
