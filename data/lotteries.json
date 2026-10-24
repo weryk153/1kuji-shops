@@ -1,5 +1,5 @@
 {
-  "scraped_at": "2026-10-23T21:57:53.942Z",
+  "scraped_at": "2026-10-24T21:28:24.885Z",
   "lotteries": [
     {
       "id": "disney_coco",
@@ -208,22 +208,6 @@
       "release_date": "2026-09-26",
       "image_url": "https://assets.1kuji.com/uploads/product/image/10736/0ef32989-afc6-4bee-b114-4bbf266aba3d.webp",
       "source_url": "https://1kuji.com/products/theghostintheshell"
-    },
-    {
-      "id": "berserk4",
-      "product_id": 10739,
-      "name_ja": "一番くじ ベルセルク 宿命の双極",
-      "release_date": "2026-09-25",
-      "image_url": "https://assets.1kuji.com/uploads/product/image/10739/907bc0ac-f66a-4976-8a66-68dbd052f426.webp",
-      "source_url": "https://1kuji.com/products/berserk4"
-    },
-    {
-      "id": "yuhaku4",
-      "product_id": 10728,
-      "name_ja": "一番くじ 幽☆遊☆白書 魔界の扉編",
-      "release_date": "2026-09-25",
-      "image_url": "https://assets.1kuji.com/uploads/product/image/10728/920a0449-013a-42b9-9482-cfcf574fb1c8.webp",
-      "source_url": "https://1kuji.com/products/yuhaku4"
     }
   ]
 }
