@@ -1,6 +1,38 @@
 {
-  "scraped_at": "2026-10-27T22:54:23.550Z",
+  "scraped_at": "2026-10-28T23:04:33.883Z",
   "lotteries": [
+    {
+      "id": "streetfighter3",
+      "product_id": 10786,
+      "name_ja": "一番くじ ストリートファイター ～俺より強い奴に会いに行く～",
+      "release_date": "2026-11-11",
+      "image_url": "https://assets.1kuji.com/uploads/product/image/10786/94caffbd-39e0-4db9-b849-1139a8b3f546.webp",
+      "source_url": "https://1kuji.com/products/streetfighter3"
+    },
+    {
+      "id": "estherbunny",
+      "product_id": 10773,
+      "name_ja": "一番くじ エスターバニー -ROMANCE ANGEL-",
+      "release_date": "2026-11-07",
+      "image_url": "https://assets.1kuji.com/uploads/product/image/10773/786ef258-3e73-4a28-a56c-e3b8b1695965.webp",
+      "source_url": "https://1kuji.com/products/estherbunny"
+    },
+    {
+      "id": "sakura15",
+      "product_id": 10787,
+      "name_ja": "一番くじ アニメ カードキャプターさくら クリアカード編～Blessed collection～",
+      "release_date": "2026-11-06",
+      "image_url": "https://assets.1kuji.com/uploads/product/image/10787/5ab904db-5e03-4a6e-8f2b-6864c504c04c.webp",
+      "source_url": "https://1kuji.com/products/sakura15"
+    },
+    {
+      "id": "gundam_ucsi",
+      "product_id": 10766,
+      "name_ja": "一番くじ 機動戦士ガンダム UNIVERSAL CENTURY SAGA INTERLUDE",
+      "release_date": "2026-11-05",
+      "image_url": "https://assets.1kuji.com/uploads/product/image/10766/b6e2cff6-cda4-452e-9c24-5f0beb2dd233.webp",
+      "source_url": "https://1kuji.com/products/gundam_ucsi"
+    },
     {
       "id": "disney_coco",
       "product_id": 10757,
@@ -176,14 +208,6 @@
       "release_date": "2026-09-30",
       "image_url": "https://assets.1kuji.com/uploads/product/image/10746/2126a099-73a6-45b4-ae65-2952e4460ba6.webp",
       "source_url": "https://1kuji.com/products/disney_toy8"
-    },
-    {
-      "id": "josemaru",
-      "product_id": 10774,
-      "name_ja": "一番くじちょこっと じょせまる ～ふりふり ぷりてぃ ぉいぬ～",
-      "release_date": "2026-09-29",
-      "image_url": "https://assets.1kuji.com/uploads/product/image/10774/5cd634d1-33aa-4637-a619-c3d32edd805d.webp",
-      "source_url": "https://1kuji.com/products/josemaru"
     }
   ]
 }
