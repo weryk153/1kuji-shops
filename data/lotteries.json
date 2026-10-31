@@ -1,5 +1,5 @@
 {
-  "scraped_at": "2026-10-30T22:54:35.242Z",
+  "scraped_at": "2026-10-31T22:23:35.564Z",
   "lotteries": [
     {
       "id": "streetfighter3",
@@ -192,14 +192,6 @@
       "release_date": "2026-10-03",
       "image_url": "https://assets.1kuji.com/uploads/product/image/10763/03867a5d-5ba4-4aa0-939d-bf62c51c2028.webp",
       "source_url": "https://1kuji.com/products/fairytail"
-    },
-    {
-      "id": "slime23",
-      "product_id": 10812,
-      "name_ja": "一番くじちょこっと 転生したらスライムだった件",
-      "release_date": "2026-10-02",
-      "image_url": "https://assets.1kuji.com/uploads/product/image/10812/be751f76-c1d5-4ae1-a513-95b4e65560ea.webp",
-      "source_url": "https://1kuji.com/products/slime23"
     }
   ]
 }
