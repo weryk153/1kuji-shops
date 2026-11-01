@@ -1,5 +1,5 @@
 {
-  "scraped_at": "2026-10-31T22:23:35.564Z",
+  "scraped_at": "2026-11-01T22:41:02.943Z",
   "lotteries": [
     {
       "id": "streetfighter3",
@@ -176,22 +176,6 @@
       "release_date": "2026-10-10",
       "image_url": "https://assets.1kuji.com/uploads/product/image/10751/57da6398-11f5-4665-b4bd-f97d75dc0721.webp",
       "source_url": "https://1kuji.com/products/disney_pooh7"
-    },
-    {
-      "id": "gundam_ucs2",
-      "product_id": 10691,
-      "name_ja": "一番くじ 機動戦士ガンダム UNIVERSAL CENTURY SAGA2",
-      "release_date": "2026-10-03",
-      "image_url": "https://assets.1kuji.com/uploads/product/image/10691/d74ba5c2-6215-4e8c-a885-a458cd589a86.webp",
-      "source_url": "https://1kuji.com/products/gundam_ucs2"
-    },
-    {
-      "id": "fairytail",
-      "product_id": 10763,
-      "name_ja": "一番くじ FAIRY TAIL 20th ANNIVERSARY",
-      "release_date": "2026-10-03",
-      "image_url": "https://assets.1kuji.com/uploads/product/image/10763/03867a5d-5ba4-4aa0-939d-bf62c51c2028.webp",
-      "source_url": "https://1kuji.com/products/fairytail"
     }
   ]
 }
