@@ -1,6 +1,38 @@
 {
-  "scraped_at": "2026-11-03T23:56:05.789Z",
+  "scraped_at": "2026-11-05T00:15:47.906Z",
   "lotteries": [
+    {
+      "id": "hxh8_2",
+      "product_id": 10788,
+      "name_ja": "一番くじ HUNTER×HUNTER CHMERA ANT ②（再販売）",
+      "release_date": "2026-11-14",
+      "image_url": "https://assets.1kuji.com/uploads/product/image/10788/c42d07ae-586a-4f3c-bd4a-7aa8e50dd2e1.webp",
+      "source_url": "https://1kuji.com/products/hxh8_2"
+    },
+    {
+      "id": "onep105",
+      "product_id": 10785,
+      "name_ja": "一番くじ ワンピース～あにまる大集合！～",
+      "release_date": "2026-11-14",
+      "image_url": "https://assets.1kuji.com/uploads/product/image/10785/ef9196d6-7a9b-4f69-99ca-f261745bc8cb.webp",
+      "source_url": "https://1kuji.com/products/onep105"
+    },
+    {
+      "id": "godzilla10",
+      "product_id": 10789,
+      "name_ja": "一番くじ ゴジラ 怪獣乱舞-ゼロの鼓動-",
+      "release_date": "2026-11-13",
+      "image_url": "https://assets.1kuji.com/uploads/product/image/10789/9098916f-265e-4107-9a01-4f50ab0e408d.webp",
+      "source_url": "https://1kuji.com/products/godzilla10"
+    },
+    {
+      "id": "hololive-flowglow",
+      "product_id": 10769,
+      "name_ja": "一番くじ hololive FLOW GLOW",
+      "release_date": "2026-11-13",
+      "image_url": "https://assets.1kuji.com/uploads/product/image/10769/0db60368-e12d-439d-8aa4-85fbae886904.webp",
+      "source_url": "https://1kuji.com/products/hololive-flowglow"
+    },
     {
       "id": "streetfighter3",
       "product_id": 10786,
