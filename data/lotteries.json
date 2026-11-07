@@ -1,5 +1,5 @@
 {
-  "scraped_at": "2026-11-06T00:00:33.072Z",
+  "scraped_at": "2026-11-06T23:41:34.804Z",
   "lotteries": [
     {
       "id": "hxh8_2",
@@ -18,20 +18,20 @@
       "source_url": "https://1kuji.com/products/onep105"
     },
     {
-      "id": "hololive-flowglow",
-      "product_id": 10769,
-      "name_ja": "一番くじ hololive FLOW GLOW",
-      "release_date": "2026-11-13",
-      "image_url": "https://assets.1kuji.com/uploads/product/image/10769/0db60368-e12d-439d-8aa4-85fbae886904.webp",
-      "source_url": "https://1kuji.com/products/hololive-flowglow"
-    },
-    {
       "id": "godzilla10",
       "product_id": 10789,
       "name_ja": "一番くじ ゴジラ 怪獣乱舞-ゼロの鼓動-",
       "release_date": "2026-11-13",
       "image_url": "https://assets.1kuji.com/uploads/product/image/10789/9098916f-265e-4107-9a01-4f50ab0e408d.webp",
       "source_url": "https://1kuji.com/products/godzilla10"
+    },
+    {
+      "id": "hololive-flowglow",
+      "product_id": 10769,
+      "name_ja": "一番くじ hololive FLOW GLOW",
+      "release_date": "2026-11-13",
+      "image_url": "https://assets.1kuji.com/uploads/product/image/10769/0db60368-e12d-439d-8aa4-85fbae886904.webp",
+      "source_url": "https://1kuji.com/products/hololive-flowglow"
     },
     {
       "id": "streetfighter3",
