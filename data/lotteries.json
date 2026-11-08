@@ -1,5 +1,5 @@
 {
-  "scraped_at": "2026-11-07T22:37:45.451Z",
+  "scraped_at": "2026-11-08T22:44:50.064Z",
   "lotteries": [
     {
       "id": "hxh8_2",
@@ -200,14 +200,6 @@
       "release_date": "2026-10-17",
       "image_url": "https://assets.1kuji.com/uploads/product/image/10762/912b6ff4-f63b-4153-96e7-8f87e0187958.webp",
       "source_url": "https://1kuji.com/products/glay"
-    },
-    {
-      "id": "disney_pooh7",
-      "product_id": 10751,
-      "name_ja": "一番くじ 〈くまのプーさん〉100th Anniversary",
-      "release_date": "2026-10-10",
-      "image_url": "https://assets.1kuji.com/uploads/product/image/10751/57da6398-11f5-4665-b4bd-f97d75dc0721.webp",
-      "source_url": "https://1kuji.com/products/disney_pooh7"
     }
   ]
 }
