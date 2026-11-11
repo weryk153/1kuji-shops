@@ -1,6 +1,14 @@
 {
-  "scraped_at": "2026-11-10T01:57:05.807Z",
+  "scraped_at": "2026-11-10T23:58:15.129Z",
   "lotteries": [
+    {
+      "id": "tamagotchi6",
+      "product_id": 10761,
+      "name_ja": "一番くじ Tamagotchi ～夜空で発見！？12星座とたまごっち～",
+      "release_date": "2026-11-21",
+      "image_url": "https://assets.1kuji.com/uploads/product/image/10761/180fd5a6-adec-4227-9990-53e1587a925f.webp",
+      "source_url": "https://1kuji.com/products/tamagotchi6"
+    },
     {
       "id": "hxh8_2",
       "product_id": 10788,
