@@ -763,11 +763,15 @@ main {
 .calc-target { margin: 10px 0 0; font-size: 0.84rem; font-weight: 500; }
 .calc-note { margin: 8px 0 0; font-size: 0.74rem; color: var(--soft); }
 .price-field { max-width: 200px; margin-bottom: 14px; }
-.board-head, .board-row { display: grid; grid-template-columns: 34px 1fr 116px 92px 52px; gap: 8px; align-items: center; }
+.board-head, .board-row { display: grid; grid-template-columns: 72px 1fr 116px 92px 52px; gap: 10px; align-items: center; }
 .board-head { padding: 0 10px 6px; font-size: 0.68rem; font-weight: 700; color: var(--soft); }
 .board-head span:first-child { grid-column: 1 / 3; }
 .board { list-style: none; margin: 0; padding: 0; display: flex; flex-direction: column; gap: 6px; }
 .board-row { padding: 8px 10px; border: 1px solid var(--line); border-radius: 12px; }
+.board-img { width: 72px; border-radius: 10px; background: #fff; border: 1px solid var(--line); }
+.board-img img { object-fit: contain; }
+.board-img .mini-tile { position: absolute; left: 0; top: 0; z-index: 1; width: 24px; height: 24px; border-radius: 0 0 8px 0; font-size: 0.75rem; }
+.board-img .mini-tile.small { width: auto; padding: 0 4px; font-size: 0.55rem; }
 .mini-tile {
   width: 34px; height: 34px;
   border-radius: 8px;
@@ -809,7 +813,8 @@ main {
   .target-btn { grid-area: target; }
   .stepper { grid-area: count; }
   .num.value { grid-area: value; }
-  .board-row { grid-template-columns: 34px 1fr 1fr 52px; grid-template-areas: "tile name name target" "count count value value"; }
+  .board-row { grid-template-columns: 64px 1fr 1fr 52px; grid-template-areas: "tile name name target" "count count value value"; }
+  .board-img { grid-area: tile; width: 64px; }
   .calc-grid { grid-template-columns: 1fr 1fr; }
   .calc-grid > div:first-child { grid-column: 1 / -1; }
 }
@@ -854,3 +859,18 @@ main {
 a.rank-metric { text-decoration: none; text-align: right; display: flex; flex-direction: column; line-height: 1.3; }
 a.rank-metric small { font-size: 0.68rem; font-weight: 700; color: var(--muted); }
 a.rank-metric:hover { text-decoration: underline; }
+
+.calc-hero {
+  display: block;
+  margin: 0 0 16px;
+  border: 1px solid var(--line);
+  border-radius: var(--radius-md);
+  overflow: hidden;
+  text-decoration: none;
+}
+.calc-hero .thumb { border-radius: 0; aspect-ratio: 3 / 2; }
+.calc-hero-cap { padding: 10px 14px 12px; display: flex; flex-direction: column; gap: 2px; }
+.calc-hero-cap b { font-size: 0.95rem; line-height: 1.45; }
+.calc-hero-cap span { font-size: 0.76rem; color: var(--muted); }
+.calc-hero:hover .calc-hero-cap b { color: var(--accent); }
+.calc-hero:focus-visible { outline: none; box-shadow: var(--shadow-focus); }

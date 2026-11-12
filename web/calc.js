@@ -1,4 +1,4 @@
-import { loadSchedule, loadMarket, todayJst, releaseDate, rankStyle, el } from './common.js';
+import { loadSchedule, loadMarket, todayJst, releaseDate, rankStyle, el, thumb, formatPrice } from './common.js';
 import { computeEv } from './ev.js';
 
 const $ = (id) => document.getElementById(id);
@@ -80,8 +80,23 @@ function pick(id) {
   state = saved && saved.counts?.length === item.prizes.length ? saved : fresh();
   history.replaceState(null, '', `?id=${encodeURIComponent(id)}`);
   $('price-input').value = state.price ?? '';
+  renderHero();
   renderBoard();
   renderSummary();
+}
+
+// 選定一番賞的橫幅大圖（點了到詳細頁）
+function renderHero() {
+  const hero = $('calc-hero');
+  hero.innerHTML = '';
+  hero.href = `kuji?id=${encodeURIComponent(item.id)}`;
+  const t = thumb(item.banner_url || item.image_url, item.name_ja);
+  const cap = el('div', 'calc-hero-cap');
+  cap.append(el('b', null, item.name_ja));
+  const price = formatPrice(item.price);
+  cap.append(el('span', null, [price, `全 ${item.prizes.length} 賞`, '看各賞詳情 ›'].filter(Boolean).join('・')));
+  hero.append(t, cap);
+  hero.hidden = false;
 }
 
 function numInput(value, label, onChange) {
@@ -103,9 +118,12 @@ function renderBoard() {
     const li = el('li', 'board-row');
     const st = rankStyle(p.rank);
     const short = st.short.split('\n')[0];
+    const pic = thumb(p.image_url, `${p.rank} ${p.name}`);
+    pic.classList.add('board-img');
     const tile = el('span', `mini-tile${short.length > 2 ? ' small' : ''}`, short);
     tile.style.setProperty('--rank-bg', st.bg);
     tile.style.setProperty('--rank-fg', st.fg);
+    pic.append(tile);
     const name = el('div', 'board-name');
     name.append(el('b', null, p.rank || '賞'), el('span', null, p.name));
 
@@ -148,7 +166,7 @@ function renderBoard() {
       renderSummary();
     });
 
-    li.append(tile, name, countBox, value, target);
+    li.append(pic, name, countBox, value, target);
     board.append(li);
   });
 }
