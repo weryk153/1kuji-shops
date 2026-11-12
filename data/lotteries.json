@@ -1,5 +1,5 @@
 {
-  "scraped_at": "2026-11-10T23:58:15.129Z",
+  "scraped_at": "2026-11-12T01:26:06.174Z",
   "lotteries": [
     {
       "id": "tamagotchi6",
@@ -8,6 +8,38 @@
       "release_date": "2026-11-21",
       "image_url": "https://assets.1kuji.com/uploads/product/image/10761/180fd5a6-adec-4227-9990-53e1587a925f.webp",
       "source_url": "https://1kuji.com/products/tamagotchi6"
+    },
+    {
+      "id": "jojo_26",
+      "product_id": 10771,
+      "name_ja": "一番くじ ジョジョの奇妙な冒険 The Gathering of RIVALS",
+      "release_date": "2026-11-21",
+      "image_url": "https://assets.1kuji.com/uploads/product/image/10771/a80b4314-4997-4c06-9e60-e626c2b51251.webp",
+      "source_url": "https://1kuji.com/products/jojo_26"
+    },
+    {
+      "id": "battlecats2-2",
+      "product_id": 10799,
+      "name_ja": "一番くじ にゃんこ大戦争 ～みんなでペリペリするにゃ～（再販売）",
+      "release_date": "2026-11-20",
+      "image_url": "https://assets.1kuji.com/uploads/product/image/10799/1a105c2e-139c-4d6d-bad4-98588af55cdd.webp",
+      "source_url": "https://1kuji.com/products/battlecats2-2"
+    },
+    {
+      "id": "whippi_wrappi",
+      "product_id": 10783,
+      "name_ja": "一番くじちょこっと ホイッピ＆ラッピ",
+      "release_date": "2026-11-19",
+      "image_url": "https://assets.1kuji.com/uploads/product/image/10783/6b740f2b-6515-48ce-8bc6-45c44efc1cbf.webp",
+      "source_url": "https://1kuji.com/products/whippi_wrappi"
+    },
+    {
+      "id": "toloveru_d",
+      "product_id": 10794,
+      "name_ja": "一番くじ To LOVEる-とらぶる-ダークネス",
+      "release_date": "2026-11-18",
+      "image_url": "https://assets.1kuji.com/uploads/product/image/10794/e129d149-92db-4691-9df4-c942b57cae17.webp",
+      "source_url": "https://1kuji.com/products/toloveru_d"
     },
     {
       "id": "hxh8_2",
