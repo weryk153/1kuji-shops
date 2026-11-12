@@ -184,6 +184,7 @@ function renderSummary() {
   });
   const r = computeEv({ price: state.price, lastOne, prizes }, state.target != null ? map[state.target] : null);
 
+  renderMini(r);
   if (r.remaining === 0) {
     box.append(el('p', 'calc-empty', '在下方「獎項看板」輸入各賞剩幾個，這裡就會算出每抽期望值。'));
     return;
@@ -212,6 +213,34 @@ function renderSummary() {
         (Number.isFinite(state.price) ? `（約 ${yen(Math.ceil(t.expectedDraws) * state.price)}）` : '') + '。'));
   }
   if (r.unpriced > 0) box.append(el('p', 'calc-note', `有 ${r.unpriced} 抽的賞還沒填行情，先以 0 円計算。`));
+}
+
+// 手機：上方結果卡捲出畫面時，在底部分頁列上方顯示一條精簡結果
+const mini = el('button', 'calc-mini');
+mini.type = 'button';
+mini.hidden = true;
+mini.addEventListener('click', () => $('calc-summary').scrollIntoView({ behavior: 'smooth', block: 'center' }));
+document.body.append(mini);
+let summaryVisible = true;
+let lastResult = null;
+new IntersectionObserver(([e]) => {
+  summaryVisible = e.isIntersecting;
+  renderMini(lastResult);
+}).observe($('calc-summary'));
+
+function renderMini(r) {
+  lastResult = r;
+  mini.innerHTML = '';
+  if (!r || r.remaining === 0 || summaryVisible) {
+    mini.hidden = true;
+    return;
+  }
+  mini.append(el('span', 'calc-mini-label', `剩 ${r.remaining} 抽・每抽期望值`), el('b', null, yen(r.evPerDraw)));
+  if (r.gainPerDraw != null) {
+    const good = r.gainPerDraw >= 0;
+    mini.append(el('span', `calc-mini-gain ${good ? 'good' : 'bad'}`, `${good ? '+' : '−'}${yen(Math.abs(r.gainPerDraw))}`));
+  }
+  mini.hidden = false;
 }
 
 init().catch((err) => {
