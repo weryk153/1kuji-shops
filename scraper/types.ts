@@ -36,3 +36,31 @@ export interface ShopsFile {
   scraped_at: string;
   shops: Shop[];
 }
+
+// 發售日曆：每月商品清單頁的一筆，加上詳細頁解析出的價格與各賞
+export interface Prize {
+  rank: string;            // "A賞"、"ラストワン賞"；解不出來時為空字串
+  name: string;
+  kinds: number | null;    // 全 N 種
+  size: string | null;
+  image_url: string | null;
+}
+
+export interface ScheduleItem {
+  id: string;              // slug
+  name_ja: string;
+  category: string;        // "一番くじ"、"一番くじちょこっと" 等
+  image_url: string;
+  shop_date: string | null;  // 店頭販売日 YYYY-MM-DD
+  online_at: string | null;  // オンライン販売開始 ISO 8601（JST）
+  banner_url?: string | null; // 官網商品頁頂端橫幅（寬圖）
+  price?: number | null;     // 1 回價格（日圓，含稅）
+  stores?: string | null;    // 取扱店原文
+  prizes?: Prize[];
+}
+
+export interface ScheduleFile {
+  scraped_at: string;
+  months: string[];        // ["2026-10", ...]
+  items: ScheduleItem[];
+}

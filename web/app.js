@@ -2,7 +2,8 @@ import { generateCsv, generateFilename } from './csv.js';
 import { translateShopName } from './translate.js';
 import { buildSearchBlob } from './aliases.js';
 import { createMap } from './map.js';
-import { haversineKm, formatDistance } from './geo-utils.js';
+import { haversineKm, formatDistance, nearestShops } from './geo-utils.js';
+import { loadSchedule, todayJst, formatDay, formatPrice, thumb, el } from './common.js';
 
 const $ = (id) => document.getElementById(id);
 const lotteryPicker = $('lottery-picker');
@@ -25,8 +26,10 @@ const scrapedAtEl = $('scraped-at');
 const staleWarning = $('stale-warning');
 
 const PAGE_SIZE = 5;
+const NEARBY_PAGE = 10;
 
 let lotteries = [];
+let scheduleById = new Map(); // id → schedule item（價格等）
 let prefectures = [];
 let currentShops = [];
 let currentLotteryId = null;
@@ -36,13 +39,16 @@ let map = null;
 let userLocation = null; // { lat, lon } | null
 let sortMode = 'city'; // 'city' | 'distance'
 let expandedCities = new Set(); // city names whose pagination is expanded
+let nearbyLimit = NEARBY_PAGE; // 「附近的店」目前列出幾間
 
 async function init() {
   try {
-    const [lJson, pJson] = await Promise.all([
+    const [lJson, pJson, sched] = await Promise.all([
       fetch('data/lotteries.json').then((r) => r.json()),
       fetch('data/prefectures.json').then((r) => r.json()),
+      loadSchedule(),
     ]);
+    scheduleById = new Map(sched.items.map((i) => [i.id, i]));
     lotteries = lJson.lotteries;
     prefectures = pJson;
 
@@ -69,66 +75,52 @@ function populateLotteries() {
     lotteryPicker.innerHTML = '<p class="picker-empty">目前沒有可選的一番賞</p>';
     return;
   }
-  for (const l of lotteries) {
-    lotteryPicker.appendChild(renderLotteryCard(l));
+  const today = todayJst();
+  const onSale = lotteries.filter((l) => l.release_date <= today)
+    .sort((a, b) => b.release_date.localeCompare(a.release_date));
+  const soon = lotteries.filter((l) => l.release_date > today)
+    .sort((a, b) => a.release_date.localeCompare(b.release_date));
+  for (const [zh, en, list] of [['販售中', 'On sale', onSale], ['即將開賣', 'Coming soon', soon]]) {
+    if (list.length === 0) continue;
+    const group = el('div', 'picker-group');
+    const h = el('h3', 'picker-group-title');
+    h.append(el('span', 'sec-zh', zh), el('span', 'sec-en', en), el('span', 'picker-count', `${list.length}`));
+    const row = el('div', 'picker-row');
+    for (const l of list) row.appendChild(renderLotteryCard(l, l.release_date > today));
+    group.append(h, row);
+    lotteryPicker.appendChild(group);
   }
 }
 
-function renderLotteryCard(lottery) {
-  const card = document.createElement('button');
-  card.type = 'button';
-  card.className = 'lottery-card';
+function renderLotteryCard(lottery, upcoming) {
+  const extra = scheduleById.get(lottery.id);
+  const card = el('div', 'lottery-card');
   card.dataset.id = lottery.id;
   card.dataset.search = buildSearchBlob(lottery);
-  card.setAttribute('aria-pressed', 'false');
 
-  const imgWrap = document.createElement('div');
-  imgWrap.className = 'img-wrap';
-  const img = document.createElement('img');
-  img.loading = 'lazy';
-  img.alt = lottery.name_ja;
-  img.addEventListener('load', () => imgWrap.classList.add('loaded'));
-  img.addEventListener('error', () => imgWrap.classList.add('loaded'));
-  if (lottery.image_url) img.src = lottery.image_url;
-  imgWrap.appendChild(img);
+  const btn = el('button', 'lottery-select');
+  btn.type = 'button';
+  btn.setAttribute('aria-pressed', 'false');
+  const t = thumb(extra?.banner_url || lottery.image_url, '');
+  t.appendChild(el('span', upcoming ? 'pill red' : 'pill dark',
+    upcoming ? `${formatDay(lottery.release_date, { weekday: false })} 開賣` : '販售中'));
+  const price = formatPrice(extra?.price);
+  btn.append(t, el('span', 'name', lottery.name_ja),
+    el('span', 'date', price || `${formatDay(lottery.release_date)} 開賣`));
+  btn.addEventListener('click', () => {
+    selectLottery(lottery.id);
+    // 選好後帶到地圖（選擇器很長，不捲過去看不到結果）
+    document.querySelector('.finder')?.scrollIntoView({ behavior: 'smooth', block: 'start' });
+  });
 
-  const nameEl = document.createElement('div');
-  nameEl.className = 'name';
-  nameEl.textContent = lottery.name_ja;
-
-  const dateEl = document.createElement('div');
-  dateEl.className = 'date';
-  dateEl.textContent = `${lottery.release_date} 開賣`;
-
-  card.append(imgWrap, nameEl, dateEl);
-  card.addEventListener('click', () => selectLottery(lottery.id));
+  const more = el('a', 'lottery-more', '看賞品 ›');
+  more.href = `kuji?id=${encodeURIComponent(lottery.id)}`;
+  card.append(btn, more);
   return card;
 }
 
 function initMap() {
-  map = createMap({
-    container: mapContainer,
-    onPrefectureClick: (code) => {
-      if (!currentLotteryId) return;
-      if (prefectureSelect.value === code) {
-        // 同一縣：已從全國視圖點回來，只重畫地圖即可，保留已選市区町村
-        map.setPrefecture(code, availableCities);
-        map.setSelectedCities(selectedCities, availableCities);
-        return;
-      }
-      prefectureSelect.value = code;
-      onPrefectureChange();
-    },
-    onCityToggle: (name) => {
-      if (selectedCities.has(name)) selectedCities.delete(name);
-      else selectedCities.add(name);
-      syncCityCheckboxes();
-      map.setSelectedCities(selectedCities, availableCities);
-      updateUrl();
-      render();
-    },
-    onLocate: handleLocate,
-  });
+  map = createMap({ container: mapContainer, onLocate: handleLocate });
   map.init();
 }
 
@@ -139,27 +131,15 @@ const LOCATE_ERROR_MSG = {
   unavailable: '無法取得位置，請再試一次',
 };
 
-function handleLocate({ coords, prefCode, error }) {
+function handleLocate({ coords, error }) {
   if (error) {
     statusEl.textContent = LOCATE_ERROR_MSG[error] || '定位失敗';
     return;
   }
   userLocation = coords;
-  syncSortToggleVisibility();
-  if (!currentLotteryId) {
-    statusEl.textContent = '已取得位置，請先選一番賞';
-    return;
-  }
-  if (prefCode && prefectureSelect.value !== prefCode) {
-    if (prefectures.some((p) => p.code === prefCode)) {
-      prefectureSelect.value = prefCode;
-      onPrefectureChange();
-      return;
-    }
-  }
-  if (!prefCode) {
-    statusEl.textContent = '位置不在日本境內，請手動選都道府縣';
-  }
+  nearbyLimit = NEARBY_PAGE;
+  map.setUser(coords, nearestShops(currentShops, coords, 5));
+  onSortModeChange('distance');
   render();
 }
 
@@ -204,17 +184,20 @@ function onSortModeChange(mode) {
   render();
 }
 
-function syncSortToggleVisibility() {
-  // 有定位才顯示 toggle（沒定位時依距離無從計算）
-  sortToggleEl.hidden = !userLocation;
-}
-
 function onLotterySearch() {
   const q = lotterySearchInput.value.trim().toLowerCase();
-  for (const card of lotteryPicker.querySelectorAll('.lottery-card')) {
-    const name = (card.dataset.search || '').toLowerCase();
-    card.hidden = q !== '' && !name.includes(q);
+  let any = false;
+  for (const group of lotteryPicker.querySelectorAll('.picker-group')) {
+    let visible = 0;
+    for (const card of group.querySelectorAll('.lottery-card')) {
+      const name = (card.dataset.search || '').toLowerCase();
+      card.hidden = q !== '' && !name.includes(q);
+      if (!card.hidden) visible++;
+    }
+    group.hidden = visible === 0;
+    if (visible > 0) any = true;
   }
+  $('picker-no-match').hidden = any;
 }
 
 function onCitySearch() {
@@ -229,7 +212,7 @@ function markSelectedCard(id) {
   for (const card of lotteryPicker.querySelectorAll('.lottery-card')) {
     const isSelected = card.dataset.id === id;
     card.classList.toggle('selected', isSelected);
-    card.setAttribute('aria-pressed', String(isSelected));
+    card.querySelector('.lottery-select')?.setAttribute('aria-pressed', String(isSelected));
   }
 }
 
@@ -254,12 +237,15 @@ async function selectLottery(id, opts = {}) {
       statusEl.textContent = '找不到此一番賞，可能已下檔';
       markSelectedCard('');
       prefectureSelect.disabled = true;
+      map?.setShops(null);
       return;
     }
     const data = await res.json();
     if (pendingLotteryId !== id) return; // 再 check 一次（json 解析也是 await）
     currentShops = data.shops;
     currentLotteryId = id;
+    nearbyLimit = NEARBY_PAGE;
+    map?.setShops(currentShops);
     if (!opts.skipReset) {
       selectedCities = new Set();
       rebuildCities();
@@ -284,11 +270,16 @@ function onPrefectureChange() {
   render();
 }
 
+// 選了都道府縣 / 市区町村 → 地圖移到那些店的範圍
 function syncMapFromState() {
   if (!map) return;
-  const code = prefectureSelect.value || null;
-  map.setPrefecture(code, availableCities);
-  map.setSelectedCities(selectedCities, availableCities);
+  const prefCode = prefectureSelect.value;
+  if (!prefCode || !currentLotteryId) return;
+  const inPref = currentShops.filter((s) => s.prefecture_code === prefCode);
+  const picked = selectedCities.size > 0
+    ? inPref.filter((s) => selectedCities.has(s.city || ''))
+    : inPref;
+  map.fitShops(picked);
 }
 
 function rebuildCities() {
@@ -351,7 +342,7 @@ function onCityToggle(e) {
   if (e.target.checked) selectedCities.add(v);
   else selectedCities.delete(v);
   expandedCities.delete(v);
-  map?.setSelectedCities(selectedCities, availableCities);
+  syncMapFromState();
   updateUrl();
   render();
 }
@@ -360,7 +351,7 @@ function onCitySelectAll() {
   selectedCities = new Set(availableCities.map((c) => c.name));
   expandedCities = new Set();
   syncCityCheckboxes();
-  map?.setSelectedCities(selectedCities, availableCities);
+  syncMapFromState();
   updateUrl();
   render();
 }
@@ -369,63 +360,89 @@ function onCityClear() {
   selectedCities = new Set();
   expandedCities = new Set();
   syncCityCheckboxes();
-  map?.setSelectedCities(selectedCities, availableCities);
+  syncMapFromState();
   updateUrl();
   render();
 }
 
 function render() {
   updateCitySummaryCount();
-  syncSortToggleVisibility();
   if (filtersSection) filtersSection.classList.toggle('disabled', !currentLotteryId);
-  const prefCode = prefectureSelect.value;
   listEl.innerHTML = '';
+  sortToggleEl.hidden = true;
 
   if (!currentLotteryId) {
-    statusEl.textContent = '請先選一番賞';
+    statusEl.textContent = userLocation ? '已取得位置，請先選一番賞' : '請先選一番賞';
     setActionsEnabled(false);
     return;
   }
+
+  const area = resolveArea();
+  if (area.shops) {
+    statusEl.textContent = area.status;
+    // 有定位才顯示排序切換（沒定位時依距離無從計算）
+    sortToggleEl.hidden = !userLocation;
+    if (sortMode === 'distance' && userLocation) renderByDistance(area.shops);
+    else renderGrouped(area.shops);
+    setActionsEnabled(true);
+    return;
+  }
+  setActionsEnabled(false);
+  // 地區沒選完整、但有定位 → 列出附近的店
+  if (userLocation) {
+    renderNearby();
+    return;
+  }
+  statusEl.textContent = area.status;
+}
+
+// 依都道府縣 / 市区町村篩選；選完整回傳 { status, shops }，否則只有 { status }（提示下一步）
+function resolveArea() {
+  const prefCode = prefectureSelect.value;
   if (!prefCode) {
-    statusEl.textContent = '請選擇都道府縣（可從上方地圖點選）';
-    setActionsEnabled(false);
-    return;
+    return { status: '按地圖右下「◎ 我的位置」看附近的店，或選擇都道府縣' };
   }
-
   const inPref = currentShops.filter((s) => s.prefecture_code === prefCode);
-  const pref = prefectures.find((p) => p.code === prefCode);
-  const prefName = pref?.name_zh ?? '';
-
-  if (inPref.length === 0) {
-    statusEl.textContent = `${prefName} 目前沒有販售店舖`;
-    setActionsEnabled(false);
-    return;
-  }
-
+  const prefName = prefectures.find((p) => p.code === prefCode)?.name_zh ?? '';
+  if (inPref.length === 0) return { status: `${prefName} 目前沒有販售店舖` };
   if (availableCities.length > 0 && selectedCities.size === 0) {
-    statusEl.textContent = `${prefName} 共 ${inPref.length} 家店舖，請勾選市区町村`;
-    setActionsEnabled(false);
-    return;
+    return { status: `${prefName} 共 ${inPref.length} 家店舖，請勾選市区町村` };
   }
-
   const filtered = availableCities.length > 0
     ? inPref.filter((s) => selectedCities.has(s.city || ''))
     : inPref;
+  if (filtered.length === 0) return { status: '所選市区町村沒有店舖' };
+  const status = availableCities.length > 0
+    ? `${prefName} ${selectedCities.size} 個市区町村，共 ${filtered.length} 家店舖`
+    : `${prefName} 共 ${filtered.length} 家店舖`;
+  return { status, shops: filtered };
+}
 
-  if (filtered.length === 0) {
-    statusEl.textContent = `所選市区町村沒有店舖`;
-    setActionsEnabled(false);
+function renderNearby() {
+  const rows = nearestShops(currentShops, userLocation, nearbyLimit);
+  if (rows.length === 0) {
+    statusEl.textContent = '這個一番賞沒有店舖座標資料';
     return;
   }
-
-  const cityCount = availableCities.length > 0 ? selectedCities.size : null;
-  statusEl.textContent = cityCount != null
-    ? `${prefName} ${cityCount} 個市区町村，共 ${filtered.length} 家店舖`
-    : `${prefName} 共 ${filtered.length} 家店舖`;
-
-  if (sortMode === 'distance' && userLocation) renderByDistance(filtered);
-  else renderGrouped(filtered);
-  setActionsEnabled(true);
+  statusEl.textContent = rows[0].km > 50
+    ? '你附近 50 km 內沒有販售店舖，以下是最近的店'
+    : '你附近的販售店舖（由近到遠）';
+  const ul = document.createElement('ul');
+  ul.className = 'city-shops';
+  for (const { shop, km } of rows) ul.appendChild(renderShop(shop, km));
+  listEl.appendChild(ul);
+  const total = currentShops.filter((s) => Number.isFinite(s.lat) && Number.isFinite(s.lon)).length;
+  if (total > rows.length) {
+    const more = document.createElement('button');
+    more.type = 'button';
+    more.className = 'expand-btn';
+    more.textContent = `再顯示 ${Math.min(NEARBY_PAGE, total - rows.length)} 間 ▾`;
+    more.addEventListener('click', () => {
+      nearbyLimit += NEARBY_PAGE;
+      render();
+    });
+    listEl.appendChild(more);
+  }
 }
 
 function withDistance(shop) {
@@ -545,9 +562,24 @@ function renderShop(shop, precomputedKm) {
   link.target = '_blank';
   link.rel = 'noopener';
   link.title = '在 Google 地圖開啟';
-  link.textContent = '開啟地圖';
+  link.textContent = 'Google 地圖';
 
-  li.append(nameEl, addrEl, relEl, link);
+  const actions = document.createElement('div');
+  actions.className = 'shop-actions';
+  if (Number.isFinite(shop.lat) && Number.isFinite(shop.lon)) {
+    const pinBtn = document.createElement('button');
+    pinBtn.type = 'button';
+    pinBtn.className = 'pin-btn';
+    pinBtn.textContent = '在地圖上看';
+    pinBtn.addEventListener('click', () => {
+      map?.focusShop(shop);
+      mapContainer.scrollIntoView({ behavior: 'smooth', block: 'center' });
+    });
+    actions.appendChild(pinBtn);
+  }
+  actions.appendChild(link);
+
+  li.append(nameEl, addrEl, relEl, actions);
 
   const km = precomputedKm != null ? precomputedKm : withDistance(shop);
   if (km != null) {

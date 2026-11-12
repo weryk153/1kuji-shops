@@ -18,6 +18,20 @@ export function formatDistance(km) {
   return `${Math.round(km)} km`;
 }
 
+// 依距離由近到遠取前 limit 間；售完的店排在所有未售完之後，無座標的略過
+// 回傳 [{ shop, km }]
+export function nearestShops(shops, loc, limit) {
+  if (!loc) return [];
+  const rows = [];
+  for (const shop of shops) {
+    if (!Number.isFinite(shop.lat) || !Number.isFinite(shop.lon)) continue;
+    rows.push({ shop, km: haversineKm(loc.lat, loc.lon, shop.lat, shop.lon) });
+  }
+  const soldOut = (r) => (r.shop.sellout_flag === 1 ? 1 : 0);
+  rows.sort((a, b) => soldOut(a) - soldOut(b) || a.km - b.km);
+  return rows.slice(0, limit);
+}
+
 // GeoJSON Polygon / MultiPolygon point-in-polygon
 // point = [lon, lat]，rings 第一個 = 外環，之後 = 洞
 export function pointInGeometry(point, geom) {

@@ -3,6 +3,7 @@ import { join } from 'node:path';
 import { establishSession } from './session.ts';
 import { fetchLotteries } from './fetch-lotteries.ts';
 import { fetchShops } from './fetch-shops.ts';
+import { fetchSchedule } from './fetch-schedule.ts';
 import { shouldDeleteShopFile } from './retention.ts';
 import { pool } from './pool.ts';
 import type { Lottery, LotteriesFile, ShopsFile } from './types.ts';
@@ -52,6 +53,17 @@ async function main() {
     join(DATA_DIR, 'lotteries.json'),
     JSON.stringify(lotteriesFile, null, 2) + '\n'
   );
+
+  // 發售日曆（前後幾個月的官網清單 + 價格 / 各賞）。失敗不影響店舖資料。
+  console.log('fetching schedule...');
+  try {
+    const schedule = await fetchSchedule(now);
+    await writeFile(join(DATA_DIR, 'schedule.json'), JSON.stringify(schedule) + '\n');
+    console.log(`  -> ${schedule.items.length} schedule items`);
+  } catch (err) {
+    console.warn(`  ! schedule failed: ${(err as Error).message}`);
+    process.exitCode = 1;
+  }
 
   // 對每個視窗內 lottery 並行抓店舖
   let failed = 0;

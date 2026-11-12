@@ -1,5 +1,6 @@
 import type { Lottery } from './types.ts';
-import { establishSession, apiHeaders, UA, type Session } from './session.ts';
+import { establishSession, apiHeaders, type Session } from './session.ts';
+import { fetchProductHtml } from './product-page.ts';
 
 const PRODUCTS_URL = 'https://1kuji.com/shop_lists/products.json';
 
@@ -31,7 +32,6 @@ export async function fetchLotteries(session?: Session): Promise<Lottery[]> {
       release_date = await fetchReleaseDate(p.show_url);
     } catch (err) {
       console.warn(`  ! skip ${p.show_url}: ${(err as Error).message}`);
-      await sleep(1000);
       continue;
     }
     lotteries.push({
@@ -42,25 +42,16 @@ export async function fetchLotteries(session?: Session): Promise<Lottery[]> {
       image_url: p.image_url,
       source_url: `https://1kuji.com/products/${p.show_url}`,
     });
-    await sleep(1000);
   }
   return lotteries;
 }
 
 async function fetchReleaseDate(slug: string): Promise<string> {
-  const res = await fetch(`https://1kuji.com/products/${slug}`, {
-    headers: { 'User-Agent': UA },
-  });
-  if (!res.ok) throw new Error(`detail page failed for ${slug}: ${res.status}`);
-  const html = await res.text();
+  const html = await fetchProductHtml(slug);
   // <section class="aboutCol"> ... ■発売日：店頭販売：YYYY年MM月DD日 ...
   const m = html.match(
     /<section[^>]*class="aboutCol"[\s\S]*?■発売日：[\s\S]*?(\d{4})年(\d{2})月(\d{2})日/
   );
   if (!m) throw new Error(`could not parse release_date for ${slug}`);
   return `${m[1]}-${m[2]}-${m[3]}`;
-}
-
-function sleep(ms: number): Promise<void> {
-  return new Promise((r) => setTimeout(r, ms));
 }

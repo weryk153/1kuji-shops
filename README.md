@@ -1,6 +1,17 @@
 # 1kuji 店舖查詢工具
 
-依「一番賞 × 都道府縣」查詢 1kuji.com 店舖，產生分享連結與 Google My Maps 用 CSV。
+日本一番賞（一番くじ）資訊站，版型參考 kujinone.com：
+
+| 頁面 | 路徑 | 資料 |
+|---|---|---|
+| 首頁 | `/` | 販售中 / 近日開賣（`data/schedule.json`） |
+| 找店 | `/shops?lottery=…` | 店舖地圖（Leaflet + 国土地理院）、附近的店、CSV（`data/shops/*.json`） |
+| 發售日曆 | `/schedule` | 官網每月清單 + 價格、取扱店、各賞（`data/schedule.json`） |
+| 商品詳細 | `/kuji?id=…` | 各賞一覽 + Mercari 行情（`data/market.json`） |
+| 期望值計算 | `/calc?id=…` | 照店頭看板輸入剩餘數，行情預設帶 Mercari 中位數 |
+| 排名 | `/ranking` | 最高行情賞、售完比例、販售店數（`web/data/stats.json`，建置時產生） |
+
+舊的分享連結 `/?lottery=…` 會自動轉到 `/shops`。
 
 ## 設計
 
@@ -14,7 +25,8 @@
 
 ```bash
 npm install
-npm run scrape                   # 抓資料 → data/
+npm run scrape                   # 抓資料 → data/（一番賞、店舖、發售日曆）
+npm run scrape:market            # Mercari 成交行情 → data/market.json（需 npx playwright install chromium）
 npm run build                    # data/ → web/data/
 npm run serve                    # 本地預覽 http://localhost:3000
 npm test                         # 跑單元測試

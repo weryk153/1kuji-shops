@@ -3,3 +3,4 @@ set -euo pipefail
 rm -rf web/data
 cp -r data web/data
 echo "data/ → web/data/ copied"
+node scripts/build-stats.mjs

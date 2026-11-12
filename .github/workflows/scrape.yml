@@ -35,6 +35,16 @@ jobs:
       - name: Run scraper
         run: npm run scrape
 
+      # Mercari 成交行情（無頭瀏覽器）。失敗不擋店舖資料 commit，前端沿用上次的 market.json
+      - name: Install Chromium for market scrape
+        run: npx playwright install --with-deps chromium
+        continue-on-error: true
+
+      - name: Scrape Mercari market prices
+        run: npm run scrape:market
+        timeout-minutes: 60
+        continue-on-error: true
+
       - name: Commit if data changed (skip on PR)
         if: github.event_name != 'pull_request'
         run: |
