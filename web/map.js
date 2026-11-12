@@ -12,7 +12,7 @@ const NEARBY_ZOOM = 15;
 const MIN_PIN_ZOOM = 10;
 const MAX_PINS = 3000;
 
-const PIN_STYLE = { radius: 7, weight: 2, color: '#ffffff', fillColor: '#e0242f', fillOpacity: 0.95 };
+const PIN_STYLE = { radius: 7, weight: 2, color: '#ffffff', fillColor: '#c8342a', fillOpacity: 0.95 };
 const PIN_SOLDOUT = { ...PIN_STYLE, fillColor: '#9aa3ad', fillOpacity: 0.85 };
 
 const JST_FMT = new Intl.DateTimeFormat('ja-JP', {

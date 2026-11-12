@@ -1,0 +1,12 @@
+# 一番賞店舖查詢
+
+> 日本一番賞（一番くじ）資訊站（正體中文）：販售店舖地圖、附近的店、發售日曆、各賞內容、Mercari 成交行情、期望值計算與排名。資料來源 1kuji.com，每天更新。
+
+## 頁面
+
+- [首頁](https://1kuji-shops.pages.dev/)：販售中與近日開賣的一番賞
+- [找店](https://1kuji-shops.pages.dev/shops)：選一番賞，在地圖上找販售店舖或附近的店
+- [發售日曆](https://1kuji-shops.pages.dev/schedule)：發售日、單抽價格、取扱店
+- [期望值計算](https://1kuji-shops.pages.dev/calc)：照店頭獎項看板算每抽期望值
+- [排名](https://1kuji-shops.pages.dev/ranking)：最高行情賞、售完比例、販售店數
+

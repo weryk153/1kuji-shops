@@ -7,12 +7,12 @@
   --surface: #ffffff;
   --fg: #22201f;
   --muted: #6f6b68;
-  --soft: #a7a29e;
+  --soft: #76716d;
   --line: #ebe8e4;
   --border: #ebe8e4;
   --tint: #f7f6f4;
-  --accent: #e5463b;
-  --accent-deep: #c5342a;
+  --accent: #c8342a;
+  --accent-deep: #a82a21;
   --accent-soft: #fdeceA;
   --dark: #2a2626;
   --sat: #2b6fd6;
@@ -20,7 +20,7 @@
   --radius-sm: 8px;
   --radius-md: 14px;
   --radius-lg: 18px;
-  --shadow-focus: 0 0 0 3px rgba(229,70,59,0.3);
+  --shadow-focus: 0 0 0 3px rgba(200,52,42,0.3);
   --nav-w: 220px;
   --col-w: 800px;
 }
@@ -902,3 +902,13 @@ a.rank-metric:hover { text-decoration: underline; }
   .calc-mini-gain.bad { color: #ff8a80; }
   body:has(.calc-mini:not([hidden])) main { padding-bottom: calc(140px + env(safe-area-inset-bottom)); }
 }
+
+/* 骨架佔位：資料載入前先撐住版面 */
+.skeleton .thumb, .sk-line { background: #efedea; }
+.sk-line { height: 0.8em; border-radius: 4px; margin: 6px 0; width: 80%; }
+.sk-line.short { width: 40%; }
+.skeleton .row-body { width: 100%; }
+@media (prefers-reduced-motion: no-preference) {
+  .skeleton .thumb, .sk-line { animation: sk-pulse 1.4s ease-in-out infinite; }
+}
+@keyframes sk-pulse { 50% { opacity: 0.55; } }

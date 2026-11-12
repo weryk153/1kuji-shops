@@ -21,6 +21,8 @@ async function init() {
     .sort((a, b) => releaseDate(b).localeCompare(releaseDate(a)));
   const soon = dated.filter((i) => releaseDate(i) > today);
 
+  // 清掉 HTML 裡的骨架佔位（避免資料載入後版面跳動）
+  for (const id of ['pickup', 'onsale-rows', 'soon-rows']) $(id).innerHTML = '';
   const pickup = $('pickup');
   const picks = onSale.slice(0, PICKUP_N);
   for (const it of picks) pickup.append(pickCard(it, { pill: { text: '販售中', kind: 'dark' } }));
