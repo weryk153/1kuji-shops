@@ -1,0 +1,72 @@
+<!doctype html>
+<html lang="zh-Hant">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <title>台灣全家一番賞庫存｜一番賞店舖查詢</title>
+  <meta name="description" content="台灣全家便利商店的一番賞庫存：哪幾間店有貨、各剩幾籤，用地圖找你附近的店。">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.9.4/leaflet.min.css" integrity="sha384-c6Rcwz4e4CITMbu/NBmnNS8yN2sC3cUElMEMfP3vqqKFp7GOYaaBBCqmaWBjmkjb" crossorigin="anonymous">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;500;700;900&display=swap">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <nav class="app-nav" aria-label="主要頁面">
+    <a class="nav-brand" href="./"><svg class="" width="30" height="30" viewBox="0 0 32 32" aria-hidden="true"><rect x="3" y="13" width="7" height="15" rx="2.5" fill="#22201f"/><path d="M14.5 4h4.2L23 8.3V26a2 2 0 0 1-2 2h-6.5a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2z" fill="#e5463b"/><path d="M18.7 4v4.3H23" fill="#f6a39c"/><rect x="25" y="16" width="5" height="12" rx="2.5" fill="#22201f"/></svg><span><b>一番賞店舖查詢</b><small>日本一番くじ 找店・日曆</small></span></a>
+    <div class="nav-links">
+        <a href="./"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 10.5 12 3l9 7.5"/><path d="M5 9.5V20h5v-6h4v6h5V9.5"/></svg><span><span class="zh">首頁</span><span class="en">HOME</span></span></a>
+        <a href="shops"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 21s-7-6.2-7-11.5a7 7 0 0 1 14 0C19 14.8 12 21 12 21z"/><circle cx="12" cy="9.5" r="2.5"/></svg><span><span class="zh">找店</span><span class="en">FIND SHOPS</span></span></a>
+        <a href="tw" aria-current="page"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 9.5 5.5 4h13L20 9.5"/><path d="M4 9.5a2.7 2.7 0 0 0 5.3 0 2.7 2.7 0 0 0 5.4 0 2.7 2.7 0 0 0 5.3 0"/><path d="M5.5 12v8h13v-8"/><path d="M10 20v-4.5h4V20"/></svg><span><span class="zh">台灣全家</span><span class="en">TAIWAN</span></span></a>
+        <a href="schedule"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3.5" y="5" width="17" height="15.5" rx="2.5"/><path d="M3.5 10h17M8 3v4M16 3v4"/></svg><span><span class="zh">發售日曆</span><span class="en">SCHEDULE</span></span></a>
+        <a href="calc"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="5" y="3" width="14" height="18" rx="2.5"/><path d="M8.5 7.5h7M8.5 12h1M12 12h1M15.5 12h0M8.5 16h1M12 16h1M15.5 16h0"/></svg><span><span class="zh">期望值計算</span><span class="en">CALCULATOR</span></span></a>
+        <a href="ranking"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 20h16"/><rect x="5" y="12" width="3.5" height="8" rx="1"/><rect x="10.25" y="6" width="3.5" height="14" rx="1"/><rect x="15.5" y="9.5" width="3.5" height="10.5" rx="1"/></svg><span><span class="zh">排名</span><span class="en">RANKING</span></span></a>
+    </div>
+    <div class="nav-foot">資料來源 <a href="https://www.family.com.tw/" target="_blank" rel="noopener">全家便利商店</a><br>每 6 小時自動更新</div>
+  </nav>
+  <div class="page-wrap">
+    <main>
+      <header class="page-head">
+        <p class="eyebrow">TAIWAN · FAMILYMART</p>
+        <h1>台灣全家 一番賞庫存</h1>
+        <p>全台全家便利商店現在有哪幾款一番賞、哪幾間店有貨、各剩幾籤。剩越少越接近最後賞。</p>
+        <p class="meta">資料來源 全家「造型卡/一番賞地圖」・全家更新於 <span id="source-updated">載入中…</span></p>
+        <p class="stale-warning" id="stale-warning" hidden>資料超過 24 小時未更新，庫存可能已經不準</p>
+      </header>
+
+      <section aria-labelledby="kuji-label">
+        <div class="step-head"><span class="step-no">1</span><div><h2 id="kuji-label">選擇一番賞</h2><p class="sec-en">PICK A KUJI</p></div></div>
+        <div id="kuji-picker" class="tw-picker" role="group" aria-label="一番賞"><p class="picker-empty">載入中…</p></div>
+      </section>
+
+      <section class="finder" aria-labelledby="finder-label">
+        <div class="step-head"><span class="step-no">2</span><div><h2 id="finder-label">找店</h2><p class="sec-en">FIND SHOPS</p></div></div>
+        <div class="filters">
+          <label class="field pref-field">
+            <span class="field-label">縣市</span>
+            <select id="city-select" disabled><option value="">請先選一番賞</option></select>
+          </label>
+        </div>
+
+        <div class="map-section" aria-label="店舖地圖"><div id="map-container"></div></div>
+
+        <div class="results">
+          <p id="status" class="status" aria-live="polite"></p>
+          <div id="sort-toggle" class="sort-toggle" hidden role="radiogroup" aria-label="排序方式">
+            <button type="button" class="sort-opt selected" data-mode="few" role="radio" aria-checked="true">剩最少</button>
+            <button type="button" class="sort-opt" data-mode="many" role="radio" aria-checked="false">剩最多</button>
+            <button type="button" class="sort-opt" data-mode="distance" role="radio" aria-checked="false">離我最近</button>
+          </div>
+          <div id="shop-list" class="shop-list"></div>
+        </div>
+        <p class="tw-note">庫存是全家地圖網站的數字，跟店頭實際剩餘可能有落差；出發前建議先打電話問。只列出全家，7-ELEVEN、玩具店、官方認證店不在內。</p>
+      </section>
+
+      <footer class="site-foot">資料來源 全家便利商店・本站與全家、BANDAI SPIRITS 無關</footer>
+    </main>
+  </div>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.9.4/leaflet.min.js" integrity="sha384-NElt3Op+9NBMCYaef5HxeJmU4Xeard/Lku8ek6hoPTvYkQPh3zLIrJP7KiRocsxO" crossorigin="anonymous"></script>
+  <script type="module" src="tw.js"></script>
+  <script defer src='https://static.cloudflareinsights.com/beacon.min.js' data-cf-beacon='{"token": "0cc2e31d71f940ca8a9e6e9164d87bcc"}'></script>
+</body>
+</html>

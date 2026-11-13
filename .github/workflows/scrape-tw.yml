@@ -1,0 +1,54 @@
+name: scrape-tw
+
+# 台灣全家一番賞庫存（約 370 個請求、2 分鐘）。庫存變化快，每 6 小時跑一次。
+on:
+  schedule:
+    - cron: '17 */6 * * *'  # UTC 00/06/12/18:17 = 台灣 08/14/20/02:17
+  workflow_dispatch:
+  pull_request:
+    branches: [main]
+    paths:
+      - 'scraper/familymart.ts'
+      - 'scraper/fetch-familymart.ts'
+      - 'scraper/tw-postcodes.json'
+
+concurrency:
+  group: scrape-tw
+  cancel-in-progress: false
+
+jobs:
+  scrape:
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    permissions:
+      contents: write
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+          cache: npm
+
+      - run: npm ci
+
+      - name: Scrape FamilyMart Taiwan
+        run: npm run scrape:tw
+
+      # 和每日的 scrape workflow 改的是不同檔案，push 前先 rebase 就不會互相擋
+      - name: Commit if data changed (skip on PR)
+        if: github.event_name != 'pull_request'
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+          git add data/tw-familymart.json
+          if git diff --staged --quiet; then
+            echo "No data changes, skipping commit."
+            exit 0
+          fi
+          git commit -m "data: 台灣全家庫存 $(date -u +%Y-%m-%dT%H:%MZ)"
+          for i in 1 2 3; do
+            git pull --rebase origin main && git push && exit 0
+            sleep 5
+          done
+          exit 1

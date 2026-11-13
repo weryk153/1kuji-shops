@@ -12,7 +12,8 @@
     "test": "tsx --test tests/*.test.{ts,mjs}",
     "build": "bash scripts/build.sh",
     "serve": "npx serve web",
-    "scrape:market": "tsx scraper/fetch-market.ts"
+    "scrape:market": "tsx scraper/fetch-market.ts",
+    "scrape:tw": "tsx scraper/fetch-familymart.ts"
   },
   "devDependencies": {
     "@types/node": "^20.0.0",

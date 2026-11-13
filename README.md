@@ -9,6 +9,7 @@
 | 發售日曆 | `/schedule` | 官網每月清單 + 價格、取扱店、各賞（`data/schedule.json`） |
 | 商品詳細 | `/kuji?id=…` | 各賞一覽 + Mercari 行情（`data/market.json`） |
 | 期望值計算 | `/calc?id=…` | 照店頭看板輸入剩餘數，行情預設帶 Mercari 中位數 |
+| 台灣全家 | `/tw?code=…` | 台灣全家各店一番賞剩餘籤數、地圖（`data/tw-familymart.json`，每 6 小時） |
 | 排名 | `/ranking` | 最高行情賞、售完比例、販售店數（`web/data/stats.json`，建置時產生） |
 
 舊的分享連結 `/?lottery=…` 會自動轉到 `/shops`。
@@ -27,6 +28,7 @@
 npm install
 npm run scrape                   # 抓資料 → data/（一番賞、店舖、發售日曆）
 npm run scrape:market            # Mercari 成交行情 → data/market.json（需 npx playwright install chromium）
+npm run scrape:tw                # 台灣全家一番賞庫存 → data/tw-familymart.json（約 2 分鐘）
 npm run build                    # data/ → web/data/
 npm run serve                    # 本地預覽 http://localhost:3000
 npm test                         # 跑單元測試
@@ -49,6 +51,8 @@ npm test                         # 跑單元測試
 - 每日 UTC 03:00（JST 12:00）自動跑爬蟲
 - 若 `data/` 有變更 → 自動 commit + push（觸發 Cloudflare Pages 重新部署）
 - 失敗時 GitHub 寄 email 給 repo owner
+
+`.github/workflows/scrape-tw.yml` 每 6 小時抓一次台灣全家庫存（全家官方地圖 `stamp.family.com.tw/api/maps`，免登入，逐一查 368 個郵遞區號）。
 
 確認 repo 設定 → Actions → General → Workflow permissions 勾「Read and write」。
 
