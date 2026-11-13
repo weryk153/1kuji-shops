@@ -386,7 +386,7 @@ function render() {
     // 有定位才顯示排序切換（沒定位時依距離無從計算）
     sortToggleEl.hidden = !userLocation;
     if (sortMode === 'distance' && userLocation) renderByDistance(area.shops);
-    else renderGrouped(area.shops);
+    else renderGrouped(area.shops, area.groupBy);
     setActionsEnabled();
     return;
   }
@@ -400,15 +400,22 @@ function render() {
 }
 
 // 依都道府縣 / 市区町村篩選；選完整回傳 { status, shops }，否則只有 { status }（提示下一步）
+// 台灣（source.listWithoutArea）店少，不必先選地區：沒選縣市就列全台、沒勾區就列整個縣市
 function resolveArea() {
   const prefCode = prefectureSelect.value;
+  const listAll = !!source.listWithoutArea;
+  const inStock = (list) => list.filter((s) => s.sellout_flag !== 1).length;
   if (!prefCode) {
+    if (listAll) {
+      return { status: `全台 ${inStock(currentShops)} 家有貨，選${L10N.pref}可以縮小範圍`, shops: currentShops, groupBy: 'prefecture' };
+    }
     return { status: `按地圖右下「◎ 我的位置」看附近的店，或選擇${L10N.pref}` };
   }
   const inPref = currentShops.filter((s) => s.prefecture_code === prefCode);
   const prefName = prefectures.find((p) => p.code === prefCode)?.name_zh ?? '';
   if (inPref.length === 0) return { status: `${prefName} 目前沒有販售店舖` };
   if (availableCities.length > 0 && selectedCities.size === 0) {
+    if (listAll) return { status: `${prefName} ${inStock(inPref)} 家有貨`, shops: inPref };
     return { status: `${prefName} 共 ${inPref.length} 家店舖，請勾選${L10N.city}` };
   }
   const filtered = availableCities.length > 0
@@ -458,16 +465,20 @@ function soldOutLast(a, b) {
   return (a.sellout_flag === 1 ? 1 : 0) - (b.sellout_flag === 1 ? 1 : 0);
 }
 
-function renderGrouped(shops) {
+function renderGrouped(shops, groupBy = 'city') {
   const groups = new Map();
   for (const s of shops) {
-    const key = s.city || '';
+    const key = (groupBy === 'prefecture' ? s.prefecture_code : s.city) || '';
     if (!groups.has(key)) groups.set(key, []);
     groups.get(key).push(s);
   }
   // 售完店排到每組最後（pagination 預設藏在「展開更多」裡）
   for (const arr of groups.values()) arr.sort((a, b) => soldOutLast(a, b) || source.compareInGroup(a, b));
-  const keys = [...groups.keys()].sort((a, b) => a.localeCompare(b, L10N.locale));
+  // 依縣市分組時照縣市清單的順序（北到南），否則依名稱
+  const prefOrder = new Map(prefectures.map((p, i) => [p.code, i]));
+  const keys = [...groups.keys()].sort((a, b) => (groupBy === 'prefecture'
+    ? (prefOrder.get(a) ?? 99) - (prefOrder.get(b) ?? 99)
+    : a.localeCompare(b, L10N.locale)));
   for (const key of keys) {
     const group = document.createElement('section');
     group.className = 'city-group';

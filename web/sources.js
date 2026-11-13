@@ -82,6 +82,7 @@ function twSource() {
   const lineupId = (id) => (/^(fm|seven)-/.test(id) ? null : id);
   return {
     region: 'tw',
+    listWithoutArea: true, // 一款最多幾百家，選了商品就直接列店
     labels: { pref: '縣市', city: '鄉鎮市區', choosePref: '選擇縣市…', locale: 'zh-Hant' },
     staleHours: 24,
     mapOptions: {
