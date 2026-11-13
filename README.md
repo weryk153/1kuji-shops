@@ -7,6 +7,7 @@
 | 首頁 | `/` | 販售中 / 近日開賣（`data/schedule.json`） |
 | 找店 | `/shops?lottery=…` | 店舖地圖（Leaflet + 国土地理院）、附近的店、分享連結（`data/shops/*.json`） |
 | 發售日曆 | `/schedule` | 官網每月清單 + 價格、取扱店、各賞（`data/schedule.json`） |
+| 發售日曆・台灣 | `/tw-schedule` | 台灣開賣日與售價（`data/tw-releases.json`，整理自一番賞台灣 FB 粉專） |
 | 商品詳細 | `/kuji?id=…` | 各賞一覽 + Mercari 行情（`data/market.json`） |
 | 期望值計算 | `/calc?id=…` | 照店頭看板輸入剩餘數，行情預設帶 Mercari 中位數 |
 | 找店・台灣 | `/tw?lottery=…` | 官方台灣清單（`data/tw-lineup.json`）＋全家各店剩餘籤數（`data/tw-familymart.json`），每 6 小時 |

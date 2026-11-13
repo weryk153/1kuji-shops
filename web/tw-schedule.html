@@ -1,0 +1,55 @@
+<!doctype html>
+<html lang="zh-Hant">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <title>台灣一番賞發售日曆｜一番賞店舖查詢</title>
+  <meta name="description" content="台灣一番賞開賣日、單抽台幣價格與販售通路。">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;500;700;900&display=swap">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body data-region="tw">
+  <nav class="app-nav" aria-label="主要頁面">
+    <a class="nav-brand" href="./"><svg class="" width="30" height="30" viewBox="0 0 32 32" aria-hidden="true"><rect x="3" y="13" width="7" height="15" rx="2.5" fill="#22201f"/><path d="M14.5 4h4.2L23 8.3V26a2 2 0 0 1-2 2h-6.5a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2z" fill="#e5463b"/><path d="M18.7 4v4.3H23" fill="#f6a39c"/><rect x="25" y="16" width="5" height="12" rx="2.5" fill="#22201f"/></svg><span><b>一番賞店舖查詢</b><small>日本一番くじ 找店・日曆</small></span></a>
+    <div class="nav-links">
+        <a href="./"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 10.5 12 3l9 7.5"/><path d="M5 9.5V20h5v-6h4v6h5V9.5"/></svg><span><span class="zh">首頁</span><span class="en">HOME</span></span></a>
+        <a href="shops"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 21s-7-6.2-7-11.5a7 7 0 0 1 14 0C19 14.8 12 21 12 21z"/><circle cx="12" cy="9.5" r="2.5"/></svg><span><span class="zh">找店</span><span class="en">FIND SHOPS</span></span></a>
+        <a href="schedule" aria-current="page"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3.5" y="5" width="17" height="15.5" rx="2.5"/><path d="M3.5 10h17M8 3v4M16 3v4"/></svg><span><span class="zh">發售日曆</span><span class="en">SCHEDULE</span></span></a>
+        <a href="calc"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="5" y="3" width="14" height="18" rx="2.5"/><path d="M8.5 7.5h7M8.5 12h1M12 12h1M15.5 12h0M8.5 16h1M12 16h1M15.5 16h0"/></svg><span><span class="zh">期望值計算</span><span class="en">CALCULATOR</span></span></a>
+        <a href="ranking"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 20h16"/><rect x="5" y="12" width="3.5" height="8" rx="1"/><rect x="10.25" y="6" width="3.5" height="14" rx="1"/><rect x="15.5" y="9.5" width="3.5" height="10.5" rx="1"/></svg><span><span class="zh">排名</span><span class="en">RANKING</span></span></a>
+    </div>
+    <div class="nav-foot">資料來源 <a href="https://1kuji.com/" target="_blank" rel="noopener">1kuji.com</a><br>每天自動更新</div>
+  </nav>
+  <div class="page-wrap">
+    <main>
+      <header class="page-head">
+        <p class="eyebrow">SCHEDULE · TAIWAN</p>
+        <h1>一番賞發售日曆</h1>
+        <nav class="region-tabs" aria-label="地區"><a href="schedule">日本</a><a href="tw-schedule" aria-current="page">台灣</a></nav>
+        <p>台灣接下來哪天開賣、一抽多少錢。開賣日與售價整理自「一番賞台灣」官方粉專，商品清單每天從官網更新。</p>
+        <p class="meta">最後更新 <span id="scraped-at">載入中…</span></p>
+      </header>
+
+      <section aria-labelledby="next-label">
+        <div class="sec-head" style="margin-top:24px">
+          <div><h2 id="next-label">接下來開賣</h2><p class="sec-en">NEXT</p></div>
+        </div>
+        <div id="next-row" class="next-row"></div>
+      </section>
+
+      <div id="month-tabs" class="tabs" role="tablist" aria-label="月份"></div>
+      <div id="store-chips" class="store-chips" role="group" aria-label="依店家篩選"></div>
+      <h2 id="cal-title" class="cal-title"></h2>
+      <div id="calendar" class="calendar"></div>
+
+      <section id="day-list" class="day-list" aria-label="依日期列出"></section>
+
+      <footer class="site-foot">資料來源 1kuji.com 台灣專區、一番賞台灣官方粉專・本站與 BANDAI SPIRITS 無關</footer>
+    </main>
+  </div>
+  <script type="module" src="schedule.js"></script>
+  <script defer src='https://static.cloudflareinsights.com/beacon.min.js' data-cf-beacon='{"token": "0cc2e31d71f940ca8a9e6e9164d87bcc"}'></script>
+</body>
+</html>

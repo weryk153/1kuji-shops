@@ -126,9 +126,10 @@ export function countdownLabel(today, ymd) {
 
 // 橫幅大圖卡（首頁 PICKUP、日曆 NEXT）
 // opts.pill：左上角 { text, kind }；opts.badge：右上角文字；opts.meta：標題下一行
-export function pickCard(item, { pill, badge, meta } = {}) {
+export function pickCard(item, { pill, badge, meta, href } = {}) {
   const a = el('a', 'pick-card');
-  a.href = `kuji?id=${encodeURIComponent(item.id)}`;
+  a.href = href ?? `kuji?id=${encodeURIComponent(item.id)}`;
+  if (/^https?:/.test(a.getAttribute('href'))) { a.target = '_blank'; a.rel = 'noopener'; }
   const t = thumb(item.banner_url || item.image_url, '');
   if (pill) t.append(el('span', `pill ${pill.kind || 'dark'}`, pill.text));
   if (badge) t.append(el('span', 'pill dark badge-r', badge));
@@ -173,16 +174,21 @@ export function yen(n) {
   return `${Math.round(n).toLocaleString('ja-JP')} 円`;
 }
 
-// 「找店」記住上次看的地區（日本 /shops、台灣 /tw）：導覽列的「找店」直接連到那一頁
-const FIND_REGION_KEY = 'find-region';
-(function rememberFindRegion() {
+// 「找店」「發售日曆」記住上次看的地區（日本／台灣）：導覽列直接連到那一頁
+const REGION_PAGES = [
+  { key: 'find-region', jp: 'shops', tw: 'tw' },
+  { key: 'sched-region', jp: 'schedule', tw: 'tw-schedule' },
+];
+(function rememberRegion() {
   if (typeof document === 'undefined') return;
-  const m = location.pathname.match(/\/(shops|tw)(\.html)?$/);
+  const page = location.pathname.match(/\/([\w-]+?)(\.html)?$/)?.[1];
   try {
-    if (m) localStorage.setItem(FIND_REGION_KEY, m[1]);
-    const region = localStorage.getItem(FIND_REGION_KEY);
-    if (region !== 'tw') return;
-    const link = document.querySelector('.nav-links a[href="shops"]');
-    if (link) link.setAttribute('href', 'tw');
+    for (const r of REGION_PAGES) {
+      if (page === r.jp) localStorage.setItem(r.key, 'jp');
+      if (page === r.tw) localStorage.setItem(r.key, 'tw');
+      if (localStorage.getItem(r.key) !== 'tw') continue;
+      const link = document.querySelector(`.nav-links a[href="${r.jp}"]`);
+      if (link) link.setAttribute('href', r.tw);
+    }
   } catch { /* 無痕模式或封鎖儲存：照預設連到日本 */ }
 })();
