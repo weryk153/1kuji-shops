@@ -3,7 +3,7 @@
 // 頁面先給 10 筆，其餘靠 /areas/tw/products/more 逐頁載入（伺服器用 session 記頁數，要帶 cookie）。
 //
 // 用法：npm run scrape:tw-lineup
-import { writeFile } from 'node:fs/promises';
+import { readFile, writeFile } from 'node:fs/promises';
 import { UA } from './session.ts';
 
 const BASE = 'https://1kuji.com/areas/tw/products';
@@ -12,7 +12,26 @@ const MAX_PAGES = 12; // 發売済み 會一路列到很舊的商品，最多抓
 const GAP_MS = 1000;
 
 export interface TwLineupItem { id: string; name_ja: string; image_url: string }
-export interface TwLineupFile { scraped_at: string; upcoming: TwLineupItem[]; released: TwLineupItem[] }
+export interface TwLineupFile {
+  scraped_at: string;
+  upcoming: TwLineupItem[];
+  released: TwLineupItem[];
+  // 從「発売予定」移到「発売済み」的那天 = 台灣開賣日（官網沒寫日期，只能這樣偵測；精度到天）
+  released_on?: Record<string, string>;
+}
+
+// 上次是即將開賣、這次變販售中的 → 記今天為開賣日；舊紀錄保留
+export function detectReleases(prev: TwLineupFile | null, released: TwLineupItem[], today: string): Record<string, string> {
+  const out = { ...(prev?.released_on ?? {}) };
+  const wasUpcoming = new Set(prev?.upcoming.map((i) => i.id) ?? []);
+  for (const i of released) if (wasUpcoming.has(i.id) && !out[i.id]) out[i.id] = today;
+  return out;
+}
+
+// 台灣日期 YYYY-MM-DD
+export function todayTaipei(now = new Date()): string {
+  return new Date(now.getTime() + 8 * 3600_000).toISOString().slice(0, 10);
+}
 
 const sleep = (ms: number) => new Promise((r) => setTimeout(r, ms));
 
@@ -56,7 +75,12 @@ async function main() {
   const upcoming = await fetchStatus('sale_before');
   await sleep(GAP_MS);
   const released = await fetchStatus('sale');
-  const file: TwLineupFile = { scraped_at: new Date().toISOString(), upcoming, released };
+  let prev: TwLineupFile | null = null;
+  try { prev = JSON.parse(await readFile(OUT, 'utf8')); } catch { /* 第一次跑 */ }
+  const released_on = detectReleases(prev, released, todayTaipei());
+  const newly = Object.keys(released_on).filter((id) => !prev?.released_on?.[id]);
+  if (newly.length) console.log(`  今天開賣：${newly.join(', ')}`);
+  const file: TwLineupFile = { scraped_at: new Date().toISOString(), upcoming, released, released_on };
   await writeFile(OUT, JSON.stringify(file) + '\n');
   console.log(`tw-lineup: 即將開賣 ${upcoming.length}、販售中 ${released.length} → ${OUT}`);
 }

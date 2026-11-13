@@ -41,7 +41,17 @@ async function loadTw() {
     online_at: null,
     price: r.price,
     tw_tags: ['cert', ...(fmIds.has(r.id) || r.channels.includes('全家') ? ['famima'] : []), ...(sevenIds.has(r.id) || r.channels.includes('7-ELEVEN') ? ['seven'] : [])],
-  })).sort((a, b) => a.shop_date.localeCompare(b.shop_date));
+  }));
+  // 粉專沒整理到的：用官方清單偵測到的開賣日補（沒有價格）
+  const fromFb = new Set(list.map((i) => i.id));
+  for (const [id, date] of Object.entries(lineup.released_on ?? {})) {
+    if (fromFb.has(id) || !official.has(id)) continue;
+    list.push({
+      id, name_ja: official.get(id).name_ja, image_url: official.get(id).image_url, shop_date: date, online_at: null, price: null,
+      tw_tags: ['cert', ...(fmIds.has(id) ? ['famima'] : []), ...(sevenIds.has(id) ? ['seven'] : [])],
+    });
+  }
+  list.sort((a, b) => a.shop_date.localeCompare(b.shop_date));
   const dated = new Set(list.map((i) => i.id));
   undatedUpcoming = lineup.upcoming.filter((i) => !dated.has(i.id));
   const today = todayJst();
