@@ -919,3 +919,8 @@ a.rank-metric:hover { text-decoration: underline; }
 .region-tabs a:hover { color: #fff; }
 .region-tabs a[aria-current="page"] { background: #fff; color: var(--fg); }
 .region-tabs a:focus-visible { outline: none; box-shadow: var(--shadow-focus); }
+/* 首頁（淺色底）的地區分頁 */
+.region-tabs.on-light { border-color: var(--line); margin: 4px 0 14px; }
+.region-tabs button { font: inherit; border: none; background: transparent; cursor: pointer; padding: 0.3rem 1.1rem; border-radius: 999px; font-size: 0.86rem; font-weight: 700; color: var(--muted); }
+.region-tabs button[aria-selected="true"] { background: var(--fg); color: #fff; }
+.region-tabs button:focus-visible { outline: none; box-shadow: var(--shadow-focus); }

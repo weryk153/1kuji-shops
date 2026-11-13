@@ -1,10 +1,10 @@
 # 1kuji 店舖查詢工具
 
-日本一番賞（一番くじ）資訊站，版型參考 kujinone.com：
+台灣與日本一番賞（一番くじ）資訊站，版型參考 kujinone.com。地區預設台灣，首頁、找店、發售日曆都能切換日本／台灣：
 
 | 頁面 | 路徑 | 資料 |
 |---|---|---|
-| 首頁 | `/` | 販售中 / 近日開賣（`data/schedule.json`） |
+| 首頁 | `/` | 販售中 / 近日開賣，台灣／日本分頁（`data/tw-*.json`、`data/schedule.json`） |
 | 找店 | `/shops?lottery=…` | 店舖地圖（Leaflet + 国土地理院）、附近的店、分享連結（`data/shops/*.json`） |
 | 發售日曆 | `/schedule` | 官網每月清單 + 價格、取扱店、各賞（`data/schedule.json`） |
 | 發售日曆・台灣 | `/tw-schedule` | 台灣開賣日與售價（`data/tw-releases.json`，整理自一番賞台灣 FB 粉專） |

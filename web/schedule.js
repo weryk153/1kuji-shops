@@ -2,10 +2,12 @@ import {
   loadJson, loadSchedule, todayJst, formatDayTime, releaseDate, countdownLabel,
   STORE_TAGS, storeTags, storeLabel, thumb, el, pickCard,
 } from './common.js';
+import { loadTwReleases, todayTw } from './tw-data.js';
 
 const $ = (id) => document.getElementById(id);
 const WEEK = ['日', '一', '二', '三', '四', '五', '六'];
 const TW = document.body.dataset.region === 'tw';
+const today_ = () => (TW ? todayTw() : todayJst());
 
 // 台灣：開賣日與售價來自 FB 粉專整理的 data/tw-releases.json，圖片與名稱來自官方台灣清單
 const TW_TAGS = [
@@ -18,56 +20,16 @@ const tagsOf = (it) => (TW ? it.tw_tags : storeTags(it));
 const labelOf = (key) => (TW ? TW_TAGS.find((t) => t.key === key)?.label ?? key : storeLabel(key));
 const priceText = (it) => (TW ? `${it.price} 元` : `${it.price}円`);
 const unitText = TW ? '／抽' : '／回';
-let undatedUpcoming = []; // 台灣：官方列為即將開賣、但粉專還沒公布日期的
-let scheduleIds = new Set();
-let sevenIds = new Set();
+let undatedUpcoming = []; // 台灣：官方列為即將開賣、但還不知道日期的
+let detailHref = (id) => `kuji?id=${encodeURIComponent(id)}`;
 
 async function loadTw() {
-  const [rel, lineup, fm, sched] = await Promise.all([
-    loadJson('data/tw-releases.json'),
-    loadJson('data/tw-lineup.json'),
-    loadJson('data/tw-familymart.json').catch(() => ({ products: [] })),
-    loadSchedule(),
-    loadJson('data/tw-seven.json').catch(() => ({ products: [] })),
-  ]).then(([r, l, f, s, sv]) => { sevenIds = new Set(sv.products.filter((p) => p.jp_id).map((p) => p.jp_id)); return [r, l, f, s]; });
-  scheduleIds = new Set(sched.items.map((i) => i.id));
-  const official = new Map([...lineup.upcoming, ...lineup.released].map((i) => [i.id, i]));
-  const fmIds = new Set(fm.products.filter((p) => p.jp_id).map((p) => p.jp_id));
-  const list = rel.items.map((r) => ({
-    id: r.id,
-    name_ja: r.name_zh,
-    image_url: official.get(r.id)?.image_url ?? null,
-    shop_date: r.date,
-    online_at: null,
-    price: r.price,
-    tw_tags: ['cert', ...(fmIds.has(r.id) || r.channels.includes('全家') ? ['famima'] : []), ...(sevenIds.has(r.id) || r.channels.includes('7-ELEVEN') ? ['seven'] : [])],
-  }));
-  // 粉專沒整理到的：用官方清單偵測到的開賣日補（沒有價格）
-  const fromFb = new Set(list.map((i) => i.id));
-  for (const [id, date] of Object.entries(lineup.released_on ?? {})) {
-    if (fromFb.has(id) || !official.has(id)) continue;
-    list.push({
-      id, name_ja: official.get(id).name_ja, image_url: official.get(id).image_url, shop_date: date, online_at: null, price: null,
-      tw_tags: ['cert', ...(fmIds.has(id) ? ['famima'] : []), ...(sevenIds.has(id) ? ['seven'] : [])],
-    });
-  }
-  list.sort((a, b) => a.shop_date.localeCompare(b.shop_date));
-  const dated = new Set(list.map((i) => i.id));
-  undatedUpcoming = lineup.upcoming.filter((i) => !dated.has(i.id));
-  const today = todayJst();
-  const ms = new Set([...list.map((i) => i.shop_date.slice(0, 7)), today.slice(0, 7)]);
-  return {
-    items: list,
-    months: [...ms].sort(),
-    shopIds: new Set(official.keys()),
-    updated: `開賣日 ${rel.updated_at}（FB 粉專）・官方清單 ${new Date(lineup.scraped_at).toLocaleDateString('zh-TW', { timeZone: 'Asia/Taipei' })}`,
-  };
-}
-
-// 台灣的商品詳細：本站日曆有就連本站，沒有就連官方台灣頁
-function detailHref(id) {
-  if (!TW || scheduleIds.has(id)) return `kuji?id=${encodeURIComponent(id)}`;
-  return `https://1kuji.com/areas/tw/products/${encodeURIComponent(id)}`;
+  const tw = await loadTwReleases();
+  undatedUpcoming = tw.undatedUpcoming;
+  detailHref = tw.detailHref;
+  const today = todayTw();
+  const ms = new Set([...tw.items.map((i) => i.shop_date.slice(0, 7)), today.slice(0, 7)]);
+  return { items: tw.items, months: [...ms].sort(), shopIds: tw.officialIds, updated: tw.updated };
 }
 
 let items = [];
@@ -96,7 +58,7 @@ async function init() {
       : '尚無資料';
   }
 
-  const today = todayJst();
+  const today = today_();
   const params = new URLSearchParams(location.search);
   month = months.includes(params.get('m')) ? params.get('m')
     : months.includes(today.slice(0, 7)) ? today.slice(0, 7)
@@ -162,7 +124,7 @@ function renderChips() {
 function renderTabs() {
   const tabs = $('month-tabs');
   tabs.innerHTML = '';
-  const thisYear = Number(todayJst().slice(0, 4));
+  const thisYear = Number(today_().slice(0, 4));
   for (const m of months) {
     const [y, mm] = m.split('-').map(Number);
     const b = el('button', 'tab', y === thisYear ? `${mm}月` : `${y}年${mm}月`);
@@ -209,7 +171,7 @@ function renderCalendar(byDay) {
   const [y, m] = month.split('-').map(Number);
   const first = new Date(Date.UTC(y, m - 1, 1)).getUTCDay();
   const days = new Date(Date.UTC(y, m, 0)).getUTCDate();
-  const today = todayJst();
+  const today = today_();
   WEEK.forEach((w, i) => cal.append(el('div', `cal-head${i === 0 ? ' sun' : i === 6 ? ' sat' : ''}`, w)));
   for (let i = 0; i < first; i++) cal.append(el('div', 'cal-cell'));
   for (let d = 1; d <= days; d++) {
@@ -239,7 +201,7 @@ function renderDays(byDay) {
       : `這個月沒有在「${labelOf(store)}」開賣的一番賞，切換成「全部」看看。`));
     return;
   }
-  const today = todayJst();
+  const today = today_();
   for (const [d, list] of [...byDay.entries()].sort(([a], [b]) => a.localeCompare(b))) {
     const sec = el('section', 'day');
     sec.id = `d-${d}`;

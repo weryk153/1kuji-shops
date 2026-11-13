@@ -142,15 +142,16 @@ export function pickCard(item, { pill, badge, meta, href } = {}) {
 }
 
 // 有框線的清單列：縮圖｜狀態＋標題＋價格｜›
-export function rowCard(item, { pill } = {}) {
+export function rowCard(item, { pill, href, meta } = {}) {
   const li = el('li');
   const a = el('a', 'row-card');
-  a.href = `kuji?id=${encodeURIComponent(item.id)}`;
+  a.href = href ?? `kuji?id=${encodeURIComponent(item.id)}`;
+  if (/^https?:/.test(a.getAttribute('href'))) { a.target = '_blank'; a.rel = 'noopener'; }
   a.append(thumb(item.image_url, ''));
   const body = el('div', 'row-body');
   if (pill) body.append(el('span', `pill ${pill.kind || ''}`, pill.text));
   body.append(el('div', 'row-title', item.name_ja));
-  const price = formatPrice(item.price);
+  const price = meta ?? formatPrice(item.price);
   if (price) body.append(el('div', 'row-meta', price));
   a.append(body, el('span', 'chev'));
   li.append(a);
@@ -174,21 +175,31 @@ export function yen(n) {
   return `${Math.round(n).toLocaleString('ja-JP')} 円`;
 }
 
-// 「找店」「發售日曆」記住上次看的地區（日本／台灣）：導覽列直接連到那一頁
-const REGION_PAGES = [
-  { key: 'find-region', jp: 'shops', tw: 'tw' },
-  { key: 'sched-region', jp: 'schedule', tw: 'tw-schedule' },
-];
-(function rememberRegion() {
+// 地區（日本／台灣）：預設台灣，使用者看過日本頁就記住日本。
+// 首頁的分頁、導覽列的「找店」「發售日曆」都照這個設定。
+const REGION_KEY = 'region';
+const REGION_PAGES = { shops: 'jp', schedule: 'jp', tw: 'tw', 'tw-schedule': 'tw' };
+const NAV_TW = { shops: 'tw', schedule: 'tw-schedule' };
+
+export function getRegion() {
+  try { return localStorage.getItem(REGION_KEY) === 'jp' ? 'jp' : 'tw'; } catch { return 'tw'; }
+}
+
+export function setRegion(region) {
+  try { localStorage.setItem(REGION_KEY, region); } catch { /* 無痕模式：只影響這次 */ }
+  syncNavRegion(region);
+}
+
+function syncNavRegion(region) {
+  for (const [jp, tw] of Object.entries(NAV_TW)) {
+    const link = document.querySelector(`.nav-links a[href="${jp}"], .nav-links a[href="${tw}"]`);
+    if (link) link.setAttribute('href', region === 'tw' ? tw : jp);
+  }
+}
+
+(function initRegion() {
   if (typeof document === 'undefined') return;
   const page = location.pathname.match(/\/([\w-]+?)(\.html)?$/)?.[1];
-  try {
-    for (const r of REGION_PAGES) {
-      if (page === r.jp) localStorage.setItem(r.key, 'jp');
-      if (page === r.tw) localStorage.setItem(r.key, 'tw');
-      if (localStorage.getItem(r.key) !== 'tw') continue;
-      const link = document.querySelector(`.nav-links a[href="${r.jp}"]`);
-      if (link) link.setAttribute('href', r.tw);
-    }
-  } catch { /* 無痕模式或封鎖儲存：照預設連到日本 */ }
+  if (page && REGION_PAGES[page]) setRegion(REGION_PAGES[page]);
+  else syncNavRegion(getRegion());
 })();
