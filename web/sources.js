@@ -1,6 +1,5 @@
 // 找店頁的資料來源：日本（1kuji.com）與台灣（全家地圖）共用 app.js 的畫面與互動，
 // 差異都收在這裡。<body data-region="tw"> 用台灣，其他用日本。
-import { generateFilename } from './csv.js';
 import { buildSearchBlob } from './aliases.js';
 import { loadSchedule, loadJson, todayJst, formatDay, formatPrice } from './common.js';
 
@@ -59,7 +58,6 @@ function jpSource() {
     mapsQuery: (shop) => shop.address,
     shopLine: (shop) => (shop.release_datetime ? `開賣 ${formatJst(new Date(shop.release_datetime))}` : ''),
     compareInGroup: () => 0,
-    csvFilename: generateFilename,
     formatUpdated: formatJst,
   };
 }
@@ -180,13 +178,6 @@ function twSource() {
     shopLine: () => '',
     // 同一區裡剩越少的排越前面（越接近最後賞）
     compareInGroup: (a, b) => (a.qty ?? 0) - (b.qty ?? 0),
-    csvFilename(lottery, pref, cities) {
-      const clean = lottery.name_ja.replace(/^一番くじ\s*/, '').replace(/[\\/:*?"<>|]/g, '_');
-      let region = pref.name_zh;
-      if (cities?.length > 3) region += `_${cities.length}區`;
-      else if (cities?.length) region += `_${cities.join('_')}`;
-      return `一番賞_${clean}_${region}_全家門市.csv`;
-    },
     formatUpdated: formatTw,
   };
 }
