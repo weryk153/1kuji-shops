@@ -16,6 +16,9 @@ on:
       - '!scraper/tw-postcodes.json'
       - '!scraper/fetch-tw-lineup.ts'
       - '!scraper/tw-jp-map.json'
+      - '!scraper/seven.ts'
+      - '!scraper/convert-seven.ts'
+      - '!scraper/tw-seven-map.json'
 
 # 防止多個 scrape 同時打 1kuji（會 rate limit）。同 group 後到的會等前一個完成。
 concurrency:
