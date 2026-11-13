@@ -29,6 +29,7 @@ npm install
 npm run scrape                   # 抓資料 → data/（一番賞、店舖、發售日曆）
 npm run scrape:market            # Mercari 成交行情 → data/market.json（需 npx playwright install chromium）
 npm run scrape:tw                # 台灣全家一番賞庫存 → data/tw-familymart.json（約 2 分鐘）
+npm run scrape:catalog           # 日本商品目錄 → data/jp-catalog.json（台灣頁商品圖；新品項要在 scraper/tw-jp-map.json 補對照）
 npm run build                    # data/ → web/data/
 npm run serve                    # 本地預覽 http://localhost:3000
 npm test                         # 跑單元測試

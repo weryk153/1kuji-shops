@@ -52,3 +52,18 @@ test('buildFile 去重、只留一番賞、統計有貨門市與籤數', () => {
   assert.deepEqual([k2.stores, k2.qty], [0, 0]); // 售完不算有貨
   assert.equal(file.products[0].code, 'K1'); // 有貨門市多的排前面
 });
+
+test('attachJp 依對照表帶入日本商品圖，沒對到的列在 unmapped', async () => {
+  const { attachJp } = await import('../scraper/familymart.ts');
+  const base = { name: 'n', short: 's', series: 'x', stores: 1, qty: 1 };
+  const { products, unmapped } = attachJp(
+    [{ ...base, code: 'K1' }, { ...base, code: 'K2' }, { ...base, code: 'K3' }],
+    { K1: 'db_sb', K3: 'gone' },
+    [{ id: 'db_sb', name_ja: '一番くじ ドラゴンボール', image_url: 'https://img/db.webp', shop_date: '2026-07-11' }],
+  );
+  assert.equal(products[0].jp_id, 'db_sb');
+  assert.equal(products[0].image_url, 'https://img/db.webp');
+  assert.equal(products[0].jp_name, '一番くじ ドラゴンボール');
+  assert.equal(products[1].image_url, undefined);
+  assert.deepEqual(unmapped.map((p) => p.code), ['K2', 'K3']); // K3 對照表有但目錄沒有
+});

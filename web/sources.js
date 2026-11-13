@@ -77,6 +77,7 @@ const LOW_QTY = 10;
 
 function twSource() {
   let data = null;
+  let scheduleIds = new Set();
   return {
     region: 'tw',
     labels: { pref: '縣市', city: '鄉鎮市區', choosePref: '選擇縣市…', locale: 'zh-Hant' },
@@ -94,14 +95,20 @@ function twSource() {
       popupMeta: (s) => (s.qty > 0 ? `剩 ${s.qty} 籤` : null),
     },
     async load() {
-      data = await loadJson('data/tw-familymart.json');
+      const [tw, sched] = await Promise.all([loadJson('data/tw-familymart.json'), loadSchedule()]);
+      data = tw;
+      scheduleIds = new Set(sched.items.map((i) => i.id));
       const lotteries = data.products.map((p) => ({
         id: p.code,
-        name_ja: p.short,      // app.js 共用欄位名；台灣直接放中文名
+        // 跟日本頁同一款商品：有對到就用日本正式名，搜尋另外帶台灣品名
+        name_ja: p.jp_name || p.short,
+        tw_name: p.short,
         full_name: p.name,
         series: p.series,
         stores: p.stores,
         qty: p.qty,
+        jp_id: p.jp_id ?? null,
+        image_url: p.image_url ?? null,
         release_date: '',
       }));
       const prefectures = TW_CITIES.map((c) => ({ code: c, name_ja: c, name_zh: c }));
@@ -135,22 +142,25 @@ function twSource() {
     },
     card(l) {
       return {
-        image: null,
+        image: l.image_url,
         placeholder: l.series,
         pill: l.stores > 0 ? { text: `${l.stores} 家有貨`, kind: 'dark' } : { text: '全台售完', kind: 'red' },
         name: l.name_ja,
         sub: l.stores > 0 ? `全台剩 ${l.qty.toLocaleString()} 籤` : '目前沒有門市有貨',
-        moreHref: null,
+        // 同一款日本也有賣：發售日曆裡有就連本站詳細頁，否則連日本官網
+        moreHref: !l.jp_id ? null
+          : scheduleIds.has(l.jp_id) ? `kuji?id=${encodeURIComponent(l.jp_id)}`
+          : `https://1kuji.com/products/${encodeURIComponent(l.jp_id)}`,
       };
     },
-    searchBlob: (l) => buildSearchBlob(l) + ` ${l.full_name} ${l.series}`.toLowerCase(),
+    searchBlob: (l) => buildSearchBlob(l) + ` ${l.tw_name} ${l.full_name} ${l.series}`.toLowerCase(),
     shopBadge: (shop) => (shop.qty > 0 ? { text: `剩 ${shop.qty} 籤`, low: shop.qty <= LOW_QTY } : null),
     mapsQuery: (shop) => `${shop.name} ${shop.address}`,
     shopLine: () => '',
     // 同一區裡剩越少的排越前面（越接近最後賞）
     compareInGroup: (a, b) => (a.qty ?? 0) - (b.qty ?? 0),
     csvFilename(lottery, pref, cities) {
-      const clean = lottery.name_ja.replace(/[\\/:*?"<>|]/g, '_');
+      const clean = lottery.tw_name.replace(/[\\/:*?"<>|]/g, '_');
       let region = pref.name_zh;
       if (cities?.length > 3) region += `_${cities.length}區`;
       else if (cities?.length) region += `_${cities.join('_')}`;

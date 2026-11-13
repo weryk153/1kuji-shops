@@ -5,7 +5,7 @@
 //      FM_LIMIT=5 npm run scrape:tw（只查前 5 個郵遞區號，測試用；不寫檔）
 import { readFile, writeFile } from 'node:fs/promises';
 import { pool } from './pool.ts';
-import { FM_PROJECT_CODE, kujiProducts, buildFile, type FmClassification, type FmStore } from './familymart.ts';
+import { FM_PROJECT_CODE, kujiProducts, buildFile, attachJp, type FmClassification, type FmStore, type CatalogItem } from './familymart.ts';
 
 const API = 'https://stamp.family.com.tw/api/maps';
 const OUT = 'data/tw-familymart.json';
@@ -69,6 +69,14 @@ async function main() {
   });
 
   const file = buildFile(batches, products, new Date().toISOString());
+  const jpMap = JSON.parse(await readFile(new URL('./tw-jp-map.json', import.meta.url), 'utf8')) as Record<string, string>;
+  let catalog: CatalogItem[] = [];
+  try { catalog = JSON.parse(await readFile('data/jp-catalog.json', 'utf8')).items; } catch { /* 沒目錄就沒圖 */ }
+  const { products: withJp, unmapped } = attachJp(file.products, jpMap, catalog);
+  file.products = withJp;
+  for (const p of unmapped) {
+    console.warn(`  ? 沒有對到日本商品（沒圖）：${p.code} ${p.name}——在 scraper/tw-jp-map.json 補 "${p.code}": "<1kuji id>"`);
+  }
   console.log(`familymart: ${file.stores.length} 家店有一番賞，${((Date.now() - t0) / 1000).toFixed(0)} 秒，失敗 ${failed.length}`);
   for (const p of file.products) console.log(`  ${p.short.padEnd(12)} ${String(p.stores).padStart(4)} 家 ${String(p.qty).padStart(6)} 籤`);
   for (const f of failed) console.warn(`  ✗ ${f}`);

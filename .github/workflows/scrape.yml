@@ -39,6 +39,11 @@ jobs:
       - name: Run scraper
         run: npm run scrape
 
+      # 日本商品目錄（台灣頁對照商品圖用），只抓最近 3 個月合併進去
+      - name: Update JP catalog
+        run: npm run scrape:catalog
+        continue-on-error: true
+
       # Mercari 成交行情（無頭瀏覽器）。失敗不擋店舖資料 commit，前端沿用上次的 market.json
       - name: Install Chromium for market scrape
         run: npx playwright install --with-deps chromium

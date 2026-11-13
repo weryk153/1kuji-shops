@@ -13,7 +13,8 @@
     "build": "bash scripts/build.sh",
     "serve": "npx serve web",
     "scrape:market": "tsx scraper/fetch-market.ts",
-    "scrape:tw": "tsx scraper/fetch-familymart.ts"
+    "scrape:tw": "tsx scraper/fetch-familymart.ts",
+    "scrape:catalog": "tsx scraper/fetch-jp-catalog.ts"
   },
   "devDependencies": {
     "@types/node": "^20.0.0",

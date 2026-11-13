@@ -110,6 +110,11 @@ function renderLotteryCard(lottery) {
   if (info.moreHref) {
     const more = el('a', 'lottery-more', '看賞品 ›');
     more.href = info.moreHref;
+    if (/^https?:/.test(info.moreHref)) {
+      more.target = '_blank';
+      more.rel = 'noopener';
+      more.textContent = '看賞品（日本官網）↗';
+    }
     card.append(more);
   }
   return card;
