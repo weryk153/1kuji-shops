@@ -11,7 +11,7 @@
   <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;500;700;900&display=swap">
   <link rel="stylesheet" href="style.css">
 </head>
-<body>
+<body data-region="tw">
   <nav class="app-nav" aria-label="主要頁面">
     <a class="nav-brand" href="./"><svg class="" width="30" height="30" viewBox="0 0 32 32" aria-hidden="true"><rect x="3" y="13" width="7" height="15" rx="2.5" fill="#22201f"/><path d="M14.5 4h4.2L23 8.3V26a2 2 0 0 1-2 2h-6.5a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2z" fill="#e5463b"/><path d="M18.7 4v4.3H23" fill="#f6a39c"/><rect x="25" y="16" width="5" height="12" rx="2.5" fill="#22201f"/></svg><span><b>一番賞店舖查詢</b><small>日本一番くじ 找店・日曆</small></span></a>
     <div class="nav-links">
@@ -29,14 +29,18 @@
         <p class="eyebrow">FIND SHOPS · TAIWAN</p>
         <h1>找販售店舖</h1>
         <nav class="region-tabs" aria-label="地區"><a href="shops">日本</a><a href="tw" aria-current="page">台灣</a></nav>
-        <p>台灣現在有哪幾款一番賞、哪幾間店有貨、各剩幾籤，剩越少越接近最後賞。目前只有全家便利商店的資料。</p>
-        <p class="meta">資料來源 全家「造型卡/一番賞地圖」・全家更新於 <span id="source-updated">載入中…</span></p>
+        <p>選一個一番賞，地圖會標出有貨的店和各剩幾籤；按地圖上的「◎ 我的位置」看附近有哪幾間。目前只有全家便利商店的資料。</p>
+        <p class="meta">資料來源 全家「造型卡/一番賞地圖」・全家更新於 <span id="scraped-at">載入中…</span></p>
         <p class="stale-warning" id="stale-warning" hidden>資料超過 24 小時未更新，庫存可能已經不準</p>
       </header>
 
-      <section aria-labelledby="kuji-label">
-        <div class="step-head"><span class="step-no">1</span><div><h2 id="kuji-label">選擇一番賞</h2><p class="sec-en">PICK A KUJI</p></div></div>
-        <div id="kuji-picker" class="tw-picker" role="group" aria-label="一番賞"><p class="picker-empty">載入中…</p></div>
+      <section aria-labelledby="lottery-label">
+        <div class="step-head"><span class="step-no">1</span><div><h2 id="lottery-label">選擇一番賞</h2><p class="sec-en">PICK A KUJI</p></div></div>
+        <div class="picker-tools">
+          <input type="search" id="lottery-search" class="search-input" placeholder="搜尋作品，例如：海賊王、鬼滅" aria-label="搜尋一番賞名稱">
+        </div>
+        <div id="lottery-picker" class="lottery-picker"><p class="picker-empty">載入中…</p></div>
+        <p class="picker-empty" id="picker-no-match" hidden>沒有符合的一番賞，換個關鍵字試試。</p>
       </section>
 
       <section class="finder" aria-labelledby="finder-label">
@@ -44,29 +48,65 @@
         <div class="filters">
           <label class="field pref-field">
             <span class="field-label">縣市</span>
-            <select id="city-select" disabled><option value="">請先選一番賞</option></select>
+            <select id="prefecture-select" disabled><option value="">請先選一番賞</option></select>
           </label>
+          <details class="city-field" id="city-field" hidden>
+            <summary class="city-header">
+              <span class="field-label">鄉鎮市區 <span class="city-summary-count" id="city-summary-count" aria-live="polite"></span></span>
+              <span class="city-summary-toggle" aria-hidden="true"></span>
+            </summary>
+            <div class="city-controls">
+              <input type="search" id="city-search" class="search-input search-input-sm" placeholder="搜尋鄉鎮市區…" aria-label="搜尋鄉鎮市區">
+              <div class="city-actions">
+                <button type="button" id="city-select-all" class="link-btn">全選</button>
+                <button type="button" id="city-clear" class="link-btn">全清</button>
+              </div>
+            </div>
+            <div id="city-list" class="city-list" role="group" aria-label="鄉鎮市區"></div>
+          </details>
         </div>
 
         <div class="map-section" aria-label="店舖地圖"><div id="map-container"></div></div>
 
         <div class="results">
-          <p id="status" class="status" aria-live="polite"></p>
+          <p id="status" class="status"></p>
           <div id="sort-toggle" class="sort-toggle" hidden role="radiogroup" aria-label="排序方式">
-            <button type="button" class="sort-opt selected" data-mode="few" role="radio" aria-checked="true">剩最少</button>
-            <button type="button" class="sort-opt" data-mode="many" role="radio" aria-checked="false">剩最多</button>
-            <button type="button" class="sort-opt" data-mode="distance" role="radio" aria-checked="false">離我最近</button>
+            <button type="button" class="sort-opt selected" data-mode="city" role="radio" aria-checked="true">城市分群</button>
+            <button type="button" class="sort-opt" data-mode="distance" role="radio" aria-checked="false">依距離</button>
           </div>
           <div id="shop-list" class="shop-list"></div>
         </div>
-        <p class="tw-note">庫存是全家地圖網站的數字，跟店頭實際剩餘可能有落差；出發前建議先打電話問。只列出全家，7-ELEVEN、玩具店、官方認證店不在內。</p>
+        <p class="region-note">庫存是全家地圖網站的數字，跟店頭實際剩餘可能有落差，出發前建議先打電話問。7-ELEVEN、玩具店、官方認證店還沒有收錄。</p>
+
+        <section class="export" aria-labelledby="export-label">
+          <h2 id="export-label">帶走這份清單</h2>
+          <p>選好縣市和鄉鎮市區後，可以複製連結給朋友，或下載 CSV 匯入 Google My Maps。</p>
+          <div class="actions">
+            <button id="copy-link" class="btn btn-secondary" disabled>複製分享連結</button>
+            <button id="download-csv" class="btn btn-primary" disabled>下載 CSV</button>
+          </div>
+          <details class="howto">
+            <summary>怎麼把 CSV 變成 Google 地圖？</summary>
+            <ol class="howto-steps">
+              <li>點「下載 CSV」存到手機或電腦</li>
+              <li>用 Google 帳號開啟 <a href="https://mymaps.google.com" target="_blank" rel="noopener">mymaps.google.com</a></li>
+              <li>點「<strong>+ 建立新地圖</strong>」</li>
+              <li>左側「未命名圖層」裡點「<strong>匯入</strong>」</li>
+              <li>把 CSV 拖進去（手機可選「從裝置選取」）</li>
+              <li>選 <strong>Address</strong> 當地址欄、<strong>Name</strong> 當標題</li>
+              <li>等幾秒，店家會以紅色圖釘出現在地圖上</li>
+              <li>右上「分享」→「擁有連結的人都可查看」→ 複製連結</li>
+            </ol>
+            <p class="howto-note">地址 Google 會自動定位，不用調整。</p>
+          </details>
+        </section>
       </section>
 
       <footer class="site-foot">資料來源 全家便利商店・本站與全家、BANDAI SPIRITS 無關</footer>
     </main>
   </div>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.9.4/leaflet.min.js" integrity="sha384-NElt3Op+9NBMCYaef5HxeJmU4Xeard/Lku8ek6hoPTvYkQPh3zLIrJP7KiRocsxO" crossorigin="anonymous"></script>
-  <script type="module" src="tw.js"></script>
+  <script type="module" src="app.js"></script>
   <script defer src='https://static.cloudflareinsights.com/beacon.min.js' data-cf-beacon='{"token": "0cc2e31d71f940ca8a9e6e9164d87bcc"}'></script>
 </body>
 </html>

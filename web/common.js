@@ -172,3 +172,17 @@ export function mercariSoldUrl(query) {
 export function yen(n) {
   return `${Math.round(n).toLocaleString('ja-JP')} 円`;
 }
+
+// 「找店」記住上次看的地區（日本 /shops、台灣 /tw）：導覽列的「找店」直接連到那一頁
+const FIND_REGION_KEY = 'find-region';
+(function rememberFindRegion() {
+  if (typeof document === 'undefined') return;
+  const m = location.pathname.match(/\/(shops|tw)(\.html)?$/);
+  try {
+    if (m) localStorage.setItem(FIND_REGION_KEY, m[1]);
+    const region = localStorage.getItem(FIND_REGION_KEY);
+    if (region !== 'tw') return;
+    const link = document.querySelector('.nav-links a[href="shops"]');
+    if (link) link.setAttribute('href', 'tw');
+  } catch { /* 無痕模式或封鎖儲存：照預設連到日本 */ }
+})();
