@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<!-- worker 上的 7-11 庫存排程：每天 09:20、18:20 跑 scripts/tw-seven-worker.sh
+     安裝：cp 到 ~/Library/LaunchAgents/ 後 launchctl load -w ~/Library/LaunchAgents/com.kuren.1kuji-seven.plist -->
+<plist version="1.0">
+<dict>
+  <key>Label</key><string>com.kuren.1kuji-seven</string>
+  <key>ProgramArguments</key>
+  <array>
+    <string>/bin/bash</string>
+    <string>-lc</string>
+    <string>$HOME/1kuji-shops/scripts/tw-seven-worker.sh</string>
+  </array>
+  <key>StartCalendarInterval</key>
+  <array>
+    <dict><key>Hour</key><integer>9</integer><key>Minute</key><integer>20</integer></dict>
+    <dict><key>Hour</key><integer>18</integer><key>Minute</key><integer>20</integer></dict>
+  </array>
+  <key>StandardOutPath</key><string>/tmp/1kuji-seven.log</string>
+  <key>StandardErrorPath</key><string>/tmp/1kuji-seven.log</string>
+</dict>
+</plist>

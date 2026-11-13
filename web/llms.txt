@@ -6,7 +6,9 @@
 
 - [首頁](https://1kuji-shops.pages.dev/)：販售中與近日開賣的一番賞
 - [找店](https://1kuji-shops.pages.dev/shops)：選一番賞，在地圖上找販售店舖或附近的店
+- [找店・台灣](https://1kuji-shops.pages.dev/tw)：台灣全家、7-ELEVEN 的一番賞庫存，各店剩幾籤、附近有貨的店（資料來源超商官方門市地圖）
 - [發售日曆](https://1kuji-shops.pages.dev/schedule)：發售日、單抽價格、取扱店
+- [發售日曆・台灣](https://1kuji-shops.pages.dev/tw-schedule)：台灣開賣日、單抽台幣價格、販售通路
 - [期望值計算](https://1kuji-shops.pages.dev/calc)：照店頭獎項看板算每抽期望值
 - [排名](https://1kuji-shops.pages.dev/ranking)：最高行情賞、售完比例、販售店數
 

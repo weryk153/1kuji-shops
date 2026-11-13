@@ -1,0 +1,210 @@
+{
+ "_說明": "台灣開賣日與售價。官方網站沒有這兩項，來源是「一番賞台灣」FB 粉專的發售預告（facebook.com/1KUJI.TAIWAN），由人工觸發的瀏覽器讀取整理；id 是官方商品 id（1kuji.com/areas/tw/products/<id>）。",
+ "updated_at": "2026-11-13",
+ "items": [
+  {
+   "id": "disney4",
+   "date": "2026-09-17",
+   "price": 355,
+   "name_zh": "一番賞 〈迪士尼〉WORLD OF IMAGINATION",
+   "channels": []
+  },
+  {
+   "id": "eva19",
+   "date": "2026-09-17",
+   "price": 305,
+   "name_zh": "一番賞 福音戰士新劇場版：序",
+   "channels": []
+  },
+  {
+   "id": "minions11",
+   "date": "2026-09-17",
+   "price": 285,
+   "name_zh": "一番賞 小小兵 電影「Minions & Monsters」",
+   "channels": [
+    "全家"
+   ]
+  },
+  {
+   "id": "natsume48",
+   "date": "2026-09-17",
+   "price": 300,
+   "name_zh": "一番賞 夏目友人帳 雨天也好，晴天也好。",
+   "channels": []
+  },
+  {
+   "id": "nikke8",
+   "date": "2026-09-17",
+   "price": 340,
+   "name_zh": "一番賞 勝利女神：NIKKE CHAPTER8",
+   "channels": []
+  },
+  {
+   "id": "shingeki15",
+   "date": "2026-09-17",
+   "price": 270,
+   "name_zh": "一番賞 進擊的巨人 ~選擇與結果~",
+   "channels": []
+  },
+  {
+   "id": "db_gt",
+   "date": "2026-09-24",
+   "price": 305,
+   "name_zh": "一番賞 七龍珠 GT",
+   "channels": []
+  },
+  {
+   "id": "gintama22",
+   "date": "2026-09-24",
+   "price": 310,
+   "name_zh": "一番賞 銀魂 誕生20周年記念 銀魂展 ~二十歲的群英會~ 第二彈",
+   "channels": []
+  },
+  {
+   "id": "haikyu32",
+   "date": "2026-09-24",
+   "price": 305,
+   "name_zh": "一番賞 排球少年!! -烏野的未來-",
+   "channels": []
+  },
+  {
+   "id": "reptiles3",
+   "date": "2026-09-24",
+   "price": 265,
+   "name_zh": "一番賞 爬蟲類&兩生類~Tiny-Friends~ vol.3",
+   "channels": []
+  },
+  {
+   "id": "hololive-rpg",
+   "date": "2026-10-08",
+   "price": 335,
+   "name_zh": "一番賞 HOLOLIVE ～RPG Style～",
+   "channels": [
+    "7-ELEVEN"
+   ]
+  },
+  {
+   "id": "houkaistarrail3",
+   "date": "2026-10-08",
+   "price": 560,
+   "name_zh": "一番賞 崩壞：星穹鐵道 Vol.3",
+   "channels": []
+  },
+  {
+   "id": "gkmas06",
+   "date": "2026-10-15",
+   "price": 335,
+   "name_zh": "一番賞 學園偶像大師 Part6",
+   "channels": []
+  },
+  {
+   "id": "myhero47",
+   "date": "2026-10-15",
+   "price": 305,
+   "name_zh": "一番賞 我的英雄學院 -成為最棒的英雄前的故事-",
+   "channels": [
+    "7-ELEVEN"
+   ]
+  },
+  {
+   "id": "disney_kh5",
+   "date": "2026-10-16",
+   "price": 370,
+   "name_zh": "一番賞 王國之心 -25th Anniversary-",
+   "channels": []
+  },
+  {
+   "id": "disney_ps13",
+   "date": "2026-10-16",
+   "price": 355,
+   "name_zh": "一番賞 〈迪士尼公主〉Enchanted Glow",
+   "channels": []
+  },
+  {
+   "id": "bleach8",
+   "date": "2026-10-22",
+   "price": 335,
+   "name_zh": "一番賞 BLEACH Stirring Souls vol.5",
+   "channels": []
+  },
+  {
+   "id": "hxh11",
+   "date": "2026-10-22",
+   "price": 335,
+   "name_zh": "一番賞 獵人 GREED ISLAND ②",
+   "channels": [
+    "全家"
+   ]
+  },
+  {
+   "id": "chainsawman3",
+   "date": "2026-10-29",
+   "price": 335,
+   "name_zh": "一番賞 鏈鋸人 劇場版鏈鋸人 蕾潔篇 第2彈",
+   "channels": []
+  },
+  {
+   "id": "jujutsu19",
+   "date": "2026-10-29",
+   "price": 310,
+   "name_zh": "一番賞 咒術迴戰 5周年 FINAL！",
+   "channels": []
+  },
+  {
+   "id": "theghostintheshell",
+   "date": "2026-10-29",
+   "price": 345,
+   "name_zh": "一番賞 攻殻機動隊 THE GHOST IN THE SHELL",
+   "channels": []
+  },
+  {
+   "id": "yuhaku4",
+   "date": "2026-10-29",
+   "price": 335,
+   "name_zh": "一番賞 幽遊白書 魔界之門篇",
+   "channels": []
+  },
+  {
+   "id": "disney_toy8",
+   "date": "2026-10-30",
+   "price": 380,
+   "name_zh": "一番賞 玩具總動員 ～永遠的玩伴～",
+   "channels": []
+  },
+  {
+   "id": "gundam_ucs2",
+   "date": "2026-11-05",
+   "price": 335,
+   "name_zh": "一番賞 機動戰士鋼彈 UNIVERSAL CENTURY SAGA 2",
+   "channels": []
+  },
+  {
+   "id": "umamusume17",
+   "date": "2026-11-05",
+   "price": 355,
+   "name_zh": "一番賞 賽馬娘 第14彈",
+   "channels": []
+  },
+  {
+   "id": "berserk4",
+   "date": "2026-11-12",
+   "price": 350,
+   "name_zh": "一番賞 烙印勇士 宿命的雙極",
+   "channels": []
+  },
+  {
+   "id": "fairytail",
+   "date": "2026-11-12",
+   "price": 335,
+   "name_zh": "一番賞 FAIRY TAIL 魔導少年 20週年紀念",
+   "channels": []
+  },
+  {
+   "id": "kinniku3",
+   "date": "2026-11-12",
+   "price": 365,
+   "name_zh": "一番賞 金肉人 超人血盟軍",
+   "channels": []
+  }
+ ]
+}

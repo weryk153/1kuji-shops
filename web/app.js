@@ -1,9 +1,12 @@
-import { generateCsv, generateFilename } from './csv.js';
+// 找店頁（日本 /shops、台灣 /tw 共用）；兩邊的資料差異在 sources.js
 import { translateShopName } from './translate.js';
-import { buildSearchBlob } from './aliases.js';
 import { createMap } from './map.js';
 import { haversineKm, formatDistance, nearestShops } from './geo-utils.js';
-import { loadSchedule, todayJst, formatDay, formatPrice, thumb, el } from './common.js';
+import { thumb, el } from './common.js';
+import { pickSource } from './sources.js';
+
+const source = pickSource();
+const L10N = source.labels;
 
 const $ = (id) => document.getElementById(id);
 const lotteryPicker = $('lottery-picker');
@@ -16,7 +19,6 @@ const citySummaryCount = $('city-summary-count');
 const citySelectAllBtn = $('city-select-all');
 const cityClearBtn = $('city-clear');
 const copyBtn = $('copy-link');
-const downloadBtn = $('download-csv');
 const filtersSection = document.querySelector('.filters');
 const statusEl = $('status');
 const listEl = $('shop-list');
@@ -29,7 +31,6 @@ const PAGE_SIZE = 5;
 const NEARBY_PAGE = 10;
 
 let lotteries = [];
-let scheduleById = new Map(); // id → schedule item（價格等）
 let prefectures = [];
 let currentShops = [];
 let currentLotteryId = null;
@@ -43,18 +44,12 @@ let nearbyLimit = NEARBY_PAGE; // 「附近的店」目前列出幾間
 
 async function init() {
   try {
-    const [lJson, pJson, sched] = await Promise.all([
-      fetch('data/lotteries.json').then((r) => r.json()),
-      fetch('data/prefectures.json').then((r) => r.json()),
-      loadSchedule(),
-    ]);
-    scheduleById = new Map(sched.items.map((i) => [i.id, i]));
-    lotteries = lJson.lotteries;
-    prefectures = pJson;
+    const loaded = await source.load();
+    lotteries = loaded.lotteries;
+    prefectures = loaded.prefectures;
 
-    const scrapedAt = new Date(lJson.scraped_at);
-    scrapedAtEl.textContent = formatDate(scrapedAt);
-    if (Date.now() - scrapedAt.getTime() > 48 * 3600 * 1000) {
+    scrapedAtEl.textContent = source.formatUpdated(loaded.updatedAt);
+    if (Date.now() - loaded.checkedAt.getTime() > source.staleHours * 3600 * 1000) {
       staleWarning.hidden = false;
     }
 
@@ -75,52 +70,56 @@ function populateLotteries() {
     lotteryPicker.innerHTML = '<p class="picker-empty">目前沒有可選的一番賞</p>';
     return;
   }
-  const today = todayJst();
-  const onSale = lotteries.filter((l) => l.release_date <= today)
-    .sort((a, b) => b.release_date.localeCompare(a.release_date));
-  const soon = lotteries.filter((l) => l.release_date > today)
-    .sort((a, b) => a.release_date.localeCompare(b.release_date));
-  for (const [zh, en, list] of [['販售中', 'On sale', onSale], ['即將開賣', 'Coming soon', soon]]) {
+  for (const [zh, en, list] of source.pickerGroups(lotteries)) {
     if (list.length === 0) continue;
     const group = el('div', 'picker-group');
     const h = el('h3', 'picker-group-title');
     h.append(el('span', 'sec-zh', zh), el('span', 'sec-en', en), el('span', 'picker-count', `${list.length}`));
     const row = el('div', 'picker-row');
-    for (const l of list) row.appendChild(renderLotteryCard(l, l.release_date > today));
+    for (const l of list) row.appendChild(renderLotteryCard(l));
     group.append(h, row);
     lotteryPicker.appendChild(group);
   }
 }
 
-function renderLotteryCard(lottery, upcoming) {
-  const extra = scheduleById.get(lottery.id);
+function renderLotteryCard(lottery) {
+  const info = source.card(lottery);
   const card = el('div', 'lottery-card');
   card.dataset.id = lottery.id;
-  card.dataset.search = buildSearchBlob(lottery);
+  card.dataset.search = source.searchBlob(lottery);
 
   const btn = el('button', 'lottery-select');
   btn.type = 'button';
   btn.setAttribute('aria-pressed', 'false');
-  const t = thumb(extra?.banner_url || lottery.image_url, '');
-  t.appendChild(el('span', upcoming ? 'pill red' : 'pill dark',
-    upcoming ? `${formatDay(lottery.release_date, { weekday: false })} 開賣` : '販售中'));
-  const price = formatPrice(extra?.price);
-  btn.append(t, el('span', 'name', lottery.name_ja),
-    el('span', 'date', price || `${formatDay(lottery.release_date)} 開賣`));
+  const t = thumb(info.image, '');
+  if (!info.image && info.placeholder) {
+    t.classList.add('thumb-text');
+    t.appendChild(el('span', 'thumb-label', info.placeholder));
+  }
+  t.appendChild(el('span', `pill ${info.pill.kind}`, info.pill.text));
+  btn.append(t, el('span', 'name', info.name), el('span', 'date', info.sub));
   btn.addEventListener('click', () => {
     selectLottery(lottery.id);
     // 選好後帶到地圖（選擇器很長，不捲過去看不到結果）
     document.querySelector('.finder')?.scrollIntoView({ behavior: 'smooth', block: 'start' });
   });
 
-  const more = el('a', 'lottery-more', '看賞品 ›');
-  more.href = `kuji?id=${encodeURIComponent(lottery.id)}`;
-  card.append(btn, more);
+  card.append(btn);
+  if (info.moreHref) {
+    const more = el('a', 'lottery-more', '看賞品 ›');
+    more.href = info.moreHref;
+    if (/^https?:/.test(info.moreHref)) {
+      more.target = '_blank';
+      more.rel = 'noopener';
+      more.textContent = '看賞品（官網）↗';
+    }
+    card.append(more);
+  }
   return card;
 }
 
 function initMap() {
-  map = createMap({ container: mapContainer, onLocate: handleLocate });
+  map = createMap({ container: mapContainer, onLocate: handleLocate, ...source.mapOptions });
   map.init();
 }
 
@@ -150,7 +149,7 @@ function syncCityCheckboxes() {
 }
 
 function populatePrefectures() {
-  prefectureSelect.innerHTML = '<option value="">選擇都道府縣…</option>';
+  prefectureSelect.innerHTML = `<option value="">${L10N.choosePref}</option>`;
   for (const p of prefectures) {
     const opt = document.createElement('option');
     opt.value = p.code;
@@ -164,7 +163,6 @@ function bindEvents() {
   citySelectAllBtn.addEventListener('click', onCitySelectAll);
   cityClearBtn.addEventListener('click', onCityClear);
   copyBtn.addEventListener('click', onCopyLink);
-  downloadBtn.addEventListener('click', onDownloadCsv);
   lotterySearchInput.addEventListener('input', onLotterySearch);
   citySearchInput.addEventListener('input', onCitySearch);
   for (const btn of sortToggleEl.querySelectorAll('.sort-opt')) {
@@ -230,19 +228,17 @@ async function selectLottery(id, opts = {}) {
 
   try {
     statusEl.textContent = '載入店舖資料中…';
-    const res = await fetch(`data/shops/${encodeURIComponent(id)}.json`);
+    const shops = await source.loadShops(id, lotteries.find((l) => l.id === id));
     // 過期 fetch — 使用者已切到別的 id，不要覆蓋
     if (pendingLotteryId !== id) return;
-    if (!res.ok) {
+    if (!shops) {
       statusEl.textContent = '找不到此一番賞，可能已下檔';
       markSelectedCard('');
       prefectureSelect.disabled = true;
       map?.setShops(null);
       return;
     }
-    const data = await res.json();
-    if (pendingLotteryId !== id) return; // 再 check 一次（json 解析也是 await）
-    currentShops = data.shops;
+    currentShops = shops;
     currentLotteryId = id;
     nearbyLimit = NEARBY_PAGE;
     map?.setShops(currentShops);
@@ -298,7 +294,7 @@ function rebuildCities() {
     byName.get(name).count += 1;
   }
   availableCities = [...byName.values()]
-    .sort((a, b) => a.name.localeCompare(b.name, 'ja'));
+    .sort((a, b) => a.name.localeCompare(b.name, L10N.locale));
   if (availableCities.length === 0) {
     cityField.hidden = true;
     return;
@@ -373,7 +369,14 @@ function render() {
 
   if (!currentLotteryId) {
     statusEl.textContent = userLocation ? '已取得位置，請先選一番賞' : '請先選一番賞';
-    setActionsEnabled(false);
+    setActionsEnabled();
+    return;
+  }
+
+  // 這款沒有任何店舖資料（台灣：還沒開賣、或全家沒賣）
+  if (currentShops.length === 0 && source.noShopsStatus) {
+    statusEl.textContent = source.noShopsStatus(lotteries.find((l) => l.id === currentLotteryId));
+    setActionsEnabled();
     return;
   }
 
@@ -384,10 +387,10 @@ function render() {
     sortToggleEl.hidden = !userLocation;
     if (sortMode === 'distance' && userLocation) renderByDistance(area.shops);
     else renderGrouped(area.shops);
-    setActionsEnabled(true);
+    setActionsEnabled();
     return;
   }
-  setActionsEnabled(false);
+  setActionsEnabled();
   // 地區沒選完整、但有定位 → 列出附近的店
   if (userLocation) {
     renderNearby();
@@ -400,20 +403,20 @@ function render() {
 function resolveArea() {
   const prefCode = prefectureSelect.value;
   if (!prefCode) {
-    return { status: '按地圖右下「◎ 我的位置」看附近的店，或選擇都道府縣' };
+    return { status: `按地圖右下「◎ 我的位置」看附近的店，或選擇${L10N.pref}` };
   }
   const inPref = currentShops.filter((s) => s.prefecture_code === prefCode);
   const prefName = prefectures.find((p) => p.code === prefCode)?.name_zh ?? '';
   if (inPref.length === 0) return { status: `${prefName} 目前沒有販售店舖` };
   if (availableCities.length > 0 && selectedCities.size === 0) {
-    return { status: `${prefName} 共 ${inPref.length} 家店舖，請勾選市区町村` };
+    return { status: `${prefName} 共 ${inPref.length} 家店舖，請勾選${L10N.city}` };
   }
   const filtered = availableCities.length > 0
     ? inPref.filter((s) => selectedCities.has(s.city || ''))
     : inPref;
-  if (filtered.length === 0) return { status: '所選市区町村沒有店舖' };
+  if (filtered.length === 0) return { status: `所選${L10N.city}沒有店舖` };
   const status = availableCities.length > 0
-    ? `${prefName} ${selectedCities.size} 個市区町村，共 ${filtered.length} 家店舖`
+    ? `${prefName} ${selectedCities.size} 個${L10N.city}，共 ${filtered.length} 家店舖`
     : `${prefName} 共 ${filtered.length} 家店舖`;
   return { status, shops: filtered };
 }
@@ -463,8 +466,8 @@ function renderGrouped(shops) {
     groups.get(key).push(s);
   }
   // 售完店排到每組最後（pagination 預設藏在「展開更多」裡）
-  for (const arr of groups.values()) arr.sort(soldOutLast);
-  const keys = [...groups.keys()].sort((a, b) => a.localeCompare(b, 'ja'));
+  for (const arr of groups.values()) arr.sort((a, b) => soldOutLast(a, b) || source.compareInGroup(a, b));
+  const keys = [...groups.keys()].sort((a, b) => a.localeCompare(b, L10N.locale));
   for (const key of keys) {
     const group = document.createElement('section');
     group.className = 'city-group';
@@ -545,6 +548,8 @@ function renderShop(shop, precomputedKm) {
     badge.textContent = '售完';
     nameEl.appendChild(badge);
   }
+  const extra = source.shopBadge(shop);
+  if (extra) nameEl.appendChild(el('span', `qty-badge${extra.low ? ' is-low' : ''}`, extra.text));
 
   const addrEl = document.createElement('div');
   addrEl.className = 'address';
@@ -552,13 +557,13 @@ function renderShop(shop, precomputedKm) {
 
   const relEl = document.createElement('div');
   relEl.className = 'release';
-  relEl.textContent = `開賣 ${formatDateTime(shop.release_datetime)}`;
+  relEl.textContent = source.shopLine(shop);
 
   // shop.address 是 1kuji.com 拉的第三方資料 — 用 setAttribute('href', ...)
   // 而非 innerHTML 模板，避免奇怪字元造成 attribute escape 問題
   const link = document.createElement('a');
   link.className = 'map-link';
-  link.href = `https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(shop.address)}`;
+  link.href = `https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(source.mapsQuery(shop))}`;
   link.target = '_blank';
   link.rel = 'noopener';
   link.title = '在 Google 地圖開啟';
@@ -579,7 +584,7 @@ function renderShop(shop, precomputedKm) {
   }
   actions.appendChild(link);
 
-  li.append(nameEl, addrEl, relEl, actions);
+  li.append(nameEl, addrEl, ...(relEl.textContent ? [relEl] : []), actions);
 
   const km = precomputedKm != null ? precomputedKm : withDistance(shop);
   if (km != null) {
@@ -591,9 +596,9 @@ function renderShop(shop, precomputedKm) {
   return li;
 }
 
-function setActionsEnabled(enabled) {
-  copyBtn.disabled = !enabled;
-  downloadBtn.disabled = !enabled;
+// 分享連結：選了一番賞就能分享（網址會帶上目前的地區篩選）
+function setActionsEnabled() {
+  copyBtn.disabled = !currentLotteryId;
 }
 
 function updateUrl() {
@@ -661,57 +666,6 @@ async function onCopyLink() {
     copyBtn.textContent = '複製分享連結';
     copyBtn.classList.remove('success');
   }, 1500);
-}
-
-function onDownloadCsv() {
-  const prefCode = prefectureSelect.value;
-  const lottery = lotteries.find((l) => l.id === currentLotteryId);
-  const pref = prefectures.find((p) => p.code === prefCode);
-  if (!lottery || !pref) return;
-  const inPref = currentShops.filter((s) => s.prefecture_code === prefCode);
-  const filtered = availableCities.length > 0
-    ? inPref.filter((s) => selectedCities.has(s.city || ''))
-    : inPref;
-  if (filtered.length === 0) return;
-  const csv = generateCsv(filtered);
-  const sortedCities = [...selectedCities].sort((a, b) => a.localeCompare(b, 'ja'));
-  const filename = generateFilename(lottery, pref, sortedCities);
-  triggerDownload(csv, filename);
-  flashDownloadSuccess(filtered.length);
-}
-
-function flashDownloadSuccess(n) {
-  const original = downloadBtn.textContent;
-  downloadBtn.textContent = `已下載 ${n} 筆 ✓`;
-  downloadBtn.classList.add('success');
-  setTimeout(() => {
-    downloadBtn.textContent = original;
-    downloadBtn.classList.remove('success');
-  }, 1800);
-}
-
-function triggerDownload(content, filename) {
-  const blob = new Blob([content], { type: 'text/csv;charset=utf-8' });
-  const url = URL.createObjectURL(blob);
-  const a = document.createElement('a');
-  a.href = url;
-  a.download = filename;
-  a.click();
-  URL.revokeObjectURL(url);
-}
-
-const JST_FMT = new Intl.DateTimeFormat('ja-JP', {
-  year: 'numeric', month: '2-digit', day: '2-digit',
-  hour: '2-digit', minute: '2-digit', timeZone: 'Asia/Tokyo', hour12: false,
-});
-function formatDate(d) {
-  return JST_FMT.format(d).replace(/\//g, '-') + ' JST';
-}
-function formatDateTime(iso) {
-  if (!iso) return '';
-  const d = new Date(iso);
-  if (isNaN(d.valueOf())) return iso;
-  return formatDate(d);
 }
 
 init();

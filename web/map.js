@@ -8,6 +8,11 @@ import { haversineKm, formatDistance } from './geo-utils.js';
 
 const JAPAN_CENTER = [36.5, 137.5];
 const JAPAN_ZOOM = 5;
+const GSI_TILES = {
+  url: 'https://cyberjapandata.gsi.go.jp/xyz/pale/{z}/{x}/{y}.png',
+  attribution: '<a href="https://maps.gsi.go.jp/development/ichiran.html" target="_blank" rel="noopener">国土地理院</a>',
+  maxNativeZoom: 18,
+};
 const NEARBY_ZOOM = 15;
 const MIN_PIN_ZOOM = 10;
 const MAX_PINS = 3000;
@@ -24,25 +29,28 @@ function hasCoord(s) {
   return Number.isFinite(s.lat) && Number.isFinite(s.lon);
 }
 
-export function createMap({ container, onLocate }) {
+// 預設是日本（国土地理院淡色地図）；台灣頁傳入 center / zoom / tiles 改用 OSM 系底圖。
+// popupMeta(shop) 可回傳額外的 popup 文字（例：剩餘籤數）
+export function createMap({ container, onLocate, center = JAPAN_CENTER, zoom = JAPAN_ZOOM, tiles = GSI_TILES, popupMeta = null, minPinZoom = MIN_PIN_ZOOM }) {
   container.innerHTML = '';
   const el = document.createElement('div');
   el.className = 'leaflet-map';
   container.appendChild(el);
 
   const map = L.map(el, {
-    center: JAPAN_CENTER,
-    zoom: JAPAN_ZOOM,
+    center,
+    zoom,
     minZoom: 4,
     maxZoom: 18,
     // 嵌在頁面裡的地圖：滾輪預設不縮放，避免捲頁時被地圖吃掉；點過地圖才啟用
     scrollWheelZoom: false,
     preferCanvas: true,
   });
-  L.tileLayer('https://cyberjapandata.gsi.go.jp/xyz/pale/{z}/{x}/{y}.png', {
-    attribution: '<a href="https://maps.gsi.go.jp/development/ichiran.html" target="_blank" rel="noopener">国土地理院</a>',
-    maxNativeZoom: 18,
+  L.tileLayer(tiles.url, {
+    attribution: tiles.attribution,
+    maxNativeZoom: tiles.maxNativeZoom ?? 18,
     maxZoom: 18,
+    ...(tiles.subdomains ? { subdomains: tiles.subdomains } : {}),
   }).addTo(map);
   map.on('click', () => map.scrollWheelZoom.enable());
   map.on('mouseout', () => map.scrollWheelZoom.disable());
@@ -122,6 +130,7 @@ export function createMap({ container, onLocate }) {
     const meta = document.createElement('div');
     meta.className = 'shop-popup-meta';
     const parts = [];
+    if (popupMeta) parts.push(...[].concat(popupMeta(s) || []));
     if (user) parts.push(formatDistance(haversineKm(user.lat, user.lon, s.lat, s.lon)));
     if (s.release_datetime) {
       const d = new Date(s.release_datetime);
@@ -157,7 +166,7 @@ export function createMap({ container, onLocate }) {
       showHint('先選一番賞，地圖會標出販售店舖');
       return;
     }
-    if (map.getZoom() < MIN_PIN_ZOOM) {
+    if (map.getZoom() < minPinZoom) {
       showHint('放大地圖，或按「◎ 我的位置」看附近的店');
       return;
     }

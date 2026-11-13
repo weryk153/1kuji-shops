@@ -28,6 +28,7 @@
       <header class="page-head">
         <p class="eyebrow">FIND SHOPS</p>
         <h1>找販售店舖</h1>
+        <nav class="region-tabs" aria-label="地區"><a href="shops" aria-current="page">日本</a><a href="tw">台灣</a></nav>
         <p>選一個一番賞，地圖會標出有賣的店；按地圖上的「◎ 我的位置」看附近有哪幾間。</p>
         <p class="meta">資料來源 1kuji.com・最後更新 <span id="scraped-at">載入中…</span></p>
         <p class="stale-warning" id="stale-warning" hidden>資料超過 48 小時未更新</p>
@@ -77,26 +78,11 @@
         </div>
 
         <section class="export" aria-labelledby="export-label">
-          <h2 id="export-label">帶走這份清單</h2>
-          <p>選好都道府縣和市区町村後，可以複製連結給朋友，或下載 CSV 匯入 Google My Maps。</p>
+          <h2 id="export-label">分享給朋友</h2>
+          <p>連結會記住你選的一番賞和地區，朋友打開看到的就是最新資料。</p>
           <div class="actions">
-            <button id="copy-link" class="btn btn-secondary" disabled>複製分享連結</button>
-            <button id="download-csv" class="btn btn-primary" disabled>下載 CSV</button>
+            <button id="copy-link" class="btn btn-primary" disabled>複製分享連結</button>
           </div>
-          <details class="howto">
-            <summary>怎麼把 CSV 變成 Google 地圖？</summary>
-            <ol class="howto-steps">
-              <li>點「下載 CSV」存到手機或電腦</li>
-              <li>用 Google 帳號開啟 <a href="https://mymaps.google.com" target="_blank" rel="noopener">mymaps.google.com</a></li>
-              <li>點「<strong>+ 建立新地圖</strong>」</li>
-              <li>左側「未命名圖層」裡點「<strong>匯入</strong>」</li>
-              <li>把 CSV 拖進去（手機可選「從裝置選取」）</li>
-              <li>選 <strong>Address</strong> 當地址欄、<strong>Name</strong> 當標題</li>
-              <li>等幾秒，店家會以紅色圖釘出現在地圖上</li>
-              <li>右上「分享」→「擁有連結的人都可查看」→ 複製連結</li>
-            </ol>
-            <p class="howto-note">日文地址 Google 會自動定位，不用調整。</p>
-          </details>
         </section>
       </section>
 
