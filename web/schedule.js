@@ -20,6 +20,7 @@ const priceText = (it) => (TW ? `${it.price} 元` : `${it.price}円`);
 const unitText = TW ? '／抽' : '／回';
 let undatedUpcoming = []; // 台灣：官方列為即將開賣、但粉專還沒公布日期的
 let scheduleIds = new Set();
+let sevenIds = new Set();
 
 async function loadTw() {
   const [rel, lineup, fm, sched] = await Promise.all([
@@ -27,7 +28,8 @@ async function loadTw() {
     loadJson('data/tw-lineup.json'),
     loadJson('data/tw-familymart.json').catch(() => ({ products: [] })),
     loadSchedule(),
-  ]);
+    loadJson('data/tw-seven.json').catch(() => ({ products: [] })),
+  ]).then(([r, l, f, s, sv]) => { sevenIds = new Set(sv.products.filter((p) => p.jp_id).map((p) => p.jp_id)); return [r, l, f, s]; });
   scheduleIds = new Set(sched.items.map((i) => i.id));
   const official = new Map([...lineup.upcoming, ...lineup.released].map((i) => [i.id, i]));
   const fmIds = new Set(fm.products.filter((p) => p.jp_id).map((p) => p.jp_id));
@@ -38,7 +40,7 @@ async function loadTw() {
     shop_date: r.date,
     online_at: null,
     price: r.price,
-    tw_tags: ['cert', ...(fmIds.has(r.id) || r.channels.includes('全家') ? ['famima'] : []), ...(r.channels.includes('7-ELEVEN') ? ['seven'] : [])],
+    tw_tags: ['cert', ...(fmIds.has(r.id) || r.channels.includes('全家') ? ['famima'] : []), ...(sevenIds.has(r.id) || r.channels.includes('7-ELEVEN') ? ['seven'] : [])],
   })).sort((a, b) => a.shop_date.localeCompare(b.shop_date));
   const dated = new Set(list.map((i) => i.id));
   undatedUpcoming = lineup.upcoming.filter((i) => !dated.has(i.id));

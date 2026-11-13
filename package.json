@@ -14,7 +14,8 @@
     "serve": "npx serve web",
     "scrape:market": "tsx scraper/fetch-market.ts",
     "scrape:tw": "tsx scraper/fetch-familymart.ts",
-    "scrape:tw-lineup": "tsx scraper/fetch-tw-lineup.ts"
+    "scrape:tw-lineup": "tsx scraper/fetch-tw-lineup.ts",
+    "convert:seven": "tsx scraper/convert-seven.ts"
   },
   "devDependencies": {
     "@types/node": "^20.0.0",
