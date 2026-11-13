@@ -59,7 +59,7 @@ test('attachJp 依對照表帶入日本商品圖，沒對到的列在 unmapped',
   const { products, unmapped } = attachJp(
     [{ ...base, code: 'K1' }, { ...base, code: 'K2' }, { ...base, code: 'K3' }],
     { K1: 'db_sb', K3: 'gone' },
-    [{ id: 'db_sb', name_ja: '一番くじ ドラゴンボール', image_url: 'https://img/db.webp', shop_date: '2026-07-11' }],
+    [{ id: 'db_sb', name_ja: '一番くじ ドラゴンボール', image_url: 'https://img/db.webp' }],
   );
   assert.equal(products[0].jp_id, 'db_sb');
   assert.equal(products[0].image_url, 'https://img/db.webp');

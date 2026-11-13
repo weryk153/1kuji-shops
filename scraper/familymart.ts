@@ -28,9 +28,9 @@ export interface TwProduct {
   series: string;  // 全家的分類名，例：七龍珠
   stores: number;  // 有貨（qty > 0）的門市數
   qty: number;     // 全台剩餘籤數合計
-  jp_id?: string;      // 對應的日本 1kuji 商品（scraper/tw-jp-map.json）
-  jp_name?: string;    // 日本商品名，例：一番くじ ドラゴンボール スペクタクルバトル
-  image_url?: string;  // 日本官網商品圖
+  jp_id?: string;      // 對應的官方商品 id（scraper/tw-jp-map.json），例：db_sb
+  jp_name?: string;    // 官方商品名，例：一番くじ ドラゴンボール スペクタクルバトル
+  image_url?: string;  // 官方商品圖
 }
 
 export interface TwStore {
@@ -136,8 +136,9 @@ export function buildFile(
   return { scraped_at: scrapedAt, source_updated: sourceUpdated, products: productList, stores: storeList };
 }
 
-// 台灣品項 → 日本商品（圖片）。對照表沒有的回傳在 unmapped，讓爬蟲 log 出來補。
-export interface CatalogItem { id: string; name_ja: string; image_url: string; shop_date: string | null }
+// 全家品項 → 官方台灣清單的商品（data/tw-lineup.json，id 跟日本官網相同）。
+// 對照表沒有的回傳在 unmapped，讓爬蟲 log 出來補。
+export interface CatalogItem { id: string; name_ja: string; image_url: string }
 
 export function attachJp(
   products: TwProduct[],

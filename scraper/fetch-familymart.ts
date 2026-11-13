@@ -71,11 +71,14 @@ async function main() {
   const file = buildFile(batches, products, new Date().toISOString());
   const jpMap = JSON.parse(await readFile(new URL('./tw-jp-map.json', import.meta.url), 'utf8')) as Record<string, string>;
   let catalog: CatalogItem[] = [];
-  try { catalog = JSON.parse(await readFile('data/jp-catalog.json', 'utf8')).items; } catch { /* 沒目錄就沒圖 */ }
+  try {
+    const lineup = JSON.parse(await readFile('data/tw-lineup.json', 'utf8'));
+    catalog = [...lineup.upcoming, ...lineup.released];
+  } catch { /* 沒有官方清單就不對照 */ }
   const { products: withJp, unmapped } = attachJp(file.products, jpMap, catalog);
   file.products = withJp;
   for (const p of unmapped) {
-    console.warn(`  ? 沒有對到日本商品（沒圖）：${p.code} ${p.name}——在 scraper/tw-jp-map.json 補 "${p.code}": "<1kuji id>"`);
+    console.warn(`  ? 沒有對到官方台灣清單：${p.code} ${p.name}——在 scraper/tw-jp-map.json 補 "${p.code}": "<商品 id>"`);
   }
   console.log(`familymart: ${file.stores.length} 家店有一番賞，${((Date.now() - t0) / 1000).toFixed(0)} 秒，失敗 ${failed.length}`);
   for (const p of file.products) console.log(`  ${p.short.padEnd(12)} ${String(p.stores).padStart(4)} 家 ${String(p.qty).padStart(6)} 籤`);

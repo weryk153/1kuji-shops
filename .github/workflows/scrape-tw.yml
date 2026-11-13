@@ -11,6 +11,8 @@ on:
       - 'scraper/familymart.ts'
       - 'scraper/fetch-familymart.ts'
       - 'scraper/tw-postcodes.json'
+      - 'scraper/fetch-tw-lineup.ts'
+      - 'scraper/tw-jp-map.json'
 
 concurrency:
   group: scrape-tw
@@ -32,6 +34,11 @@ jobs:
 
       - run: npm ci
 
+      # 官方台灣清單（即將開賣／販售中），全家品項要對到這份的商品 id
+      - name: Scrape official Taiwan lineup
+        run: npm run scrape:tw-lineup
+        continue-on-error: true
+
       - name: Scrape FamilyMart Taiwan
         run: npm run scrape:tw
 
@@ -41,7 +48,7 @@ jobs:
         run: |
           git config user.name "github-actions[bot]"
           git config user.email "github-actions[bot]@users.noreply.github.com"
-          git add data/tw-familymart.json
+          git add data/tw-familymart.json data/tw-lineup.json
           if git diff --staged --quiet; then
             echo "No data changes, skipping commit."
             exit 0

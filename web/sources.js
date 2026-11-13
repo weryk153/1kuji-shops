@@ -74,6 +74,7 @@ const TW_FMT = new Intl.DateTimeFormat('zh-TW', {
 });
 const formatTw = (d) => TW_FMT.format(d).replace(/\//g, '-');
 const LOW_QTY = 10;
+const RECENT_RELEASED = 30;
 
 function twSource() {
   let data = null;
@@ -95,32 +96,42 @@ function twSource() {
       popupMeta: (s) => (s.qty > 0 ? `剩 ${s.qty} 籤` : null),
     },
     async load() {
-      const [tw, sched] = await Promise.all([loadJson('data/tw-familymart.json'), loadSchedule()]);
-      data = tw;
+      const [lineup, fm, sched] = await Promise.all([
+        loadJson('data/tw-lineup.json'),
+        loadJson('data/tw-familymart.json'),
+        loadSchedule(),
+      ]);
+      data = fm;
       scheduleIds = new Set(sched.items.map((i) => i.id));
-      const lotteries = data.products.map((p) => ({
-        id: p.code,
-        // 跟日本頁同一款商品：有對到就用日本正式名，搜尋另外帶台灣品名
-        name_ja: p.jp_name || p.short,
-        tw_name: p.short,
-        full_name: p.name,
-        series: p.series,
-        stores: p.stores,
-        qty: p.qty,
-        jp_id: p.jp_id ?? null,
-        image_url: p.image_url ?? null,
+      // 全家品項掛到官方商品上（scraper/tw-jp-map.json 對照）；對不到的全家品項另外列
+      const fmById = new Map(fm.products.filter((p) => p.jp_id).map((p) => [p.jp_id, p]));
+      const toLottery = (item, status) => ({
+        id: item.id,
+        name_ja: item.name_ja,
+        image_url: item.image_url,
+        status,
+        fm: fmById.get(item.id) ?? null,
         release_date: '',
-      }));
-      const prefectures = TW_CITIES.map((c) => ({ code: c, name_ja: c, name_zh: c }));
+      });
+      const upcoming = lineup.upcoming.map((i) => toLottery(i, 'upcoming'));
+      // 官方「販售中」會一路列到很舊的商品：取最新 RECENT_RELEASED 款，加上全家還有貨的
+      const released = lineup.released
+        .map((i) => toLottery(i, 'released'))
+        .filter((l, idx) => idx < RECENT_RELEASED || (l.fm?.stores ?? 0) > 0);
+      const lineupIds = new Set([...lineup.upcoming, ...lineup.released].map((i) => i.id));
+      const orphans = fm.products
+        .filter((p) => p.stores > 0 && !(p.jp_id && lineupIds.has(p.jp_id)))
+        .map((p) => ({ id: `fm-${p.code}`, name_ja: p.short, image_url: null, placeholder: p.series, status: 'released', fm: p, release_date: '' }));
       return {
-        lotteries,
-        prefectures,
-        updatedAt: data.source_updated ? new Date(data.source_updated) : new Date(data.scraped_at),
-        checkedAt: new Date(data.scraped_at),
+        lotteries: [...upcoming, ...released, ...orphans],
+        prefectures: TW_CITIES.map((c) => ({ code: c, name_ja: c, name_zh: c })),
+        updatedAt: fm.source_updated ? new Date(fm.source_updated) : new Date(fm.scraped_at),
+        checkedAt: new Date(fm.scraped_at),
       };
     },
-    async loadShops(code) {
-      if (!data.products.some((p) => p.code === code)) return null;
+    async loadShops(id, lottery) {
+      const code = lottery?.fm?.code;
+      if (!code) return [];
       return data.stores
         .filter((s) => code in s.stock)
         .map((s) => ({
@@ -134,33 +145,43 @@ function twSource() {
           ...(s.stock[code] > 0 ? {} : { sellout_flag: 1 }),
         }));
     },
+    noShopsStatus: (l) => (l.status === 'upcoming'
+      ? '還沒開賣，開賣後會顯示全家有貨的門市'
+      : '全家沒有這款的庫存資料，可能只在官方認證店販售'),
     pickerGroups(lotteries) {
       return [
-        ['有貨', 'In stock', lotteries.filter((l) => l.stores > 0)],
-        ['全台售完', 'Sold out', lotteries.filter((l) => l.stores === 0)],
+        // 找店頁：全家查得到有貨門市的排前面，其餘照官方順序（新的在前）
+        ['販售中', 'On sale', lotteries.filter((l) => l.status === 'released')
+          .sort((a, b) => Number((b.fm?.stores ?? 0) > 0) - Number((a.fm?.stores ?? 0) > 0))],
+        ['即將開賣', 'Coming soon', lotteries.filter((l) => l.status === 'upcoming')],
       ];
     },
     card(l) {
+      const fm = l.fm;
+      const sub = l.status === 'upcoming' ? '開賣日以官方公告為準'
+        : !fm ? '全家沒有販售'
+        : fm.stores > 0 ? `全家 ${fm.stores} 家・剩 ${fm.qty.toLocaleString()} 籤`
+        : '全家已售完';
+      const official = l.id.startsWith('fm-') ? null : l.id;
       return {
         image: l.image_url,
-        placeholder: l.series,
-        pill: l.stores > 0 ? { text: `${l.stores} 家有貨`, kind: 'dark' } : { text: '全台售完', kind: 'red' },
+        placeholder: l.placeholder,
+        pill: l.status === 'upcoming' ? { text: '即將開賣', kind: 'red' } : { text: '販售中', kind: 'dark' },
         name: l.name_ja,
-        sub: l.stores > 0 ? `全台剩 ${l.qty.toLocaleString()} 籤` : '目前沒有門市有貨',
-        // 同一款日本也有賣：發售日曆裡有就連本站詳細頁，否則連日本官網
-        moreHref: !l.jp_id ? null
-          : scheduleIds.has(l.jp_id) ? `kuji?id=${encodeURIComponent(l.jp_id)}`
-          : `https://1kuji.com/products/${encodeURIComponent(l.jp_id)}`,
+        sub,
+        moreHref: !official ? null
+          : scheduleIds.has(official) ? `kuji?id=${encodeURIComponent(official)}`
+          : `https://1kuji.com/areas/tw/products/${encodeURIComponent(official)}`,
       };
     },
-    searchBlob: (l) => buildSearchBlob(l) + ` ${l.tw_name} ${l.full_name} ${l.series}`.toLowerCase(),
+    searchBlob: (l) => `${buildSearchBlob(l)} ${l.fm?.short ?? ''} ${l.fm?.series ?? ''}`.toLowerCase(),
     shopBadge: (shop) => (shop.qty > 0 ? { text: `剩 ${shop.qty} 籤`, low: shop.qty <= LOW_QTY } : null),
     mapsQuery: (shop) => `${shop.name} ${shop.address}`,
     shopLine: () => '',
     // 同一區裡剩越少的排越前面（越接近最後賞）
     compareInGroup: (a, b) => (a.qty ?? 0) - (b.qty ?? 0),
     csvFilename(lottery, pref, cities) {
-      const clean = lottery.tw_name.replace(/[\\/:*?"<>|]/g, '_');
+      const clean = lottery.name_ja.replace(/^一番くじ\s*/, '').replace(/[\\/:*?"<>|]/g, '_');
       let region = pref.name_zh;
       if (cities?.length > 3) region += `_${cities.length}區`;
       else if (cities?.length) region += `_${cities.join('_')}`;

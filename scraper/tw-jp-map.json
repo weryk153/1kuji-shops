@@ -1,5 +1,5 @@
 {
-  "_說明": "全家品項代碼 → 日本 1kuji 商品 id（data/jp-catalog.json），用來顯示商品圖。新品項出現時爬蟲會在 log 列出候選，補一行即可。",
+  "_說明": "全家品項代碼 → 官方商品 id（見 https://1kuji.com/areas/tw/products ，跟日本官網同一套 id）。全家出新品項時爬蟲 log 會提示，補一行即可。",
   "1569642": "minions11",
   "1604084": "chainsawman3",
   "1559536": "kimetsu30",

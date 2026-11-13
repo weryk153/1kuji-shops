@@ -113,7 +113,7 @@ function renderLotteryCard(lottery) {
     if (/^https?:/.test(info.moreHref)) {
       more.target = '_blank';
       more.rel = 'noopener';
-      more.textContent = '看賞品（日本官網）↗';
+      more.textContent = '看賞品（官網）↗';
     }
     card.append(more);
   }
@@ -231,7 +231,7 @@ async function selectLottery(id, opts = {}) {
 
   try {
     statusEl.textContent = '載入店舖資料中…';
-    const shops = await source.loadShops(id);
+    const shops = await source.loadShops(id, lotteries.find((l) => l.id === id));
     // 過期 fetch — 使用者已切到別的 id，不要覆蓋
     if (pendingLotteryId !== id) return;
     if (!shops) {
@@ -372,6 +372,13 @@ function render() {
 
   if (!currentLotteryId) {
     statusEl.textContent = userLocation ? '已取得位置，請先選一番賞' : '請先選一番賞';
+    setActionsEnabled(false);
+    return;
+  }
+
+  // 這款沒有任何店舖資料（台灣：還沒開賣、或全家沒賣）
+  if (currentShops.length === 0 && source.noShopsStatus) {
+    statusEl.textContent = source.noShopsStatus(lotteries.find((l) => l.id === currentLotteryId));
     setActionsEnabled(false);
     return;
   }
