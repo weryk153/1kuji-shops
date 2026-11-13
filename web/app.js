@@ -19,6 +19,8 @@ const citySummaryCount = $('city-summary-count');
 const citySelectAllBtn = $('city-select-all');
 const cityClearBtn = $('city-clear');
 const copyBtn = $('copy-link');
+const shareBox = $('share-box');
+const copyBtnHtml = copyBtn.innerHTML;
 const filtersSection = document.querySelector('.filters');
 const statusEl = $('status');
 const listEl = $('shop-list');
@@ -607,9 +609,9 @@ function renderShop(shop, precomputedKm) {
   return li;
 }
 
-// 分享連結：選了一番賞就能分享（網址會帶上目前的地區篩選）
+// 分享連結：選了一番賞才出現（網址會帶上目前的地區篩選）
 function setActionsEnabled() {
-  copyBtn.disabled = !currentLotteryId;
+  shareBox.hidden = !currentLotteryId;
 }
 
 function updateUrl() {
@@ -674,7 +676,7 @@ async function onCopyLink() {
     if (ok) copyBtn.classList.add('success');
   }
   setTimeout(() => {
-    copyBtn.textContent = '複製分享連結';
+    copyBtn.innerHTML = copyBtnHtml;
     copyBtn.classList.remove('success');
   }, 1500);
 }
