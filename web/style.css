@@ -923,3 +923,8 @@ a.rank-metric:hover { text-decoration: underline; }
 .tw-qty.is-low { color: #fff; background: var(--accent); border-color: var(--accent); }
 .tw-note { margin: 16px 0 0; color: var(--soft); font-size: 0.78rem; line-height: 1.6; }
 .sort-opt:disabled { opacity: 0.45; cursor: not-allowed; }
+.region-tabs { display: inline-flex; gap: 2px; padding: 3px; margin: 10px 0 4px; border: 1px solid rgba(255, 255, 255, 0.22); border-radius: 999px; }
+.region-tabs a { padding: 0.3rem 1.1rem; border-radius: 999px; font-size: 0.86rem; font-weight: 700; color: rgba(255, 255, 255, 0.78); text-decoration: none; }
+.region-tabs a:hover { color: #fff; }
+.region-tabs a[aria-current="page"] { background: #fff; color: var(--fg); }
+.region-tabs a:focus-visible { outline: none; box-shadow: var(--shadow-focus); }

@@ -9,7 +9,7 @@
 | 發售日曆 | `/schedule` | 官網每月清單 + 價格、取扱店、各賞（`data/schedule.json`） |
 | 商品詳細 | `/kuji?id=…` | 各賞一覽 + Mercari 行情（`data/market.json`） |
 | 期望值計算 | `/calc?id=…` | 照店頭看板輸入剩餘數，行情預設帶 Mercari 中位數 |
-| 台灣全家 | `/tw?code=…` | 台灣全家各店一番賞剩餘籤數、地圖（`data/tw-familymart.json`，每 6 小時） |
+| 找店・台灣 | `/tw?code=…` | 台灣全家各店一番賞剩餘籤數、地圖（`data/tw-familymart.json`，每 6 小時） |
 | 排名 | `/ranking` | 最高行情賞、售完比例、販售店數（`web/data/stats.json`，建置時產生） |
 
 舊的分享連結 `/?lottery=…` 會自動轉到 `/shops`。
