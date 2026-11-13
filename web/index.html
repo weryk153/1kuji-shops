@@ -3,8 +3,8 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
-  <title>一番賞店舖查詢｜日本哪裡抽得到一番賞</title>
-  <meta name="description" content="查日本一番賞（一番くじ）的販售店舖地圖、附近有賣的店、發售日曆與各賞內容。">
+  <title>一番賞店舖查詢｜台灣、日本哪裡抽得到一番賞</title>
+  <meta name="description" content="查台灣與日本一番賞（一番くじ）的販售店舖地圖、全家與 7-ELEVEN 庫存、附近有賣的店、發售日曆與各賞內容。">
   <script>if (/[?&](lottery|prefecture)=/.test(location.search)) location.replace("shops" + location.search);</script>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -13,7 +13,7 @@
 </head>
 <body>
   <nav class="app-nav" aria-label="主要頁面">
-    <a class="nav-brand" href="./"><svg class="" width="30" height="30" viewBox="0 0 32 32" aria-hidden="true"><rect x="3" y="13" width="7" height="15" rx="2.5" fill="#22201f"/><path d="M14.5 4h4.2L23 8.3V26a2 2 0 0 1-2 2h-6.5a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2z" fill="#e5463b"/><path d="M18.7 4v4.3H23" fill="#f6a39c"/><rect x="25" y="16" width="5" height="12" rx="2.5" fill="#22201f"/></svg><span><b>一番賞店舖查詢</b><small>日本一番くじ 找店・日曆</small></span></a>
+    <a class="nav-brand" href="./"><svg class="" width="30" height="30" viewBox="0 0 32 32" aria-hidden="true"><rect x="3" y="13" width="7" height="15" rx="2.5" fill="#22201f"/><path d="M14.5 4h4.2L23 8.3V26a2 2 0 0 1-2 2h-6.5a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2z" fill="#e5463b"/><path d="M18.7 4v4.3H23" fill="#f6a39c"/><rect x="25" y="16" width="5" height="12" rx="2.5" fill="#22201f"/></svg><span><b>一番賞店舖查詢</b><small>台灣・日本 找店・日曆</small></span></a>
     <div class="nav-links">
         <a href="./" aria-current="page"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 10.5 12 3l9 7.5"/><path d="M5 9.5V20h5v-6h4v6h5V9.5"/></svg><span><span class="zh">首頁</span><span class="en">HOME</span></span></a>
         <a href="shops"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 21s-7-6.2-7-11.5a7 7 0 0 1 14 0C19 14.8 12 21 12 21z"/><circle cx="12" cy="9.5" r="2.5"/></svg><span><span class="zh">找店</span><span class="en">FIND SHOPS</span></span></a>
@@ -27,10 +27,14 @@
     <main>
       <section class="hero">
         <svg class="hero-mark" width="56" height="56" viewBox="0 0 32 32" aria-hidden="true"><rect x="3" y="13" width="7" height="15" rx="2.5" fill="#22201f"/><path d="M14.5 4h4.2L23 8.3V26a2 2 0 0 1-2 2h-6.5a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2z" fill="#e5463b"/><path d="M18.7 4v4.3H23" fill="#f6a39c"/><rect x="25" y="16" width="5" height="12" rx="2.5" fill="#22201f"/></svg>
-        <h1>日本哪裡抽得到一番賞？</h1>
-        <p>找出你附近有賣的店、看發售日曆，<br>在店裡還能照看板算這一抽划不划算。</p>
+        <h1>哪裡抽得到一番賞？</h1>
+        <div class="region-tabs on-light" role="tablist" aria-label="地區">
+          <button type="button" role="tab" data-region="tw" aria-selected="true">台灣</button>
+          <button type="button" role="tab" data-region="jp" aria-selected="false">日本</button>
+        </div>
+        <p id="hero-text">全家、7-ELEVEN 哪幾間有貨、各剩幾籤，<br>還有台灣開賣日與一抽多少錢。</p>
         <div class="hero-actions">
-          <a class="btn btn-primary btn-lg" href="shops">找附近的販售店</a>
+          <a class="btn btn-primary btn-lg" id="hero-find" href="tw">找附近有貨的店</a>
           <a class="btn btn-secondary btn-lg" href="calc">計算期望值</a>
         </div>
         <div class="hero-bars" aria-hidden="true"><i style="height:10px"></i><i style="height:16px"></i><i style="height:12px"></i><i class="on" style="height:26px"></i><i style="height:14px"></i><i style="height:20px"></i><i style="height:11px"></i><i style="height:17px"></i></div>
@@ -39,7 +43,7 @@
       <section aria-labelledby="onsale-label">
         <div class="sec-head">
           <div><h2 id="onsale-label">販售中的一番賞</h2><p class="sec-en">ON SALE</p></div>
-          <a class="more-link" href="schedule">查看全部 →</a>
+          <a class="more-link" id="onsale-more" href="tw-schedule">查看全部 →</a>
         </div>
         <p class="sub-label">PICKUP・最新開賣</p>
         <div id="pickup" class="pickup"><div class="pick-card skeleton" aria-hidden="true"><div class="thumb"></div><div class="pick-body"><div class="sk-line"></div><div class="sk-line short"></div></div></div><div class="pick-card skeleton" aria-hidden="true"><div class="thumb"></div><div class="pick-body"><div class="sk-line"></div><div class="sk-line short"></div></div></div></div>
@@ -50,18 +54,18 @@
       <section aria-labelledby="soon-label">
         <div class="sec-head">
           <div><h2 id="soon-label">近日開賣</h2><p class="sec-en">UPCOMING</p></div>
-          <a class="more-link" href="schedule">發售日曆 →</a>
+          <a class="more-link" id="soon-more" href="tw-schedule">發售日曆 →</a>
         </div>
         <ul id="soon-rows" class="rows"><li class="skeleton" aria-hidden="true"><div class="row-card"><div class="thumb"></div><div class="row-body"><div class="sk-line short"></div><div class="sk-line"></div></div><span></span></div></li><li class="skeleton" aria-hidden="true"><div class="row-card"><div class="thumb"></div><div class="row-body"><div class="sk-line short"></div><div class="sk-line"></div></div><span></span></div></li><li class="skeleton" aria-hidden="true"><div class="row-card"><div class="thumb"></div><div class="row-body"><div class="sk-line short"></div><div class="sk-line"></div></div><span></span></div></li><li class="skeleton" aria-hidden="true"><div class="row-card"><div class="thumb"></div><div class="row-body"><div class="sk-line short"></div><div class="sk-line"></div></div><span></span></div></li><li class="skeleton" aria-hidden="true"><div class="row-card"><div class="thumb"></div><div class="row-body"><div class="sk-line short"></div><div class="sk-line"></div></div><span></span></div></li></ul>
       </section>
 
       <section class="about-box">
         <h2>一番賞（一番くじ）是什麼？</h2>
-        <p>BANDAI SPIRITS 在日本便利商店、書店和玩具店販售的角色抽籤，每抽必中，一回大約 750〜900 日圓。熱門作品常在開賣當天就被抽完，先查好哪幾間店有賣再出門。</p>
+        <p>BANDAI SPIRITS 推出的角色抽籤，每抽必中。台灣在官方認證店、全家、7-ELEVEN 販售，一抽大約 270〜380 元；日本在便利商店、書店和玩具店，一回大約 750〜900 日圓。熱門作品常在開賣當天就被抽完，先查好哪幾間店有貨再出門。</p>
         <p class="meta" style="margin-top:8px">資料最後更新 <span id="scraped-at">載入中…</span></p>
       </section>
 
-      <footer class="site-foot">資料來源 1kuji.com・本站與 BANDAI SPIRITS 無關</footer>
+      <footer class="site-foot">資料來源 1kuji.com、一番賞台灣、全家、7-ELEVEN・本站與 BANDAI SPIRITS 無關</footer>
     </main>
   </div>
   <script type="module" src="home.js"></script>

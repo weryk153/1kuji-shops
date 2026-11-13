@@ -1,10 +1,10 @@
 # 一番賞店舖查詢
 
-> 日本一番賞（一番くじ）資訊站（正體中文）：販售店舖地圖、附近的店、發售日曆、各賞內容、Mercari 成交行情、期望值計算與排名。資料來源 1kuji.com，每天更新。
+> 台灣與日本一番賞（一番くじ）資訊站（正體中文）：台灣全家、7-ELEVEN 各店庫存與開賣日、日本販售店舖地圖、發售日曆、各賞內容、Mercari 成交行情、期望值計算與排名。資料來源 1kuji.com、一番賞台灣、全家、7-ELEVEN，每天更新。
 
 ## 頁面
 
-- [首頁](https://1kuji-shops.pages.dev/)：販售中與近日開賣的一番賞
+- [首頁](https://1kuji-shops.pages.dev/)：販售中與近日開賣的一番賞（台灣／日本切換，預設台灣）
 - [找店](https://1kuji-shops.pages.dev/shops)：選一番賞，在地圖上找販售店舖或附近的店
 - [找店・台灣](https://1kuji-shops.pages.dev/tw)：台灣全家、7-ELEVEN 的一番賞庫存，各店剩幾籤、附近有貨的店（資料來源超商官方門市地圖）
 - [發售日曆](https://1kuji-shops.pages.dev/schedule)：發售日、單抽價格、取扱店
