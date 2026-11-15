@@ -1,5 +1,5 @@
 {
-  "scraped_at": "2026-11-14T00:16:52.081Z",
+  "scraped_at": "2026-11-14T22:55:15.836Z",
   "lotteries": [
     {
       "id": "tamagotchi6",
@@ -42,20 +42,20 @@
       "source_url": "https://1kuji.com/products/toloveru_d"
     },
     {
-      "id": "hxh8_2",
-      "product_id": 10788,
-      "name_ja": "一番くじ HUNTER×HUNTER CHMERA ANT ②（再販売）",
-      "release_date": "2026-11-14",
-      "image_url": "https://assets.1kuji.com/uploads/product/image/10788/c42d07ae-586a-4f3c-bd4a-7aa8e50dd2e1.webp",
-      "source_url": "https://1kuji.com/products/hxh8_2"
-    },
-    {
       "id": "onep105",
       "product_id": 10785,
       "name_ja": "一番くじ ワンピース～あにまる大集合！～",
       "release_date": "2026-11-14",
       "image_url": "https://assets.1kuji.com/uploads/product/image/10785/ef9196d6-7a9b-4f69-99ca-f261745bc8cb.webp",
       "source_url": "https://1kuji.com/products/onep105"
+    },
+    {
+      "id": "hxh8_2",
+      "product_id": 10788,
+      "name_ja": "一番くじ HUNTER×HUNTER CHMERA ANT ②（再販売）",
+      "release_date": "2026-11-14",
+      "image_url": "https://assets.1kuji.com/uploads/product/image/10788/c42d07ae-586a-4f3c-bd4a-7aa8e50dd2e1.webp",
+      "source_url": "https://1kuji.com/products/hxh8_2"
     },
     {
       "id": "godzilla10",
