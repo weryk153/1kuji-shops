@@ -1,6 +1,30 @@
 {
-  "scraped_at": "2026-11-18T01:33:38.781Z",
+  "scraped_at": "2026-11-19T01:02:03.088Z",
   "lotteries": [
+    {
+      "id": "db_fa3",
+      "product_id": 10791,
+      "name_ja": "一番くじ ドラゴンボール Fantastic Adventure 3",
+      "release_date": "2026-11-28",
+      "image_url": "https://assets.1kuji.com/uploads/product/image/10791/939e041d-6dea-4739-a5fc-38f084b79dbe.webp",
+      "source_url": "https://1kuji.com/products/db_fa3"
+    },
+    {
+      "id": "persona_30th",
+      "product_id": 10768,
+      "name_ja": "一番くじ 『ペルソナ』シリーズ30th ANNIVERSARY",
+      "release_date": "2026-11-28",
+      "image_url": "https://assets.1kuji.com/uploads/product/image/10768/14621ddc-41d5-4afa-a36b-edc26b19da2a.webp",
+      "source_url": "https://1kuji.com/products/persona_30th"
+    },
+    {
+      "id": "rider_zeztz",
+      "product_id": 10759,
+      "name_ja": "一番くじ 仮面ライダーマイス＆仮面ライダーゼッツ",
+      "release_date": "2026-11-27",
+      "image_url": "https://assets.1kuji.com/uploads/product/image/10759/7dc9ba71-8b33-4bf2-86bc-b21d659fe5f0.png",
+      "source_url": "https://1kuji.com/products/rider_zeztz"
+    },
     {
       "id": "jojo_26",
       "product_id": 10771,
@@ -42,20 +66,20 @@
       "source_url": "https://1kuji.com/products/toloveru_d"
     },
     {
-      "id": "hxh8_2",
-      "product_id": 10788,
-      "name_ja": "一番くじ HUNTER×HUNTER CHMERA ANT ②（再販売）",
-      "release_date": "2026-11-14",
-      "image_url": "https://assets.1kuji.com/uploads/product/image/10788/c42d07ae-586a-4f3c-bd4a-7aa8e50dd2e1.webp",
-      "source_url": "https://1kuji.com/products/hxh8_2"
-    },
-    {
       "id": "onep105",
       "product_id": 10785,
       "name_ja": "一番くじ ワンピース～あにまる大集合！～",
       "release_date": "2026-11-14",
       "image_url": "https://assets.1kuji.com/uploads/product/image/10785/ef9196d6-7a9b-4f69-99ca-f261745bc8cb.webp",
       "source_url": "https://1kuji.com/products/onep105"
+    },
+    {
+      "id": "hxh8_2",
+      "product_id": 10788,
+      "name_ja": "一番くじ HUNTER×HUNTER CHMERA ANT ②（再販売）",
+      "release_date": "2026-11-14",
+      "image_url": "https://assets.1kuji.com/uploads/product/image/10788/c42d07ae-586a-4f3c-bd4a-7aa8e50dd2e1.webp",
+      "source_url": "https://1kuji.com/products/hxh8_2"
     },
     {
       "id": "godzilla10",
