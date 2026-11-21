@@ -1,13 +1,13 @@
 {
-  "scraped_at": "2026-11-20T01:08:55.795Z",
+  "scraped_at": "2026-11-21T00:43:14.690Z",
   "lotteries": [
     {
-      "id": "db_fa3",
-      "product_id": 10791,
-      "name_ja": "一番くじ ドラゴンボール Fantastic Adventure 3",
-      "release_date": "2026-11-28",
-      "image_url": "https://assets.1kuji.com/uploads/product/image/10791/939e041d-6dea-4739-a5fc-38f084b79dbe.webp",
-      "source_url": "https://1kuji.com/products/db_fa3"
+      "id": "kusuriya2",
+      "product_id": 10779,
+      "name_ja": "一番くじ 『劇場版 薬屋のひとりごと 亡妃の秘宝』",
+      "release_date": "2026-12-05",
+      "image_url": "https://assets.1kuji.com/uploads/product/image/10779/b2863c14-c442-4fd0-a044-59b3fd0b02d8.webp",
+      "source_url": "https://1kuji.com/products/kusuriya2"
     },
     {
       "id": "persona_30th",
@@ -18,6 +18,14 @@
       "source_url": "https://1kuji.com/products/persona_30th"
     },
     {
+      "id": "db_fa3",
+      "product_id": 10791,
+      "name_ja": "一番くじ ドラゴンボール Fantastic Adventure 3",
+      "release_date": "2026-11-28",
+      "image_url": "https://assets.1kuji.com/uploads/product/image/10791/939e041d-6dea-4739-a5fc-38f084b79dbe.webp",
+      "source_url": "https://1kuji.com/products/db_fa3"
+    },
+    {
       "id": "rider_zeztz",
       "product_id": 10759,
       "name_ja": "一番くじ 仮面ライダーマイス＆仮面ライダーゼッツ",
@@ -26,20 +34,20 @@
       "source_url": "https://1kuji.com/products/rider_zeztz"
     },
     {
-      "id": "jojo_26",
-      "product_id": 10771,
-      "name_ja": "一番くじ ジョジョの奇妙な冒険 The Gathering of RIVALS",
-      "release_date": "2026-11-21",
-      "image_url": "https://assets.1kuji.com/uploads/product/image/10771/a80b4314-4997-4c06-9e60-e626c2b51251.webp",
-      "source_url": "https://1kuji.com/products/jojo_26"
-    },
-    {
       "id": "tamagotchi6",
       "product_id": 10761,
       "name_ja": "一番くじ Tamagotchi ～夜空で発見！？12星座とたまごっち～",
       "release_date": "2026-11-21",
       "image_url": "https://assets.1kuji.com/uploads/product/image/10761/180fd5a6-adec-4227-9990-53e1587a925f.webp",
       "source_url": "https://1kuji.com/products/tamagotchi6"
+    },
+    {
+      "id": "jojo_26",
+      "product_id": 10771,
+      "name_ja": "一番くじ ジョジョの奇妙な冒険 The Gathering of RIVALS",
+      "release_date": "2026-11-21",
+      "image_url": "https://assets.1kuji.com/uploads/product/image/10771/a80b4314-4997-4c06-9e60-e626c2b51251.webp",
+      "source_url": "https://1kuji.com/products/jojo_26"
     },
     {
       "id": "battlecats2-2",
@@ -82,20 +90,20 @@
       "source_url": "https://1kuji.com/products/hxh8_2"
     },
     {
-      "id": "godzilla10",
-      "product_id": 10789,
-      "name_ja": "一番くじ ゴジラ 怪獣乱舞-ゼロの鼓動-",
-      "release_date": "2026-11-13",
-      "image_url": "https://assets.1kuji.com/uploads/product/image/10789/9098916f-265e-4107-9a01-4f50ab0e408d.webp",
-      "source_url": "https://1kuji.com/products/godzilla10"
-    },
-    {
       "id": "hololive-flowglow",
       "product_id": 10769,
       "name_ja": "一番くじ hololive FLOW GLOW",
       "release_date": "2026-11-13",
       "image_url": "https://assets.1kuji.com/uploads/product/image/10769/0db60368-e12d-439d-8aa4-85fbae886904.webp",
       "source_url": "https://1kuji.com/products/hololive-flowglow"
+    },
+    {
+      "id": "godzilla10",
+      "product_id": 10789,
+      "name_ja": "一番くじ ゴジラ 怪獣乱舞-ゼロの鼓動-",
+      "release_date": "2026-11-13",
+      "image_url": "https://assets.1kuji.com/uploads/product/image/10789/9098916f-265e-4107-9a01-4f50ab0e408d.webp",
+      "source_url": "https://1kuji.com/products/godzilla10"
     },
     {
       "id": "streetfighter3",
