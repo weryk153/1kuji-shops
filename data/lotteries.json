@@ -1,5 +1,5 @@
 {
-  "scraped_at": "2026-11-21T00:43:14.690Z",
+  "scraped_at": "2026-11-21T23:44:23.595Z",
   "lotteries": [
     {
       "id": "kusuriya2",
@@ -10,20 +10,20 @@
       "source_url": "https://1kuji.com/products/kusuriya2"
     },
     {
-      "id": "persona_30th",
-      "product_id": 10768,
-      "name_ja": "一番くじ 『ペルソナ』シリーズ30th ANNIVERSARY",
-      "release_date": "2026-11-28",
-      "image_url": "https://assets.1kuji.com/uploads/product/image/10768/14621ddc-41d5-4afa-a36b-edc26b19da2a.webp",
-      "source_url": "https://1kuji.com/products/persona_30th"
-    },
-    {
       "id": "db_fa3",
       "product_id": 10791,
       "name_ja": "一番くじ ドラゴンボール Fantastic Adventure 3",
       "release_date": "2026-11-28",
       "image_url": "https://assets.1kuji.com/uploads/product/image/10791/939e041d-6dea-4739-a5fc-38f084b79dbe.webp",
       "source_url": "https://1kuji.com/products/db_fa3"
+    },
+    {
+      "id": "persona_30th",
+      "product_id": 10768,
+      "name_ja": "一番くじ 『ペルソナ』シリーズ30th ANNIVERSARY",
+      "release_date": "2026-11-28",
+      "image_url": "https://assets.1kuji.com/uploads/product/image/10768/14621ddc-41d5-4afa-a36b-edc26b19da2a.webp",
+      "source_url": "https://1kuji.com/products/persona_30th"
     },
     {
       "id": "rider_zeztz",
@@ -74,14 +74,6 @@
       "source_url": "https://1kuji.com/products/toloveru_d"
     },
     {
-      "id": "onep105",
-      "product_id": 10785,
-      "name_ja": "一番くじ ワンピース～あにまる大集合！～",
-      "release_date": "2026-11-14",
-      "image_url": "https://assets.1kuji.com/uploads/product/image/10785/ef9196d6-7a9b-4f69-99ca-f261745bc8cb.webp",
-      "source_url": "https://1kuji.com/products/onep105"
-    },
-    {
       "id": "hxh8_2",
       "product_id": 10788,
       "name_ja": "一番くじ HUNTER×HUNTER CHMERA ANT ②（再販売）",
@@ -90,12 +82,12 @@
       "source_url": "https://1kuji.com/products/hxh8_2"
     },
     {
-      "id": "hololive-flowglow",
-      "product_id": 10769,
-      "name_ja": "一番くじ hololive FLOW GLOW",
-      "release_date": "2026-11-13",
-      "image_url": "https://assets.1kuji.com/uploads/product/image/10769/0db60368-e12d-439d-8aa4-85fbae886904.webp",
-      "source_url": "https://1kuji.com/products/hololive-flowglow"
+      "id": "onep105",
+      "product_id": 10785,
+      "name_ja": "一番くじ ワンピース～あにまる大集合！～",
+      "release_date": "2026-11-14",
+      "image_url": "https://assets.1kuji.com/uploads/product/image/10785/ef9196d6-7a9b-4f69-99ca-f261745bc8cb.webp",
+      "source_url": "https://1kuji.com/products/onep105"
     },
     {
       "id": "godzilla10",
@@ -104,6 +96,14 @@
       "release_date": "2026-11-13",
       "image_url": "https://assets.1kuji.com/uploads/product/image/10789/9098916f-265e-4107-9a01-4f50ab0e408d.webp",
       "source_url": "https://1kuji.com/products/godzilla10"
+    },
+    {
+      "id": "hololive-flowglow",
+      "product_id": 10769,
+      "name_ja": "一番くじ hololive FLOW GLOW",
+      "release_date": "2026-11-13",
+      "image_url": "https://assets.1kuji.com/uploads/product/image/10769/0db60368-e12d-439d-8aa4-85fbae886904.webp",
+      "source_url": "https://1kuji.com/products/hololive-flowglow"
     },
     {
       "id": "streetfighter3",
@@ -224,14 +224,6 @@
       "release_date": "2026-10-24",
       "image_url": "https://assets.1kuji.com/uploads/product/image/10750/e6932a07-9236-4e8b-9843-d992eed8ecd6.webp",
       "source_url": "https://1kuji.com/products/sumikko27"
-    },
-    {
-      "id": "moomin11",
-      "product_id": 10778,
-      "name_ja": "一番くじ ムーミン ～A day like this～",
-      "release_date": "2026-10-23",
-      "image_url": "https://assets.1kuji.com/uploads/product/image/10778/81f1d54c-4a61-48df-b5c2-dde60c2a4fa4.webp",
-      "source_url": "https://1kuji.com/products/moomin11"
     }
   ]
 }
