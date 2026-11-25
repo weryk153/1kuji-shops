@@ -1,5 +1,5 @@
 {
-  "scraped_at": "2026-11-24T04:14:45.992Z",
+  "scraped_at": "2026-11-25T02:58:48.045Z",
   "lotteries": [
     {
       "id": "kusuriya2",
@@ -184,14 +184,6 @@
       "release_date": "2026-10-28",
       "image_url": "https://assets.1kuji.com/uploads/product/image/10795/5abe855e-403f-407e-8875-c33a3edd9fdf.webp",
       "source_url": "https://1kuji.com/products/mojojojo"
-    },
-    {
-      "id": "naruto11",
-      "product_id": 10777,
-      "name_ja": "一番くじ NARUTO-ナルト- 疾風伝 飛段・角都編",
-      "release_date": "2026-10-26",
-      "image_url": "https://assets.1kuji.com/uploads/product/image/10777/5cf6c265-a7f3-4d85-a244-cf2b05125190.webp",
-      "source_url": "https://1kuji.com/products/naruto11"
     }
   ]
 }
