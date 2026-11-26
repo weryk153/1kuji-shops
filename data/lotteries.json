@@ -1,6 +1,22 @@
 {
-  "scraped_at": "2026-11-25T02:58:48.045Z",
+  "scraped_at": "2026-11-26T02:06:49.901Z",
   "lotteries": [
+    {
+      "id": "zelda5",
+      "product_id": 10841,
+      "name_ja": "一番くじ ゼルダの伝説 ハイラルコレクション",
+      "release_date": "2026-12-05",
+      "image_url": "https://assets.1kuji.com/uploads/product/image/10841/4b83c524-56fa-4f74-86ca-6ec49d9c36e8.webp",
+      "source_url": "https://1kuji.com/products/zelda5"
+    },
+    {
+      "id": "choigosim",
+      "product_id": 10749,
+      "name_ja": "一番くじ チェゴシム",
+      "release_date": "2026-12-05",
+      "image_url": "https://assets.1kuji.com/uploads/product/image/10749/051cf684-1a36-4096-b9ff-02b9b517fc6d.webp",
+      "source_url": "https://1kuji.com/products/choigosim"
+    },
     {
       "id": "kusuriya2",
       "product_id": 10779,
@@ -10,12 +26,20 @@
       "source_url": "https://1kuji.com/products/kusuriya2"
     },
     {
-      "id": "persona_30th",
-      "product_id": 10768,
-      "name_ja": "一番くじ 『ペルソナ』シリーズ30th ANNIVERSARY",
-      "release_date": "2026-11-28",
-      "image_url": "https://assets.1kuji.com/uploads/product/image/10768/14621ddc-41d5-4afa-a36b-edc26b19da2a.webp",
-      "source_url": "https://1kuji.com/products/persona_30th"
+      "id": "eva20",
+      "product_id": 10790,
+      "name_ja": "一番くじ ヱヴァンゲリヲン新劇場版：破",
+      "release_date": "2026-12-05",
+      "image_url": "https://assets.1kuji.com/uploads/product/image/10790/91a17a7c-cc46-4385-ac6f-806e7707bec4.webp",
+      "source_url": "https://1kuji.com/products/eva20"
+    },
+    {
+      "id": "myhero48",
+      "product_id": 10804,
+      "name_ja": "一番くじ 僕のヒーローアカデミア -彼女たちの物語-",
+      "release_date": "2026-11-30",
+      "image_url": "https://assets.1kuji.com/uploads/product/image/10804/4f71c4a9-b967-46fb-83f0-87e162b18894.webp",
+      "source_url": "https://1kuji.com/products/myhero48"
     },
     {
       "id": "db_fa3",
@@ -26,6 +50,14 @@
       "source_url": "https://1kuji.com/products/db_fa3"
     },
     {
+      "id": "persona_30th",
+      "product_id": 10768,
+      "name_ja": "一番くじ 『ペルソナ』シリーズ30th ANNIVERSARY",
+      "release_date": "2026-11-28",
+      "image_url": "https://assets.1kuji.com/uploads/product/image/10768/14621ddc-41d5-4afa-a36b-edc26b19da2a.webp",
+      "source_url": "https://1kuji.com/products/persona_30th"
+    },
+    {
       "id": "rider_zeztz",
       "product_id": 10759,
       "name_ja": "一番くじ 仮面ライダーマイス＆仮面ライダーゼッツ",
@@ -34,20 +66,20 @@
       "source_url": "https://1kuji.com/products/rider_zeztz"
     },
     {
-      "id": "tamagotchi6",
-      "product_id": 10761,
-      "name_ja": "一番くじ Tamagotchi ～夜空で発見！？12星座とたまごっち～",
-      "release_date": "2026-11-21",
-      "image_url": "https://assets.1kuji.com/uploads/product/image/10761/180fd5a6-adec-4227-9990-53e1587a925f.webp",
-      "source_url": "https://1kuji.com/products/tamagotchi6"
-    },
-    {
       "id": "jojo_26",
       "product_id": 10771,
       "name_ja": "一番くじ ジョジョの奇妙な冒険 The Gathering of RIVALS",
       "release_date": "2026-11-21",
       "image_url": "https://assets.1kuji.com/uploads/product/image/10771/a80b4314-4997-4c06-9e60-e626c2b51251.webp",
       "source_url": "https://1kuji.com/products/jojo_26"
+    },
+    {
+      "id": "tamagotchi6",
+      "product_id": 10761,
+      "name_ja": "一番くじ Tamagotchi ～夜空で発見！？12星座とたまごっち～",
+      "release_date": "2026-11-21",
+      "image_url": "https://assets.1kuji.com/uploads/product/image/10761/180fd5a6-adec-4227-9990-53e1587a925f.webp",
+      "source_url": "https://1kuji.com/products/tamagotchi6"
     },
     {
       "id": "battlecats2-2",
@@ -74,20 +106,20 @@
       "source_url": "https://1kuji.com/products/toloveru_d"
     },
     {
-      "id": "onep105",
-      "product_id": 10785,
-      "name_ja": "一番くじ ワンピース～あにまる大集合！～",
-      "release_date": "2026-11-14",
-      "image_url": "https://assets.1kuji.com/uploads/product/image/10785/ef9196d6-7a9b-4f69-99ca-f261745bc8cb.webp",
-      "source_url": "https://1kuji.com/products/onep105"
-    },
-    {
       "id": "hxh8_2",
       "product_id": 10788,
       "name_ja": "一番くじ HUNTER×HUNTER CHMERA ANT ②（再販売）",
       "release_date": "2026-11-14",
       "image_url": "https://assets.1kuji.com/uploads/product/image/10788/c42d07ae-586a-4f3c-bd4a-7aa8e50dd2e1.webp",
       "source_url": "https://1kuji.com/products/hxh8_2"
+    },
+    {
+      "id": "onep105",
+      "product_id": 10785,
+      "name_ja": "一番くじ ワンピース～あにまる大集合！～",
+      "release_date": "2026-11-14",
+      "image_url": "https://assets.1kuji.com/uploads/product/image/10785/ef9196d6-7a9b-4f69-99ca-f261745bc8cb.webp",
+      "source_url": "https://1kuji.com/products/onep105"
     },
     {
       "id": "godzilla10",
