@@ -1,21 +1,21 @@
 {
-  "scraped_at": "2026-11-26T02:06:49.901Z",
+  "scraped_at": "2026-11-27T02:05:52.278Z",
   "lotteries": [
+    {
+      "id": "eva20",
+      "product_id": 10790,
+      "name_ja": "一番くじ ヱヴァンゲリヲン新劇場版：破",
+      "release_date": "2026-12-05",
+      "image_url": "https://assets.1kuji.com/uploads/product/image/10790/91a17a7c-cc46-4385-ac6f-806e7707bec4.webp",
+      "source_url": "https://1kuji.com/products/eva20"
+    },
     {
       "id": "zelda5",
       "product_id": 10841,
       "name_ja": "一番くじ ゼルダの伝説 ハイラルコレクション",
       "release_date": "2026-12-05",
-      "image_url": "https://assets.1kuji.com/uploads/product/image/10841/4b83c524-56fa-4f74-86ca-6ec49d9c36e8.webp",
+      "image_url": "https://assets.1kuji.com/uploads/product/image/10841/734d3b2d-c299-45a5-b091-faa5babb7800.webp",
       "source_url": "https://1kuji.com/products/zelda5"
-    },
-    {
-      "id": "choigosim",
-      "product_id": 10749,
-      "name_ja": "一番くじ チェゴシム",
-      "release_date": "2026-12-05",
-      "image_url": "https://assets.1kuji.com/uploads/product/image/10749/051cf684-1a36-4096-b9ff-02b9b517fc6d.webp",
-      "source_url": "https://1kuji.com/products/choigosim"
     },
     {
       "id": "kusuriya2",
@@ -26,12 +26,12 @@
       "source_url": "https://1kuji.com/products/kusuriya2"
     },
     {
-      "id": "eva20",
-      "product_id": 10790,
-      "name_ja": "一番くじ ヱヴァンゲリヲン新劇場版：破",
+      "id": "choigosim",
+      "product_id": 10749,
+      "name_ja": "一番くじ チェゴシム",
       "release_date": "2026-12-05",
-      "image_url": "https://assets.1kuji.com/uploads/product/image/10790/91a17a7c-cc46-4385-ac6f-806e7707bec4.webp",
-      "source_url": "https://1kuji.com/products/eva20"
+      "image_url": "https://assets.1kuji.com/uploads/product/image/10749/051cf684-1a36-4096-b9ff-02b9b517fc6d.webp",
+      "source_url": "https://1kuji.com/products/choigosim"
     },
     {
       "id": "myhero48",
@@ -208,14 +208,6 @@
       "release_date": "2026-10-29",
       "image_url": "https://assets.1kuji.com/uploads/product/image/10770/8cb61ff6-6ea5-4fc4-82f6-94dd925e68fe.webp",
       "source_url": "https://1kuji.com/products/onep_o12"
-    },
-    {
-      "id": "mojojojo",
-      "product_id": 10795,
-      "name_ja": "一番くじちょこっと mojojojo",
-      "release_date": "2026-10-28",
-      "image_url": "https://assets.1kuji.com/uploads/product/image/10795/5abe855e-403f-407e-8875-c33a3edd9fdf.webp",
-      "source_url": "https://1kuji.com/products/mojojojo"
     }
   ]
 }
