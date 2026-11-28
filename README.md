@@ -5,7 +5,7 @@
 | 頁面 | 路徑 | 資料 |
 |---|---|---|
 | 首頁 | `/` | 販售中 / 近日開賣，台灣／日本分頁（`data/tw-*.json`、`data/schedule.json`） |
-| 找店 | `/shops?lottery=…` | 店舖地圖（Leaflet + 国土地理院）、附近的店、分享連結（`data/shops/*.json`） |
+| 找店 | `/shops?lottery=…` | 店舖地圖（Leaflet + 国土地理院）、附近的店、分享連結、CSV（`data/shops/*.json`） |
 | 發售日曆 | `/schedule` | 官網每月清單 + 價格、取扱店、各賞（`data/schedule.json`） |
 | 發售日曆・台灣 | `/tw-schedule` | 台灣開賣日與售價（`data/tw-releases.json`，整理自一番賞台灣 FB 粉專） |
 | 商品詳細 | `/kuji?id=…` | 各賞一覽 + Mercari 行情（`data/market.json`） |

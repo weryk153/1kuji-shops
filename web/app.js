@@ -1,4 +1,5 @@
 // 找店頁（日本 /shops、台灣 /tw 共用）；兩邊的資料差異在 sources.js
+import { generateCsv } from './csv.js';
 import { translateShopName } from './translate.js';
 import { createMap } from './map.js';
 import { haversineKm, formatDistance, nearestShops } from './geo-utils.js';
@@ -21,6 +22,7 @@ const cityClearBtn = $('city-clear');
 const copyBtn = $('copy-link');
 const shareBox = $('share-box');
 const copyBtnHtml = copyBtn.innerHTML;
+const downloadBtn = $('download-csv');
 const filtersSection = document.querySelector('.filters');
 const statusEl = $('status');
 const listEl = $('shop-list');
@@ -165,6 +167,7 @@ function bindEvents() {
   citySelectAllBtn.addEventListener('click', onCitySelectAll);
   cityClearBtn.addEventListener('click', onCityClear);
   copyBtn.addEventListener('click', onCopyLink);
+  downloadBtn.addEventListener('click', onDownloadCsv);
   lotterySearchInput.addEventListener('input', onLotterySearch);
   citySearchInput.addEventListener('input', onCitySearch);
   for (const btn of sortToggleEl.querySelectorAll('.sort-opt')) {
@@ -371,14 +374,14 @@ function render() {
 
   if (!currentLotteryId) {
     statusEl.textContent = userLocation ? '已取得位置，請先選一番賞' : '請先選一番賞';
-    setActionsEnabled();
+    setActionsEnabled(false);
     return;
   }
 
   // 這款沒有任何店舖資料（台灣：還沒開賣、或全家沒賣）
   if (currentShops.length === 0 && source.noShopsStatus) {
     statusEl.textContent = source.noShopsStatus(lotteries.find((l) => l.id === currentLotteryId));
-    setActionsEnabled();
+    setActionsEnabled(false);
     return;
   }
 
@@ -389,10 +392,10 @@ function render() {
     sortToggleEl.hidden = !userLocation;
     if (sortMode === 'distance' && userLocation) renderByDistance(area.shops);
     else renderGrouped(area.shops, area.groupBy);
-    setActionsEnabled();
+    setActionsEnabled(true);
     return;
   }
-  setActionsEnabled();
+  setActionsEnabled(false);
   // 地區沒選完整、但有定位 → 列出附近的店
   if (userLocation) {
     renderNearby();
@@ -609,9 +612,10 @@ function renderShop(shop, precomputedKm) {
   return li;
 }
 
-// 分享連結：選了一番賞才出現（網址會帶上目前的地區篩選）
-function setActionsEnabled() {
+// 分享區：選了一番賞才出現；CSV 要等地區選完整才能下載
+function setActionsEnabled(csvReady = false) {
   shareBox.hidden = !currentLotteryId;
+  downloadBtn.disabled = !csvReady;
 }
 
 function updateUrl() {
@@ -679,6 +683,38 @@ async function onCopyLink() {
     copyBtn.innerHTML = copyBtnHtml;
     copyBtn.classList.remove('success');
   }, 1500);
+}
+
+// 匯出畫面上正在列的那些店（跟 resolveArea 同一份），可匯入 Google 我的地圖
+function onDownloadCsv() {
+  const lottery = lotteries.find((l) => l.id === currentLotteryId);
+  const shops = resolveArea().shops;
+  if (!lottery || !shops?.length) return;
+  const prefCode = prefectureSelect.value;
+  const pref = prefectures.find((p) => p.code === prefCode) ?? { name_ja: '全国', name_zh: '全台' };
+  const sortedCities = [...selectedCities].sort((a, b) => a.localeCompare(b, L10N.locale));
+  triggerDownload(generateCsv(shops), source.csvFilename(lottery, pref, sortedCities));
+  flashDownloadSuccess(shops.length);
+}
+
+function flashDownloadSuccess(n) {
+  const original = downloadBtn.textContent;
+  downloadBtn.textContent = `已下載 ${n} 筆 ✓`;
+  downloadBtn.classList.add('success');
+  setTimeout(() => {
+    downloadBtn.textContent = original;
+    downloadBtn.classList.remove('success');
+  }, 1800);
+}
+
+function triggerDownload(content, filename) {
+  const blob = new Blob([content], { type: 'text/csv;charset=utf-8' });
+  const url = URL.createObjectURL(blob);
+  const a = document.createElement('a');
+  a.href = url;
+  a.download = filename;
+  a.click();
+  URL.revokeObjectURL(url);
 }
 
 init();
