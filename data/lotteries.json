@@ -1,5 +1,5 @@
 {
-  "scraped_at": "2026-11-27T02:05:52.278Z",
+  "scraped_at": "2026-11-28T01:51:11.179Z",
   "lotteries": [
     {
       "id": "eva20",
@@ -200,14 +200,6 @@
       "release_date": "2026-10-31",
       "image_url": "https://assets.1kuji.com/uploads/product/image/10748/72eba2b3-3b2c-44e9-9d8b-248f3ade4b62.webp",
       "source_url": "https://1kuji.com/products/miabyss"
-    },
-    {
-      "id": "onep_o12",
-      "product_id": 10770,
-      "name_ja": "一番くじ ONE PIECE -空に奏でる\"島の歌声\"（ラブ・ソング）-",
-      "release_date": "2026-10-29",
-      "image_url": "https://assets.1kuji.com/uploads/product/image/10770/8cb61ff6-6ea5-4fc4-82f6-94dd925e68fe.webp",
-      "source_url": "https://1kuji.com/products/onep_o12"
     }
   ]
 }
